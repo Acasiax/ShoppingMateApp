@@ -13,8 +13,12 @@ extension UIView {
         button.setTitle(title, for: .normal)
         button.setTitleColor(.gray, for: .normal)
         button.backgroundColor = .clear
-       
-        }
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 15
+        button.layer.borderColor = UIColor.gray.cgColor
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+ 
+        
         return button
     }
 
