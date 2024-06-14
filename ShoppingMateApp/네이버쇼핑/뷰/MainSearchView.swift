@@ -52,7 +52,9 @@ class MainSearchView: UIViewController, UISearchBarDelegate {
         downPriceButton.setTitle("가격↓", for: .normal)
         view.addSubview(downPriceButton)
         
-
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         view.addSubview(collectionView)
     }
 
