@@ -8,7 +8,41 @@
 import UIKit
 import SnapKit
 
-//컬레션뷰
+// MARK: - UISearchBarDelegate
+extension HomeViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = homeView.searchBar.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        loadData(query: text)
+        addRecentSearch(text)
+        recentSearchTableView.isHidden = true // 🌟 검색 시작 시 테이블 뷰 숨김
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        productItems.removeAll()
+        homeView.collectionView.reloadData()
+        updateEmptyImageViewVisibility()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            productItems.removeAll()
+            homeView.collectionView.reloadData()
+            updateEmptyImageViewVisibility()
+        }
+    }
+    
+    private func addRecentSearch(_ searchText: String) {
+        if !recentSearches.contains(searchText) {
+            recentSearches.insert(searchText, at: 0)
+            if recentSearches.count > 10 {
+                recentSearches.removeLast()
+            }
+        }
+        updateRecentSearchVisibility()
+    }
+}
+
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return productItems.count
@@ -36,7 +70,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("셀클릭")
         let item = productItems[indexPath.row]
         let webVC = WebViewController()
         webVC.productID = item.productID
@@ -44,11 +77,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         webVC.webViewTitle = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         navigationController?.pushViewController(webVC, animated: true)
     }
-    
 }
 
-
-//최근검색 테이블뷰
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recentSearches.count
@@ -64,7 +95,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let selectedSearch = recentSearches[indexPath.row]
         homeView.searchBar.text = selectedSearch
         loadData(query: selectedSearch)
-      //  recentSearchTableView.isHidden = true // 🌟 검색 시작 시 테이블 뷰 숨김
+        recentSearchTableView.isHidden = true // 🌟 검색 시작 시 테이블 뷰 숨김
     }
 
     // 최근 검색어 삭제 기능 (선택 사항)
