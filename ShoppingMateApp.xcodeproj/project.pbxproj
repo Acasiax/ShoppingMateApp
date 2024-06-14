@@ -13,6 +13,8 @@
 		AA8E88322C1BF0E800B477D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA8E88302C1BF0E800B477D3 /* Main.storyboard */; };
 		AA8E88342C1BF0EA00B477D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA8E88332C1BF0EA00B477D3 /* Assets.xcassets */; };
 		AA8E88372C1BF0EA00B477D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA8E88352C1BF0EA00B477D3 /* LaunchScreen.storyboard */; };
+		AA8E883F2C1BF22E00B477D3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AA8E883E2C1BF22E00B477D3 /* .gitignore */; };
+		AA8E88412C1BF24300B477D3 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88402C1BF24300B477D3 /* APIKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		AA8E88332C1BF0EA00B477D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA8E88362C1BF0EA00B477D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA8E88382C1BF0EA00B477D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA8E883E2C1BF22E00B477D3 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		AA8E88402C1BF24300B477D3 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +44,8 @@
 		AA8E881E2C1BF0E800B477D3 = {
 			isa = PBXGroup;
 			children = (
+				AA8E883E2C1BF22E00B477D3 /* .gitignore */,
+				AA8E88402C1BF24300B477D3 /* APIKey.swift */,
 				AA8E88292C1BF0E800B477D3 /* ShoppingMateApp */,
 				AA8E88282C1BF0E800B477D3 /* Products */,
 			);
@@ -125,6 +131,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA8E883F2C1BF22E00B477D3 /* .gitignore in Resources */,
 				AA8E88372C1BF0EA00B477D3 /* LaunchScreen.storyboard in Resources */,
 				AA8E88342C1BF0EA00B477D3 /* Assets.xcassets in Resources */,
 				AA8E88322C1BF0E800B477D3 /* Main.storyboard in Resources */,
@@ -140,6 +147,7 @@
 			files = (
 				AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */,
 				AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */,
+				AA8E88412C1BF24300B477D3 /* APIKey.swift in Sources */,
 				AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,11 +303,13 @@
 				DEVELOPMENT_TEAM = 4KLMMMFY4D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ShoppingMateApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "이윤지";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,9 +317,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.acasia.ShoppingMateApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -323,11 +336,13 @@
 				DEVELOPMENT_TEAM = 4KLMMMFY4D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ShoppingMateApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "이윤지";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -335,9 +350,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.acasia.ShoppingMateApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
