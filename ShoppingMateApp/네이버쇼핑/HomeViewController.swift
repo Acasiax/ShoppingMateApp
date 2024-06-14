@@ -23,18 +23,36 @@ class HomeViewController: UIViewController {
     
 
     private func setupUI() {
-        
-        
     }
     
-    func shoppingRequest(query: String, display: Int = 30, start: Int = 1, sort: String = "sim", completion: @escaping ([Item]?) -> Void) {
-        let url = "https://openapi.naver.com/v1/search/shop.json"
-        let parameters: [String: Any] = ["query": query, "display": display, "start": start, "sort": sort]
-        let headers: HTTPHeaders = [
-            "X-Naver-Client-Id": APIKey.naverClientId,
-            "X-Naver-Client-Secret": APIKey.naverClientSecret,
-            "Content-Type": "application/json; charset=UTF-8"
-        ]
+    @objc private func changeSort(sender: UIButton) {
+        guard !isDataLoading else { return }
+        guard let query = homeView.searchBar.text, !query.isEmpty else { return }
+
+        var sortValue: String
+        switch sender {
+        case homeView.accuracyButton:
+            sortValue = "sim"
+        case homeView.dateButton:
+            sortValue = "date"
+        case homeView.upPriceButton:
+            sortValue = "dsc"
+        case homeView.downPriceButton:
+            sortValue = "asc"
+        default:
+            return
+        }
+
+        productItems.removeAll()
+        isDataLoading = true
+        shopManager.shoppingRequest(query: query, sort: sortValue) { items in
+            self.isDataLoading = false
+            guard let items = items else { return }
+            self.productItems.append(contentsOf: items)
+            self.homeView.collectionView.reloadData()
+        }
+    }
+   
         
         func loadData(query: String, sort: String = "sim", display: Int = 30, start: Int = 1) {
               shopManager.shoppingRequest(query: query, display: display, start: start, sort: sort) { items in
@@ -46,7 +64,7 @@ class HomeViewController: UIViewController {
           }
     }
     
-}
+
 
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
