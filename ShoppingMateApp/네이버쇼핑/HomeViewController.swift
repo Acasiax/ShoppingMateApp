@@ -9,20 +9,22 @@ import UIKit
 import Alamofire
 
 class HomeViewController: UIViewController {
-
-    var items: [Item] = []
+    let homeView = MainSearchView()
+    var productItems: [Item] = []
+    var shopManager = NetworkManager.shared
+    var isDataLoading = false
+    var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        shoppingRequest(query: query) { [weak self] items in
-                   guard let self = self else { return }
-                   if let items = items {
-                       self.items = items
-                       
-                   }
-               }
         
-       
+        setupUI()
+    }
+    
+
+    private func setupUI() {
+        
+        
     }
     
     func shoppingRequest(query: String, display: Int = 30, start: Int = 1, sort: String = "sim", completion: @escaping ([Item]?) -> Void) {
@@ -34,17 +36,16 @@ class HomeViewController: UIViewController {
             "Content-Type": "application/json; charset=UTF-8"
         ]
         
-        AF.request(url, method: .get, parameters: parameters, headers: headers).validate().responseDecodable(of: Shop.self) { response in
-            switch response.result {
-            case .success(let shop):
-                completion(shop.items)
-            case .failure(let error):
-                print("Error: \(error)")
-                completion(nil)
-            }
-        }
+        func loadData(query: String, sort: String = "sim", display: Int = 30, start: Int = 1) {
+              shopManager.shoppingRequest(query: query, display: display, start: start, sort: sort) { items in
+                  self.isDataLoading = false
+                  guard let items = items else { return }
+                  self.productItems.append(contentsOf: items)
+                 
+              }
+          }
     }
-
+    
 }
 
 

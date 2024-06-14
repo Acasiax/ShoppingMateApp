@@ -22,6 +22,8 @@
 		AA8E88532C1BF49C00B477D3 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88522C1BF49C00B477D3 /* HomeCollectionViewCell.swift */; };
 		AA8E88562C1BF53D00B477D3 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88552C1BF53D00B477D3 /* Item.swift */; };
 		AA8E88582C1BF57500B477D3 /* LikeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88572C1BF57500B477D3 /* LikeTable.swift */; };
+		AA8E885A2C1BF84700B477D3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88592C1BF84700B477D3 /* NetworkManager.swift */; };
+		AA8E885D2C1BFA0B00B477D3 /* MainSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		AA8E88522C1BF49C00B477D3 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		AA8E88552C1BF53D00B477D3 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		AA8E88572C1BF57500B477D3 /* LikeTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeTable.swift; sourceTree = "<group>"; };
+		AA8E88592C1BF84700B477D3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,7 @@
 		AA8E88422C1BF2F600B477D3 /* 네이버쇼핑 */ = {
 			isa = PBXGroup;
 			children = (
+				AA8E885B2C1BFA0300B477D3 /* 뷰 */,
 				AA8E88542C1BF52D00B477D3 /* 모델 */,
 				AA8E884E2C1BF3EF00B477D3 /* HomeViewController.swift */,
 				AA8E88522C1BF49C00B477D3 /* HomeCollectionViewCell.swift */,
@@ -104,9 +109,19 @@
 			children = (
 				AA8E88552C1BF53D00B477D3 /* Item.swift */,
 				AA8E88572C1BF57500B477D3 /* LikeTable.swift */,
+				AA8E88592C1BF84700B477D3 /* NetworkManager.swift */,
 			);
 			name = "모델";
 			path = "모델";
+			sourceTree = "<group>";
+		};
+		AA8E885B2C1BFA0300B477D3 /* 뷰 */ = {
+			isa = PBXGroup;
+			children = (
+				AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */,
+			);
+			name = "뷰";
+			path = "뷰";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA8E885A2C1BF84700B477D3 /* NetworkManager.swift in Sources */,
 				AA8E884F2C1BF3EF00B477D3 /* HomeViewController.swift in Sources */,
 				AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */,
 				AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */,
@@ -199,6 +215,7 @@
 				AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */,
 				AA8E88532C1BF49C00B477D3 /* HomeCollectionViewCell.swift in Sources */,
 				AA8E88582C1BF57500B477D3 /* LikeTable.swift in Sources */,
+				AA8E885D2C1BFA0B00B477D3 /* MainSearchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
