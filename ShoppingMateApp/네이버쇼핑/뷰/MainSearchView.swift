@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainSearchView: UIViewController, UISearchBarDelegate {
+class MainSearchView: UIViewController, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
     lazy var searchBar: UISearchBar = {
         return UIView().createSearchBar(delegate: self)
@@ -39,43 +39,32 @@ class MainSearchView: UIViewController, UISearchBarDelegate {
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: "MainCollectionViewCell")
+        view.delegate = self
+        view.dataSource = self
         view.backgroundColor = .blue
         return view
     }()
-
+    
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
+           fatalError("init(coder:) has not been implemented")
+       }
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-        setConstraints()
+            super.viewDidLoad()
+            configureView()
+            setConstraints()
+        }
+    
+    override func configureView() {
+        self.backgroundColor = .white
+        addSubview(searchBar)
+        addSubview(accuracyButton)
+        addSubview(dateButton)
+        addSubview(upPriceButton)
+        addSubview(downPriceButton)
+        addSubview(collectionView)
     }
 
-    private func setupUI() {
-        view.backgroundColor = .white
-
-        searchBar.delegate = self
-        searchBar.placeholder = "Search"
-        view.addSubview(searchBar)
-        
-        accuracyButton.setTitle("정확도", for: .normal)
-        view.addSubview(accuracyButton)
-        
-        dateButton.setTitle("날짜", for: .normal)
-        view.addSubview(dateButton)
-        
-        upPriceButton.setTitle("가격↑", for: .normal)
-        view.addSubview(upPriceButton)
-        
-        downPriceButton.setTitle("가격↓", for: .normal)
-        view.addSubview(downPriceButton)
-
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MainCollectionViewCell")
-        view.addSubview(collectionView)
-        view.backgroundColor = .blue
-    }
 
     func setConstraints() {
         searchBar.snp.makeConstraints { make in
@@ -117,6 +106,17 @@ class MainSearchView: UIViewController, UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
        
+    }
+
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath)
+        cell.backgroundColor = .lightGray
+        return cell
     }
 }
 
