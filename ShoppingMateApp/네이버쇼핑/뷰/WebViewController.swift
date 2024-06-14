@@ -49,23 +49,24 @@ class WebViewController: UIViewController, WKUIDelegate {
             make.edges.equalToSuperview()
         }
     }
+    
     private func configureNavigationBar() {
         let appearance = UINavigationBarAppearance()
-             appearance.backgroundColor = .red
-             appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.backgroundColor = .red
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.standardAppearance = appearance
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: likedImageName), style: .plain, target: self, action: #selector(detailLikeButtonTapped))
         navigationItem.title = webViewTitle
         navigationController?.navigationBar.tintColor = .white
-             
+
         let backButton = UIButton(type: .system)
         backButton.setImage(UIImage(named: "chevron.backward"), for: .normal)
         backButton.setTitle("쇼핑 검색", for: .normal)
         backButton.addTarget(self, action: #selector(backToMainView), for: .touchUpInside)
         backButton.tintColor = .white
-
+        
         let backBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.leftBarButtonItem = backBarButtonItem
 
@@ -75,8 +76,8 @@ class WebViewController: UIViewController, WKUIDelegate {
         if #available(iOS 15.0, *) {
             self.tabBarController?.tabBar.scrollEdgeAppearance = tabBarAppearance
         }
-        
     }
+    
     private func loadWebView() {
         if let productID = productID {
             let urlString = "https://msearch.shopping.naver.com/product/\(productID)"

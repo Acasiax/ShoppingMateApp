@@ -21,22 +21,27 @@ class HomeViewController: ReuseBaseViewController {
     var pageStartNumber = 1
     var isDataLoading = false
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupUI()
-    }
-    
     override func loadView() {
         self.view = homeView
     }
 
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+                view.addGestureRecognizer(tapGesture)
+        setupUI()
+    }
+    
+   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         homeView.collectionView.reloadData()
     }
   
+    @objc func dismissKeyboard() {
+           view.endEditing(true)
+       }
     
     private func setupUI() {
         homeView.collectionView.delegate = self
