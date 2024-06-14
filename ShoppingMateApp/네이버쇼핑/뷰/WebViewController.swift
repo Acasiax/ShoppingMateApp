@@ -37,6 +37,10 @@ class WebViewController: UIViewController, WKUIDelegate {
         }
     }
     private func configureNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .red
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.isTranslucent = false
         
     }
     private func loadWebView() {
