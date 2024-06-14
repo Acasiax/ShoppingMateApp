@@ -22,7 +22,23 @@ class HomeViewController: UIViewController {
     }
     
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        homeView.collectionView.reloadData()
+    }
+  
+    
     private func setupUI() {
+        homeView.collectionView.delegate = self
+        homeView.collectionView.dataSource = self
+
+
+        homeView.accuracyButton.addTarget(self, action: #selector(changeSort), for: .touchUpInside)
+        homeView.dateButton.addTarget(self, action: #selector(changeSort), for: .touchUpInside)
+        homeView.upPriceButton.addTarget(self, action: #selector(changeSort), for: .touchUpInside)
+        homeView.downPriceButton.addTarget(self, action: #selector(changeSort), for: .touchUpInside)
+
+       
     }
     
     @objc private func changeSort(sender: UIButton) {
