@@ -12,8 +12,9 @@ class HomeViewController: UIViewController {
     let homeView = MainSearchView()
     var productItems: [Item] = []
     var shopManager = NetworkManager.shared
+    var isDataEnd = false
+    var pageStartNumber = 1
     var isDataLoading = false
-    var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,14 @@ class HomeViewController: UIViewController {
     private func setupUI() {
         homeView.collectionView.delegate = self
         homeView.collectionView.dataSource = self
+        
+        
+        homeView.accuracyButton.addTarget(self, action: #selector(toggleButtonColor), for: .touchUpInside)
+        homeView.dateButton.addTarget(self, action: #selector(toggleButtonColor), for: .touchUpInside)
+        homeView.upPriceButton.addTarget(self, action: #selector(toggleButtonColor), for: .touchUpInside)
+        homeView.downPriceButton.addTarget(self, action: #selector(toggleButtonColor), for: .touchUpInside)
+        
+        
         homeView.accuracyButton.addTarget(self, action: #selector(changeSort), for: .touchUpInside)
         homeView.dateButton.addTarget(self, action: #selector(changeSort), for: .touchUpInside)
         homeView.upPriceButton.addTarget(self, action: #selector(changeSort), for: .touchUpInside)
@@ -38,6 +47,21 @@ class HomeViewController: UIViewController {
 
        
     }
+    
+    @objc private func toggleButtonColor(sender: UIButton) {
+        let allButtons = [homeView.accuracyButton, homeView.dateButton, homeView.upPriceButton, homeView.downPriceButton]
+        for button in allButtons {
+            button.isSelected = false
+            button.backgroundColor = .gray
+            button.setTitleColor(.red, for: .normal)
+        }
+        sender.isSelected.toggle()
+        if sender.isSelected {
+            sender.backgroundColor = .white
+            sender.setTitleColor(.brown, for: .normal)
+        }
+    }
+    
     
     @objc private func changeSort(sender: UIButton) {
         guard !isDataLoading else { return }
@@ -81,24 +105,42 @@ class HomeViewController: UIViewController {
 
 
 
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return productItems.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell() }
+        let item = productItems[indexPath.row]
+        cell.configure(with: item)
         return cell
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-//        let item = productItems[indexPath.row]
-//    }
-    
-    
-    
-    
-    
-    
-    
+
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        guard let query = homeView.searchBar.text, !isDataEnd else { return }
+
+        if productItems.count - 1 == indexPaths.last?.row {
+            pageStartNumber += 1
+            shopManager.shoppingRequest(query: query, start: pageStartNumber) { items in
+                guard let items = items else { return }
+                self.productItems.append(contentsOf: items)
+                self.homeView.collectionView.reloadData()
+            }
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = productItems[indexPath.row]
+      
+    }
 }
+
+    
+    
+    
+    
+    
+    
+    
+
