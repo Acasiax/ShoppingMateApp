@@ -72,7 +72,19 @@ class WebViewController: UIViewController, WKUIDelegate {
         
     }
     private func loadWebView() {
-        
+        if let productID = productID {
+            let urlString = "https://msearch.shopping.naver.com/product/\(productID)"
+            if let url = URL(string: urlString) {
+                let request = URLRequest(url: url)
+                webView.load(request)
+            }
+        } else if let likeProductID = likeProductID {
+            let urlString = "https://msearch.shopping.naver.com/product/\(likeProductID)"
+            if let url = URL(string: urlString) {
+                let request = URLRequest(url: url)
+                webView.load(request)
+            }
+        }
     }
     
     @objc private func backToMainView() {
@@ -96,5 +108,21 @@ class WebViewController: UIViewController, WKUIDelegate {
     }
 
     
-    
-}
+    private func updateLikeButtonImage() {
+        let imageName = isLiked ? likedImageName : unlikedImageName
+        navigationItem.rightBarButtonItem?.image = UIImage(named: imageName)
+    }
+
+    private func checkIfProductIsLiked() {
+        let repository = LikeTableRepository()
+        let likedItems = repository.fetchAll()
+        if let productID = self.productID {
+            isLiked = likedItems.contains(where: { $0.productID == productID })
+        } else if let likeProductID = self.likeProductID {
+            isLiked = likedItems.contains(where: { $0.productID == likeProductID })
+        } else {
+            isLiked = false
+        }
+    }
+ }
+
