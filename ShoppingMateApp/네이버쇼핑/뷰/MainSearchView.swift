@@ -59,13 +59,45 @@ class MainSearchView: UIViewController, UISearchBarDelegate {
     }
 
     func setConstraints() {
-
+        searchBar.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.leading.trailing.equalToSuperview().inset(10)
+            make.height.equalTo(50)
+        }
+        accuracyButton.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(10)
+            make.width.equalTo(50)
+            make.height.equalTo(38)
+        }
+        dateButton.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(20)
+            make.leading.equalTo(accuracyButton.snp.trailing).offset(7)
+            make.width.equalTo(50)
+            make.height.equalTo(38)
+        }
+        upPriceButton.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(20)
+            make.leading.equalTo(dateButton.snp.trailing).offset(7)
+            make.width.equalTo(80)
+            make.height.equalTo(38)
+        }
+        downPriceButton.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(20)
+            make.leading.equalTo(upPriceButton.snp.trailing).offset(7)
+            make.width.equalTo(80)
+            make.height.equalTo(38)
+        }
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(accuracyButton.snp.bottom).offset(20)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
     }
 
-
+   
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-     
+       
     }
 }
 
