@@ -16,8 +16,15 @@ class WebViewController: UIViewController, WKUIDelegate {
     var webViewTitle: String?
     var item: Item?
     var likedProductItem: LikeTable?
-   
+    var isLiked: Bool = false {
+        didSet {
+            updateLikeButtonImage()
+        }
+    }
 
+    private let likedImageName = "like_selected"
+    private let unlikedImageName = "like_unselected"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,22 +47,54 @@ class WebViewController: UIViewController, WKUIDelegate {
         let appearance = UINavigationBarAppearance()
              appearance.backgroundColor = .red
              appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: likedImageName), style: .plain, target: self, action: #selector(detailLikeButtonTapped))
+        navigationItem.title = webViewTitle
+        navigationController?.navigationBar.tintColor = .white
              
-             navigationController?.navigationBar.standardAppearance = appearance
-             navigationController?.navigationBar.scrollEdgeAppearance = appearance
-             navigationController?.navigationBar.isTranslucent = false
-             
-             // Set the title
-             self.title = webViewTitle
-             
-             // Add the 'like' button
-             let likeButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(didTapLikeButton))
-             likeButton.tintColor = .white
-             navigationItem.rightBarButtonItem = likeButton
+        let backButton = UIButton(type: .system)
+        backButton.setImage(UIImage(named: "chevron.backward"), for: .normal)
+        backButton.setTitle("쇼핑 검색", for: .normal)
+        backButton.addTarget(self, action: #selector(backToMainView), for: .touchUpInside)
+        backButton.tintColor = .white
+
+        let backBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backBarButtonItem
+
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.backgroundColor = .red
+        self.tabBarController?.tabBar.standardAppearance = tabBarAppearance
+        if #available(iOS 15.0, *) {
+            self.tabBarController?.tabBar.scrollEdgeAppearance = tabBarAppearance
+        }
         
     }
     private func loadWebView() {
         
     }
+    
+    @objc private func backToMainView() {
+        navigationController?.popViewController(animated: true)
+    }
+
+    @objc private func detailLikeButtonTapped() {
+        isLiked.toggle()
+        let repository = LikeTableRepository()
+        if isLiked {
+            guard let item = self.item else { return }
+            repository.saveItem(item)
+        } else {
+            if let item = self.item {
+                repository.deleteItem(item)
+            } else {
+                guard let likeItem = self.likedProductItem else { return }
+                repository.deleteItem(likeItem)
+            }
+        }
+    }
+
+    
     
 }
