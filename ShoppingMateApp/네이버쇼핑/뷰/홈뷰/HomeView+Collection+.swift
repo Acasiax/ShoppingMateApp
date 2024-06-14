@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 
+//컬레션뷰
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return productItems.count
@@ -44,4 +45,34 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         navigationController?.pushViewController(webVC, animated: true)
     }
     
+}
+
+
+//최근검색 테이블뷰
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return recentSearches.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RecentSearchCell", for: indexPath)
+        cell.textLabel?.text = recentSearches[indexPath.row]
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedSearch = recentSearches[indexPath.row]
+        homeView.searchBar.text = selectedSearch
+        loadData(query: selectedSearch)
+      //  recentSearchTableView.isHidden = true // 🌟 검색 시작 시 테이블 뷰 숨김
+    }
+
+    // 최근 검색어 삭제 기능 (선택 사항)
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            recentSearches.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            updateRecentSearchVisibility()
+        }
+    }
 }

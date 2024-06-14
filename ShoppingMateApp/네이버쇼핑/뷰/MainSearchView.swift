@@ -64,13 +64,13 @@ class MainSearchView: BaseView, UISearchBarDelegate {
         accuracyButton.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(10)
-            make.width.equalTo(50)
+            make.width.equalTo(55)
             make.height.equalTo(38)
         }
         dateButton.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom).offset(20)
             make.leading.equalTo(accuracyButton.snp.trailing).offset(7)
-            make.width.equalTo(50)
+            make.width.equalTo(55)
             make.height.equalTo(38)
         }
         upPriceButton.snp.makeConstraints { make in
