@@ -44,17 +44,16 @@ class HomeViewController: ReuseBaseViewController {
        }
     
     private func setupUI() {
+        setupNavigationUI()
+        homeView.searchBar.delegate = self
         homeView.collectionView.delegate = self
         homeView.collectionView.dataSource = self
-        homeView.collectionView.dataSource = self
         homeView.collectionView.prefetchDataSource = self
-        
-        
+
         homeView.accuracyButton.addTarget(self, action: #selector(toggleButtonColor), for: .touchUpInside)
         homeView.dateButton.addTarget(self, action: #selector(toggleButtonColor), for: .touchUpInside)
         homeView.upPriceButton.addTarget(self, action: #selector(toggleButtonColor), for: .touchUpInside)
         homeView.downPriceButton.addTarget(self, action: #selector(toggleButtonColor), for: .touchUpInside)
-        
         
         homeView.accuracyButton.addTarget(self, action: #selector(changeSort), for: .touchUpInside)
         homeView.dateButton.addTarget(self, action: #selector(changeSort), for: .touchUpInside)
@@ -64,7 +63,6 @@ class HomeViewController: ReuseBaseViewController {
         if let cancelButton = homeView.searchBar.value(forKey: "cancelButton") as? UIButton {
             cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         }
-       
     }
     
     private func setupNavigationUI() {
