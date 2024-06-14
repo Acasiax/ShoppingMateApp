@@ -51,11 +51,10 @@ class MainSearchView: UIViewController, UISearchBarDelegate {
         
         downPriceButton.setTitle("가격↓", for: .normal)
         view.addSubview(downPriceButton)
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MainCollectionViewCell")
         view.addSubview(collectionView)
+        view.backgroundColor = .blue
     }
 
     func setConstraints() {
@@ -101,14 +100,4 @@ class MainSearchView: UIViewController, UISearchBarDelegate {
     }
 }
 
-extension MainSearchView: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .lightGray
-        return cell
-    }
-}
+
