@@ -14,7 +14,8 @@ class HomeViewController: UIViewController {
     let homeView = MainSearchView()
     var productItems: [Item] = []
     var shopManager = NetworkManager.shared
-    
+    var favoriteItems: Results<LikeTable>!
+    let realmDatabase = try! Realm()
     var isDataEnd = false
     var pageStartNumber = 1
     var isDataLoading = false
