@@ -10,11 +10,26 @@ import SnapKit
 
 class MainSearchView: UIViewController, UISearchBarDelegate {
 
-    let searchBar = UISearchBar()
-    let accuracyButton = UIButton(type: .system)
-    let dateButton = UIButton(type: .system)
-    let upPriceButton = UIButton(type: .system)
-    let downPriceButton = UIButton(type: .system)
+    lazy var searchBar: UISearchBar = {
+        return UIView().createSearchBar(delegate: self)
+    }()
+
+    let accuracyButton: UIButton = {
+        return UIView().createButton(title: "정확도")
+    }()
+
+    let dateButton: UIButton = {
+        return UIView().createButton(title: "날짜순")
+    }()
+
+    let upPriceButton: UIButton = {
+        return UIView().createButton(title: "가격높은순", width: 80)
+    }()
+
+    let downPriceButton: UIButton = {
+        return UIView().createButton(title: "가격낮은순", width: 80)
+    }()
+
    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
