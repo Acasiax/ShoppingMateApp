@@ -20,6 +20,8 @@
 		AA8E884B2C1BF34000B477D3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AA8E884A2C1BF34000B477D3 /* RealmSwift */; };
 		AA8E884F2C1BF3EF00B477D3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E884E2C1BF3EF00B477D3 /* HomeViewController.swift */; };
 		AA8E88532C1BF49C00B477D3 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88522C1BF49C00B477D3 /* HomeCollectionViewCell.swift */; };
+		AA8E88562C1BF53D00B477D3 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88552C1BF53D00B477D3 /* Item.swift */; };
+		AA8E88582C1BF57500B477D3 /* LikeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88572C1BF57500B477D3 /* LikeTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		AA8E88402C1BF24300B477D3 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		AA8E884E2C1BF3EF00B477D3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AA8E88522C1BF49C00B477D3 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		AA8E88552C1BF53D00B477D3 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		AA8E88572C1BF57500B477D3 /* LikeTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,11 +91,22 @@
 		AA8E88422C1BF2F600B477D3 /* 네이버쇼핑 */ = {
 			isa = PBXGroup;
 			children = (
+				AA8E88542C1BF52D00B477D3 /* 모델 */,
 				AA8E884E2C1BF3EF00B477D3 /* HomeViewController.swift */,
 				AA8E88522C1BF49C00B477D3 /* HomeCollectionViewCell.swift */,
 			);
 			name = "네이버쇼핑";
 			path = "네이버쇼핑";
+			sourceTree = "<group>";
+		};
+		AA8E88542C1BF52D00B477D3 /* 모델 */ = {
+			isa = PBXGroup;
+			children = (
+				AA8E88552C1BF53D00B477D3 /* Item.swift */,
+				AA8E88572C1BF57500B477D3 /* LikeTable.swift */,
+			);
+			name = "모델";
+			path = "모델";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,8 +195,10 @@
 				AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */,
 				AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */,
 				AA8E88412C1BF24300B477D3 /* APIKey.swift in Sources */,
+				AA8E88562C1BF53D00B477D3 /* Item.swift in Sources */,
 				AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */,
 				AA8E88532C1BF49C00B477D3 /* HomeCollectionViewCell.swift in Sources */,
+				AA8E88582C1BF57500B477D3 /* LikeTable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
