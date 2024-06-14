@@ -61,6 +61,27 @@ class HomeViewController: ReuseBaseViewController {
        
     }
     
+    private func setupNavigationUI() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .green
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.shadowColor = .clear
+
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.isTranslucent = false
+        navigationItem.title = "쇼핑 검색"
+    }
+
+    @objc private func cancelButtonTapped() {
+        productItems.removeAll()
+        homeView.collectionView.reloadData()
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
     @objc private func toggleButtonColor(sender: UIButton) {
         let allButtons = [homeView.accuracyButton, homeView.dateButton, homeView.upPriceButton, homeView.downPriceButton]
         for button in allButtons {
