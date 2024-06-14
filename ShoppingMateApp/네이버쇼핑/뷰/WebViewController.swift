@@ -17,6 +17,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     var item: Item?
     var likedProductItem: LikeTable?
    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +26,21 @@ class WebViewController: UIViewController, WKUIDelegate {
         loadWebView()
     }
     
-    private func setupWebView() {}
-    private func configureNavigationBar() {}
-    private func loadWebView() {}
+    private func setupWebView() {
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.uiDelegate = self
+        view.addSubview(webView)
+        
+        webView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    private func configureNavigationBar() {
+        
+    }
+    private func loadWebView() {
+        
+    }
     
 }
