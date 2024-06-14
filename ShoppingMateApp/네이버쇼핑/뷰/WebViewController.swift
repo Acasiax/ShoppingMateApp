@@ -38,9 +38,20 @@ class WebViewController: UIViewController, WKUIDelegate {
     }
     private func configureNavigationBar() {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .red
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.isTranslucent = false
+             appearance.backgroundColor = .red
+             appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+             
+             navigationController?.navigationBar.standardAppearance = appearance
+             navigationController?.navigationBar.scrollEdgeAppearance = appearance
+             navigationController?.navigationBar.isTranslucent = false
+             
+             // Set the title
+             self.title = webViewTitle
+             
+             // Add the 'like' button
+             let likeButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(didTapLikeButton))
+             likeButton.tintColor = .white
+             navigationItem.rightBarButtonItem = likeButton
         
     }
     private func loadWebView() {
