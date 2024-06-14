@@ -33,6 +33,12 @@ class WebViewController: UIViewController, WKUIDelegate {
         loadWebView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkIfProductIsLiked()
+    }
+
+    
     private func setupWebView() {
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)

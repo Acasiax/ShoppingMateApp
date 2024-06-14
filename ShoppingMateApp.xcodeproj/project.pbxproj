@@ -29,6 +29,8 @@
 		AA8E886B2C1C08CF00B477D3 /* Create+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886A2C1C08CF00B477D3 /* Create+Component.swift */; };
 		AA8E886D2C1C203700B477D3 /* favoriteTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886C2C1C203700B477D3 /* favoriteTable.swift */; };
 		AA8E886F2C1C237900B477D3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886E2C1C237900B477D3 /* WebViewController.swift */; };
+		AA8E88712C1C27D800B477D3 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88702C1C27D800B477D3 /* LikeViewController.swift */; };
+		AA8E88732C1C29B900B477D3 /* LikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88722C1C29B900B477D3 /* LikeCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		AA8E886A2C1C08CF00B477D3 /* Create+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Create+Component.swift"; sourceTree = "<group>"; };
 		AA8E886C2C1C203700B477D3 /* favoriteTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favoriteTable.swift; sourceTree = "<group>"; };
 		AA8E886E2C1C237900B477D3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		AA8E88702C1C27D800B477D3 /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
+		AA8E88722C1C29B900B477D3 /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,8 @@
 				AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */,
 				AA8E88612C1C01FB00B477D3 /* Resuse.swift */,
 				AA8E886E2C1C237900B477D3 /* WebViewController.swift */,
+				AA8E88702C1C27D800B477D3 /* LikeViewController.swift */,
+				AA8E88722C1C29B900B477D3 /* LikeCollectionViewCell.swift */,
 			);
 			name = "뷰";
 			path = "뷰";
@@ -234,6 +240,7 @@
 				AA8E885A2C1BF84700B477D3 /* NetworkManager.swift in Sources */,
 				AA8E884F2C1BF3EF00B477D3 /* HomeViewController.swift in Sources */,
 				AA8E886D2C1C203700B477D3 /* favoriteTable.swift in Sources */,
+				AA8E88732C1C29B900B477D3 /* LikeCollectionViewCell.swift in Sources */,
 				AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */,
 				AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */,
 				AA8E88412C1BF24300B477D3 /* APIKey.swift in Sources */,
@@ -245,6 +252,7 @@
 				AA8E886F2C1C237900B477D3 /* WebViewController.swift in Sources */,
 				AA8E885D2C1BFA0B00B477D3 /* MainSearchView.swift in Sources */,
 				AA8E886B2C1C08CF00B477D3 /* Create+Component.swift in Sources */,
+				AA8E88712C1C27D800B477D3 /* LikeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
