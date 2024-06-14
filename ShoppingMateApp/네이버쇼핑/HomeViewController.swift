@@ -5,16 +5,20 @@
 //  Created by 이윤지 on 6/14/24.
 //
 
+import Foundation
 import UIKit
-import Alamofire
+import SnapKit
+import RealmSwift
 
 class HomeViewController: UIViewController {
     let homeView = MainSearchView()
     var productItems: [Item] = []
     var shopManager = NetworkManager.shared
+    
     var isDataEnd = false
     var pageStartNumber = 1
     var isDataLoading = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +26,9 @@ class HomeViewController: UIViewController {
         setupUI()
     }
     
+    override func loadView() {
+        self.view = homeView
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
