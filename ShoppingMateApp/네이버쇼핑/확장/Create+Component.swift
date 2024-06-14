@@ -17,8 +17,10 @@ extension UIView {
         button.layer.cornerRadius = 15
         button.layer.borderColor = UIColor.gray.cgColor
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
- 
-        
+        button.snp.makeConstraints { make in
+            make.width.equalTo(width)
+            make.height.equalTo(40)
+        }
         return button
     }
 
