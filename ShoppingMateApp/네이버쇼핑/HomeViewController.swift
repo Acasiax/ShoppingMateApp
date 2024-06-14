@@ -16,6 +16,7 @@ class HomeViewController: ReuseBaseViewController {
     var shopManager = NetworkManager.shared
     var favoriteItems: Results<LikeTable>!
     let realmDatabase = try! Realm()
+    let likeTableRepository = LikeTableRepository()
     var isDataEnd = false
     var pageStartNumber = 1
     var isDataLoading = false
@@ -166,14 +167,36 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = productItems[indexPath.row]
-      
+        let webVC = WebViewController()
+        webVC.productID = item.productID
+        webVC.item = item
+        webVC.webViewTitle = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        navigationController?.pushViewController(webVC, animated: true)
     }
 }
 
     
     
     
-    
+// MARK: - UISearchBarDelegate
+extension HomeViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = homeView.searchBar.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        loadData(query: text)
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        productItems.removeAll()
+        homeView.collectionView.reloadData()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            productItems.removeAll()
+            homeView.collectionView.reloadData()
+        }
+    }
+}
     
     
     
