@@ -31,6 +31,7 @@
 		AA8E886F2C1C237900B477D3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886E2C1C237900B477D3 /* WebViewController.swift */; };
 		AA8E88712C1C27D800B477D3 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88702C1C27D800B477D3 /* LikeViewController.swift */; };
 		AA8E88732C1C29B900B477D3 /* LikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88722C1C29B900B477D3 /* LikeCollectionViewCell.swift */; };
+		AA8E88782C1C49E600B477D3 /* HomeView+Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88772C1C49E600B477D3 /* HomeView+Collection+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		AA8E886E2C1C237900B477D3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		AA8E88702C1C27D800B477D3 /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		AA8E88722C1C29B900B477D3 /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
+		AA8E88772C1C49E600B477D3 /* HomeView+Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeView+Collection+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,17 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				AA8E88402C1BF24300B477D3 /* APIKey.swift */,
-				AA8E88572C1BF57500B477D3 /* RealmDateManager.swift */,
-				AA8E886C2C1C203700B477D3 /* favoriteTable.swift */,
-				AA8E88592C1BF84700B477D3 /* NetworkManager.swift */,
-				AA8E88552C1BF53D00B477D3 /* Item.swift */,
-				AA8E88612C1C01FB00B477D3 /* Resuse.swift */,
-				AA8E884E2C1BF3EF00B477D3 /* HomeViewController.swift */,
-				AA8E886A2C1C08CF00B477D3 /* Create+Component.swift */,
-				AA8E88522C1BF49C00B477D3 /* HomeCollectionViewCell.swift */,
-				AA8E88702C1C27D800B477D3 /* LikeViewController.swift */,
-				AA8E88722C1C29B900B477D3 /* LikeCollectionViewCell.swift */,
-				AA8E886E2C1C237900B477D3 /* WebViewController.swift */,
 				AA8E88422C1BF2F600B477D3 /* 네이버쇼핑 */,
 				AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */,
 				AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */,
@@ -120,6 +111,7 @@
 		AA8E88422C1BF2F600B477D3 /* 네이버쇼핑 */ = {
 			isa = PBXGroup;
 			children = (
+				AA8E88752C1C498300B477D3 /* 셀 */,
 				AA8E885E2C1BFC2700B477D3 /* 확장 */,
 				AA8E885B2C1BFA0300B477D3 /* 뷰 */,
 				AA8E88542C1BF52D00B477D3 /* 모델 */,
@@ -131,6 +123,10 @@
 		AA8E88542C1BF52D00B477D3 /* 모델 */ = {
 			isa = PBXGroup;
 			children = (
+				AA8E88572C1BF57500B477D3 /* RealmDateManager.swift */,
+				AA8E886C2C1C203700B477D3 /* favoriteTable.swift */,
+				AA8E88592C1BF84700B477D3 /* NetworkManager.swift */,
+				AA8E88552C1BF53D00B477D3 /* Item.swift */,
 			);
 			name = "모델";
 			path = "모델";
@@ -139,7 +135,11 @@
 		AA8E885B2C1BFA0300B477D3 /* 뷰 */ = {
 			isa = PBXGroup;
 			children = (
+				AA8E88762C1C49B000B477D3 /* 홈뷰 */,
 				AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */,
+				AA8E88612C1C01FB00B477D3 /* Resuse.swift */,
+				AA8E88702C1C27D800B477D3 /* LikeViewController.swift */,
+				AA8E886E2C1C237900B477D3 /* WebViewController.swift */,
 			);
 			name = "뷰";
 			path = "뷰";
@@ -148,9 +148,30 @@
 		AA8E885E2C1BFC2700B477D3 /* 확장 */ = {
 			isa = PBXGroup;
 			children = (
+				AA8E886A2C1C08CF00B477D3 /* Create+Component.swift */,
 			);
 			name = "확장";
 			path = "확장";
+			sourceTree = "<group>";
+		};
+		AA8E88752C1C498300B477D3 /* 셀 */ = {
+			isa = PBXGroup;
+			children = (
+				AA8E88722C1C29B900B477D3 /* LikeCollectionViewCell.swift */,
+				AA8E88522C1BF49C00B477D3 /* HomeCollectionViewCell.swift */,
+			);
+			name = "셀";
+			path = "셀";
+			sourceTree = "<group>";
+		};
+		AA8E88762C1C49B000B477D3 /* 홈뷰 */ = {
+			isa = PBXGroup;
+			children = (
+				AA8E884E2C1BF3EF00B477D3 /* HomeViewController.swift */,
+				AA8E88772C1C49E600B477D3 /* HomeView+Collection+.swift */,
+			);
+			name = "홈뷰";
+			path = "홈뷰";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +265,7 @@
 				AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */,
 				AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */,
 				AA8E88412C1BF24300B477D3 /* APIKey.swift in Sources */,
+				AA8E88782C1C49E600B477D3 /* HomeView+Collection+.swift in Sources */,
 				AA8E88562C1BF53D00B477D3 /* Item.swift in Sources */,
 				AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */,
 				AA8E88532C1BF49C00B477D3 /* HomeCollectionViewCell.swift in Sources */,

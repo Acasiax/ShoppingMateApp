@@ -20,6 +20,7 @@ class HomeViewController: ReuseBaseViewController {
     var isDataEnd = false
     var pageStartNumber = 1
     var isDataLoading = false
+    var recentSearches: [String] = [] //최근 검색어
     
     //검색 결과가 없을 때 표시할 이미지 뷰
      let emptyImageView: UIImageView = {
@@ -35,9 +36,17 @@ class HomeViewController: ReuseBaseViewController {
             label.text = "최근 검색어가 없어요"
             label.textColor = .systemPink
             label.textAlignment = .center
+        label.font = .systemFont(ofSize: 17, weight: .bold)
             label.isHidden = true // 기본적으로 숨김
             return label
         }()
+    
+    // 최근 검색어를 표시할 테이블 뷰
+       let recentSearchTableView: UITableView = {
+           let tableView = UITableView()
+           tableView.isHidden = true
+           return tableView
+       }()
     
     
     override func loadView() {
@@ -52,6 +61,7 @@ class HomeViewController: ReuseBaseViewController {
        
         setupUI()
         setupEmptyImageView()
+        
         print(realmDatabase.configuration.fileURL)
     }
 
@@ -111,7 +121,7 @@ class HomeViewController: ReuseBaseViewController {
            }
            
            emptyLabel.snp.makeConstraints { make in
-               make.top.equalTo(emptyImageView.snp.bottom).offset(5)
+               make.top.equalTo(emptyImageView.snp.bottom).offset(8)
                make.centerX.equalToSuperview()
            }
        }
@@ -176,7 +186,7 @@ class HomeViewController: ReuseBaseViewController {
           }
       }
     // 검색 결과가 없을 때 emptyImageView를 표시하는 함수
-       private func updateEmptyImageViewVisibility() {
+        func updateEmptyImageViewVisibility() {
            let isEmpty = productItems.isEmpty
                   emptyImageView.isHidden = !isEmpty
                   emptyLabel.isHidden = !isEmpty
@@ -188,6 +198,7 @@ extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = homeView.searchBar.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         loadData(query: text)
+        addRecentSearch(text)
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -203,43 +214,16 @@ extension HomeViewController: UISearchBarDelegate {
             updateEmptyImageViewVisibility()
         }
     }
-}
-
-// MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return productItems.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell() }
-        let item = productItems[indexPath.row]
-        cell.configure(with: item)
-        return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        guard let query = homeView.searchBar.text, !isDataEnd else { return }
-
-        if productItems.count - 1 == indexPaths.last?.row {
-            pageStartNumber += 1
-            shopManager.shoppingRequest(query: query, start: pageStartNumber) { items in
-                guard let items = items else { return }
-                self.productItems.append(contentsOf: items)
-                self.homeView.collectionView.reloadData()
-                self.updateEmptyImageViewVisibility()
-            }
-        }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("셀클릭")
-        let item = productItems[indexPath.row]
-        let webVC = WebViewController()
-        webVC.productID = item.productID
-        webVC.item = item
-        webVC.webViewTitle = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
-        navigationController?.pushViewController(webVC, animated: true)
-    }
+    
+    private func addRecentSearch(_ searchText: String) {
+           if !recentSearches.contains(searchText) {
+               recentSearches.insert(searchText, at: 0)
+               if recentSearches.count > 10 {
+                   recentSearches.removeLast()
+               }
+           }
+       }
     
 }
+
+
