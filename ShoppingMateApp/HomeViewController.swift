@@ -29,7 +29,8 @@ class HomeViewController: ReuseBaseViewController {
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
                 view.addGestureRecognizer(tapGesture)
-        
+        tapGesture.cancelsTouchesInView = false // 🌟
+       
         setupUI()
         print(realmDatabase.configuration.fileURL)
     }
@@ -74,7 +75,7 @@ class HomeViewController: ReuseBaseViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.isTranslucent = false
-        navigationItem.title = "쇼핑 검색"
+        navigationItem.title = "이윤지's MEANING OUT"
     }
 
     @objc private func cancelButtonTapped() {
@@ -183,6 +184,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("셀클릭")
         let item = productItems[indexPath.row]
         let webVC = WebViewController()
         webVC.productID = item.productID
@@ -190,4 +192,5 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         webVC.webViewTitle = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         navigationController?.pushViewController(webVC, animated: true)
     }
+    
 }

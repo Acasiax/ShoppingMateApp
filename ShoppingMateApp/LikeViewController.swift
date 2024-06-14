@@ -78,6 +78,7 @@ extension LikeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("이거클릭")
         let likeItem = likedItems[indexPath.row]
         let webVC = WebViewController()
         webVC.productID = likeItem.productID
