@@ -28,6 +28,7 @@
 		AA8E88652C1C078D00B477D3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AA8E88642C1C078D00B477D3 /* Kingfisher */; };
 		AA8E886B2C1C08CF00B477D3 /* Create+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886A2C1C08CF00B477D3 /* Create+Component.swift */; };
 		AA8E886D2C1C203700B477D3 /* favoriteTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886C2C1C203700B477D3 /* favoriteTable.swift */; };
+		AA8E886F2C1C237900B477D3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886E2C1C237900B477D3 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		AA8E88612C1C01FB00B477D3 /* Resuse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resuse.swift; sourceTree = "<group>"; };
 		AA8E886A2C1C08CF00B477D3 /* Create+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Create+Component.swift"; sourceTree = "<group>"; };
 		AA8E886C2C1C203700B477D3 /* favoriteTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favoriteTable.swift; sourceTree = "<group>"; };
+		AA8E886E2C1C237900B477D3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 			children = (
 				AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */,
 				AA8E88612C1C01FB00B477D3 /* Resuse.swift */,
+				AA8E886E2C1C237900B477D3 /* WebViewController.swift */,
 			);
 			name = "뷰";
 			path = "뷰";
@@ -239,6 +242,7 @@
 				AA8E88532C1BF49C00B477D3 /* HomeCollectionViewCell.swift in Sources */,
 				AA8E88582C1BF57500B477D3 /* RealmDateManager.swift in Sources */,
 				AA8E88622C1C01FB00B477D3 /* Resuse.swift in Sources */,
+				AA8E886F2C1C237900B477D3 /* WebViewController.swift in Sources */,
 				AA8E885D2C1BFA0B00B477D3 /* MainSearchView.swift in Sources */,
 				AA8E886B2C1C08CF00B477D3 /* Create+Component.swift in Sources */,
 			);
