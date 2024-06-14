@@ -11,7 +11,7 @@ import SnapKit
 class MainSearchView: BaseView, UISearchBarDelegate {
 
     lazy var searchBar: UISearchBar = {
-        return UIView().createSearchBar(delegate: self)
+        return self.createSearchBar(delegate: self)
     }()
 
     let accuracyButton: UIButton = {
