@@ -31,8 +31,6 @@ class HomeViewController: UIViewController {
     private func setupUI() {
         homeView.collectionView.delegate = self
         homeView.collectionView.dataSource = self
-
-
         homeView.accuracyButton.addTarget(self, action: #selector(changeSort), for: .touchUpInside)
         homeView.dateButton.addTarget(self, action: #selector(changeSort), for: .touchUpInside)
         homeView.upPriceButton.addTarget(self, action: #selector(changeSort), for: .touchUpInside)
