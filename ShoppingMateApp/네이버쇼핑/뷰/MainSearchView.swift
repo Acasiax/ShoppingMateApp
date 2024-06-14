@@ -15,13 +15,18 @@ class MainSearchView: UIViewController, UISearchBarDelegate {
     let dateButton = UIButton(type: .system)
     let upPriceButton = UIButton(type: .system)
     let downPriceButton = UIButton(type: .system)
-    let collectionView: UICollectionView
-
-    init() {
+   
+    lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        super.init(nibName: nil, bundle: nil)
-    }
+        layout.minimumLineSpacing = 20
+        layout.minimumInteritemSpacing = 5
+        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 30) / 2, height: 250)
+        
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: "MainCollectionViewCell")
+        view.backgroundColor = .blue
+        return view
+    }()
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
