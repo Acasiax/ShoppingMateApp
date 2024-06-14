@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import RealmSwift
 
-class HomeViewController: UIViewController {
+class HomeViewController: ReuseBaseViewController {
     let homeView = MainSearchView()
     var productItems: [Item] = []
     var shopManager = NetworkManager.shared
@@ -40,6 +40,8 @@ class HomeViewController: UIViewController {
     private func setupUI() {
         homeView.collectionView.delegate = self
         homeView.collectionView.dataSource = self
+        homeView.collectionView.dataSource = self
+        homeView.collectionView.prefetchDataSource = self
         
         
         homeView.accuracyButton.addTarget(self, action: #selector(toggleButtonColor), for: .touchUpInside)
@@ -53,6 +55,9 @@ class HomeViewController: UIViewController {
         homeView.upPriceButton.addTarget(self, action: #selector(changeSort), for: .touchUpInside)
         homeView.downPriceButton.addTarget(self, action: #selector(changeSort), for: .touchUpInside)
 
+        if let cancelButton = homeView.searchBar.value(forKey: "cancelButton") as? UIButton {
+            cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        }
        
     }
     
