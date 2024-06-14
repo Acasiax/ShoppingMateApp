@@ -26,7 +26,7 @@
 		AA8E885D2C1BFA0B00B477D3 /* MainSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */; };
 		AA8E88622C1C01FB00B477D3 /* Resuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88612C1C01FB00B477D3 /* Resuse.swift */; };
 		AA8E88652C1C078D00B477D3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AA8E88642C1C078D00B477D3 /* Kingfisher */; };
-		AA8E88692C1C084E00B477D3 /* Create+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88682C1C084E00B477D3 /* Create+Component.swift */; };
+		AA8E886B2C1C08CF00B477D3 /* Create+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886A2C1C08CF00B477D3 /* Create+Component.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +47,7 @@
 		AA8E88592C1BF84700B477D3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchView.swift; sourceTree = "<group>"; };
 		AA8E88612C1C01FB00B477D3 /* Resuse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resuse.swift; sourceTree = "<group>"; };
-		AA8E88682C1C084E00B477D3 /* Create+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Create+Component.swift"; sourceTree = "<group>"; };
+		AA8E886A2C1C08CF00B477D3 /* Create+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Create+Component.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				AA8E883E2C1BF22E00B477D3 /* .gitignore */,
+				AA8E886A2C1C08CF00B477D3 /* Create+Component.swift */,
 				AA8E88402C1BF24300B477D3 /* APIKey.swift */,
 				AA8E88292C1BF0E800B477D3 /* ShoppingMateApp */,
 				AA8E88282C1BF0E800B477D3 /* Products */,
@@ -135,7 +136,6 @@
 		AA8E885E2C1BFC2700B477D3 /* 확장 */ = {
 			isa = PBXGroup;
 			children = (
-				AA8E88682C1C084E00B477D3 /* Create+Component.swift */,
 			);
 			name = "확장";
 			path = "확장";
@@ -230,13 +230,13 @@
 				AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */,
 				AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */,
 				AA8E88412C1BF24300B477D3 /* APIKey.swift in Sources */,
-				AA8E88692C1C084E00B477D3 /* Create+Component.swift in Sources */,
 				AA8E88562C1BF53D00B477D3 /* Item.swift in Sources */,
 				AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */,
 				AA8E88532C1BF49C00B477D3 /* HomeCollectionViewCell.swift in Sources */,
 				AA8E88582C1BF57500B477D3 /* LikeTable.swift in Sources */,
 				AA8E88622C1C01FB00B477D3 /* Resuse.swift in Sources */,
 				AA8E885D2C1BFA0B00B477D3 /* MainSearchView.swift in Sources */,
+				AA8E886B2C1C08CF00B477D3 /* Create+Component.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
