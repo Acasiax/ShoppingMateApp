@@ -20,7 +20,26 @@ class HomeViewController: ReuseBaseViewController {
     var isDataEnd = false
     var pageStartNumber = 1
     var isDataLoading = false
-
+    
+    //검색 결과가 없을 때 표시할 이미지 뷰
+     let emptyImageView: UIImageView = {
+         let imageView = UIImageView()
+         imageView.image = UIImage(named: "empty")
+         imageView.contentMode = .scaleAspectFill
+         imageView.isHidden = true // 기본적으로 숨김
+         return imageView
+     }()
+    
+    let emptyLabel: UILabel = {
+            let label = UILabel()
+            label.text = "최근 검색어가 없어요"
+            label.textColor = .systemPink
+            label.textAlignment = .center
+            label.isHidden = true // 기본적으로 숨김
+            return label
+        }()
+    
+    
     override func loadView() {
         self.view = homeView
     }
@@ -32,12 +51,15 @@ class HomeViewController: ReuseBaseViewController {
         tapGesture.cancelsTouchesInView = false // 🌟
        
         setupUI()
+        setupEmptyImageView()
         print(realmDatabase.configuration.fileURL)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         homeView.collectionView.reloadData()
+        updateEmptyImageViewVisibility()
+        
     }
     @objc func dismissKeyboard() {
            view.endEditing(true)
@@ -78,9 +100,26 @@ class HomeViewController: ReuseBaseViewController {
         navigationItem.title = "이윤지's MEANING OUT"
     }
 
+    // emptyImageView 설정
+    private func setupEmptyImageView() {
+           view.addSubview(emptyImageView)
+           view.addSubview(emptyLabel)
+           
+           emptyImageView.snp.makeConstraints { make in
+               make.center.equalToSuperview()
+               make.width.height.equalTo(200)
+           }
+           
+           emptyLabel.snp.makeConstraints { make in
+               make.top.equalTo(emptyImageView.snp.bottom).offset(5)
+               make.centerX.equalToSuperview()
+           }
+       }
+    
     @objc private func cancelButtonTapped() {
         productItems.removeAll()
         homeView.collectionView.reloadData()
+        updateEmptyImageViewVisibility()
         navigationController?.popViewController(animated: true)
     }
 
@@ -123,6 +162,7 @@ class HomeViewController: ReuseBaseViewController {
             guard let items = items else { return }
             self.productItems.append(contentsOf: items)
             self.homeView.collectionView.reloadData()
+            self.updateEmptyImageViewVisibility()
         }
     }
     
@@ -132,9 +172,15 @@ class HomeViewController: ReuseBaseViewController {
               guard let items = items else { return }
               self.productItems.append(contentsOf: items)
               self.homeView.collectionView.reloadData()
+              self.updateEmptyImageViewVisibility()
           }
       }
-    
+    // 검색 결과가 없을 때 emptyImageView를 표시하는 함수
+       private func updateEmptyImageViewVisibility() {
+           let isEmpty = productItems.isEmpty
+                  emptyImageView.isHidden = !isEmpty
+                  emptyLabel.isHidden = !isEmpty
+       }
 }
 
 // MARK: - UISearchBarDelegate
@@ -147,12 +193,14 @@ extension HomeViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         productItems.removeAll()
         homeView.collectionView.reloadData()
+        updateEmptyImageViewVisibility()
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             productItems.removeAll()
             homeView.collectionView.reloadData()
+            updateEmptyImageViewVisibility()
         }
     }
 }
@@ -179,6 +227,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 guard let items = items else { return }
                 self.productItems.append(contentsOf: items)
                 self.homeView.collectionView.reloadData()
+                self.updateEmptyImageViewVisibility()
             }
         }
     }
