@@ -23,6 +23,24 @@ extension UIView {
         }
         return button
     }
+    
+    func createSearchBar(delegate: UISearchBarDelegate?) -> UISearchBar {
+            let searchBar = UISearchBar()
+            searchBar.placeholder = "브랜드, 상품 등을 입력하세요"
+            searchBar.layer.shadowColor = UIColor.clear.cgColor
+            searchBar.showsCancelButton = true
+            searchBar.barTintColor = .red
+            searchBar.searchTextField.textColor = .white
+            searchBar.delegate = delegate
+            if let cancelButton = searchBar.value(forKey: "cancelButton") as? UIButton {
+                cancelButton.setTitle("취소", for: .normal)
+                cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+                cancelButton.tintColor = .white
+            }
+            return searchBar
+        }
+    }
 
 
-}
+
+
