@@ -47,14 +47,49 @@ enum SettingOption: Int, CaseIterable {
 
 
 class SettingViewController: UIViewController {
-
+    private let tableView = UITableView(frame: .zero, style: .plain)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-      
+        setupNavigationBar()
+                setupTableView()
+                setupConstraints()
     }
-    
+    private func setupNavigationBar() {
+           navigationItem.title = "SETTING"
+           navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18)]
+       }
+       
+       private func setupTableView() {
+           tableView.delegate = self
+           tableView.dataSource = self
+           tableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+           tableView.backgroundColor = .white
+           tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SettingCell")
+           tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileCell")
+           view.addSubview(tableView)
+       }
+       
+       private func setupConstraints() {
+           tableView.snp.makeConstraints { make in
+               make.edges.equalToSuperview()
+           }
+       }
 
 }
 
 
+extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+    
+    
+    
+    
+}

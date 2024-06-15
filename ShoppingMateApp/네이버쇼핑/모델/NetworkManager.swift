@@ -25,6 +25,7 @@ class NetworkManager {
             switch response.result {
             case .success(let shop):
                 completion(shop.items)
+                print(response.result)
             case .failure(let error):
                 print("Error: \(error)")
                 completion(nil)
