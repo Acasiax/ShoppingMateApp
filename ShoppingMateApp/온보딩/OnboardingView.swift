@@ -31,6 +31,7 @@ class OnboardingView: UIViewController {
         button.backgroundColor = .orange
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8
+        button.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -69,6 +70,7 @@ class OnboardingView: UIViewController {
     }
     
     @objc private func startButtonTapped() {
+        print("시작하기 버튼 클릭")
         let profileSettingVC = ProfileSettingViewController(navigationTitle: "PROFILE SETTING", showSaveButton: false)
         navigationController?.pushViewController(profileSettingVC, animated: true)
     }

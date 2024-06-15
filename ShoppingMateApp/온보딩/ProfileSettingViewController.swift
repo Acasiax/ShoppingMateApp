@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileSettingViewController1: UIViewController, UITextFieldDelegate {
+class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
     
     private let profileImageView = ProfileImageView()
     private let contentView = UIView()
@@ -238,28 +238,3 @@ protocol ProfileSelectionDelegate: AnyObject {
     func didSelectProfileImage(named: String)
 }
 
-class ProfileCell: UICollectionViewCell {
-    
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        //imageView.alpha = 0.5 // 이미지 반투명 설정
-        imageView.layer.cornerRadius = 40
-        imageView.layer.masksToBounds = true
-        imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = UIColor.gray.cgColor
-        return imageView
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        contentView.addSubview(imageView)
-        imageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
