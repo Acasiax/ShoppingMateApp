@@ -250,48 +250,52 @@ class ProfileSettingViewController: UIViewController {
         }
         return "사용할 수 있는 닉네임이에요"
     }
-
-//    private func navigateToNextScreen() {
-//        let nextViewController = HomeViewController() //🔥
-//        nextViewController.view.backgroundColor = .white
-//        self.navigationController?.pushViewController(nextViewController, animated: true)
-//    }
+ 
     
 //    private func navigateToNextScreen() {
-//        let nextViewController =
-//        nextViewController.view.backgroundColor = .white
+//        let homeViewController = HomeViewController() //🔥
+//        
 //        if let navigationController = self.navigationController {
-//            navigationController.pushViewController(nextViewController, animated: true)
+//            navigationController.pushViewController(homeViewController, animated: true)
 //        } else {
-//            let navigationController = UINavigationController(rootViewController: nextViewController)
+//            let navigationController = UINavigationController(rootViewController: homeViewController)
 //            navigationController.modalPresentationStyle = .fullScreen
 //            self.present(navigationController, animated: true, completion: nil)
 //        }
 //    }
-//
-//    
-//}
-//    private func navigateToNextScreen() {
-//        let homeViewController = HomeViewController()
-//        
-//        if let window = UIApplication.shared.windows.first {
-//            let navigationController = UINavigationController(rootViewController: homeViewController)
-//            window.rootViewController = navigationController
-//            window.makeKeyAndVisible()
-//        }
-//    }
+
+    
     private func navigateToNextScreen() {
-        let homeViewController = HomeViewController()
+        let tabBarVC = UITabBarController()
+        let searchNavVC = UINavigationController(rootViewController: HomeViewController())
+        let likeNavVC = UINavigationController(rootViewController: SettingViewController())
+        let yunjiVC = UINavigationController(rootViewController: LikeViewController())
+        
+        searchNavVC.title = "검색"
+        likeNavVC.title = "설정"
+        yunjiVC.title = "아아"
+        
+        tabBarVC.setViewControllers([searchNavVC, likeNavVC, yunjiVC], animated: false)
+        tabBarVC.modalPresentationStyle = .fullScreen
+        tabBarVC.tabBar.backgroundColor = .green
+        tabBarVC.tabBar.tintColor = .white
+        tabBarVC.tabBar.unselectedItemTintColor = .gray
+        
+        guard let items = tabBarVC.tabBar.items else { return }
+        items[0].image = UIImage(systemName: "magnifyingglass")
+        items[1].image = UIImage(systemName: "person")
+        items[2].image = UIImage(systemName: "person")
         
         if let navigationController = self.navigationController {
-            navigationController.pushViewController(homeViewController, animated: true)
+            navigationController.pushViewController(tabBarVC, animated: true)
         } else {
-            let navigationController = UINavigationController(rootViewController: homeViewController)
+            let navigationController = UINavigationController(rootViewController: tabBarVC)
             navigationController.modalPresentationStyle = .fullScreen
             self.present(navigationController, animated: true, completion: nil)
         }
     }
 
+    
 
     }
 

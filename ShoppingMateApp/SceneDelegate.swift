@@ -22,8 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
           if isNicknameSet {
               let tabBarVC = UITabBarController()
               let searchNavVC = UINavigationController(rootViewController: HomeViewController())
-              let likeNavVC = UINavigationController(rootViewController: LikeViewController())
-              let yunjiVC = UINavigationController(rootViewController: SettingViewController())
+              let likeNavVC = UINavigationController(rootViewController: SettingViewController())
+              let yunjiVC = UINavigationController(rootViewController: LikeViewController())
               
               searchNavVC.title = "검색"
               likeNavVC.title = "설정"
