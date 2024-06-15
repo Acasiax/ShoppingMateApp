@@ -62,6 +62,9 @@ class ProfileSettingViewController: UIViewController {
         setupViews()
         setupConstraints()
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
+                profileImageView.isUserInteractionEnabled = true
+                profileImageView.addGestureRecognizer(tapGesture)
     }
     
     private func setupNavigationBar() {
@@ -118,9 +121,11 @@ class ProfileSettingViewController: UIViewController {
         
     }
     
-    
+    @objc private func profileImageTapped() {
+           // 프로필 이미지 탭 기능
+       }
     
     @objc private func saveButtonTapped() {
-        // 저장 버튼 기능
+      
     }
 }
