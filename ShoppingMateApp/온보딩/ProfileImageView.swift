@@ -32,6 +32,7 @@ class ProfileImageView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -41,5 +42,17 @@ class ProfileImageView: UIView {
     private func setupViews() {
         addSubview(imageView)
         addSubview(cameraIconView)
+        
     }
+    private func setupConstraints() {
+           imageView.snp.makeConstraints { make in
+               make.edges.equalToSuperview()
+           }
+           
+           cameraIconView.snp.makeConstraints { make in
+               make.bottom.equalTo(imageView.snp.bottom)
+               make.right.equalTo(imageView.snp.right)
+               make.width.height.equalTo(24)
+           }
+       }
 }
