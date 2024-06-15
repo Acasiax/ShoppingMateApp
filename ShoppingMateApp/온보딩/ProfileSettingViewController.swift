@@ -60,7 +60,7 @@ class ProfileSettingViewController: UIViewController {
         view.backgroundColor = .white
         setupNavigationBar()
         setupViews()
-        
+        setupConstraints()
         
     }
     
@@ -84,6 +84,40 @@ class ProfileSettingViewController: UIViewController {
         contentView.addSubview(noteLabel)
         contentView.addSubview(completeButton)
     }
+    
+    private func setupConstraints() {
+        profileImageView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(40)
+            make.centerX.equalToSuperview()
+            make.width.height.equalTo(100)
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.top.equalTo(profileImageView.snp.bottom).offset(20)
+            make.left.right.bottom.equalToSuperview()
+        }
+        
+        nicknameTextField.snp.makeConstraints { make in
+            make.top.equalTo(contentView.snp.top).offset(40)
+            make.left.equalToSuperview().offset(40)
+            make.right.equalToSuperview().offset(-40)
+        }
+        
+        noteLabel.snp.makeConstraints { make in
+            make.top.equalTo(nicknameTextField.snp.bottom).offset(10)
+            make.left.equalToSuperview().offset(40)
+            make.right.equalToSuperview().offset(-40)
+        }
+        
+        completeButton.snp.makeConstraints { make in
+            make.top.equalTo(noteLabel.snp.bottom).offset(30)
+            make.left.equalToSuperview().offset(40)
+            make.right.equalToSuperview().offset(-40)
+            make.height.equalTo(50)
+        }
+        
+    }
+    
     
     
     @objc private func saveButtonTapped() {
