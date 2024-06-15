@@ -17,4 +17,12 @@ class OnboardingView: UIViewController {
            label.textAlignment = .center
            return label
        }()
+    
+    private let launchImageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.image = UIImage(named: "launch")
+            imageView.contentMode = .scaleAspectFill
+            return imageView
+        }()
+    
 }
