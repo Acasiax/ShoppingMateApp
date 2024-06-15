@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
+class ProfileSettingViewController1: UIViewController, UITextFieldDelegate {
     
     private let profileImageView = ProfileImageView()
     private let contentView = UIView()

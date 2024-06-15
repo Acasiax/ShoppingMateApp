@@ -67,10 +67,11 @@ class OnboardingView: UIViewController {
             make.height.equalTo(50)
         }
     }
-//    @objc private func startButtonTapped() {
-//        let profileSettingVC = ProfileSettingViewController
-//        navigationController?.pushViewController(profileSettingVC, animated: true)
-//    }
+    
+    @objc private func startButtonTapped() {
+        let profileSettingVC = ProfileSettingViewController(navigationTitle: "PROFILE SETTING", showSaveButton: false)
+        navigationController?.pushViewController(profileSettingVC, animated: true)
+    }
 
     
 }
