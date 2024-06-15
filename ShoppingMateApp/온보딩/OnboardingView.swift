@@ -34,4 +34,21 @@ class OnboardingView: UIViewController {
             return button
         }()
     
+    override func viewDidLoad() {
+            super.viewDidLoad()
+            view.backgroundColor = .white
+            setupViews()
+            setupConstraints()
+        }
+    
+    private func setupViews() {
+           view.addSubview(titleLabel)
+           view.addSubview(launchImageView)
+           view.addSubview(startButton)
+       }
+    private func setupConstraints() {
+        
+        
+        
+    }
 }
