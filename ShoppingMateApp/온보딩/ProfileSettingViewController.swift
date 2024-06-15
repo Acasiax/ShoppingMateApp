@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ProfileSettingViewController: UIViewController {
+class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
     
-    private let profileImageView = UIImageView()
+    private let profileImageView = ProfileImageView()
     private let contentView = UIView()
     
     private let nicknameTextField: UITextField = {
@@ -187,8 +187,8 @@ class ProfileSettingViewController: UIViewController {
            }
            if let profileImageName = UserDefaults.standard.string(forKey: "UserProfileImage"),
               let profileImage = UIImage(named: profileImageName) {
-               profileImageView.image = profileImage
-               profileImageView.accessibilityIdentifier = profileImageName
+               profileImageView.imageView.image = profileImage
+               profileImageView.imageView.accessibilityIdentifier = profileImageName
            }
        }
     
@@ -211,21 +211,19 @@ class ProfileSettingViewController: UIViewController {
             return "사용할 수 있는 닉네임이에요"
         }
         
-        private func navigateToNextScreen() {
-            let nextViewController = UIViewController() // SettingViewController로 교체 필요
-            nextViewController.view.backgroundColor = .white
-            self.navigationController?.pushViewController(nextViewController, animated: true)
-        }
-}
-
-extension ProfileSettingViewController: UITextFieldDelegate {
+    
+    // 텍스트 필드는 자유롭게 입력하고 지울 수 있음
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
         noteLabel.text = evaluateNickname(nickname: newText)
         return true
     }
-    
+        private func navigateToNextScreen() {
+            let nextViewController = SettingViewController()
+            nextViewController.view.backgroundColor = .white
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }
 }
 
 extension ProfileSettingViewController: ProfileSelectionDelegate {
