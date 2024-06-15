@@ -44,6 +44,7 @@ class HomeViewController: ReuseBaseViewController {
     // 최근 검색어를 표시할 테이블 뷰
     let recentSearchTableView: UITableView = {
         let tableView = UITableView()
+        
         tableView.isHidden = true
         return tableView
     }()
@@ -60,7 +61,7 @@ class HomeViewController: ReuseBaseViewController {
 
         setupUI()
         setupEmptyImageView()
-        setupRecentSearchTableView()
+       // setupRecentSearchTableView() //🔥
         updateRecentSearchVisibility()
         updateEmptyImageViewVisibility()
         print(realmDatabase.configuration.fileURL)
@@ -83,7 +84,8 @@ class HomeViewController: ReuseBaseViewController {
         homeView.collectionView.delegate = self
         homeView.collectionView.dataSource = self
         homeView.collectionView.prefetchDataSource = self
-
+        
+        
         homeView.accuracyButton.addTarget(self, action: #selector(toggleButtonColor), for: .touchUpInside)
         homeView.dateButton.addTarget(self, action: #selector(toggleButtonColor), for: .touchUpInside)
         homeView.upPriceButton.addTarget(self, action: #selector(toggleButtonColor), for: .touchUpInside)
@@ -134,7 +136,7 @@ class HomeViewController: ReuseBaseViewController {
         recentSearchTableView.delegate = self
         recentSearchTableView.dataSource = self
         recentSearchTableView.register(UITableViewCell.self, forCellReuseIdentifier: "RecentSearchCell")
-        
+        recentSearchTableView.backgroundColor = .yellow.withAlphaComponent(0.5)
         recentSearchTableView.snp.makeConstraints { make in
             make.top.equalTo(homeView.searchBar.snp.bottom)
             make.left.right.equalToSuperview()

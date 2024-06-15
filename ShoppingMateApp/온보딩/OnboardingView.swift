@@ -5,4 +5,16 @@
 //  Created by 이윤지 on 6/15/24.
 //
 
-import Foundation
+import UIKit
+import SnapKit
+
+class OnboardingView: UIViewController {
+    private let titleLabel: UILabel = {
+           let label = UILabel()
+           label.text = "MeaningOut"
+           label.font = UIFont.systemFont(ofSize: 45, weight: .heavy)
+           label.textColor = UIColor.orange
+           label.textAlignment = .center
+           return label
+       }()
+}
