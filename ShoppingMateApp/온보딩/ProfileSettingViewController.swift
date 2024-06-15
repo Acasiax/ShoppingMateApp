@@ -63,8 +63,8 @@ class ProfileSettingViewController: UIViewController {
         setupConstraints()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
-                profileImageView.isUserInteractionEnabled = true
-                profileImageView.addGestureRecognizer(tapGesture)
+        profileImageView.isUserInteractionEnabled = true
+        profileImageView.addGestureRecognizer(tapGesture)
     }
     
     private func setupNavigationBar() {
@@ -122,10 +122,88 @@ class ProfileSettingViewController: UIViewController {
     }
     
     @objc private func profileImageTapped() {
-           // 프로필 이미지 탭 기능
-       }
+        // 프로필 이미지 탭 기능
+    }
     
     @objc private func saveButtonTapped() {
-      
+        let nickname = nicknameTextField.text ?? ""
+        let validationMessage = evaluateNickname(nickname: nickname)
+        if validationMessage == "사용할 수 있는 닉네임이에요" {
+            saveUserData()
+            navigateToNextScreen()
+        } else {
+            // 잘못된 닉네임 경고 메시지 표시
+            let alert = UIAlertController(title: "경고", message: validationMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
+        
     }
+    
+    private func saveUserData() {
+           let nickname = nicknameTextField.text ?? ""
+           let profileImageName = profileImageView.accessibilityIdentifier ?? ""
+           let defaults = UserDefaults.standard
+           
+           defaults.set(nickname, forKey: "UserNickname")
+           defaults.set(profileImageName, forKey: "UserProfileImage")
+           defaults.set(true, forKey: "isNicknameSet")
+           
+           if defaults.string(forKey: "UserJoinDate") == nil {
+               let dateFormatter = DateFormatter()
+               dateFormatter.dateFormat = "yyyy-MM-dd"
+               let joinDate = dateFormatter.string(from: Date())
+               defaults.set(joinDate, forKey: "UserJoinDate")
+           }
+           
+           printUserDefaults()
+       }
+    private func printUserDefaults() {
+            let defaults = UserDefaults.standard
+            let nickname = defaults.string(forKey: "UserNickname") ?? "닉네임이 설정되지 않음"
+            let profileImageName = defaults.string(forKey: "UserProfileImage") ?? "프로필 이미지가 설정되지 않음"
+            let isNicknameSet = defaults.bool(forKey: "isNicknameSet")
+            let joinDate = defaults.string(forKey: "UserJoinDate") ?? "가입 날짜가 설정되지 않음"
+            
+            print("닉네임: \(nickname)")
+            print("프로필 이미지 이름: \(profileImageName)")
+            print("isNicknameSet: \(isNicknameSet)")
+            print("가입 날짜: \(joinDate)")
+        }
+    
+    private func loadUserData() {
+           if let nickname = UserDefaults.standard.string(forKey: "UserNickname") {
+               nicknameTextField.text = nickname
+           }
+           if let profileImageName = UserDefaults.standard.string(forKey: "UserProfileImage"),
+              let profileImage = UIImage(named: profileImageName) {
+               profileImageView.image = profileImage
+               profileImageView.accessibilityIdentifier = profileImageName
+           }
+       }
+    
+    private func isValidNickname(nickname: String) -> Bool {
+            let nicknameRegex = "^[가-힣a-zA-Z]{2,10}$"
+            let predicate = NSPredicate(format: "SELF MATCHES %@", nicknameRegex)
+            return predicate.evaluate(with: nickname)
+        }
+        
+        private func evaluateNickname(nickname: String) -> String {
+            if nickname.count < 2 || nickname.count >= 10 {
+                return "2글자 이상 10글자 미만으로 설정해주세요"
+            }
+            if nickname.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil {
+                return "닉네임에 숫자는 포함 할 수 없어요"
+            }
+            if nickname.rangeOfCharacter(from: CharacterSet(charactersIn: "@#$%")) != nil {
+                return "닉네임에 특수 문자를 포함할 수 없어요"
+            }
+            return "사용할 수 있는 닉네임이에요"
+        }
+        
+        private func navigateToNextScreen() {
+            let nextViewController = UIViewController() // SettingViewController로 교체 필요
+            nextViewController.view.backgroundColor = .white
+            self.navigationController?.pushViewController(nextViewController, animated: true)
+        }
 }
