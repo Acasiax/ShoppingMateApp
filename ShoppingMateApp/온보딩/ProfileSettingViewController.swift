@@ -207,3 +207,12 @@ class ProfileSettingViewController: UIViewController {
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }
 }
+
+extension ProfileSettingViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        noteLabel.text = evaluateNickname(nickname: newText)
+        return true
+    }
+}
