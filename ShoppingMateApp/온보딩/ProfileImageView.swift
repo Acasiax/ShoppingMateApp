@@ -22,6 +22,13 @@ class ProfileImageView: UIView {
         return imageView
     }()
     
+    let cameraIconView: UIImageView = {
+          let imageView = UIImageView()
+          imageView.image = UIImage(systemName: "camera")
+          imageView.tintColor = .orange
+          return imageView
+      }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -33,5 +40,6 @@ class ProfileImageView: UIView {
     
     private func setupViews() {
         addSubview(imageView)
+        addSubview(cameraIconView)
     }
 }
