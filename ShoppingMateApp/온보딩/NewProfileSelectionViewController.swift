@@ -64,6 +64,7 @@ extension NewProfileSelectionViewController: UICollectionViewDelegate, UICollect
             cell.imageView.alpha = 1.0
         } else {
             cell.imageView.layer.borderColor = UIColor.gray.cgColor
+            cell.imageView.layer.borderWidth = 1 // 🟠
             cell.imageView.alpha = 0.5
         }
         
@@ -72,6 +73,8 @@ extension NewProfileSelectionViewController: UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedProfile = profiles[indexPath.item]
         delegate?.didSelectProfileImage(named: selectedProfile)
+        UserDefaults.standard.setValue(selectedProfile, forKey: "UserProfileImage")
+                collectionView.reloadData() 
         self.view.removeFromSuperview()
         self.removeFromParent()
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
+class ProfileSettingViewController: UIViewController {
     
     private let profileImageView = ProfileImageView()
     private let contentView = UIView()
@@ -17,6 +17,7 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
         textField.placeholder = "닉네임을 입력해주세요 :)"
         textField.borderStyle = .roundedRect
         textField.textAlignment = .center
+        textField.text = "임시닉네임" // 👈 임시 닉네임 설정
         return textField
     }()
     
@@ -36,6 +37,16 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private let passButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("로그인 없이 시작", for: .normal)
+        button.backgroundColor = .orange
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 8
+        button.addTarget(self, action: #selector(passButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -69,6 +80,10 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
         profileImageView.addGestureRecognizer(tapGesture)
         
         nicknameTextField.delegate = self
+        DispatchQueue.main.async {
+                self.nicknameTextField.autocorrectionType = .no
+                self.nicknameTextField.spellCheckingType = .no
+            }
     }
     
     private func setupNavigationBar() {
@@ -90,6 +105,7 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
         contentView.addSubview(nicknameTextField)
         contentView.addSubview(noteLabel)
         contentView.addSubview(completeButton)
+        contentView.addSubview(passButton)
     }
     
     private func setupConstraints() {
@@ -122,6 +138,12 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
             make.right.equalToSuperview().offset(-40)
             make.height.equalTo(50)
         }
+        passButton.snp.makeConstraints { make in
+            make.top.equalTo(completeButton.snp.bottom).offset(10)
+            make.left.equalToSuperview().offset(40)
+            make.right.equalToSuperview().offset(-40)
+            make.height.equalTo(50)
+        }
         
     }
     
@@ -150,24 +172,45 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    
+    @objc private func passButtonTapped() {
+        let nickname = nicknameTextField.text ?? ""
+        let validationMessage = evaluateNickname(nickname: nickname)
+      
+            saveUserData()
+            navigateToNextScreen()
+      
+       
+        
+    }
+    
     private func saveUserData() {
-           let nickname = nicknameTextField.text ?? ""
-           let profileImageName = profileImageView.accessibilityIdentifier ?? ""
-           let defaults = UserDefaults.standard
-           
-           defaults.set(nickname, forKey: "UserNickname")
-           defaults.set(profileImageName, forKey: "UserProfileImage")
-           defaults.set(true, forKey: "isNicknameSet")
-           
-           if defaults.string(forKey: "UserJoinDate") == nil {
-               let dateFormatter = DateFormatter()
-               dateFormatter.dateFormat = "yyyy-MM-dd"
-               let joinDate = dateFormatter.string(from: Date())
-               defaults.set(joinDate, forKey: "UserJoinDate")
-           }
-           
-           printUserDefaults()
-       }
+        // UI 관련 작업을 메인 스레드에서 수행
+        let nickname = nicknameTextField.text ?? ""
+        let profileImageName = profileImageView.accessibilityIdentifier ?? ""
+        
+        // 나머지 작업을 백그라운드 스레드에서 수행
+        DispatchQueue.global(qos: .background).async {
+            let defaults = UserDefaults.standard
+
+            defaults.set(nickname, forKey: "UserNickname")
+            defaults.set(profileImageName, forKey: "UserProfileImage")
+            defaults.set(true, forKey: "isNicknameSet")
+
+            if defaults.string(forKey: "UserJoinDate") == nil {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                let joinDate = dateFormatter.string(from: Date())
+                defaults.set(joinDate, forKey: "UserJoinDate")
+            }
+            
+            DispatchQueue.main.async {
+                self.printUserDefaults()
+            }
+        }
+    }
+
+
     private func printUserDefaults() {
             let defaults = UserDefaults.standard
             let nickname = defaults.string(forKey: "UserNickname") ?? "닉네임이 설정되지 않음"
@@ -181,16 +224,34 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
             print("가입 날짜: \(joinDate)")
         }
     
+//    private func loadUserData() {
+//           if let nickname = UserDefaults.standard.string(forKey: "UserNickname") {
+//               nicknameTextField.text = nickname
+//           }
+//           if let profileImageName = UserDefaults.standard.string(forKey: "UserProfileImage"),
+//              let profileImage = UIImage(named: profileImageName) {
+//               profileImageView.imageView.image = profileImage
+//               profileImageView.imageView.accessibilityIdentifier = profileImageName
+//           }
+//       }
+    
     private func loadUserData() {
-           if let nickname = UserDefaults.standard.string(forKey: "UserNickname") {
-               nicknameTextField.text = nickname
-           }
-           if let profileImageName = UserDefaults.standard.string(forKey: "UserProfileImage"),
-              let profileImage = UIImage(named: profileImageName) {
-               profileImageView.imageView.image = profileImage
-               profileImageView.imageView.accessibilityIdentifier = profileImageName
-           }
-       }
+        if let nickname = UserDefaults.standard.string(forKey: "UserNickname") {
+            nicknameTextField.text = nickname // 👈 기존 닉네임 설정
+        }
+        if let profileImageName = UserDefaults.standard.string(forKey: "UserProfileImage"),
+           !profileImageName.isEmpty, // 👈 빈 문자열 확인 추가
+           let profileImage = UIImage(named: profileImageName) {
+            profileImageView.imageView.image = profileImage
+            profileImageView.imageView.accessibilityIdentifier = profileImageName
+        } else {
+            // 👈 프로필 이미지가 없거나 빈 문자열인 경우 기본 이미지 설정
+            profileImageView.imageView.image = UIImage(named: "profile_0")
+            //profileImageView.imageView.accessibilityIdentifier = "profile_0"
+        }
+    }
+
+    
     
     private func isValidNickname(nickname: String) -> Bool {
             let nicknameRegex = "^[가-힣a-zA-Z]{2,10}$"
@@ -220,7 +281,7 @@ class ProfileSettingViewController: UIViewController, UITextFieldDelegate {
         return true
     }
         private func navigateToNextScreen() {
-            let nextViewController = SettingViewController()
+            let nextViewController = SettingViewController() //🔥
             nextViewController.view.backgroundColor = .white
             self.navigationController?.pushViewController(nextViewController, animated: true)
         }
@@ -238,3 +299,10 @@ protocol ProfileSelectionDelegate: AnyObject {
     func didSelectProfileImage(named: String)
 }
 
+
+
+extension ProfileSettingViewController: UITextFieldDelegate {
+    
+    
+    
+}

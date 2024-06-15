@@ -15,36 +15,51 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         let initialViewController: UIViewController
+        let defaults = UserDefaults.standard
+        let isNicknameSet = defaults.bool(forKey: "isNicknameSet")
         
-        let isNicknameSet = UserDefaults.standard.bool(forKey: "isNicknameSet")
+        
         if isNicknameSet {
-            let tabBarVC = UITabBarController()
-            let searchNavVC = UINavigationController(rootViewController: HomeViewController())
-            let likeNavVC = UINavigationController(rootViewController: LikeViewController())
-            
-            searchNavVC.title = "검색"
-            likeNavVC.title = "설정"
-            
-            tabBarVC.setViewControllers([searchNavVC, likeNavVC], animated: false)
-            tabBarVC.modalPresentationStyle = .fullScreen
-            tabBarVC.tabBar.backgroundColor = .green
-            tabBarVC.tabBar.tintColor = .white
-            tabBarVC.tabBar.unselectedItemTintColor = .gray
-            
-            guard let items = tabBarVC.tabBar.items else { return }
-            items[0].image = UIImage(systemName: "magnifyingglass")
-            items[1].image = UIImage(systemName: "person")
-            
-            initialViewController = tabBarVC
-        } else {
-            let navigationController = UINavigationController(rootViewController: OnboardingView())
-            initialViewController = navigationController
-        }
-        
-        window?.rootViewController = initialViewController
-        window?.makeKeyAndVisible()
-    }
-    
+                 // 닉네임이 설정된 경우 닉네임을 출력합니다.
+                 if let nickname = defaults.string(forKey: "nickname"), !nickname.isEmpty {
+                     print("닉네임: \(nickname)")
+                 } else {
+                     // 닉네임이 없거나 비어있는 경우, isNicknameSet을 false로 재설정합니다.
+                     defaults.set(false, forKey: "isNicknameSet")
+                     print("닉네임이 설정되지 않았습니다.")
+                 }
+             }
+             
+             if defaults.bool(forKey: "isNicknameSet") {
+                 let tabBarVC = UITabBarController()
+                 let searchNavVC = UINavigationController(rootViewController: HomeViewController())
+                 let likeNavVC = UINavigationController(rootViewController: LikeViewController())
+                 let yunjiVC = UINavigationController(rootViewController: SettingViewController())
+                 
+                 searchNavVC.title = "검색"
+                 likeNavVC.title = "설정"
+                 yunjiVC.title = "아아"
+                 
+                 tabBarVC.setViewControllers([searchNavVC, likeNavVC, yunjiVC], animated: false)
+                 tabBarVC.modalPresentationStyle = .fullScreen
+                 tabBarVC.tabBar.backgroundColor = .green
+                 tabBarVC.tabBar.tintColor = .white
+                 tabBarVC.tabBar.unselectedItemTintColor = .gray
+                 
+                 guard let items = tabBarVC.tabBar.items else { return }
+                 items[0].image = UIImage(systemName: "magnifyingglass")
+                 items[1].image = UIImage(systemName: "person")
+                 items[2].image = UIImage(systemName: "person")
+                 
+                 initialViewController = tabBarVC
+             } else {
+                 let navigationController = UINavigationController(rootViewController: OnboardingView())
+                 initialViewController = navigationController
+             }
+             
+             window?.rootViewController = initialViewController
+             window?.makeKeyAndVisible()
+         }
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
