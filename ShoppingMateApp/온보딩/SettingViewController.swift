@@ -108,6 +108,27 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             cell.detailTextLabel?.text = settingOption.detail
             cell.accessoryType = settingOption == .logout ? .none : .disclosureIndicator
             cell.textLabel?.textColor = settingOption == .logout ? .red : .black
+            if settingOption == .cart {
+                let cartImageView = UIImageView(image: UIImage(systemName: "cart"))
+                cartImageView.tintColor = .black
+                let cartLabel = UILabel()
+                cartLabel.text = settingOption.detail
+                cartLabel.textColor = .black
+                
+                cell.contentView.addSubview(cartImageView)
+                cell.contentView.addSubview(cartLabel)
+                
+                cartImageView.snp.makeConstraints { make in
+                    make.trailing.equalToSuperview().offset(-10)
+                    make.centerY.equalToSuperview()
+                    make.width.height.equalTo(24)
+                }
+                
+                cartLabel.snp.makeConstraints { make in
+                    make.trailing.equalTo(cartImageView.snp.leading).offset(-5)
+                    make.centerY.equalToSuperview()
+                }
+            }
             return cell
         }
     }
@@ -133,93 +154,41 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-}
-
-
-class ProfileTableViewCell: UITableViewCell {
-    private let profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = 35
-        imageView.layer.masksToBounds = true
-        imageView.layer.borderWidth = 4
-        imageView.layer.borderColor = UIColor.orange.cgColor
-        return imageView
-    }()
+    private func showLogoutAlert() {
+        let alert = UIAlertController(title: "탈퇴하기", message: "정말로 탈퇴하시겠습니까?", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .destructive) { _ in
+            self.resetUserDefaults()
+            self.navigateToOnboarding()
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alert.addAction(confirmAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
     
-    private let usernameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        return label
-    }()
-    
-    private let joinDateLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .gray
-        return label
-    }()
-    
-    private let disclosureIndicator: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "chevron.right"))
-        imageView.tintColor = .gray
-        return imageView
-    }()
-    
-    func configure() {
+    private func resetUserDefaults() {
         let defaults = UserDefaults.standard
-        let nickname = defaults.string(forKey: "UserNickname") ?? "닉네임이 설정되지 않음"
-        let profileImageName = defaults.string(forKey: "UserProfileImage") ?? "profile_default"
-        let joinDate = defaults.string(forKey: "UserJoinDate") ?? "가입 날짜가 설정되지 않음"
-        
-        usernameLabel.text = nickname
-        joinDateLabel.text = "\(joinDate) 가입"
-        profileImageView.image = UIImage(named: profileImageName)
-    }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupViews()
-        setupConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupViews() {
-        contentView.addSubview(profileImageView)
-        contentView.addSubview(usernameLabel)
-        contentView.addSubview(joinDateLabel)
-        contentView.addSubview(disclosureIndicator)
-    }
-    
-    private func setupConstraints() {
-        profileImageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(70)
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            defaults.removeObject(forKey: key)
         }
-        
-        usernameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(23)
-            make.leading.equalTo(profileImageView.snp.trailing).offset(15)
-            make.trailing.equalTo(disclosureIndicator.snp.leading).offset(-10)
-        }
-        
-        joinDateLabel.snp.makeConstraints { make in
-            make.top.equalTo(usernameLabel.snp.bottom).offset(5)
-            make.leading.equalTo(usernameLabel.snp.leading)
-            make.trailing.equalTo(usernameLabel.snp.trailing)
-        }
-        
-        disclosureIndicator.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-20)
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(20)
+    }
+    
+    private func navigateToOnboarding() {
+        let onboardingVC = OnboardingView()
+        let navigationController = UINavigationController(rootViewController: onboardingVC)
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = navigationController
+            window.makeKeyAndVisible()
+            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
         }
     }
 }
+
+
+
 
 
 

@@ -13,6 +13,7 @@
 		AA6CB5BF2C1D597A0089E3B7 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5BE2C1D597A0089E3B7 /* ProfileImageView.swift */; };
 		AA6CB5C12C1D599F0089E3B7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5C02C1D599F0089E3B7 /* SettingViewController.swift */; };
 		AA6CB5C32C1D6BB10089E3B7 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5C22C1D6BB10089E3B7 /* ProfileCell.swift */; };
+		AA6CB5C52C1DBF6F0089E3B7 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5C42C1DBF6F0089E3B7 /* ProfileTableViewCell.swift */; };
 		AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */; };
 		AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */; };
 		AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882E2C1BF0E800B477D3 /* ViewController.swift */; };
@@ -47,6 +48,7 @@
 		AA6CB5BE2C1D597A0089E3B7 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		AA6CB5C02C1D599F0089E3B7 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		AA6CB5C22C1D6BB10089E3B7 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		AA6CB5C42C1DBF6F0089E3B7 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		AA8E88272C1BF0E800B477D3 /* ShoppingMateApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingMateApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				AA6CB5BE2C1D597A0089E3B7 /* ProfileImageView.swift */,
 				AA6CB5C02C1D599F0089E3B7 /* SettingViewController.swift */,
 				AA6CB5C22C1D6BB10089E3B7 /* ProfileCell.swift */,
+				AA6CB5C42C1DBF6F0089E3B7 /* ProfileTableViewCell.swift */,
 			);
 			name = "온보딩";
 			path = "온보딩";
@@ -294,6 +297,7 @@
 				AA8E88732C1C29B900B477D3 /* LikeCollectionViewCell.swift in Sources */,
 				AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */,
 				AA6CB5BC2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift in Sources */,
+				AA6CB5C52C1DBF6F0089E3B7 /* ProfileTableViewCell.swift in Sources */,
 				AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */,
 				AA8E88412C1BF24300B477D3 /* APIKey.swift in Sources */,
 				AA8E88782C1C49E600B477D3 /* HomeView+Collection+.swift in Sources */,

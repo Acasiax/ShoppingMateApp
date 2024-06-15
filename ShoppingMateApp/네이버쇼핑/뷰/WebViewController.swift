@@ -5,7 +5,6 @@
 //  Created by 이윤지 on 6/14/24.
 //
 
-import Foundation
 import UIKit
 import WebKit
 import RealmSwift
@@ -132,7 +131,6 @@ class WebViewController: UIViewController, WKUIDelegate {
  }
 
 
-import Foundation
 import UIKit
 import WebKit
 import RealmSwift
