@@ -5,7 +5,6 @@
 //  Created by 이윤지 on 6/14/24.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 import RealmSwift
@@ -112,7 +111,7 @@ class HomeViewController: ReuseBaseViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.isTranslucent = false
-        navigationItem.title = "이윤지's MEANING OUT"
+        navigationItem.title = "이윤지's MEANING OUT카카"
     }
 
     // emptyImageView 설정
@@ -220,4 +219,3 @@ class HomeViewController: ReuseBaseViewController {
         recentSearchTableView.reloadData()
     }
 }
-
