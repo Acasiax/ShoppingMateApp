@@ -81,15 +81,59 @@ class SettingViewController: UIViewController {
 
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return SettingOption.allCases.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        guard let settingOption = SettingOption(rawValue: indexPath.section) else {
+            return UITableViewCell()
+        }
+        
+        switch settingOption {
+        case .profile:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as? ProfileTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.configure()
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath)
+            cell.textLabel?.text = settingOption.title
+            cell.detailTextLabel?.text = settingOption.detail
+            cell.accessoryType = settingOption == .logout ? .none : .disclosureIndicator
+            cell.textLabel?.textColor = settingOption == .logout ? .red : .black
+            return cell
+        }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let settingOption = SettingOption(rawValue: indexPath.section)
+        return settingOption == .profile ? 100 : 44
+    }
     
-    
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let settingOption = SettingOption(rawValue: indexPath.section) {
+            switch settingOption {
+            case .profile:
+                let profileVC = ProfileSettingViewController(navigationTitle: "Edit Profile", showSaveButton: true)
+                navigationController?.pushViewController(profileVC, animated: true)
+            case .logout:
+                showLogoutAlert()
+            default:
+                break
+            }
+        }
+    }
 }
+
+    
+    
+    
+
