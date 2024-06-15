@@ -9,21 +9,40 @@ import UIKit
 
 class ProfileSettingViewController: UIViewController {
 
+    private var navigationTitle: String
+    private var showSaveButton: Bool
+    
+    init(navigationTitle: String, showSaveButton: Bool) {
+           self.navigationTitle = navigationTitle
+           self.showSaveButton = showSaveButton
+           super.init(nibName: nil, bundle: nil)
+       }
+    
+    required init?(coder: NSCoder) {
+        self.navigationTitle = ""
+        self.showSaveButton = false
+        super.init(coder: coder)
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .white
+       
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupNavigationBar() {
+        navigationItem.title = navigationTitle
+             navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18)]
+             
+             if showSaveButton {
+                 let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
+                 saveButton.setTitleTextAttributes([.foregroundColor: UIColor.black, .font: UIFont.boldSystemFont(ofSize: 16)], for: .normal)
+                 navigationItem.rightBarButtonItem = saveButton
+             }
+        
     }
-    */
-
+    @objc private func saveButtonTapped() {
+            // 저장 버튼 기능
+        }
 }
