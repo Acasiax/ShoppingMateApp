@@ -25,4 +25,13 @@ class OnboardingView: UIViewController {
             return imageView
         }()
     
+    private let startButton: UIButton = {
+            let button = UIButton(type: .system)
+            button.setTitle("시작하기", for: .normal)
+            button.backgroundColor = .orange
+            button.setTitleColor(.white, for: .normal)
+            button.layer.cornerRadius = 8
+            return button
+        }()
+    
 }
