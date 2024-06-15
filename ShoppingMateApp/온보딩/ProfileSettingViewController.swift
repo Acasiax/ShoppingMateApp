@@ -58,13 +58,17 @@ class ProfileSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        printUserDefaults()
         setupNavigationBar()
         setupViews()
         setupConstraints()
+        loadUserData()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
         profileImageView.isUserInteractionEnabled = true
         profileImageView.addGestureRecognizer(tapGesture)
+        
+        nicknameTextField.delegate = self
     }
     
     private func setupNavigationBar() {
@@ -123,6 +127,12 @@ class ProfileSettingViewController: UIViewController {
     
     @objc private func profileImageTapped() {
         // 프로필 이미지 탭 기능
+        let newViewController = NewProfileSelectionViewController()
+        newViewController.delegate = self
+        addChild(newViewController)
+        newViewController.view.frame = contentView.bounds
+        contentView.addSubview(newViewController.view)
+        newViewController.didMove(toParent: self)
     }
     
     @objc private func saveButtonTapped() {
@@ -215,4 +225,8 @@ extension ProfileSettingViewController: UITextFieldDelegate {
         noteLabel.text = evaluateNickname(nickname: newText)
         return true
     }
+}
+
+protocol ProfileSelectionDelegate: AnyObject {
+    func didSelectProfileImage(named: String)
 }
