@@ -11,32 +11,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
+           guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        window = UIWindow(windowScene: windowScene)
-        let mainVC = HomeViewController()
-        let navigationController = UINavigationController(rootViewController: mainVC)
+           window = UIWindow(windowScene: windowScene)
+           let initialViewController: UIViewController
 
-        let tabBarVC = UITabBarController()
-        let searchNavVC = UINavigationController(rootViewController: HomeViewController())
-        let likeNavVC = UINavigationController(rootViewController: LikeViewController())
+           let isNicknameSet = UserDefaults.standard.bool(forKey: "isNicknameSet")
+           if isNicknameSet {
+               let tabBarVC = UITabBarController()
+               let searchNavVC = UINavigationController(rootViewController: HomeViewController())
+               let likeNavVC = UINavigationController(rootViewController: LikeViewController())
+               
+               searchNavVC.title = "검색"
+               likeNavVC.title = "설정"
+               
+               tabBarVC.setViewControllers([searchNavVC, likeNavVC], animated: false)
+               tabBarVC.modalPresentationStyle = .fullScreen
+               tabBarVC.tabBar.backgroundColor = .green
+               tabBarVC.tabBar.tintColor = .white
+               tabBarVC.tabBar.unselectedItemTintColor = .gray
+               
+               guard let items = tabBarVC.tabBar.items else { return }
+               items[0].image = UIImage(systemName: "magnifyingglass")
+               items[1].image = UIImage(systemName: "person")
+               
+               initialViewController = tabBarVC
+           } else {
+               initialViewController = OnboardingView()
+           }
 
-        searchNavVC.title = "검색"
-        likeNavVC.title = "설정"
+           window?.rootViewController = initialViewController
+           window?.makeKeyAndVisible()
+       }
 
-        tabBarVC.setViewControllers([searchNavVC, likeNavVC], animated: false)
-        tabBarVC.modalPresentationStyle = .fullScreen
-        tabBarVC.tabBar.backgroundColor = .green
-        tabBarVC.tabBar.tintColor = .white
-        tabBarVC.tabBar.unselectedItemTintColor = .gray
-
-        guard let items = tabBarVC.tabBar.items else { return }
-        items[0].image = UIImage(systemName: "magnifyingglass")
-        items[1].image = UIImage(systemName: "person")
-
-        window?.rootViewController = tabBarVC
-        window?.makeKeyAndVisible()
-    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

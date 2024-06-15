@@ -225,6 +225,15 @@ extension ProfileSettingViewController: UITextFieldDelegate {
         noteLabel.text = evaluateNickname(nickname: newText)
         return true
     }
+    
+}
+
+extension ProfileSettingViewController: ProfileSelectionDelegate {
+    func didSelectProfileImage(named: String) {
+        profileImageView.imageView.image = UIImage(named: named)
+        profileImageView.imageView.accessibilityIdentifier = named
+        saveUserData() // 선택한 이미지를 즉시 저장
+    }
 }
 
 protocol ProfileSelectionDelegate: AnyObject {
