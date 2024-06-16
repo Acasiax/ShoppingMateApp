@@ -102,7 +102,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         priceLabel.textColor = .black
-        priceLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        priceLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         priceLabel.textAlignment = .left
         
         likeButton.setImage(UIImage(named: unlikedImageName), for: .normal)

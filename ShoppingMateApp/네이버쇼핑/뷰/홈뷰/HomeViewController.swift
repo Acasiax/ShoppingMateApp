@@ -9,7 +9,7 @@ import SnapKit
 import RealmSwift
 
 class HomeViewController: ReuseBaseViewController {
-    let homeView = MainSearchView() //검색하면 정보 나오는 화면
+    let homeView = MainSearchView()
     var shopManager = NetworkManager.shared
     var productItems: [Item] = []
     var favoriteItems: Results<LikeTable>!
@@ -18,14 +18,20 @@ class HomeViewController: ReuseBaseViewController {
     var isDataEnd = false
     var pageStartNumber = 1
     var isDataLoading = false
-    var recentSearches: [String] = [] // 최근 검색어
-    
-    // 검색 결과가 없을 때 표시할 이미지 뷰
+    var recentSearchRepository = RecentSearchRepository()
+    var recentSearches: [String] = [] {
+        didSet {
+            print("HomeViewController recentSearches didSet: \(recentSearches)")
+            recentSearchTableView.recentSearches = recentSearches
+            updateRecentSearchVisibility()
+        }
+    }
+
     let emptyImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "empty")
         imageView.contentMode = .scaleAspectFill
-        imageView.isHidden = true // 기본적으로 숨김
+        imageView.isHidden = true
         return imageView
     }()
     
@@ -35,14 +41,12 @@ class HomeViewController: ReuseBaseViewController {
         label.textColor = .black
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 17, weight: .bold)
-        label.isHidden = true // 기본적으로 숨김
+        label.isHidden = true
         return label
     }()
     
-    // 최근 검색어를 표시할 테이블 뷰
-    let recentSearchTableView: UITableView = {
-        let tableView = UITableView()
-        
+    let recentSearchTableView: RecentSearchTableView = {
+        let tableView = RecentSearchTableView()
         tableView.isHidden = true
         return tableView
     }()
@@ -55,18 +59,20 @@ class HomeViewController: ReuseBaseViewController {
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
-        tapGesture.cancelsTouchesInView = false // 🌟
-
+        tapGesture.cancelsTouchesInView = false
+        
         setupUI()
         setupEmptyImageView()
-       // setupRecentSearchTableView() //🔥
+        setupRecentSearchTableView()
+        loadRecentSearches()
         updateRecentSearchVisibility()
         updateEmptyImageViewVisibility()
-        print(realmDatabase.configuration.fileURL)
+        print("Realm file URL: \(realmDatabase.configuration.fileURL!)")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        loadRecentSearches()
         updateRecentSearchVisibility()
         updateEmptyImageViewVisibility()
         homeView.collectionView.reloadData()
@@ -82,7 +88,6 @@ class HomeViewController: ReuseBaseViewController {
         homeView.collectionView.delegate = self
         homeView.collectionView.dataSource = self
         homeView.collectionView.prefetchDataSource = self
-        
         
         homeView.accuracyButton.addTarget(self, action: #selector(toggleButtonColor), for: .touchUpInside)
         homeView.dateButton.addTarget(self, action: #selector(toggleButtonColor), for: .touchUpInside)
@@ -113,14 +118,13 @@ class HomeViewController: ReuseBaseViewController {
         navigationItem.title = "이윤지's MEANING OUT"
     }
 
-    // emptyImageView 설정
     private func setupEmptyImageView() {
         view.addSubview(emptyImageView)
         view.addSubview(emptyLabel)
         
         emptyImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.height.equalTo(200)
+            make.width.height.equalTo(230)
         }
         
         emptyLabel.snp.makeConstraints { make in
@@ -131,15 +135,26 @@ class HomeViewController: ReuseBaseViewController {
     
     private func setupRecentSearchTableView() {
         view.addSubview(recentSearchTableView)
-        recentSearchTableView.delegate = self
-        recentSearchTableView.dataSource = self
-        recentSearchTableView.register(UITableViewCell.self, forCellReuseIdentifier: "RecentSearchCell")
-        recentSearchTableView.backgroundColor = .yellow.withAlphaComponent(0.5)
+        recentSearchTableView.onSelectSearch = { [weak self] selectedSearch in
+            self?.homeView.searchBar.text = selectedSearch
+            self?.loadData(query: selectedSearch)
+            self?.recentSearchTableView.isHidden = true
+        }
+        
+        recentSearchTableView.onDeleteSearch = { [weak self] deletedSearch in
+            self?.deleteSearch(deletedSearch)
+        }
+        
         recentSearchTableView.snp.makeConstraints { make in
             make.top.equalTo(homeView.searchBar.snp.bottom)
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+    }
+    
+    private func deleteSearch(_ searchTerm: String) {
+        recentSearchRepository.deleteSearch(searchTerm)
+        loadRecentSearches()
     }
     
     @objc private func cancelButtonTapped() {
@@ -203,25 +218,35 @@ class HomeViewController: ReuseBaseViewController {
         }
     }
     
-    // 검색 결과가 없을 때 emptyImageView를 표시하는 함수
     func updateEmptyImageViewVisibility() {
         let isEmpty = productItems.isEmpty
         emptyImageView.isHidden = !isEmpty
         emptyLabel.isHidden = !isEmpty
-        recentSearchTableView.isHidden = !recentSearches.isEmpty || !isEmpty // 🌟 최근 검색어가 있을 때는 emptyImageView를 숨김
+        recentSearchTableView.isHidden = recentSearches.isEmpty
         recentSearchTableView.reloadData()
     }
     
-    // 최근 검색어 표시 여부 업데이트 함수
     func updateRecentSearchVisibility() {
+        print("Updating recent search visibility: \(recentSearches)")
         recentSearchTableView.isHidden = recentSearches.isEmpty
         recentSearchTableView.reloadData()
+    }
+    
+    private func loadRecentSearches() {
+        recentSearches = recentSearchRepository.fetchAll()
+        print("Loaded recent searches: \(recentSearches)")
     }
 }
 
 extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        
+        if !recentSearches.contains(query) {
+            recentSearches.append(query)
+            recentSearchRepository.saveSearch(query)
+        }
+        
         let searchResultsVC = SearchResultsViewController(query: query)
         navigationController?.pushViewController(searchResultsVC, animated: true)
     }

@@ -5,7 +5,6 @@
 //  Created by 이윤지 on 6/14/24.
 //
 
-
 import UIKit
 import RealmSwift
 
@@ -142,7 +141,7 @@ class LikeView: BaseView {
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(LikeCollectionViewCell.self, forCellWithReuseIdentifier: "LikeCollectionViewCell")
-        view.backgroundColor = .purple
+        view.backgroundColor = .white
         return view
     }()
 

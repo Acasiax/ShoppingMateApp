@@ -18,6 +18,7 @@
 		AA6CB5C92C1DE2D60089E3B7 /* sss.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5C82C1DE2D60089E3B7 /* sss.swift */; };
 		AA6CB5CF2C1ECC770089E3B7 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */; };
 		AA6CB5D12C1ECCD90089E3B7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */; };
+		AA6CB5D42C1EE7E10089E3B7 /* RecentSearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5D32C1EE7E10089E3B7 /* RecentSearchTableView.swift */; };
 		AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */; };
 		AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */; };
 		AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882E2C1BF0E800B477D3 /* ViewController.swift */; };
@@ -57,6 +58,7 @@
 		AA6CB5C82C1DE2D60089E3B7 /* sss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sss.swift; sourceTree = "<group>"; };
 		AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		AA6CB5D32C1EE7E10089E3B7 /* RecentSearchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchTableView.swift; sourceTree = "<group>"; };
 		AA8E88272C1BF0E800B477D3 /* ShoppingMateApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingMateApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,15 @@
 			path = "온보딩";
 			sourceTree = "<group>";
 		};
+		AA6CB5D22C1EE7D10089E3B7 /* 검색기록 */ = {
+			isa = PBXGroup;
+			children = (
+				AA6CB5D32C1EE7E10089E3B7 /* RecentSearchTableView.swift */,
+			);
+			name = "검색기록";
+			path = "검색기록";
+			sourceTree = "<group>";
+		};
 		AA8E881E2C1BF0E800B477D3 = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +162,7 @@
 		AA8E88422C1BF2F600B477D3 /* 네이버쇼핑 */ = {
 			isa = PBXGroup;
 			children = (
+				AA6CB5D22C1EE7D10089E3B7 /* 검색기록 */,
 				AA8E88752C1C498300B477D3 /* 셀 */,
 				AA8E885E2C1BFC2700B477D3 /* 확장 */,
 				AA8E885B2C1BFA0300B477D3 /* 뷰 */,
@@ -314,6 +326,7 @@
 				AA6CB5BC2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift in Sources */,
 				AA6CB5C52C1DBF6F0089E3B7 /* ProfileTableViewCell.swift in Sources */,
 				AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */,
+				AA6CB5D42C1EE7E10089E3B7 /* RecentSearchTableView.swift in Sources */,
 				AA8E88412C1BF24300B477D3 /* APIKey.swift in Sources */,
 				AA8E88782C1C49E600B477D3 /* HomeView+Collection+.swift in Sources */,
 				AA8E88562C1BF53D00B477D3 /* Item.swift in Sources */,
