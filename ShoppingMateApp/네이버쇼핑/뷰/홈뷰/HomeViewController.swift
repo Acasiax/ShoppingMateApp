@@ -120,7 +120,7 @@ class HomeViewController: ReuseBaseViewController {
         
         emptyImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.height.equalTo(240)
+            make.width.height.equalTo(200)
         }
         
         emptyLabel.snp.makeConstraints { make in

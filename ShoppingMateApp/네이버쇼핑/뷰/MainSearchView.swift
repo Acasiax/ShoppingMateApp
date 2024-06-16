@@ -46,7 +46,7 @@ class MainSearchView: BaseView, UISearchBarDelegate {
    
     override func configureView() {
         self.backgroundColor = .white
-        addSubview(searchBar)
+       addSubview(searchBar)
         addSubview(accuracyButton)
         addSubview(dateButton)
         addSubview(upPriceButton)

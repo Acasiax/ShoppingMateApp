@@ -15,43 +15,29 @@ class SearchResultsViewController: ReuseBaseViewController {
     private var isDataLoading = false
     private var pageStartNumber = 1
 
+    
     let searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.placeholder = "검색어를 입력하세요"
-        return searchBar
-    }()
-    
-    let accuracyButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("정확도", for: .normal)
-        button.backgroundColor = .gray
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
-    
-    let dateButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("날짜순", for: .normal)
-        button.backgroundColor = .gray
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
-    
-    let upPriceButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("가격높은순", for: .normal)
-        button.backgroundColor = .gray
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
-    
-    let downPriceButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("가격낮은순", for: .normal)
-        button.backgroundColor = .gray
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
+           let searchBar = UISearchBar()
+           searchBar.placeholder = "검색어를 입력하세요"
+           return searchBar
+       }()
+       
+       let accuracyButton: UIButton = {
+           return UIView().createButton(title: "정확도")
+       }()
+       
+       let dateButton: UIButton = {
+           return UIView().createButton(title: "날짜순")
+       }()
+       
+       let upPriceButton: UIButton = {
+           return UIView().createButton(title: "가격높은순", width: 80)
+       }()
+       
+       let downPriceButton: UIButton = {
+           return UIView().createButton(title: "가격낮은순", width: 80)
+       }()
+       
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -64,11 +50,13 @@ class SearchResultsViewController: ReuseBaseViewController {
         return view
     }()
     
+    //검색한 결과가 네비의 타이틀로
     init(query: String) {
-        self.query = query
-        super.init(nibName: nil, bundle: nil)
-        searchBar.text = query
-    }
+          self.query = query
+          super.init(nibName: nil, bundle: nil)
+          searchBar.text = query
+          self.title = query
+      }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -168,10 +156,12 @@ class SearchResultsViewController: ReuseBaseViewController {
 
 extension SearchResultsViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = searchBar.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        productItems.removeAll()
-        loadData(query: text)
-    }
+        guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+               let searchResultsVC = SearchResultsViewController(query: query)
+               // 🌟 Set the navigation title to the search query
+               searchResultsVC.title = query
+               navigationController?.pushViewController(searchResultsVC, animated: true)
+           }
 }
 
 extension SearchResultsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {

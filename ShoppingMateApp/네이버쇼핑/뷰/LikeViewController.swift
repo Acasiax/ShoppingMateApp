@@ -44,16 +44,17 @@ class LikeViewController: ReuseBaseViewController {
 
     private func configureNavigationBar() {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .red
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.backgroundColor = .white
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+        //구분선
         appearance.shadowColor = .clear
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.isTranslucent = false
-        navigationItem.title = "좋아요 목록"
+        navigationItem.title = "나의 장바구니 목록~"
     }
 
     private func fetchLikedItems() {
