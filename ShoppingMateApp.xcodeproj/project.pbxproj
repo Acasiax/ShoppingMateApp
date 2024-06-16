@@ -14,6 +14,10 @@
 		AA6CB5C12C1D599F0089E3B7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5C02C1D599F0089E3B7 /* SettingViewController.swift */; };
 		AA6CB5C32C1D6BB10089E3B7 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5C22C1D6BB10089E3B7 /* ProfileCell.swift */; };
 		AA6CB5C52C1DBF6F0089E3B7 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5C42C1DBF6F0089E3B7 /* ProfileTableViewCell.swift */; };
+		AA6CB5C72C1DCC570089E3B7 /* LikeNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5C62C1DCC570089E3B7 /* LikeNotification.swift */; };
+		AA6CB5C92C1DE2D60089E3B7 /* sss.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5C82C1DE2D60089E3B7 /* sss.swift */; };
+		AA6CB5CF2C1ECC770089E3B7 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */; };
+		AA6CB5D12C1ECCD90089E3B7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */; };
 		AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */; };
 		AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */; };
 		AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882E2C1BF0E800B477D3 /* ViewController.swift */; };
@@ -49,6 +53,10 @@
 		AA6CB5C02C1D599F0089E3B7 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		AA6CB5C22C1D6BB10089E3B7 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		AA6CB5C42C1DBF6F0089E3B7 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		AA6CB5C62C1DCC570089E3B7 /* LikeNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeNotification.swift; sourceTree = "<group>"; };
+		AA6CB5C82C1DE2D60089E3B7 /* sss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sss.swift; sourceTree = "<group>"; };
+		AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		AA8E88272C1BF0E800B477D3 /* ShoppingMateApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingMateApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,7 +97,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AA6CB5B62C1D4B4D0089E3B7 /* 온보딩 */ = {
+		AA6CB5B62C1D4B4D0089E3B7 /* 온보딩.본본본 */ = {
 			isa = PBXGroup;
 			children = (
 				AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */,
@@ -99,8 +107,10 @@
 				AA6CB5C02C1D599F0089E3B7 /* SettingViewController.swift */,
 				AA6CB5C22C1D6BB10089E3B7 /* ProfileCell.swift */,
 				AA6CB5C42C1DBF6F0089E3B7 /* ProfileTableViewCell.swift */,
+				AA6CB5C82C1DE2D60089E3B7 /* sss.swift */,
+				AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */,
 			);
-			name = "온보딩";
+			name = "온보딩.본본본";
 			path = "온보딩";
 			sourceTree = "<group>";
 		};
@@ -125,7 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				AA8E88402C1BF24300B477D3 /* APIKey.swift */,
-				AA6CB5B62C1D4B4D0089E3B7 /* 온보딩 */,
+				AA6CB5B62C1D4B4D0089E3B7 /* 온보딩.본본본 */,
 				AA8E88422C1BF2F600B477D3 /* 네이버쇼핑 */,
 				AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */,
 				AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */,
@@ -165,11 +175,12 @@
 		AA8E885B2C1BFA0300B477D3 /* 뷰 */ = {
 			isa = PBXGroup;
 			children = (
+				AA8E88702C1C27D800B477D3 /* LikeViewController.swift */,
 				AA8E88762C1C49B000B477D3 /* 홈뷰 */,
 				AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */,
 				AA8E88612C1C01FB00B477D3 /* Resuse.swift */,
-				AA8E88702C1C27D800B477D3 /* LikeViewController.swift */,
 				AA8E886E2C1C237900B477D3 /* WebViewController.swift */,
+				AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */,
 			);
 			name = "뷰";
 			path = "뷰";
@@ -179,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				AA8E886A2C1C08CF00B477D3 /* Create+Component.swift */,
+				AA6CB5C62C1DCC570089E3B7 /* LikeNotification.swift */,
 			);
 			name = "확장";
 			path = "확장";
@@ -295,13 +307,17 @@
 				AA8E886D2C1C203700B477D3 /* favoriteTable.swift in Sources */,
 				AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */,
 				AA8E88732C1C29B900B477D3 /* LikeCollectionViewCell.swift in Sources */,
+				AA6CB5CF2C1ECC770089E3B7 /* SearchResultsViewController.swift in Sources */,
+				AA6CB5C92C1DE2D60089E3B7 /* sss.swift in Sources */,
 				AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */,
+				AA6CB5D12C1ECCD90089E3B7 /* MainTabBarController.swift in Sources */,
 				AA6CB5BC2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift in Sources */,
 				AA6CB5C52C1DBF6F0089E3B7 /* ProfileTableViewCell.swift in Sources */,
 				AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */,
 				AA8E88412C1BF24300B477D3 /* APIKey.swift in Sources */,
 				AA8E88782C1C49E600B477D3 /* HomeView+Collection+.swift in Sources */,
 				AA8E88562C1BF53D00B477D3 /* Item.swift in Sources */,
+				AA6CB5C72C1DCC570089E3B7 /* LikeNotification.swift in Sources */,
 				AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */,
 				AA8E88532C1BF49C00B477D3 /* HomeCollectionViewCell.swift in Sources */,
 				AA8E88582C1BF57500B477D3 /* RealmDateManager.swift in Sources */,

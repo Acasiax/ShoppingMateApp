@@ -4,9 +4,9 @@
 //
 //  Created by 이윤지 on 6/15/24.
 //
-
 import UIKit
 import SnapKit
+import RealmSwift
 
 enum SettingOption: Int, CaseIterable {
     case profile
@@ -38,16 +38,40 @@ enum SettingOption: Int, CaseIterable {
         case .profile:
             return nil
         case .cart:
-            return "18개의 상품"
+            return nil
         default:
             return nil
         }
     }
 }
 
-
 class SettingViewController: UIViewController {
+    
     private let tableView = UITableView(frame: .zero, style: .plain)
+    
+    
+    var likedItemsCount: Int = 0 {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    private var notificationToken: NotificationToken?
+
+    
+    private var navigationTitle: String
+        private var showSaveButton: Bool
+
+        init(navigationTitle: String, showSaveButton: Bool) {
+            self.navigationTitle = navigationTitle
+            self.showSaveButton = showSaveButton
+            super.init(nibName: nil, bundle: nil)
+        }
+
+        required init?(coder: NSCoder) {
+            self.navigationTitle = ""
+            self.showSaveButton = false
+            super.init(coder: coder)
+        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,10 +79,15 @@ class SettingViewController: UIViewController {
         setupNavigationBar()
         setupTableView()
         setupConstraints()
+        observeLikedItems()
+    }
+    
+    deinit {
+        notificationToken?.invalidate()
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = "SETTING"
+        navigationItem.title = "SETTING33"
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18)]
     }
     
@@ -78,8 +107,24 @@ class SettingViewController: UIViewController {
         }
     }
     
+    private func observeLikedItems() {
+        let repository = LikeTableRepository()
+        let likedItems = repository.fetchAll()
+        notificationToken = likedItems.observe { [weak self] changes in
+            switch changes {
+            case .initial, .update:
+                self?.updateLikedItemsCount()
+            case .error(let error):
+                print("Error observing liked items: \(error)")
+            }
+        }
+    }
+    
+    private func updateLikedItemsCount() {
+        let repository = LikeTableRepository()
+        likedItemsCount = repository.fetchAll().count
+    }
 }
-
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -90,11 +135,12 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let settingOption = SettingOption(rawValue: indexPath.section) else {
             return UITableViewCell()
         }
-        
+
         switch settingOption {
         case .profile:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as? ProfileTableViewCell else {
@@ -102,36 +148,45 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             }
             cell.configure()
             return cell
+
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath)
             cell.textLabel?.text = settingOption.title
             cell.detailTextLabel?.text = settingOption.detail
             cell.accessoryType = settingOption == .logout ? .none : .disclosureIndicator
             cell.textLabel?.textColor = settingOption == .logout ? .red : .black
+
+            // 모든 서브뷰를 제거합니다
+            cell.contentView.subviews.forEach { $0.removeFromSuperview() }
+
             if settingOption == .cart {
                 let cartImageView = UIImageView(image: UIImage(systemName: "cart"))
                 cartImageView.tintColor = .black
                 let cartLabel = UILabel()
-                cartLabel.text = settingOption.detail
+                cartLabel.text = "\(likedItemsCount)개의 상품"
                 cartLabel.textColor = .black
-                
+
                 cell.contentView.addSubview(cartImageView)
                 cell.contentView.addSubview(cartLabel)
-                
+
                 cartImageView.snp.makeConstraints { make in
                     make.trailing.equalToSuperview().offset(-10)
                     make.centerY.equalToSuperview()
                     make.width.height.equalTo(24)
                 }
-                
+
                 cartLabel.snp.makeConstraints { make in
                     make.trailing.equalTo(cartImageView.snp.leading).offset(-5)
                     make.centerY.equalToSuperview()
                 }
             }
+
             return cell
         }
     }
+
+
+ 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let settingOption = SettingOption(rawValue: indexPath.section)
@@ -145,7 +200,19 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             switch settingOption {
             case .profile:
                 let profileVC = ProfileSettingViewController(navigationTitle: "Edit Profile", showSaveButton: true)
-                navigationController?.pushViewController(profileVC, animated: true)
+                    if let navigationController = self.navigationController {
+                        navigationController.pushViewController(profileVC, animated: true)
+                    } else {
+                        print("Navigation controller not found")
+                    }
+            case .cart:
+                let likeVC = LikeViewController()
+                            if let navigationController = self.navigationController {
+                                navigationController.pushViewController(likeVC, animated: true)
+                            } else {
+                                print("Navigation controller not found")
+                            }
+                
             case .logout:
                 showLogoutAlert()
             default:
@@ -176,6 +243,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    //👮‍♀️
     private func navigateToOnboarding() {
         let onboardingVC = OnboardingView()
         let navigationController = UINavigationController(rootViewController: onboardingVC)
@@ -186,9 +254,3 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
-
-
-
-
-

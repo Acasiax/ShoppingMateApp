@@ -4,13 +4,12 @@
 //
 //  Created by 이윤지 on 6/14/24.
 //
-
 import UIKit
 import SnapKit
 import RealmSwift
 
 class HomeViewController: ReuseBaseViewController {
-    let homeView = MainSearchView()
+    let homeView = MainSearchView() //검색하면 정보 나오는 화면
     var shopManager = NetworkManager.shared
     var productItems: [Item] = []
     var favoriteItems: Results<LikeTable>!
@@ -217,5 +216,27 @@ class HomeViewController: ReuseBaseViewController {
     func updateRecentSearchVisibility() {
         recentSearchTableView.isHidden = recentSearches.isEmpty
         recentSearchTableView.reloadData()
+    }
+}
+
+extension HomeViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        let searchResultsVC = SearchResultsViewController(query: query)
+        navigationController?.pushViewController(searchResultsVC, animated: true)
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        productItems.removeAll()
+        homeView.collectionView.reloadData()
+        updateEmptyImageViewVisibility()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            productItems.removeAll()
+            homeView.collectionView.reloadData()
+            updateEmptyImageViewVisibility()
+        }
     }
 }

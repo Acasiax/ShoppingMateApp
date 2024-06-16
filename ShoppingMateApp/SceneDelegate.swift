@@ -11,44 +11,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-          guard let windowScene = (scene as? UIWindowScene) else { return }
-          
-          window = UIWindow(windowScene: windowScene)
-          let initialViewController: UIViewController
-          let defaults = UserDefaults.standard
-          
-          let isNicknameSet = defaults.bool(forKey: "isNicknameSet")
-        defaults.set(false, forKey: "isNicknameSet") //📍
-          if isNicknameSet {
-              let tabBarVC = UITabBarController()
-              let searchNavVC = UINavigationController(rootViewController: HomeViewController())
-              let likeNavVC = UINavigationController(rootViewController: SettingViewController())
-              let yunjiVC = UINavigationController(rootViewController: LikeViewController())
-              
-              searchNavVC.title = "검색"
-              likeNavVC.title = "설정"
-              yunjiVC.title = "아아"
-              
-              tabBarVC.setViewControllers([searchNavVC, likeNavVC, yunjiVC], animated: false)
-              tabBarVC.modalPresentationStyle = .fullScreen
-              tabBarVC.tabBar.backgroundColor = .green
-              tabBarVC.tabBar.tintColor = .white
-              tabBarVC.tabBar.unselectedItemTintColor = .gray
-              
-              guard let items = tabBarVC.tabBar.items else { return }
-              items[0].image = UIImage(systemName: "magnifyingglass")
-              items[1].image = UIImage(systemName: "person")
-              items[2].image = UIImage(systemName: "person")
-              
-              initialViewController = tabBarVC
-          } else {
-              let navigationController = UINavigationController(rootViewController: OnboardingView())
-              initialViewController = navigationController
-          }
-          
-          window?.rootViewController = initialViewController
-          window?.makeKeyAndVisible()
-      }
+         guard let windowScene = (scene as? UIWindowScene) else { return }
+         
+         window = UIWindow(windowScene: windowScene)
+         let initialViewController: UIViewController
+         let defaults = UserDefaults.standard
+         
+         let isNicknameSet = defaults.bool(forKey: "isNicknameSet")
+       
+         if isNicknameSet {
+             initialViewController = MainTabBarController()
+         } else {
+             let navigationController = UINavigationController(rootViewController: OnboardingView())
+             initialViewController = navigationController
+         }
+         
+         window?.rootViewController = initialViewController
+         window?.makeKeyAndVisible()
+     }
+    
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

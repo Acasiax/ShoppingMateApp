@@ -5,9 +5,9 @@
 //  Created by 이윤지 on 6/15/24.
 //
 
+
 import UIKit
 import SnapKit
-
 
 class ProfileTableViewCell: UITableViewCell {
     private let profileImageView: UIImageView = {
@@ -42,12 +42,16 @@ class ProfileTableViewCell: UITableViewCell {
     func configure() {
         let defaults = UserDefaults.standard
         let nickname = defaults.string(forKey: "UserNickname") ?? "닉네임이 설정되지 않음"
-        let profileImageName = defaults.string(forKey: "UserProfileImage") ?? "profile_default"
         let joinDate = defaults.string(forKey: "UserJoinDate") ?? "가입 날짜가 설정되지 않음"
         
         usernameLabel.text = nickname
         joinDateLabel.text = "\(joinDate) 가입"
-        profileImageView.image = UIImage(named: profileImageName)
+        
+        if let imageData = defaults.data(forKey: "UserProfileImage"), let profileImage = UIImage(data: imageData) {
+            profileImageView.image = profileImage
+        } else {
+            profileImageView.image = UIImage(named: "profile_5")
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

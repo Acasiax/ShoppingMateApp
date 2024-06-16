@@ -8,40 +8,6 @@
 import UIKit
 import SnapKit
 
-// MARK: - UISearchBarDelegate
-extension HomeViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = homeView.searchBar.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        loadData(query: text)
-        addRecentSearch(text)
-        recentSearchTableView.isHidden = true // 🌟 검색 시작 시 테이블 뷰 숨김
-    }
-
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        productItems.removeAll()
-        homeView.collectionView.reloadData()
-        updateEmptyImageViewVisibility()
-    }
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            productItems.removeAll()
-            homeView.collectionView.reloadData()
-            updateEmptyImageViewVisibility()
-        }
-    }
-    
-    private func addRecentSearch(_ searchText: String) {
-        if !recentSearches.contains(searchText) {
-            recentSearches.insert(searchText, at: 0)
-            if recentSearches.count > 10 {
-                recentSearches.removeLast()
-            }
-        }
-        updateRecentSearchVisibility()
-    }
-}
-
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

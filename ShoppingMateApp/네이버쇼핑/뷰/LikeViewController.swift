@@ -5,6 +5,7 @@
 //  Created by 이윤지 on 6/14/24.
 //
 
+
 import UIKit
 import RealmSwift
 
@@ -17,14 +18,6 @@ class LikeViewController: ReuseBaseViewController {
     let likeRepository = LikeTableRepository()
     var isSearchActive = false
 
-    let cartLabel: UILabel = {
-           let label = UILabel()
-           label.font = UIFont.systemFont(ofSize: 16)
-           label.textColor = .black
-           label.textAlignment = .center
-           return label
-       }()
-    
     override func loadView() {
         self.view = likeView
     }

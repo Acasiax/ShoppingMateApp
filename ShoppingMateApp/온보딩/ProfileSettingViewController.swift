@@ -4,7 +4,6 @@
 //
 //  Created by 이윤지 on 6/15/24.
 //
-
 import UIKit
 
 class ProfileSettingViewController: UIViewController {
@@ -82,7 +81,7 @@ class ProfileSettingViewController: UIViewController {
     }
 
     private func setupNavigationBar() {
-        navigationItem.title = navigationTitle
+        navigationItem.title = showSaveButton ? "수정화면" : "프로필 설정"
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18)]
         
         if showSaveButton {
@@ -165,40 +164,86 @@ class ProfileSettingViewController: UIViewController {
     }
     
     @objc private func passButtonTapped() {
-        let nickname = nicknameTextField.text ?? ""
-        let validationMessage = evaluateNickname(nickname: nickname)
-        
         saveUserData()
         navigateToNextScreen()
     }
+
+    private func navigateToNextScreen() {
+        let tabBarVC = UITabBarController()
+        
+        let homeVC = HomeViewController()
+        //homeVC.navigationItem.title = "검색"
+        
+        let settingsVC = SettingViewController(navigationTitle: "세팅뷰우", showSaveButton: false)
+        
+        let likeVC = LikeViewController()
+       // likeVC.navigationItem.title = "좋아요"
+        
+        let searchNavVC = UINavigationController(rootViewController: homeVC)
+        searchNavVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
+        
+        let settingsNavVC = UINavigationController(rootViewController: settingsVC)
+        settingsNavVC.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "gearshape"), tag: 1)
+        
+        let likeNavVC = UINavigationController(rootViewController: likeVC)
+        likeNavVC.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
+        
+        tabBarVC.setViewControllers([searchNavVC, settingsNavVC, likeNavVC], animated: false)
+        tabBarVC.modalPresentationStyle = .fullScreen
+        tabBarVC.tabBar.backgroundColor = .green
+        tabBarVC.tabBar.tintColor = .white
+        tabBarVC.tabBar.unselectedItemTintColor = .gray
+        
+        guard let items = tabBarVC.tabBar.items else { return }
+        items[0].image = UIImage(systemName: "magnifyingglass")
+        items[1].image = UIImage(systemName: "gearshape")
+        items[2].image = UIImage(systemName: "heart")
+        
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = tabBarVC
+            window.makeKeyAndVisible()
+            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
+        } else {
+            print("Window not found")
+        }
+    }
     
     private func saveUserData() {
-        // UI 관련 작업을 메인 스레드에서 수행
-        DispatchQueue.main.async {
-            let nickname = self.nicknameTextField.text ?? ""
-            let profileImageName = self.profileImageView.accessibilityIdentifier ?? ""
-            
-            // 나머지 작업을 백그라운드 스레드에서 수행
-            DispatchQueue.global(qos: .background).async {
-                let defaults = UserDefaults.standard
-                defaults.set(nickname, forKey: "UserNickname")
-                defaults.set(profileImageName, forKey: "UserProfileImage")
-                defaults.set(true, forKey: "isNicknameSet")
-
-                if defaults.string(forKey: "UserJoinDate") == nil {
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd"
-                    let joinDate = dateFormatter.string(from: Date())
-                    defaults.set(joinDate, forKey: "UserJoinDate")
-                }
-                
-                DispatchQueue.main.async {
-                    self.printUserDefaults()
-                }
-            }
+        let nickname = nicknameTextField.text ?? ""
+        
+        // 프로필 이미지 데이터를 저장
+        let profileImageData = profileImageView.imageView.image?.pngData()
+        
+        let defaults = UserDefaults.standard
+        defaults.set(nickname, forKey: "UserNickname")
+        
+        if let profileImageData = profileImageData {
+            defaults.set(profileImageData, forKey: "UserProfileImage")
+        }
+        
+        if defaults.string(forKey: "UserJoinDate") == nil {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let joinDate = dateFormatter.string(from: Date())
+            defaults.set(joinDate, forKey: "UserJoinDate")
         }
     }
 
+    private func loadUserData() {
+        printUserDefaults()
+        let defaults = UserDefaults.standard
+        if let nickname = defaults.string(forKey: "UserNickname") {
+            nicknameTextField.text = nickname
+        }
+        
+        // 프로필 이미지 데이터를 로드
+        if let profileImageData = defaults.data(forKey: "UserProfileImage"), let profileImage = UIImage(data: profileImageData) {
+            profileImageView.imageView.image = profileImage
+        } else {
+            profileImageView.imageView.image = UIImage(named: "profile_5")
+        }
+    }
+    
     private func printUserDefaults() {
         DispatchQueue.main.async {
             let defaults = UserDefaults.standard
@@ -214,24 +259,6 @@ class ProfileSettingViewController: UIViewController {
         }
     }
     
-    private func loadUserData() {
-        DispatchQueue.main.async {
-            if let nickname = UserDefaults.standard.string(forKey: "UserNickname") {
-                self.nicknameTextField.text = nickname // 👈 기존 닉네임 설정
-            }
-            if let profileImageName = UserDefaults.standard.string(forKey: "UserProfileImage"),
-               !profileImageName.isEmpty, // 👈 빈 문자열 확인 추가
-               let profileImage = UIImage(named: profileImageName) {
-                self.profileImageView.imageView.image = profileImage
-                self.profileImageView.imageView.accessibilityIdentifier = profileImageName
-            } else {
-                // 👈 프로필 이미지가 없거나 빈 문자열인 경우 기본 이미지 설정
-                self.profileImageView.imageView.image = UIImage(named: "profile_0")
-                //self.profileImageView.imageView.accessibilityIdentifier = "profile_0"
-            }
-        }
-    }
-
     private func isValidNickname(nickname: String) -> Bool {
         let nicknameRegex = "^[가-힣a-zA-Z]{2,10}$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", nicknameRegex)
@@ -250,56 +277,7 @@ class ProfileSettingViewController: UIViewController {
         }
         return "사용할 수 있는 닉네임이에요"
     }
- 
-    
-//    private func navigateToNextScreen() {
-//        let homeViewController = HomeViewController() //🔥
-//        
-//        if let navigationController = self.navigationController {
-//            navigationController.pushViewController(homeViewController, animated: true)
-//        } else {
-//            let navigationController = UINavigationController(rootViewController: homeViewController)
-//            navigationController.modalPresentationStyle = .fullScreen
-//            self.present(navigationController, animated: true, completion: nil)
-//        }
-//    }
-
-    
-    private func navigateToNextScreen() {
-        let tabBarVC = UITabBarController()
-        let searchNavVC = UINavigationController(rootViewController: HomeViewController())
-        let likeNavVC = UINavigationController(rootViewController: SettingViewController())
-        let yunjiVC = UINavigationController(rootViewController: LikeViewController())
-        
-        searchNavVC.title = "검색"
-        likeNavVC.title = "설정"
-        yunjiVC.title = "아아"
-        
-        tabBarVC.setViewControllers([searchNavVC, likeNavVC, yunjiVC], animated: false)
-        tabBarVC.modalPresentationStyle = .fullScreen
-        tabBarVC.tabBar.backgroundColor = .green
-        tabBarVC.tabBar.tintColor = .white
-        tabBarVC.tabBar.unselectedItemTintColor = .gray
-        
-        guard let items = tabBarVC.tabBar.items else { return }
-        items[0].image = UIImage(systemName: "magnifyingglass")
-        items[1].image = UIImage(systemName: "person")
-        items[2].image = UIImage(systemName: "person")
-        
-        if let navigationController = self.navigationController {
-            navigationController.pushViewController(tabBarVC, animated: true)
-        } else {
-            let navigationController = UINavigationController(rootViewController: tabBarVC)
-            navigationController.modalPresentationStyle = .fullScreen
-            self.present(navigationController, animated: true, completion: nil)
-        }
-    }
-
-    
-
-    }
-
-    
+}
 
 extension ProfileSettingViewController: ProfileSelectionDelegate {
     func didSelectProfileImage(named: String) {
