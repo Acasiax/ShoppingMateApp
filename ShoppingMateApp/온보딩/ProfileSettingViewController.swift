@@ -86,7 +86,7 @@ class ProfileSettingViewController: UIViewController {
         
         if showSaveButton {
             let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
-            saveButton.setTitleTextAttributes([.foregroundColor: UIColor.black, .font: UIFont.boldSystemFont(ofSize: 16)], for: .normal)
+            saveButton.setTitleTextAttributes([.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 16, weight: .black)], for: .normal)
             navigationItem.rightBarButtonItem = saveButton
         }
     }

@@ -56,22 +56,22 @@ class SettingViewController: UIViewController {
         }
     }
     private var notificationToken: NotificationToken?
-
+    
     
     private var navigationTitle: String
-        private var showSaveButton: Bool
-
-        init(navigationTitle: String, showSaveButton: Bool) {
-            self.navigationTitle = navigationTitle
-            self.showSaveButton = showSaveButton
-            super.init(nibName: nil, bundle: nil)
-        }
-
-        required init?(coder: NSCoder) {
-            self.navigationTitle = ""
-            self.showSaveButton = false
-            super.init(coder: coder)
-        }
+    private var showSaveButton: Bool
+    
+    init(navigationTitle: String, showSaveButton: Bool) {
+        self.navigationTitle = navigationTitle
+        self.showSaveButton = showSaveButton
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        self.navigationTitle = ""
+        self.showSaveButton = false
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,7 +140,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         guard let settingOption = SettingOption(rawValue: indexPath.section) else {
             return UITableViewCell()
         }
-
+        
         switch settingOption {
         case .profile:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as? ProfileTableViewCell else {
@@ -148,45 +148,53 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             }
             cell.configure()
             return cell
-
+            
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath)
             cell.textLabel?.text = settingOption.title
             cell.detailTextLabel?.text = settingOption.detail
             cell.accessoryType = settingOption == .logout ? .none : .disclosureIndicator
             cell.textLabel?.textColor = settingOption == .logout ? .red : .black
-
+            
             // 모든 서브뷰를 제거합니다
             cell.contentView.subviews.forEach { $0.removeFromSuperview() }
-
+            let likedItemsCount = likedItemsCount
+            
             if settingOption == .cart {
-                let cartImageView = UIImageView(image: UIImage(systemName: "cart"))
-                cartImageView.tintColor = .black
+                let cartImageView = UIImageView(image: UIImage(named: "like_selected"))
+                //cartImageView.tintColor = .black
                 let cartLabel = UILabel()
-                cartLabel.text = "\(likedItemsCount)개의 상품"
+                // likedItemsCount 부분을 볼드 스타일로 설정
+                let fullText = "\(likedItemsCount)개의 상품"
+                let attributedString = NSMutableAttributedString(string: fullText)
+                let boldFont = UIFont.boldSystemFont(ofSize: cartLabel.font.pointSize)
+                attributedString.addAttribute(.font, value: boldFont, range: (fullText as NSString).range(of: "\(likedItemsCount)"))
+                
+                cartLabel.attributedText = attributedString
                 cartLabel.textColor = .black
-
+                
                 cell.contentView.addSubview(cartImageView)
                 cell.contentView.addSubview(cartLabel)
-
+                
                 cartImageView.snp.makeConstraints { make in
-                    make.trailing.equalToSuperview().offset(-10)
+                    make.trailing.equalTo(cartLabel.snp.leading).offset(-5)
                     make.centerY.equalToSuperview()
                     make.width.height.equalTo(24)
                 }
-
+                
                 cartLabel.snp.makeConstraints { make in
-                    make.trailing.equalTo(cartImageView.snp.leading).offset(-5)
+                    make.trailing.equalToSuperview().offset(-10)
+                   
                     make.centerY.equalToSuperview()
                 }
             }
-
+            
             return cell
         }
     }
-
-
- 
+    
+    
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let settingOption = SettingOption(rawValue: indexPath.section)
@@ -200,18 +208,18 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             switch settingOption {
             case .profile:
                 let profileVC = ProfileSettingViewController(navigationTitle: "Edit Profile", showSaveButton: true)
-                    if let navigationController = self.navigationController {
-                        navigationController.pushViewController(profileVC, animated: true)
-                    } else {
-                        print("Navigation controller not found")
-                    }
+                if let navigationController = self.navigationController {
+                    navigationController.pushViewController(profileVC, animated: true)
+                } else {
+                    print("Navigation controller not found")
+                }
             case .cart:
                 let likeVC = LikeViewController()
-                            if let navigationController = self.navigationController {
-                                navigationController.pushViewController(likeVC, animated: true)
-                            } else {
-                                print("Navigation controller not found")
-                            }
+                if let navigationController = self.navigationController {
+                    navigationController.pushViewController(likeVC, animated: true)
+                } else {
+                    print("Navigation controller not found")
+                }
                 
             case .logout:
                 showLogoutAlert()
