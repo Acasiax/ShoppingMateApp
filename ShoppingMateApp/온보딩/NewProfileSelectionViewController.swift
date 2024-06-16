@@ -51,25 +51,28 @@ extension NewProfileSelectionViewController: UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.id, for: indexPath) as! ProfileCell
-        let profileName = profiles[indexPath.item]
-        let image = UIImage(named: profileName)
-        image?.accessibilityIdentifier = profileName
-        cell.imageView.image = image
-        
-        // 현재 프로필 이미지와 같은지 비교하여 테두리 색상 및 불투명도 설정
-        if let currentProfileImage = UserDefaults.standard.string(forKey: "UserProfileImage"), currentProfileImage == profileName {
-            cell.imageView.layer.borderColor = UIColor.orange.cgColor
-            cell.imageView.layer.borderWidth = 3
-            cell.imageView.alpha = 1.0
-        } else {
-            cell.imageView.layer.borderColor = UIColor.gray.cgColor
-            cell.imageView.layer.borderWidth = 1 // 🟠
-            cell.imageView.alpha = 0.5
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.id, for: indexPath) as! ProfileCell
+            let profileName = profiles[indexPath.item]
+            let image = UIImage(named: profileName)
+            image?.accessibilityIdentifier = profileName
+            cell.imageView.image = image
+            
+            // 현재 프로필 이미지와 같은지 비교하여 테두리 색상 및 불투명도 설정
+            if let currentProfileImage = UserDefaults.standard.string(forKey: "UserProfileImageName"), currentProfileImage == profileName {
+                cell.imageView.layer.borderColor = UIColor.orange.cgColor
+                cell.imageView.layer.borderWidth = 3
+                cell.imageView.alpha = 1.0
+            } else {
+                cell.imageView.layer.borderColor = UIColor.gray.cgColor
+                cell.imageView.layer.borderWidth = 1
+                cell.imageView.alpha = 0.5
+            }
+            
+            return cell
         }
-        
-        return cell
-    }
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedProfile = profiles[indexPath.item]
         delegate?.didSelectProfileImage(named: selectedProfile)

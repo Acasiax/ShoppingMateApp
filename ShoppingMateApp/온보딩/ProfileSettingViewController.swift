@@ -10,7 +10,12 @@ class ProfileSettingViewController: UIViewController {
     
     private let profileImageView = ProfileImageView()
     private let contentView = UIView()
-    
+    private var currentProfileImageName: String? {
+        didSet {
+            saveUserData()
+        }
+    }
+
     private let nicknameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "닉네임을 입력해주세요 :)"
@@ -216,7 +221,7 @@ class ProfileSettingViewController: UIViewController {
     
     private func saveUserData() {
         let nickname = nicknameTextField.text ?? ""
-        
+
         // 프로필 이미지 데이터를 저장
         let profileImageData = profileImageView.imageView.image?.pngData()
         
@@ -227,21 +232,41 @@ class ProfileSettingViewController: UIViewController {
             defaults.set(profileImageData, forKey: "UserProfileImage")
         }
         
+        // 랜덤 이미지 이름을 가져와서 저장
+        if let randomImageName = profileImageView.imageView.accessibilityIdentifier {
+            defaults.set(randomImageName, forKey: "UserProfileImageName")
+        }
+        
         if defaults.string(forKey: "UserJoinDate") == nil {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let joinDate = dateFormatter.string(from: Date())
             defaults.set(joinDate, forKey: "UserJoinDate")
         }
+        
+        defaults.synchronize() // 변경사항을 즉시 디스크에 기록
+        
+        // 디버깅 출력
+        print("💡: \(nickname)")
+        if let savedNickname = defaults.string(forKey: "UserNickname") {
+            print("💡: \(savedNickname)")
+        } else {
+            print("미안해.")
+        }
+        
+        printUserDefaults() // 저장 후 UserDefaults 출력
     }
-    
+
     private func loadUserData() {
-        printUserDefaults()
         let defaults = UserDefaults.standard
         if let nickname = defaults.string(forKey: "UserNickname") {
             nicknameTextField.text = nickname
+            // 디버깅 출력
+            print("닉네임이 등록되었어요: \(nickname)")
+        } else {
+            print("죄송해요.. 닉네임을 찾을 수 없네요")
         }
-        
+
         // 프로필 이미지 데이터를 로드
         if let profileImageData = defaults.data(forKey: "UserProfileImage"), let profileImage = UIImage(data: profileImageData) {
             profileImageView.imageView.image = profileImage
@@ -250,15 +275,18 @@ class ProfileSettingViewController: UIViewController {
             let randomImageName = profileImages.randomElement() ?? "profile_0"
             profileImageView.imageView.image = UIImage(named: randomImageName)
             profileImageView.imageView.accessibilityIdentifier = randomImageName
-            UserDefaults.standard.set(randomImageName, forKey: "UserProfileImage")
+            // 랜덤 이미지 이름을 UserDefaults에 저장
+            UserDefaults.standard.set(randomImageName, forKey: "UserProfileImageName")
         }
+        currentProfileImageName = defaults.string(forKey: "UserProfileImageName")
+        printUserDefaults()  // UserDefaults 출력
     }
-    
+
     private func printUserDefaults() {
         DispatchQueue.main.async {
             let defaults = UserDefaults.standard
             let nickname = defaults.string(forKey: "UserNickname") ?? "닉네임이 설정되지 않음"
-            let profileImageName = defaults.string(forKey: "UserProfileImage") ?? "프로필 이미지가 설정되지 않음"
+            let profileImageName = defaults.string(forKey: "UserProfileImageName") ?? "프로필 이미지가 설정되지 않음"
             let isNicknameSet = defaults.bool(forKey: "isNicknameSet")
             let joinDate = defaults.string(forKey: "UserJoinDate") ?? "가입 날짜가 설정되지 않음"
             
@@ -268,6 +296,8 @@ class ProfileSettingViewController: UIViewController {
             print("가입 날짜: \(joinDate)")
         }
     }
+
+
     
     private func isValidNickname(nickname: String) -> Bool {
         let nicknameRegex = "^[가-힣a-zA-Z]{2,10}$"
