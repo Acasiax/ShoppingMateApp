@@ -23,10 +23,19 @@ class ProfileImageView: UIView {
         return imageView
     }()
     
+    let cameraBackgroundView: UIView = {
+          let view = UIView()
+          view.backgroundColor = .orange
+          view.layer.cornerRadius = 17
+          view.layer.masksToBounds = true
+          return view
+      }()
+    
     let cameraIconView: UIImageView = {
           let imageView = UIImageView()
-          imageView.image = UIImage(systemName: "camera")
-          imageView.tintColor = .orange
+          imageView.image = UIImage(systemName: "camera.fill")
+          imageView.tintColor = .white
+        imageView.layer.masksToBounds = true
           return imageView
       }()
     
@@ -42,18 +51,25 @@ class ProfileImageView: UIView {
     
     private func setupViews() {
         addSubview(imageView)
-        addSubview(cameraIconView)
+        addSubview(cameraBackgroundView)
+        cameraBackgroundView.addSubview(cameraIconView)
         
     }
     private func setupConstraints() {
            imageView.snp.makeConstraints { make in
                make.edges.equalToSuperview()
+               
            }
            
+        cameraBackgroundView.snp.makeConstraints { make in
+                    make.bottom.equalTo(imageView.snp.bottom)
+                    make.right.equalTo(imageView.snp.right)
+                    make.width.height.equalTo(30)
+                }
+        
            cameraIconView.snp.makeConstraints { make in
-               make.bottom.equalTo(imageView.snp.bottom)
-               make.right.equalTo(imageView.snp.right)
-               make.width.height.equalTo(24)
+               make.center.equalTo(cameraBackgroundView)
+               make.width.height.equalTo(18)
            }
        }
 }
