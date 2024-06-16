@@ -81,7 +81,7 @@ class ProfileSettingViewController: UIViewController {
     }
 
     private func setupNavigationBar() {
-        navigationItem.title = showSaveButton ? "수정화면" : "프로필 설정"
+        navigationItem.title = showSaveButton ? "EDIT PROFILE" : "PROFILE SETTING"
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18)]
         
         if showSaveButton {
@@ -190,13 +190,17 @@ class ProfileSettingViewController: UIViewController {
         
         tabBarVC.setViewControllers([searchNavVC, settingsNavVC, likeNavVC], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen
-        tabBarVC.tabBar.backgroundColor = .green
+        tabBarVC.tabBar.backgroundColor = UIColor(red: 0.97, green: 0.98, blue: 0.98, alpha: 1.00)
         tabBarVC.tabBar.tintColor = .white
         tabBarVC.tabBar.unselectedItemTintColor = .gray
         
+        // 탭바 아이콘 색상 설정
+            tabBarVC.tabBar.tintColor = .orange // 선택된 아이템의 색상
+            tabBarVC.tabBar.unselectedItemTintColor = .gray  // 선택되지 않은 아이템의 색상
+        
         guard let items = tabBarVC.tabBar.items else { return }
         items[0].image = UIImage(systemName: "magnifyingglass")
-        items[1].image = UIImage(systemName: "gearshape")
+        items[1].image = UIImage(systemName: "person")
         items[2].image = UIImage(systemName: "heart")
         
         if let window = UIApplication.shared.windows.first {

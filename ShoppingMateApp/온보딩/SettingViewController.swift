@@ -87,7 +87,7 @@ class SettingViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = "SETTING33"
+        navigationItem.title = "SETTING"
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18)]
     }
     

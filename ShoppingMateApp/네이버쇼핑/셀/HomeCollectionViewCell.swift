@@ -95,13 +95,13 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         mallNameLabel.font = UIFont.systemFont(ofSize: 15)
         mallNameLabel.textAlignment = .left
         
-        titleLabel.textColor = .white
+        titleLabel.textColor = .black
         titleLabel.font = UIFont.systemFont(ofSize: 16)
         titleLabel.textAlignment = .left
         titleLabel.numberOfLines = 2
         titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
-        priceLabel.textColor = .white
+        priceLabel.textColor = .black
         priceLabel.font = UIFont.boldSystemFont(ofSize: 18)
         priceLabel.textAlignment = .left
         

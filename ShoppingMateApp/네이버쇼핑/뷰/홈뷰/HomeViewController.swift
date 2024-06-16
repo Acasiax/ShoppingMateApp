@@ -32,7 +32,7 @@ class HomeViewController: ReuseBaseViewController {
     let emptyLabel: UILabel = {
         let label = UILabel()
         label.text = "최근 검색어가 없어요"
-        label.textColor = .systemPink
+        label.textColor = .black
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 17, weight: .bold)
         label.isHidden = true // 기본적으로 숨김
@@ -101,16 +101,16 @@ class HomeViewController: ReuseBaseViewController {
 
     private func setupNavigationUI() {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .green
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.backgroundColor = .lightGray
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
         appearance.shadowColor = .clear
 
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.isTranslucent = false
-        navigationItem.title = "이윤지's MEANING OUT카카"
+        navigationItem.title = "이윤지's MEANING OUT"
     }
 
     // emptyImageView 설정
@@ -120,7 +120,7 @@ class HomeViewController: ReuseBaseViewController {
         
         emptyImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.height.equalTo(200)
+            make.width.height.equalTo(240)
         }
         
         emptyLabel.snp.makeConstraints { make in

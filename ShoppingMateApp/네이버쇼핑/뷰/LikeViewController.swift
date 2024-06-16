@@ -24,6 +24,7 @@ class LikeViewController: ReuseBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         setupUI()
         fetchLikedItems()
     }
@@ -122,12 +123,12 @@ class LikeView: BaseView {
         searchBar.placeholder = "검색"
         searchBar.layer.shadowColor = UIColor.clear.cgColor
         searchBar.showsCancelButton = true
-        searchBar.barTintColor = .red
-        searchBar.searchTextField.textColor = .white
+       // searchBar.barTintColor = .red
+        searchBar.searchTextField.textColor = .black
         if let cancelButton = searchBar.value(forKey: "cancelButton") as? UIButton {
             cancelButton.setTitle("취소", for: .normal)
             cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-            cancelButton.tintColor = .white
+            cancelButton.tintColor = .orange
         }
         return searchBar
     }()

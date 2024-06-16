@@ -57,7 +57,7 @@ class MainSearchView: BaseView, UISearchBarDelegate {
 
     override func setConstraints() {
         searchBar.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(6)
             make.horizontalEdges.equalToSuperview()
             make.height.equalTo(50)
         }
