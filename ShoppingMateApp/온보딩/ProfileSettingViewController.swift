@@ -78,7 +78,7 @@ class ProfileSettingViewController: UIViewController {
         setupNavigationBar()
         setupViews()
         setupConstraints()
-        loadUserData()
+        //loadUserData()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
         profileImageView.isUserInteractionEnabled = true
@@ -325,7 +325,7 @@ extension ProfileSettingViewController: ProfileSelectionDelegate {
             self.profileImageView.imageView.image = UIImage(named: named)
             self.profileImageView.imageView.accessibilityIdentifier = named
         }
-        saveUserData() // 선택한 이미지를 즉시 저장
+        //saveUserData() // 선택한 이미지를 즉시 저장
     }
 }
 

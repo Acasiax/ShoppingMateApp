@@ -233,7 +233,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         let alert = UIAlertController(title: "탈퇴하기", message: "정말로 탈퇴하시겠습니까?", preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "확인", style: .destructive) { _ in
             self.resetUserDefaults()
-            self.navigateToOnboarding()
+           // self.navigateToOnboarding()
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
@@ -247,7 +247,9 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         let defaults = UserDefaults.standard
         let dictionary = defaults.dictionaryRepresentation()
         dictionary.keys.forEach { key in
+            //print("탈퇴하기 버튼을 눌러서 유저디폴트의 키를 지우겠습니다 : \(key)")
             defaults.removeObject(forKey: key)
+            self.navigateToOnboarding()
         }
     }
     
