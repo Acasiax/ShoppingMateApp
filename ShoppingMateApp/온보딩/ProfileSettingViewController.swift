@@ -23,7 +23,7 @@ class ProfileSettingViewController: UIViewController {
     
     private let noteLabel: UILabel = {
         let label = UILabel()
-        label.text = "닉네임에 @은 포함할 수 없어요."
+        label.text = "닉네임에 @ 는 포함할 수 없어요."
         label.textColor = .orange
         label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .center
@@ -121,8 +121,8 @@ class ProfileSettingViewController: UIViewController {
         
         noteLabel.snp.makeConstraints { make in
             make.top.equalTo(nicknameTextField.snp.bottom).offset(10)
-            make.left.equalToSuperview().offset(40)
-            make.right.equalToSuperview().offset(-40)
+            make.left.equalToSuperview().offset(50)
+           // make.right.equalToSuperview().offset(-40)
         }
         
         completeButton.snp.makeConstraints { make in
