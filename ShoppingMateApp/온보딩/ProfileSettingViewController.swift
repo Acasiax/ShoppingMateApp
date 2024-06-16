@@ -79,7 +79,7 @@ class ProfileSettingViewController: UIViewController {
         
         nicknameTextField.delegate = self
     }
-
+    
     private func setupNavigationBar() {
         navigationItem.title = showSaveButton ? "EDIT PROFILE" : "PROFILE SETTING"
         navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18)]
@@ -167,7 +167,7 @@ class ProfileSettingViewController: UIViewController {
         saveUserData()
         navigateToNextScreen()
     }
-
+    
     private func navigateToNextScreen() {
         let tabBarVC = UITabBarController()
         
@@ -177,7 +177,7 @@ class ProfileSettingViewController: UIViewController {
         let settingsVC = SettingViewController(navigationTitle: "세팅뷰우", showSaveButton: false)
         
         let likeVC = LikeViewController()
-       // likeVC.navigationItem.title = "좋아요"
+        // likeVC.navigationItem.title = "좋아요"
         
         let searchNavVC = UINavigationController(rootViewController: homeVC)
         searchNavVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
@@ -195,8 +195,8 @@ class ProfileSettingViewController: UIViewController {
         tabBarVC.tabBar.unselectedItemTintColor = .gray
         
         // 탭바 아이콘 색상 설정
-            tabBarVC.tabBar.tintColor = .orange // 선택된 아이템의 색상
-            tabBarVC.tabBar.unselectedItemTintColor = .gray  // 선택되지 않은 아이템의 색상
+        tabBarVC.tabBar.tintColor = .orange // 선택된 아이템의 색상
+        tabBarVC.tabBar.unselectedItemTintColor = .gray  // 선택되지 않은 아이템의 색상
         
         guard let items = tabBarVC.tabBar.items else { return }
         items[0].image = UIImage(systemName: "magnifyingglass")
@@ -232,7 +232,7 @@ class ProfileSettingViewController: UIViewController {
             defaults.set(joinDate, forKey: "UserJoinDate")
         }
     }
-
+    
     private func loadUserData() {
         printUserDefaults()
         let defaults = UserDefaults.standard
@@ -244,7 +244,11 @@ class ProfileSettingViewController: UIViewController {
         if let profileImageData = defaults.data(forKey: "UserProfileImage"), let profileImage = UIImage(data: profileImageData) {
             profileImageView.imageView.image = profileImage
         } else {
-            profileImageView.imageView.image = UIImage(named: "profile_5")
+            let profileImages = ["profile_0", "profile_1", "profile_2", "profile_3", "profile_4", "profile_5", "profile_6", "profile_7", "profile_8", "profile_9", "profile_10", "profile_11"]
+            let randomImageName = profileImages.randomElement() ?? "profile_0"
+            profileImageView.imageView.image = UIImage(named: randomImageName)
+            profileImageView.imageView.accessibilityIdentifier = randomImageName
+            UserDefaults.standard.set(randomImageName, forKey: "UserProfileImage")
         }
     }
     
@@ -268,7 +272,7 @@ class ProfileSettingViewController: UIViewController {
         let predicate = NSPredicate(format: "SELF MATCHES %@", nicknameRegex)
         return predicate.evaluate(with: nickname)
     }
-
+    
     private func evaluateNickname(nickname: String) -> String {
         if nickname.count < 2 || nickname.count >= 10 {
             return "2글자 이상 10글자 미만으로 설정해주세요"
