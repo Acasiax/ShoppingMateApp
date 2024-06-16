@@ -33,9 +33,10 @@ class ProfileSettingViewController: UIViewController {
     private let completeButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("완료", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
         button.backgroundColor = .orange
+        button.layer.cornerRadius = 23
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 8
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -43,9 +44,10 @@ class ProfileSettingViewController: UIViewController {
     private let passButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("로그인 없이 시작", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
         button.backgroundColor = .orange
+        button.layer.cornerRadius = 23
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 8
         button.addTarget(self, action: #selector(passButtonTapped), for: .touchUpInside)
         return button
     }()
