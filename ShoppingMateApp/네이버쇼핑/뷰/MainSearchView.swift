@@ -39,7 +39,7 @@ class MainSearchView: BaseView, UISearchBarDelegate {
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: "MainCollectionViewCell")
-        view.backgroundColor = .blue
+        view.backgroundColor = .white
         return view
     }()
   

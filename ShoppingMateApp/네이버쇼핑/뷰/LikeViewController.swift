@@ -32,6 +32,7 @@ class LikeViewController: ReuseBaseViewController {
         super.viewWillAppear(animated)
         fetchLikedItems()
         likeView.collectionView.reloadData()
+        updateEmptyImageViewVisibility()
     }
 
     private func setupUI() {
@@ -53,12 +54,20 @@ class LikeViewController: ReuseBaseViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.isTranslucent = false
-        navigationItem.title = "나의 장바구니 목록~"
+        navigationItem.title = "나의 장바구니 목록"
     }
 
     private func fetchLikedItems() {
         likedItems = likeRepository.fetchAll().filter("isLiked == true")
+        updateEmptyImageViewVisibility()
     }
+    
+    private func updateEmptyImageViewVisibility() {
+           let isEmpty = likedItems.isEmpty
+           likeView.emptyImageView.isHidden = !isEmpty
+           likeView.emptyLabel.isHidden = !isEmpty
+       }
+    
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
@@ -74,6 +83,7 @@ extension LikeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.onItemDeleted = {
             self.fetchLikedItems()
             collectionView.reloadData()
+            self.updateEmptyImageViewVisibility()
         }
         return cell
     }
@@ -96,11 +106,13 @@ extension LikeViewController: UISearchBarDelegate {
         filteredLikedItems = likedItems.filter("title CONTAINS[c] %@", text)
         isSearchActive = true
         likeView.collectionView.reloadData()
+        updateEmptyImageViewVisibility()
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isSearchActive = false
         likeView.collectionView.reloadData()
+        updateEmptyImageViewVisibility()
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -112,16 +124,37 @@ extension LikeViewController: UISearchBarDelegate {
             isSearchActive = true
             likeView.collectionView.reloadData()
         }
+        updateEmptyImageViewVisibility()
     }
 }
 
 
 
 class LikeView: BaseView {
+    
+    let emptyImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "empty")
+        imageView.contentMode = .scaleAspectFill
+        imageView.isHidden = true
+        return imageView
+    }()
+    
+    let emptyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "좋아요한 상품이 없어요"
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 17, weight: .bold)
+        label.isHidden = true
+        return label
+    }()
+    
     lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.placeholder = "검색"
+        searchBar.placeholder = "좋아요한 상품들 중 검색해보세요"
         searchBar.layer.shadowColor = UIColor.clear.cgColor
+        searchBar.searchBarStyle = .minimal
         searchBar.showsCancelButton = true
        // searchBar.barTintColor = .red
         searchBar.searchTextField.textColor = .black
@@ -148,17 +181,28 @@ class LikeView: BaseView {
     override func configureView() {
         addSubview(searchBar)
         addSubview(collectionView)
+        addSubview(emptyImageView)
+        addSubview(emptyLabel)
     }
 
     override func setConstraints() {
         searchBar.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(50)
-        }
-        collectionView.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(20)
-            make.leading.trailing.bottom.equalToSuperview()
+                make.top.equalToSuperview().offset(20)
+                make.horizontalEdges.equalToSuperview()
+                make.height.equalTo(50)
+            }
+            collectionView.snp.makeConstraints { make in
+                make.top.equalTo(searchBar.snp.bottom).offset(20)
+                make.leading.trailing.bottom.equalToSuperview()
+            }
+            emptyImageView.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+                make.width.height.equalTo(230)
+            }
+            
+            emptyLabel.snp.makeConstraints { make in
+                make.top.equalTo(emptyImageView.snp.bottom).offset(8)
+                make.centerX.equalToSuperview()
         }
     }
 }
