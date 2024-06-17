@@ -10,10 +10,10 @@ import UIKit
 extension UIColor {
     static let customOrange = UIColor(hex: "#EF8947")
     static let customBlack = UIColor(hex: "#000000")
-    static let customGray1 = UIColor(hex: "#828282")
+    static let customGray8282 = UIColor(hex: "#828282")
     //버튼 색상 토글할 떄
-    static let customGray2 = UIColor(hex: "#4C4C4C")
-    static let customLightGray = UIColor(hex: "#CDCDCD")
+    static let customGray4C4C = UIColor(hex: "#4C4C4C")
+    static let customLightGrayCDCD = UIColor(hex: "#CDCDCD")
     static let customWhite = UIColor(hex: "#FFFFFF")
     
     var cgColorValue: CGColor {

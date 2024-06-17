@@ -91,7 +91,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         imageView.layer.cornerRadius = 15
         imageView.clipsToBounds = true
         
-        mallNameLabel.textColor = .gray
+        mallNameLabel.textColor = .customGray4C4C
         mallNameLabel.font = UIFont.systemFont(ofSize: 15)
         mallNameLabel.textAlignment = .left
         
@@ -110,7 +110,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
            }
         
         
-        likeButton.backgroundColor = .customLightGray.withAlphaComponent(0.5)
+        likeButton.backgroundColor = .customLightGrayCDCD.withAlphaComponent(0.5)
         likeButton.tintColor = .customWhite
         likeButton.layer.cornerRadius = 18
         likeButton.clipsToBounds = true
@@ -158,7 +158,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
             if let image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal) {
                 likeButton.setImage(image, for: .normal)
             }
-            likeButton.backgroundColor = isLiked ? .customWhite : .customLightGray.withAlphaComponent(0.5)
+            likeButton.backgroundColor = isLiked ? .customWhite : .customLightGrayCDCD.withAlphaComponent(0.5)
        
     }
 }

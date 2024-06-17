@@ -46,14 +46,14 @@ class LikeViewController: ReuseBaseViewController {
     private func configureNavigationBar() {
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .customWhite
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.customBlack]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.customBlack]
         //구분선
         appearance.shadowColor = .clear
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = UIColor.customBlack
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.title = "나의 장바구니 목록"
     }

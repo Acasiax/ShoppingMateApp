@@ -120,8 +120,11 @@ class RecentSearchCell: UITableViewCell {
     
     let deleteButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("X", for: .normal)
-        button.setTitleColor(.customBlack, for: .normal)
+        if let xmarkImage = UIImage(systemName: "xmark")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 13, weight: .regular)) {
+        button.setImage(xmarkImage, for: .normal)
+            }
+        button.tintColor = .customBlack
+      
         return button
     }()
     

@@ -15,13 +15,13 @@
 		AA6CB5C32C1D6BB10089E3B7 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5C22C1D6BB10089E3B7 /* ProfileCell.swift */; };
 		AA6CB5C52C1DBF6F0089E3B7 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5C42C1DBF6F0089E3B7 /* ProfileTableViewCell.swift */; };
 		AA6CB5C72C1DCC570089E3B7 /* LikeNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5C62C1DCC570089E3B7 /* LikeNotification.swift */; };
-		AA6CB5C92C1DE2D60089E3B7 /* sss.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5C82C1DE2D60089E3B7 /* sss.swift */; };
 		AA6CB5CF2C1ECC770089E3B7 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */; };
 		AA6CB5D12C1ECCD90089E3B7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */; };
 		AA6CB5D42C1EE7E10089E3B7 /* RecentSearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5D32C1EE7E10089E3B7 /* RecentSearchTableView.swift */; };
 		AA6CB5D72C1F503B0089E3B7 /* ToasetMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5D62C1F503B0089E3B7 /* ToasetMessage.swift */; };
 		AA6CB5DA2C1F50550089E3B7 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = AA6CB5D92C1F50550089E3B7 /* Toast */; };
 		AA6CB6042C2024740089E3B7 /* Color+recap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB6032C2024740089E3B7 /* Color+recap.swift */; };
+		AA6CB6072C20435B0089E3B7 /* Create+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB6062C20435B0089E3B7 /* Create+Component.swift */; };
 		AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */; };
 		AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */; };
 		AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882E2C1BF0E800B477D3 /* ViewController.swift */; };
@@ -41,7 +41,6 @@
 		AA8E885D2C1BFA0B00B477D3 /* MainSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */; };
 		AA8E88622C1C01FB00B477D3 /* Resuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88612C1C01FB00B477D3 /* Resuse.swift */; };
 		AA8E88652C1C078D00B477D3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AA8E88642C1C078D00B477D3 /* Kingfisher */; };
-		AA8E886B2C1C08CF00B477D3 /* Create+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886A2C1C08CF00B477D3 /* Create+Component.swift */; };
 		AA8E886D2C1C203700B477D3 /* favoriteTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886C2C1C203700B477D3 /* favoriteTable.swift */; };
 		AA8E886F2C1C237900B477D3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886E2C1C237900B477D3 /* WebViewController.swift */; };
 		AA8E88712C1C27D800B477D3 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88702C1C27D800B477D3 /* LikeViewController.swift */; };
@@ -58,12 +57,12 @@
 		AA6CB5C22C1D6BB10089E3B7 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		AA6CB5C42C1DBF6F0089E3B7 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		AA6CB5C62C1DCC570089E3B7 /* LikeNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeNotification.swift; sourceTree = "<group>"; };
-		AA6CB5C82C1DE2D60089E3B7 /* sss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sss.swift; sourceTree = "<group>"; };
 		AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		AA6CB5D32C1EE7E10089E3B7 /* RecentSearchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchTableView.swift; sourceTree = "<group>"; };
 		AA6CB5D62C1F503B0089E3B7 /* ToasetMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToasetMessage.swift; sourceTree = "<group>"; };
 		AA6CB6032C2024740089E3B7 /* Color+recap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+recap.swift"; sourceTree = "<group>"; };
+		AA6CB6062C20435B0089E3B7 /* Create+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Create+Component.swift"; sourceTree = "<group>"; };
 		AA8E88272C1BF0E800B477D3 /* ShoppingMateApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingMateApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +80,6 @@
 		AA8E88592C1BF84700B477D3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchView.swift; sourceTree = "<group>"; };
 		AA8E88612C1C01FB00B477D3 /* Resuse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resuse.swift; sourceTree = "<group>"; };
-		AA8E886A2C1C08CF00B477D3 /* Create+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Create+Component.swift"; sourceTree = "<group>"; };
 		AA8E886C2C1C203700B477D3 /* favoriteTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favoriteTable.swift; sourceTree = "<group>"; };
 		AA8E886E2C1C237900B477D3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		AA8E88702C1C27D800B477D3 /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
@@ -109,14 +107,9 @@
 			isa = PBXGroup;
 			children = (
 				AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */,
-				AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */,
-				AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */,
-				AA6CB5BE2C1D597A0089E3B7 /* ProfileImageView.swift */,
-				AA6CB5C02C1D599F0089E3B7 /* SettingViewController.swift */,
-				AA6CB5C22C1D6BB10089E3B7 /* ProfileCell.swift */,
-				AA6CB5C42C1DBF6F0089E3B7 /* ProfileTableViewCell.swift */,
-				AA6CB5C82C1DE2D60089E3B7 /* sss.swift */,
 				AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */,
+				AA6CB6082C2043880089E3B7 /* 프로필설정 */,
+				AA6CB6092C2043C70089E3B7 /* 설정화면 */,
 			);
 			name = "온보딩.본본본";
 			path = "온보딩";
@@ -140,6 +133,38 @@
 			path = "경고";
 			sourceTree = "<group>";
 		};
+		AA6CB6082C2043880089E3B7 /* 프로필설정 */ = {
+			isa = PBXGroup;
+			children = (
+				AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */,
+				AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */,
+				AA6CB5C22C1D6BB10089E3B7 /* ProfileCell.swift */,
+				AA6CB5C42C1DBF6F0089E3B7 /* ProfileTableViewCell.swift */,
+				AA6CB5BE2C1D597A0089E3B7 /* ProfileImageView.swift */,
+			);
+			name = "프로필설정";
+			path = "프로필설정";
+			sourceTree = "<group>";
+		};
+		AA6CB6092C2043C70089E3B7 /* 설정화면 */ = {
+			isa = PBXGroup;
+			children = (
+				AA6CB5C02C1D599F0089E3B7 /* SettingViewController.swift */,
+			);
+			name = "설정화면";
+			path = "설정화면";
+			sourceTree = "<group>";
+		};
+		AA6CB60A2C2045280089E3B7 /* 검색결과,웹뷰 */ = {
+			isa = PBXGroup;
+			children = (
+				AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */,
+				AA8E886E2C1C237900B477D3 /* WebViewController.swift */,
+			);
+			name = "검색결과,웹뷰";
+			path = "검색결과,웹뷰";
+			sourceTree = "<group>";
+		};
 		AA8E881E2C1BF0E800B477D3 = {
 			isa = PBXGroup;
 			children = (
@@ -160,8 +185,8 @@
 		AA8E88292C1BF0E800B477D3 /* ShoppingMateApp */ = {
 			isa = PBXGroup;
 			children = (
-				AA6CB5D52C1F50260089E3B7 /* 경고 */,
 				AA8E88402C1BF24300B477D3 /* APIKey.swift */,
+				AA6CB5D52C1F50260089E3B7 /* 경고 */,
 				AA6CB5B62C1D4B4D0089E3B7 /* 온보딩.본본본 */,
 				AA8E88422C1BF2F600B477D3 /* 네이버쇼핑 */,
 				AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */,
@@ -179,9 +204,9 @@
 			isa = PBXGroup;
 			children = (
 				AA6CB5D22C1EE7D10089E3B7 /* 검색기록 */,
-				AA8E88752C1C498300B477D3 /* 셀 */,
 				AA8E885E2C1BFC2700B477D3 /* 확장 */,
 				AA8E885B2C1BFA0300B477D3 /* 뷰 */,
+				AA8E88752C1C498300B477D3 /* 셀 */,
 				AA8E88542C1BF52D00B477D3 /* 모델 */,
 			);
 			name = "네이버쇼핑";
@@ -203,12 +228,10 @@
 		AA8E885B2C1BFA0300B477D3 /* 뷰 */ = {
 			isa = PBXGroup;
 			children = (
-				AA8E88702C1C27D800B477D3 /* LikeViewController.swift */,
-				AA8E88762C1C49B000B477D3 /* 홈뷰 */,
-				AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */,
+				AA6CB60A2C2045280089E3B7 /* 검색결과,웹뷰 */,
+				AA8E88762C1C49B000B477D3 /* 쇼핑홈뷰 */,
 				AA8E88612C1C01FB00B477D3 /* Resuse.swift */,
-				AA8E886E2C1C237900B477D3 /* WebViewController.swift */,
-				AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */,
+				AA8E88702C1C27D800B477D3 /* LikeViewController.swift */,
 			);
 			name = "뷰";
 			path = "뷰";
@@ -217,9 +240,9 @@
 		AA8E885E2C1BFC2700B477D3 /* 확장 */ = {
 			isa = PBXGroup;
 			children = (
-				AA8E886A2C1C08CF00B477D3 /* Create+Component.swift */,
 				AA6CB5C62C1DCC570089E3B7 /* LikeNotification.swift */,
 				AA6CB6032C2024740089E3B7 /* Color+recap.swift */,
+				AA6CB6062C20435B0089E3B7 /* Create+Component.swift */,
 			);
 			name = "확장";
 			path = "확장";
@@ -235,13 +258,14 @@
 			path = "셀";
 			sourceTree = "<group>";
 		};
-		AA8E88762C1C49B000B477D3 /* 홈뷰 */ = {
+		AA8E88762C1C49B000B477D3 /* 쇼핑홈뷰 */ = {
 			isa = PBXGroup;
 			children = (
 				AA8E884E2C1BF3EF00B477D3 /* HomeViewController.swift */,
 				AA8E88772C1C49E600B477D3 /* HomeView+Collection+.swift */,
+				AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */,
 			);
-			name = "홈뷰";
+			name = "쇼핑홈뷰";
 			path = "홈뷰";
 			sourceTree = "<group>";
 		};
@@ -339,7 +363,6 @@
 				AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */,
 				AA8E88732C1C29B900B477D3 /* LikeCollectionViewCell.swift in Sources */,
 				AA6CB5CF2C1ECC770089E3B7 /* SearchResultsViewController.swift in Sources */,
-				AA6CB5C92C1DE2D60089E3B7 /* sss.swift in Sources */,
 				AA6CB6042C2024740089E3B7 /* Color+recap.swift in Sources */,
 				AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */,
 				AA6CB5D12C1ECCD90089E3B7 /* MainTabBarController.swift in Sources */,
@@ -356,11 +379,11 @@
 				AA8E88582C1BF57500B477D3 /* RealmDateManager.swift in Sources */,
 				AA8E88622C1C01FB00B477D3 /* Resuse.swift in Sources */,
 				AA6CB5D72C1F503B0089E3B7 /* ToasetMessage.swift in Sources */,
+				AA6CB6072C20435B0089E3B7 /* Create+Component.swift in Sources */,
 				AA6CB5BF2C1D597A0089E3B7 /* ProfileImageView.swift in Sources */,
 				AA8E886F2C1C237900B477D3 /* WebViewController.swift in Sources */,
 				AA6CB5BA2C1D4D6C0089E3B7 /* ProfileSettingViewController.swift in Sources */,
 				AA8E885D2C1BFA0B00B477D3 /* MainSearchView.swift in Sources */,
-				AA8E886B2C1C08CF00B477D3 /* Create+Component.swift in Sources */,
 				AA8E88712C1C27D800B477D3 /* LikeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -517,6 +540,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ShoppingMateApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "이윤지";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -534,6 +558,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -551,6 +576,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ShoppingMateApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "이윤지";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -568,6 +594,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

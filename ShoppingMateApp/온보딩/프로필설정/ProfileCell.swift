@@ -18,7 +18,7 @@ class ProfileCell: UICollectionViewCell {
         imageView.layer.cornerRadius = 40
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = UIColor.gray.cgColor
+        imageView.layer.borderColor = UIColor.customGray4C4C.cgColor
         return imageView
     }()
     
@@ -36,8 +36,8 @@ class ProfileCell: UICollectionViewCell {
     
     override func prepareForReuse() {
            super.prepareForReuse()
-           imageView.layer.borderColor = UIColor.gray.cgColor // 🟠
-           imageView.layer.borderWidth = 1 // 🟠
-           imageView.alpha = 0.5 // 🟠
+           imageView.layer.borderColor = UIColor.customGray4C4C.cgColor
+           imageView.layer.borderWidth = 1
+           imageView.alpha = 0.5
        }
 }

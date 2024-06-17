@@ -148,9 +148,9 @@ class HomeViewController: ReuseBaseViewController {
 
     private func setupNavigationUI() {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .white
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+        appearance.backgroundColor = UIColor.customWhite
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.customBlack]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.customBlack]
         appearance.shadowColor = .clear
 
         navigationController?.navigationBar.standardAppearance = appearance
@@ -241,7 +241,7 @@ class HomeViewController: ReuseBaseViewController {
         let allButtons = [homeView.accuracyButton, homeView.dateButton, homeView.upPriceButton, homeView.downPriceButton]
         for button in allButtons {
             button.isSelected = false
-            button.backgroundColor = .gray
+            button.backgroundColor = .customGray4C4C
             button.setTitleColor(.red, for: .normal)
         }
         sender.isSelected.toggle()

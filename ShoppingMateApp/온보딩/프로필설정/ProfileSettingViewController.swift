@@ -28,7 +28,7 @@ class ProfileSettingViewController: UIViewController {
     
     private let bottomLineView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray.withAlphaComponent(0.5)
+        view.backgroundColor = .customLightGrayCDCD
         return view
     }()
     
@@ -106,7 +106,7 @@ class ProfileSettingViewController: UIViewController {
         
         if showSaveButton {
             let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
-            saveButton.setTitleTextAttributes([.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 16, weight: .black)], for: .normal)
+            saveButton.setTitleTextAttributes([.foregroundColor: UIColor.customBlack, .font: UIFont.systemFont(ofSize: 16, weight: .black)], for: .normal)
             navigationItem.rightBarButtonItem = saveButton
         }
     }
@@ -139,7 +139,7 @@ class ProfileSettingViewController: UIViewController {
         }
         
         nicknameTextField.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(40)
+            make.top.equalTo(contentView.snp.top).offset(35)
             make.left.equalToSuperview().offset(40)
             make.right.equalToSuperview().offset(-40)
         }
@@ -176,12 +176,23 @@ class ProfileSettingViewController: UIViewController {
     
     @objc private func profileImageTapped() {
         let newViewController = NewProfileSelectionViewController()
-        newViewController.delegate = self
-        addChild(newViewController)
-        newViewController.view.frame = contentView.bounds
-        contentView.addSubview(newViewController.view)
-        newViewController.didMove(toParent: self)
+          newViewController.delegate = self
+        let backButton = UIBarButtonItem()
+          backButton.title = ""
+          navigationItem.backBarButtonItem = backButton
+          navigationController?.pushViewController(newViewController, animated: true)
     }
+
+    
+    
+//    @objc private func profileImageTapped() {
+//        let newViewController = NewProfileSelectionViewController()
+//        newViewController.delegate = self
+//        addChild(newViewController)
+//        newViewController.view.frame = contentView.bounds
+//        contentView.addSubview(newViewController.view)
+//        newViewController.didMove(toParent: self)
+//    }
     
     @objc private func saveButtonTapped() {
         let nickname = nicknameTextField.text ?? ""
@@ -220,10 +231,10 @@ class ProfileSettingViewController: UIViewController {
         tabBarVC.setViewControllers([searchNavVC, settingsNavVC, likeNavVC], animated: false)
         tabBarVC.tabBar.backgroundColor = UIColor(red: 0.97, green: 0.98, blue: 0.98, alpha: 1.00)
         tabBarVC.tabBar.tintColor = .customWhite
-        tabBarVC.tabBar.unselectedItemTintColor = .gray
+        tabBarVC.tabBar.unselectedItemTintColor = .customGray4C4C
         
         tabBarVC.tabBar.tintColor = .customOrange
-        tabBarVC.tabBar.unselectedItemTintColor = .gray
+        tabBarVC.tabBar.unselectedItemTintColor = .customGray4C4C
         
         guard let items = tabBarVC.tabBar.items else { return }
         items[0].image = UIImage(systemName: "magnifyingglass")
@@ -360,12 +371,12 @@ extension ProfileSettingViewController: UITextFieldDelegate {
                 }
 
                 if newText.isEmpty {
-                    self.bottomLineView.backgroundColor = .lightGray.withAlphaComponent(0.5)
+                    self.bottomLineView.backgroundColor = .customLightGrayCDCD
                     self.bottomLineView.snp.updateConstraints { make in
                         make.height.equalTo(1)
                     }
                 } else {
-                    self.bottomLineView.backgroundColor = .lightGray
+                    self.bottomLineView.backgroundColor = .customGray8282
                     self.bottomLineView.snp.updateConstraints { make in
                         make.height.equalTo(2)
                     }

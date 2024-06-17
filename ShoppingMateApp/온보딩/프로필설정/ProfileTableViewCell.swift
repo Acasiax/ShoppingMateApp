@@ -27,13 +27,13 @@ class ProfileTableViewCell: UITableViewCell {
     private let joinDateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .gray
+        label.textColor = .customGray4C4C
         return label
     }()
     
     private let disclosureIndicator: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "chevron.right"))
-        imageView.tintColor = .gray
+        imageView.tintColor = .customGray4C4C
         return imageView
     }()
     

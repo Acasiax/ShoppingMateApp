@@ -81,7 +81,7 @@ class LikeCollectionViewCell: BaseCollectionViewCell {
         imageView.layer.cornerRadius = 15
         imageView.clipsToBounds = true
 
-        mallNameLabel.textColor = .gray
+        mallNameLabel.textColor = .customGray4C4C
         mallNameLabel.font = UIFont.systemFont(ofSize: 15)
         mallNameLabel.textAlignment = .left
 

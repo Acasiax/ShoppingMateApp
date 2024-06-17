@@ -23,7 +23,7 @@ class SearchResultsViewController: ReuseBaseViewController {
     
     let resultsCountLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = UIColor.customBlack
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.isHidden = true
@@ -83,14 +83,14 @@ class SearchResultsViewController: ReuseBaseViewController {
         loadData(query: query)
         
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-           navigationItem.backBarButtonItem = backBarButtonItem
-           navigationController?.navigationBar.tintColor = .customBlack
+        navigationItem.backBarButtonItem = backBarButtonItem
+        navigationController?.navigationBar.tintColor = .customBlack
         
     }
     
     private func setupUI() {
         view.backgroundColor = .customWhite
-      //  view.addSubview(searchBar)
+        //  view.addSubview(searchBar)
         view.addSubview(resultsCountLabel)
         view.addSubview(accuracyButton)
         view.addSubview(dateButton)
@@ -105,15 +105,9 @@ class SearchResultsViewController: ReuseBaseViewController {
         upPriceButton.addTarget(self, action: #selector(changeSort(_:)), for: .touchUpInside)
         downPriceButton.addTarget(self, action: #selector(changeSort(_:)), for: .touchUpInside)
         
-//        searchBar.snp.makeConstraints { make in
-//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-//            make.left.right.equalToSuperview()
-//        }
-        
-        
         resultsCountLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
-           // make.top.equalTo(searchBar.snp.bottom).offset(10)
+            // make.top.equalTo(searchBar.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(10)
         }
         
@@ -194,7 +188,7 @@ class SearchResultsViewController: ReuseBaseViewController {
         }
         
         // 새로운 버튼을 선택하고 색상 변경
-        sender.backgroundColor = .customGray2
+        sender.backgroundColor = .customGray4C4C
         sender.setTitleColor(.customWhite, for: .normal)
         selectedButton = sender
         
@@ -234,19 +228,6 @@ extension SearchResultsViewController: UISearchBarDelegate {
     }
 }
 
-
-
-//extension SearchResultsViewController: UISearchBarDelegate {
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-//        let searchResultsVC = SearchResultsViewController(query: query)
-//        // 🌟 검색 결과를 타이틀로
-//        searchResultsVC.title = query
-//        navigationController?.pushViewController(searchResultsVC, animated: true)
-//        
-//    }
-//}
-
 extension SearchResultsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return productItems.count
@@ -280,8 +261,7 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
         webVC.webViewTitle = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         navigationController?.pushViewController(webVC, animated: true)
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        //            self.navigationItem.backBarButtonItem = backBarButtonItem
-        //        self.navigationController?.navigationBar.tintColor = UIColor.black
+       
     }
 }
 
