@@ -207,6 +207,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         if let settingOption = SettingOption(rawValue: indexPath.section) {
             switch settingOption {
             case .profile:
+                
+                let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                    self.navigationItem.backBarButtonItem = backBarButtonItem
+                self.navigationController?.navigationBar.tintColor = UIColor.black
+                
                 let profileVC = ProfileSettingViewController(navigationTitle: "Edit Profile", showSaveButton: true)
                 if let navigationController = self.navigationController {
                     navigationController.pushViewController(profileVC, animated: true)

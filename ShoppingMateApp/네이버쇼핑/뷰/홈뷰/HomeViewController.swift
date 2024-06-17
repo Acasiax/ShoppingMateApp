@@ -249,6 +249,9 @@ extension HomeViewController: UISearchBarDelegate {
         
         let searchResultsVC = SearchResultsViewController(query: query)
         navigationController?.pushViewController(searchResultsVC, animated: true)
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+            self.navigationItem.backBarButtonItem = backBarButtonItem
+        self.navigationController?.navigationBar.tintColor = UIColor.black
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

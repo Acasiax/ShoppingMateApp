@@ -19,6 +19,8 @@
 		AA6CB5CF2C1ECC770089E3B7 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */; };
 		AA6CB5D12C1ECCD90089E3B7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */; };
 		AA6CB5D42C1EE7E10089E3B7 /* RecentSearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5D32C1EE7E10089E3B7 /* RecentSearchTableView.swift */; };
+		AA6CB5D72C1F503B0089E3B7 /* ToasetMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5D62C1F503B0089E3B7 /* ToasetMessage.swift */; };
+		AA6CB5DA2C1F50550089E3B7 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = AA6CB5D92C1F50550089E3B7 /* Toast */; };
 		AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */; };
 		AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */; };
 		AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882E2C1BF0E800B477D3 /* ViewController.swift */; };
@@ -59,6 +61,7 @@
 		AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		AA6CB5D32C1EE7E10089E3B7 /* RecentSearchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchTableView.swift; sourceTree = "<group>"; };
+		AA6CB5D62C1F503B0089E3B7 /* ToasetMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToasetMessage.swift; sourceTree = "<group>"; };
 		AA8E88272C1BF0E800B477D3 /* ShoppingMateApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingMateApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 				AA8E88652C1C078D00B477D3 /* Kingfisher in Frameworks */,
 				AA8E884B2C1BF34000B477D3 /* RealmSwift in Frameworks */,
 				AA8E88452C1BF31300B477D3 /* SnapKit in Frameworks */,
+				AA6CB5DA2C1F50550089E3B7 /* Toast in Frameworks */,
 				AA8E88482C1BF31F00B477D3 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,6 +129,15 @@
 			path = "검색기록";
 			sourceTree = "<group>";
 		};
+		AA6CB5D52C1F50260089E3B7 /* 경고 */ = {
+			isa = PBXGroup;
+			children = (
+				AA6CB5D62C1F503B0089E3B7 /* ToasetMessage.swift */,
+			);
+			name = "경고";
+			path = "경고";
+			sourceTree = "<group>";
+		};
 		AA8E881E2C1BF0E800B477D3 = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +158,7 @@
 		AA8E88292C1BF0E800B477D3 /* ShoppingMateApp */ = {
 			isa = PBXGroup;
 			children = (
+				AA6CB5D52C1F50260089E3B7 /* 경고 */,
 				AA8E88402C1BF24300B477D3 /* APIKey.swift */,
 				AA6CB5B62C1D4B4D0089E3B7 /* 온보딩.본본본 */,
 				AA8E88422C1BF2F600B477D3 /* 네이버쇼핑 */,
@@ -249,6 +263,7 @@
 				AA8E88472C1BF31F00B477D3 /* Alamofire */,
 				AA8E884A2C1BF34000B477D3 /* RealmSwift */,
 				AA8E88642C1C078D00B477D3 /* Kingfisher */,
+				AA6CB5D92C1F50550089E3B7 /* Toast */,
 			);
 			productName = ShoppingMateApp;
 			productReference = AA8E88272C1BF0E800B477D3 /* ShoppingMateApp.app */;
@@ -283,6 +298,7 @@
 				AA8E88462C1BF31F00B477D3 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				AA8E88492C1BF34000B477D3 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				AA8E88632C1C078D00B477D3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				AA6CB5D82C1F50550089E3B7 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = AA8E88282C1BF0E800B477D3 /* Products */;
 			projectDirPath = "";
@@ -335,6 +351,7 @@
 				AA8E88532C1BF49C00B477D3 /* HomeCollectionViewCell.swift in Sources */,
 				AA8E88582C1BF57500B477D3 /* RealmDateManager.swift in Sources */,
 				AA8E88622C1C01FB00B477D3 /* Resuse.swift in Sources */,
+				AA6CB5D72C1F503B0089E3B7 /* ToasetMessage.swift in Sources */,
 				AA6CB5BF2C1D597A0089E3B7 /* ProfileImageView.swift in Sources */,
 				AA8E886F2C1C237900B477D3 /* WebViewController.swift in Sources */,
 				AA6CB5BA2C1D4D6C0089E3B7 /* ProfileSettingViewController.swift in Sources */,
@@ -575,6 +592,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AA6CB5D82C1F50550089E3B7 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
 		AA8E88432C1BF31300B477D3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -610,6 +635,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AA6CB5D92C1F50550089E3B7 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA6CB5D82C1F50550089E3B7 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
 		AA8E88442C1BF31300B477D3 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AA8E88432C1BF31300B477D3 /* XCRemoteSwiftPackageReference "SnapKit" */;

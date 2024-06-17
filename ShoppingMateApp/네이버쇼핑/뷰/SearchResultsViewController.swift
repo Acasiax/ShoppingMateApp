@@ -161,6 +161,7 @@ extension SearchResultsViewController: UISearchBarDelegate {
                // 🌟 Set the navigation title to the search query
                searchResultsVC.title = query
                navigationController?.pushViewController(searchResultsVC, animated: true)
+        
            }
 }
 
@@ -196,6 +197,9 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
         webVC.item = item
         webVC.webViewTitle = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         navigationController?.pushViewController(webVC, animated: true)
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//            self.navigationItem.backBarButtonItem = backBarButtonItem
+//        self.navigationController?.navigationBar.tintColor = UIColor.black
     }
 }
 

@@ -74,6 +74,9 @@ class OnboardingView: UIViewController {
         print("시작하기 버튼 클릭")
         let profileSettingVC = ProfileSettingViewController(navigationTitle: "PROFILE SETTING", showSaveButton: false)
         navigationController?.pushViewController(profileSettingVC, animated: true)
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+            self.navigationItem.backBarButtonItem = backBarButtonItem
+        self.navigationController?.navigationBar.tintColor = UIColor.black
     }
 
     
