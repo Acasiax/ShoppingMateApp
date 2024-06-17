@@ -325,8 +325,9 @@ class ProfileSettingViewController: UIViewController {
             return "닉네임에 숫자는 포함 할 수 없어요"
         }
         if nickname.rangeOfCharacter(from: CharacterSet(charactersIn: "@#$%")) != nil {
-            return "닉네임에 특수 문자를 포함할 수 없어요"
+            return "닉네임에 @,#,$,% 는 포함할 수 없어요"
         }
+        
         return "사용할 수 있는 닉네임이에요"
     }
 }
@@ -347,22 +348,45 @@ protocol ProfileSelectionDelegate: AnyObject {
 
 extension ProfileSettingViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let currentText = textField.text as NSString? {
-            let newText = currentText.replacingCharacters(in: range, with: string)
-            self.noteLabel.text = self.evaluateNickname(nickname: newText)
-            
-            if newText.isEmpty {
-                self.bottomLineView.backgroundColor = .lightGray.withAlphaComponent(0.5)
-                self.bottomLineView.snp.updateConstraints { make in
-                    make.height.equalTo(1)
+            if let currentText = textField.text as NSString? {
+                let newText = currentText.replacingCharacters(in: range, with: string)
+                let validationMessage = self.evaluateNickname(nickname: newText)
+                self.noteLabel.text = validationMessage
+                
+                if validationMessage == "사용할 수 있는 닉네임이에요" {
+                    self.noteLabel.textColor = .black
+                } else {
+                    self.noteLabel.textColor = .orange
                 }
-            } else {
-                self.bottomLineView.backgroundColor = .lightGray
-                self.bottomLineView.snp.updateConstraints { make in
-                    make.height.equalTo(2)
+
+                if newText.isEmpty {
+                    self.bottomLineView.backgroundColor = .lightGray.withAlphaComponent(0.5)
+                    self.bottomLineView.snp.updateConstraints { make in
+                        make.height.equalTo(1)
+                    }
+                } else {
+                    self.bottomLineView.backgroundColor = .lightGray
+                    self.bottomLineView.snp.updateConstraints { make in
+                        make.height.equalTo(2)
+                    }
+                }
+            }
+            return true
+        }
+    
+    
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+            if let nickname = textField.text {
+                let validationMessage = evaluateNickname(nickname: nickname)
+                noteLabel.text = validationMessage
+                if validationMessage == "사용할 수 있는 닉네임이에요" {
+                    noteLabel.textColor = .orange
+                } else {
+                    noteLabel.textColor = .red
                 }
             }
         }
-        return true
-    }
+    
+    
 }

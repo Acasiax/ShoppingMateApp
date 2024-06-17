@@ -237,7 +237,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     private func showLogoutAlert() {
-        let alert = UIAlertController(title: "탈퇴하기", message: "정말로 탈퇴하시겠습니까?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화 됩니다.\n탈퇴 하시겠습니까?", preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "확인", style: .destructive) { _ in
             self.resetUserDefaults()
             // self.navigateToOnboarding()
