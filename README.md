@@ -1,9 +1,9 @@
 ### 작업 환경
-- **플랫폼**: iOS, Android
-- **IDE**: Xcode (iOS), Android Studio (Android)
-- **언어**: Swift (iOS), Kotlin/Java (Android)
+- **플랫폼**: iOS
+- **IDE**: Xcode (iOS),
+- **언어**: Swift (iOS)
 - **버전 관리**: Git
-- **빌드 시스템**: Gradle (Android), Xcode build system (iOS)
+- **빌드 시스템**: Xcode build system (iOS)
 
 ### 앱 기능
 - **스플래시 화면**: 앱 실행 시 초기 로딩 화면, 2초 후 로그인 또는 메인 화면으로 전환
@@ -51,11 +51,11 @@
   - 이미지 선택 및 반영 기능
 
 ### 사용 기술
-- **프론트엔드**: UIKit (iOS), Jetpack Compose (Android)
+- **프론트엔드**: UIKit (iOS)
 - **백엔드**: 네이버 쇼핑 API
-- **데이터베이스**: SQLite, Room (Android)
-- **네트워킹**: Alamofire (iOS), Retrofit (Android)
-- **UI/UX**: Lottie (애니메이션), SkeletonView (로딩 스켈레톤)
+- **데이터베이스**: realm, swuft user defalut
+- **네트워킹**: Alamofire (iOS)
+- **UI/UX**: swift codebase
 
 ### 트러블 슈팅
 - **스플래시 화면 전환 문제**: 스플래시 화면에서 메인 화면으로의 전환이 부드럽게 이루어지지 않는 문제 발생 시, 애니메이션과 스레드 조정으로 해결.
