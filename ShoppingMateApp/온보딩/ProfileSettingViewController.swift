@@ -102,7 +102,7 @@ class ProfileSettingViewController: UIViewController {
     
     private func setupNavigationBar() {
         navigationItem.title = showSaveButton ? "EDIT PROFILE" : "PROFILE SETTING"
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 16)]
         
         if showSaveButton {
             let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))

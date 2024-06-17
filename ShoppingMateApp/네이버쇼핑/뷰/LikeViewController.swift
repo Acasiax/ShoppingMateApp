@@ -146,7 +146,7 @@ class LikeView: BaseView {
         label.text = "좋아요한 상품이 없어요"
         label.textColor = .black
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 17, weight: .bold)
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         label.isHidden = true
         return label
     }()
@@ -161,7 +161,7 @@ class LikeView: BaseView {
         searchBar.searchTextField.textColor = .black
         if let cancelButton = searchBar.value(forKey: "cancelButton") as? UIButton {
             cancelButton.setTitle("취소", for: .normal)
-            cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+            cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
             cancelButton.tintColor = .orange
         }
         return searchBar

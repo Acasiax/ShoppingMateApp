@@ -92,7 +92,7 @@ class LikeCollectionViewCell: BaseCollectionViewCell {
         titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
 
         priceLabel.textColor = .black
-        priceLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        priceLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         priceLabel.textAlignment = .left
 
         likeButton.backgroundColor = .orange

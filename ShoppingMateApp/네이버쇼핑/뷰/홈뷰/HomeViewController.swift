@@ -81,7 +81,7 @@ class HomeViewController: ReuseBaseViewController {
         label.text = "최근 검색어가 없어요"
         label.textColor = .black
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 17, weight: .bold)
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         label.isHidden = true
         return label
     }()

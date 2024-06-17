@@ -35,7 +35,7 @@ extension UIView {
         searchBar.delegate = delegate
         if let cancelButton = searchBar.value(forKey: "cancelButton") as? UIButton {
             cancelButton.setTitle("취소?", for: .normal)
-            cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+            cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
             cancelButton.tintColor = .orange
         }
         return searchBar

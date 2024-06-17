@@ -88,7 +88,7 @@ class SettingViewController: UIViewController {
     
     private func setupNavigationBar() {
         navigationItem.title = "SETTING"
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18)]
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 16)]
     }
     
     private func setupTableView() {
@@ -255,8 +255,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         let dictionary = defaults.dictionaryRepresentation()
         dictionary.keys.forEach { key in
             //print("탈퇴하기 버튼을 눌러서 유저디폴트의 키를 지우겠습니다 : \(key)")
-            defaults.removeObject(forKey: key)
-            self.navigateToOnboarding()
+            defaults.removeObject(forKey: key) //🌟유저 디폴트 지우고
+            self.navigateToOnboarding() //🌟 뷰 넘기기
         }
     }
     

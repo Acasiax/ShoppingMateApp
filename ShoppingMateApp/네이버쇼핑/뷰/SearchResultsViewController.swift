@@ -25,7 +25,7 @@ class SearchResultsViewController: ReuseBaseViewController {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 17, weight: .bold)
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         label.isHidden = true
         return label
     }()

@@ -28,7 +28,7 @@ class OnboardingView: UIViewController {
     private let startButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("시작하기", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .heavy)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .heavy)
         button.backgroundColor = .orange
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 23

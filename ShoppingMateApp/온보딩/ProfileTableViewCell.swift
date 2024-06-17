@@ -22,7 +22,7 @@ class ProfileTableViewCell: UITableViewCell {
     
     private let usernameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
     
