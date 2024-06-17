@@ -31,12 +31,12 @@ extension UIView {
         searchBar.searchBarStyle = .minimal
         //searchBar.layer.shadowColor = UIColor.clear.cgColor
         searchBar.showsCancelButton = true
-        searchBar.searchTextField.textColor = .black
+        searchBar.searchTextField.textColor = .customBlack
         searchBar.delegate = delegate
         if let cancelButton = searchBar.value(forKey: "cancelButton") as? UIButton {
             cancelButton.setTitle("취소?", for: .normal)
             cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-            cancelButton.tintColor = .orange
+            cancelButton.tintColor = .customOrange
         }
         return searchBar
     }

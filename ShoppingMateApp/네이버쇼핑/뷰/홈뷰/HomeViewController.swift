@@ -33,7 +33,7 @@ class HomeViewController: ReuseBaseViewController {
     
     let headerView: UIView = {
         let headerView = UIView()
-        headerView.backgroundColor = .white
+        headerView.backgroundColor = .customWhite
         
         let titleLabel = UILabel()
         titleLabel.text = "최근 검색"
@@ -41,7 +41,7 @@ class HomeViewController: ReuseBaseViewController {
         
         let deleteAllButton = UIButton(type: .system)
         deleteAllButton.setTitle("전체 삭제", for: .normal)
-        deleteAllButton.setTitleColor(.orange, for: .normal)
+        deleteAllButton.setTitleColor(.customOrange, for: .normal)
         deleteAllButton.addTarget(self, action: #selector(deleteAllButtonTapped), for: .touchUpInside)
         
         headerView.addSubview(titleLabel)
@@ -79,7 +79,7 @@ class HomeViewController: ReuseBaseViewController {
     let emptyLabel: UILabel = {
         let label = UILabel()
         label.text = "최근 검색어가 없어요"
-        label.textColor = .black
+        label.textColor = .customBlack
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.isHidden = true
@@ -148,14 +148,14 @@ class HomeViewController: ReuseBaseViewController {
 
     private func setupNavigationUI() {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .lightGray
+        appearance.backgroundColor = .white
         appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
         appearance.shadowColor = .clear
 
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = .customWhite
         navigationController?.navigationBar.isTranslucent = false
         //navigationItem.title = "이윤지's MEANING OUT"
         let nickname = getNickname()
@@ -214,7 +214,7 @@ class HomeViewController: ReuseBaseViewController {
         // 네비게이션 백버튼 설정
            let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
            navigationItem.backBarButtonItem = backBarButtonItem
-           navigationController?.navigationBar.tintColor = UIColor.black
+           navigationController?.navigationBar.tintColor = .customBlack
         
         navigationController?.pushViewController(searchResultsVC, animated: true)
     }
@@ -246,7 +246,7 @@ class HomeViewController: ReuseBaseViewController {
         }
         sender.isSelected.toggle()
         if sender.isSelected {
-            sender.backgroundColor = .white
+            sender.backgroundColor = .customWhite
             sender.setTitleColor(.brown, for: .normal)
         }
     }
@@ -335,7 +335,7 @@ extension HomeViewController: UISearchBarDelegate {
         
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backBarButtonItem
-        navigationController?.navigationBar.tintColor = UIColor.black
+        navigationController?.navigationBar.tintColor = .customBlack
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

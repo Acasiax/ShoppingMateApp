@@ -95,19 +95,23 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         mallNameLabel.font = UIFont.systemFont(ofSize: 15)
         mallNameLabel.textAlignment = .left
         
-        titleLabel.textColor = .black
+        titleLabel.textColor = .customBlack
         titleLabel.font = UIFont.systemFont(ofSize: 16)
         titleLabel.textAlignment = .left
         titleLabel.numberOfLines = 2
         titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
-        priceLabel.textColor = .black
+        priceLabel.textColor = .customBlack
         priceLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         priceLabel.textAlignment = .left
         
-        likeButton.setImage(UIImage(named: unlikedImageName), for: .normal)
-        likeButton.backgroundColor = .orange
-        likeButton.tintColor = .brown
+        if let unlikedImage = UIImage(named: unlikedImageName)?.withRenderingMode(.alwaysOriginal) {
+               likeButton.setImage(unlikedImage, for: .normal)
+           }
+        
+        
+        likeButton.backgroundColor = .customLightGray.withAlphaComponent(0.5)
+        likeButton.tintColor = .customWhite
         likeButton.layer.cornerRadius = 18
         likeButton.clipsToBounds = true
         
@@ -151,6 +155,10 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     
     private func updateLikeButtonImage() {
         let imageName = isLiked ? likedImageName : unlikedImageName
-        likeButton.setImage(UIImage(named: imageName), for: .normal)
+            if let image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal) {
+                likeButton.setImage(image, for: .normal)
+            }
+            likeButton.backgroundColor = isLiked ? .customWhite : .customLightGray.withAlphaComponent(0.5)
+       
     }
 }

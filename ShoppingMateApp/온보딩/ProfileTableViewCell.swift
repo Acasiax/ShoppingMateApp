@@ -4,8 +4,6 @@
 //
 //  Created by 이윤지 on 6/15/24.
 //
-
-
 import UIKit
 import SnapKit
 
@@ -16,7 +14,7 @@ class ProfileTableViewCell: UITableViewCell {
         imageView.layer.cornerRadius = 35
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 4
-        imageView.layer.borderColor = UIColor.orange.cgColor
+        imageView.layer.borderColor = UIColor.customOrange.cgColorValue
         return imageView
     }()
     

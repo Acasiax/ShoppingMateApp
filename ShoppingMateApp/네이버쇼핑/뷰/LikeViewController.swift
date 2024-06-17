@@ -24,7 +24,7 @@ class LikeViewController: ReuseBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .customWhite
         setupUI()
         fetchLikedItems()
     }
@@ -45,7 +45,7 @@ class LikeViewController: ReuseBaseViewController {
 
     private func configureNavigationBar() {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .white
+        appearance.backgroundColor = .customWhite
         appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
         //구분선
@@ -144,7 +144,7 @@ class LikeView: BaseView {
     let emptyLabel: UILabel = {
         let label = UILabel()
         label.text = "좋아요한 상품이 없어요"
-        label.textColor = .black
+        label.textColor = .customBlack
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.isHidden = true
@@ -158,11 +158,11 @@ class LikeView: BaseView {
         searchBar.searchBarStyle = .minimal
         searchBar.showsCancelButton = true
        // searchBar.barTintColor = .red
-        searchBar.searchTextField.textColor = .black
+        searchBar.searchTextField.textColor = .customBlack
         if let cancelButton = searchBar.value(forKey: "cancelButton") as? UIButton {
             cancelButton.setTitle("취소", for: .normal)
             cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-            cancelButton.tintColor = .orange
+            cancelButton.tintColor = .customOrange
         }
         return searchBar
     }()
@@ -175,7 +175,7 @@ class LikeView: BaseView {
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(LikeCollectionViewCell.self, forCellWithReuseIdentifier: "LikeCollectionViewCell")
-        view.backgroundColor = .white
+        view.backgroundColor = .customWhite
         return view
     }()
 

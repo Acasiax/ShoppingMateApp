@@ -18,13 +18,13 @@ class NewProfileSelectionViewController: UIViewController {
         layout.minimumInteritemSpacing = 20
         layout.minimumLineSpacing = 20
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .customWhite
         return collectionView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .customWhite
         collectionView.delegate = self
         collectionView.dataSource = self
         setupViews()
@@ -57,7 +57,7 @@ extension NewProfileSelectionViewController: UICollectionViewDelegate, UICollect
         
         // 💡 현재 프로필 이미지와 같은지 비교하여 테두리 색상 및 불투명도 설정
         if let currentProfileImage = UserDefaults.standard.string(forKey: "UserProfileImageName"), currentProfileImage == profileName {
-            cell.imageView.layer.borderColor = UIColor.orange.cgColor
+            cell.imageView.layer.borderColor = UIColor.customOrange.cgColorValue
             cell.imageView.layer.borderWidth = 3
             cell.imageView.alpha = 1.0
         } else {

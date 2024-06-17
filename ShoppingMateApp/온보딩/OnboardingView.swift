@@ -13,7 +13,7 @@ class OnboardingView: UIViewController {
         let label = UILabel()
         label.text = "MeaningOut"
         label.font = UIFont.systemFont(ofSize: 45, weight: .heavy)
-        label.textColor = UIColor.orange
+        label.textColor = .customOrange
         label.textAlignment = .center
         return label
     }()
@@ -29,8 +29,8 @@ class OnboardingView: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("시작하기", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .heavy)
-        button.backgroundColor = .orange
-        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .customOrange
+        button.setTitleColor(.customWhite, for: .normal)
         button.layer.cornerRadius = 23
         button.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         return button
@@ -38,7 +38,7 @@ class OnboardingView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .customWhite
         setupViews()
         setupConstraints()
     }
@@ -77,7 +77,7 @@ class OnboardingView: UIViewController {
         navigationController?.pushViewController(profileSettingVC, animated: true)
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
             self.navigationItem.backBarButtonItem = backBarButtonItem
-        self.navigationController?.navigationBar.tintColor = UIColor.black
+        self.navigationController?.navigationBar.tintColor = .customBlack
     }
 
     

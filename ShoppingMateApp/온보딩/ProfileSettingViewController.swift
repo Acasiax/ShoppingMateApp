@@ -35,7 +35,7 @@ class ProfileSettingViewController: UIViewController {
     private let noteLabel: UILabel = {
         let label = UILabel()
         label.text = "닉네임에 @ 는 포함할 수 없어요."
-        label.textColor = .orange
+        label.textColor = .customOrange
         label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .center
         return label
@@ -45,9 +45,9 @@ class ProfileSettingViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("완료", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
-        button.backgroundColor = .orange
+        button.backgroundColor = .customOrange
         button.layer.cornerRadius = 23
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.customWhite, for: .normal)
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -56,9 +56,9 @@ class ProfileSettingViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("로그인 없이 둘러볼게요", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
-        button.backgroundColor = .orange
+        button.backgroundColor = .customOrange
         button.layer.cornerRadius = 23
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.customWhite, for: .normal)
         button.addTarget(self, action: #selector(passButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -87,7 +87,7 @@ class ProfileSettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .customWhite
         setupNavigationBar()
         setupViews()
         setupConstraints()
@@ -219,10 +219,10 @@ class ProfileSettingViewController: UIViewController {
         
         tabBarVC.setViewControllers([searchNavVC, settingsNavVC, likeNavVC], animated: false)
         tabBarVC.tabBar.backgroundColor = UIColor(red: 0.97, green: 0.98, blue: 0.98, alpha: 1.00)
-        tabBarVC.tabBar.tintColor = .white
+        tabBarVC.tabBar.tintColor = .customWhite
         tabBarVC.tabBar.unselectedItemTintColor = .gray
         
-        tabBarVC.tabBar.tintColor = .orange
+        tabBarVC.tabBar.tintColor = .customOrange
         tabBarVC.tabBar.unselectedItemTintColor = .gray
         
         guard let items = tabBarVC.tabBar.items else { return }
@@ -354,9 +354,9 @@ extension ProfileSettingViewController: UITextFieldDelegate {
                 self.noteLabel.text = validationMessage
                 
                 if validationMessage == "사용할 수 있는 닉네임이에요" {
-                    self.noteLabel.textColor = .black
+                    self.noteLabel.textColor = .customBlack
                 } else {
-                    self.noteLabel.textColor = .orange
+                    self.noteLabel.textColor = .customOrange
                 }
 
                 if newText.isEmpty {
@@ -381,7 +381,7 @@ extension ProfileSettingViewController: UITextFieldDelegate {
                 let validationMessage = evaluateNickname(nickname: nickname)
                 noteLabel.text = validationMessage
                 if validationMessage == "사용할 수 있는 닉네임이에요" {
-                    noteLabel.textColor = .orange
+                    noteLabel.textColor = .customOrange
                 } else {
                     noteLabel.textColor = .red
                 }

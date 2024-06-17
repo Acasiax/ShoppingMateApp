@@ -61,7 +61,7 @@ class SearchResultsViewController: ReuseBaseViewController {
         layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 30) / 2, height: 250)
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: "MainCollectionViewCell")
-        view.backgroundColor = .white
+        view.backgroundColor = .customWhite
         return view
     }()
     
@@ -84,12 +84,12 @@ class SearchResultsViewController: ReuseBaseViewController {
         
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
            navigationItem.backBarButtonItem = backBarButtonItem
-           navigationController?.navigationBar.tintColor = UIColor.black
+           navigationController?.navigationBar.tintColor = .customBlack
         
     }
     
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .customWhite
       //  view.addSubview(searchBar)
         view.addSubview(resultsCountLabel)
         view.addSubview(accuracyButton)
@@ -174,7 +174,7 @@ class SearchResultsViewController: ReuseBaseViewController {
         if let totalResults = totalResults {
             let fomatterTotalResults = totalResults.formatted()
             resultsCountLabel.text = "\(fomatterTotalResults)개의 검색 결과"
-            resultsCountLabel.textColor = .orange
+            resultsCountLabel.textColor = .customOrange
             resultsCountLabel.font = .systemFont(ofSize: 15, weight: .bold)
             resultsCountLabel.isHidden = false
         } else {
@@ -189,13 +189,13 @@ class SearchResultsViewController: ReuseBaseViewController {
         
         // 이전에 선택된 버튼이 있으면 색상 복원
         if let previousButton = selectedButton {
-            previousButton.backgroundColor = .white
-            previousButton.setTitleColor(.black, for: .normal)
+            previousButton.backgroundColor = .customWhite
+            previousButton.setTitleColor(.customBlack, for: .normal)
         }
         
         // 새로운 버튼을 선택하고 색상 변경
-        sender.backgroundColor = .gray
-        sender.setTitleColor(.white, for: .normal)
+        sender.backgroundColor = .customGray2
+        sender.setTitleColor(.customWhite, for: .normal)
         selectedButton = sender
         
         

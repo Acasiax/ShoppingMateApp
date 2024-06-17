@@ -85,18 +85,20 @@ class LikeCollectionViewCell: BaseCollectionViewCell {
         mallNameLabel.font = UIFont.systemFont(ofSize: 15)
         mallNameLabel.textAlignment = .left
 
-        titleLabel.textColor = .black
+        titleLabel.textColor = .customBlack
         titleLabel.font = UIFont.systemFont(ofSize: 16)
         titleLabel.textAlignment = .left
         titleLabel.numberOfLines = 2
         titleLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
 
-        priceLabel.textColor = .black
+        priceLabel.textColor = .customBlack
         priceLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         priceLabel.textAlignment = .left
 
-        likeButton.backgroundColor = .orange
-        likeButton.tintColor = .brown
+        
+        //좋아요 버튼 토글🥕
+        likeButton.backgroundColor = .customWhite
+        likeButton.tintColor = .customBlack
         likeButton.layer.cornerRadius = 18
         likeButton.clipsToBounds = true
 
@@ -113,4 +115,5 @@ class LikeCollectionViewCell: BaseCollectionViewCell {
         repository.deleteItem(item)
         onItemDeleted?()
     }
+    
 }

@@ -51,14 +51,14 @@ class WebViewController: UIViewController, WKUIDelegate {
     //검색 후 웹뷰 webview에 들어갈 때 탭바 색깔
    private func configureNavigationBar() {
        let appearance = UINavigationBarAppearance()
-       appearance.backgroundColor = .white
+       appearance.backgroundColor = .customWhite
        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
        navigationController?.navigationBar.isTranslucent = false
        navigationController?.navigationBar.scrollEdgeAppearance = appearance
        navigationController?.navigationBar.standardAppearance = appearance
        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: likedImageName), style: .plain, target: self, action: #selector(detailLikeButtonTapped))
        navigationItem.title = webViewTitle
-       navigationController?.navigationBar.tintColor = .black
+       navigationController?.navigationBar.tintColor = .customBlack
 
        let backButton = UIButton(type: .system)
        backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
@@ -115,6 +115,7 @@ class WebViewController: UIViewController, WKUIDelegate {
 
     private func updateLikeButtonImage() {
         let imageName = isLiked ? likedImageName : unlikedImageName
+        
         navigationItem.rightBarButtonItem?.image = UIImage(named: imageName)
     }
 

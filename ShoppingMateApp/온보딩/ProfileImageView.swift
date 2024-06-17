@@ -19,13 +19,13 @@ class ProfileImageView: UIView {
         imageView.layer.cornerRadius = 50
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 4
-        imageView.layer.borderColor = UIColor.orange.cgColor
+        imageView.layer.borderColor = UIColor.customOrange.cgColorValue
         return imageView
     }()
     
     let cameraBackgroundView: UIView = {
           let view = UIView()
-          view.backgroundColor = .orange
+          view.backgroundColor = .customOrange
           view.layer.cornerRadius = 17
           view.layer.masksToBounds = true
           return view
@@ -34,7 +34,7 @@ class ProfileImageView: UIView {
     let cameraIconView: UIImageView = {
           let imageView = UIImageView()
           imageView.image = UIImage(systemName: "camera.fill")
-          imageView.tintColor = .white
+          imageView.tintColor = .customWhite
         imageView.layer.masksToBounds = true
           return imageView
       }()

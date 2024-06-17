@@ -39,13 +39,13 @@ class MainSearchView: BaseView, UISearchBarDelegate {
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: "MainCollectionViewCell")
-        view.backgroundColor = .white
+        view.backgroundColor = .customWhite
         return view
     }()
   
    
     override func configureView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .customWhite
        addSubview(searchBar)
 //        addSubview(accuracyButton)
 //        addSubview(dateButton)

@@ -17,7 +17,7 @@ class MainTabBarController: UITabBarController {
     }
     
     private func setupTabBar() {
-        tabBar.tintColor = .orange // 선택된 아이템의 색상
+        tabBar.tintColor = .customOrange // 선택된 아이템의 색상
         tabBar.unselectedItemTintColor = .gray  // 선택되지 않은 아이템의 색상
         tabBar.backgroundColor = UIColor(red: 0.97, green: 0.98, blue: 0.98, alpha: 1.00)
     }

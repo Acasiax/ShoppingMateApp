@@ -15,7 +15,7 @@ class ToastMGViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .customWhite
         
         startNetworkReachabilityObserver()
         
@@ -45,8 +45,8 @@ class ToastMGViewController: UIViewController {
         var style = ToastStyle()
         
         // 커스텀 스타일 설정
-        style.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-        style.messageColor = .white
+        style.backgroundColor = .customBlack.withAlphaComponent(0.8)
+        style.messageColor = .customWhite
         style.messageAlignment = .center
         style.cornerRadius = 10.0
         //style.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)

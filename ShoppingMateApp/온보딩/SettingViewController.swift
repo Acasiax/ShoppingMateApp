@@ -75,7 +75,7 @@ class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .customWhite
         setupNavigationBar()
         setupTableView()
         setupConstraints()
@@ -95,7 +95,7 @@ class SettingViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .customWhite
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SettingCell")
         tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileCell")
         view.addSubview(tableView)
@@ -154,7 +154,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = settingOption.title
             cell.detailTextLabel?.text = settingOption.detail
             cell.accessoryType = settingOption == .logout ? .none : .disclosureIndicator
-            cell.textLabel?.textColor = settingOption == .logout ? .red : .black
+            cell.textLabel?.textColor = settingOption == .logout ? .red : .customBlack
             
             // 모든 서브뷰를 제거합니다
             cell.contentView.subviews.forEach { $0.removeFromSuperview() }
@@ -171,7 +171,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 attributedString.addAttribute(.font, value: boldFont, range: (fullText as NSString).range(of: "\(likedItemsCount)"))
                 
                 cartLabel.attributedText = attributedString
-                cartLabel.textColor = .black
+                cartLabel.textColor = .customBlack
                 
                 cell.contentView.addSubview(cartImageView)
                 cell.contentView.addSubview(cartLabel)
@@ -210,7 +210,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
                 self.navigationItem.backBarButtonItem = backBarButtonItem
-                self.navigationController?.navigationBar.tintColor = UIColor.black
+                self.navigationController?.navigationBar.tintColor = .customBlack
                 
                 
                 

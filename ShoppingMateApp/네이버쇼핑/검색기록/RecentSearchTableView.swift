@@ -33,7 +33,7 @@ class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSo
         self.delegate = self
         self.dataSource = self
         self.register(RecentSearchCell.self, forCellReuseIdentifier: RecentSearchCell.identifier)
-        self.backgroundColor = .white
+        self.backgroundColor = .customWhite
        // self.tableHeaderView = createTableHeaderView()
         self.separatorStyle = .none
     }
@@ -102,7 +102,7 @@ class RecentSearchCell: UITableViewCell {
     
     let searchLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .customBlack
         label.font = .systemFont(ofSize: 16)
         return label
     }()
@@ -113,7 +113,7 @@ class RecentSearchCell: UITableViewCell {
         let clockImage = UIImage(systemName: "clock", withConfiguration: configuration)
         
         imageView.image = clockImage
-        imageView.tintColor = .black
+        imageView.tintColor = .customBlack
         
         return imageView
     }()
@@ -121,7 +121,7 @@ class RecentSearchCell: UITableViewCell {
     let deleteButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("X", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.customBlack, for: .normal)
         return button
     }()
     
