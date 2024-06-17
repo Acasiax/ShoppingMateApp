@@ -1,7 +1,7 @@
 //
 //  SearchResultsViewController.swift
 //  ShoppingMateApp
-//
+
 //  Created by 이윤지 on 6/16/24.
 //
 import UIKit
@@ -17,6 +17,8 @@ class SearchResultsViewController: ReuseBaseViewController {
     private var isDataEnd = false
     private var isDataLoading = false
     private var pageStartNumber = 1
+    
+    private var selectedButton: UIButton?
     
     let resultsCountLabel: UILabel = {
         let label = UILabel()
@@ -174,7 +176,22 @@ class SearchResultsViewController: ReuseBaseViewController {
     }
     
     
+    
+    
     @objc private func changeSort(_ sender: UIButton) {
+        
+        // 이전에 선택된 버튼이 있으면 색상 복원
+        if let previousButton = selectedButton {
+            previousButton.backgroundColor = .white
+            previousButton.setTitleColor(.black, for: .normal)
+        }
+        
+        // 새로운 버튼을 선택하고 색상 변경
+        sender.backgroundColor = .gray
+        sender.setTitleColor(.white, for: .normal)
+        selectedButton = sender
+        
+        
         guard let query = searchBar.text, !query.isEmpty else { return }
         var sortValue: String
         switch sender {
