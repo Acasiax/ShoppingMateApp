@@ -24,6 +24,7 @@ class NetworkManager {
         AF.request(url, method: .get, parameters: parameters, headers: headers).validate().responseDecodable(of: Shop.self) { response in
             switch response.result {
             case .success(let shop):
+              // completion(shop.total, shop.items)
                 completion(shop.items)
                 print(response.result)
             case .failure(let error):
@@ -33,3 +34,17 @@ class NetworkManager {
         }
     }
 }
+
+//        AF.request(url, method: .get, parameters: parameters, headers: headers).validate().responseDecodable(of: Shop.self) { response in
+//                    switch response.result {
+//                    case .success(let shop):
+//                        completion(shop.total, shop.items)
+//                        print("Total results: \(shop.total)")
+//                        print(response.result)
+//                    case .failure(let error):
+//                        print("Error: \(error)")
+//                        completion(nil, nil)
+//                    }
+//                }
+//            }
+//        }

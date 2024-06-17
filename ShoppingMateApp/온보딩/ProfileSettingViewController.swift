@@ -175,6 +175,53 @@ class ProfileSettingViewController: UIViewController {
         navigateToNextScreen()
     }
     
+//    private func navigateToNextScreen() {
+//        let tabBarVC = UITabBarController()
+//        
+//        let homeVC = HomeViewController()
+//        //homeVC.navigationItem.title = "검색"
+//        
+//        let settingsVC = SettingViewController(navigationTitle: "세팅뷰우", showSaveButton: false)
+//        
+//        let likeVC = LikeViewController()
+//        // likeVC.navigationItem.title = "좋아요"
+//        
+//        let searchNavVC = UINavigationController(rootViewController: homeVC)
+//        searchNavVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
+//        
+//        let settingsNavVC = UINavigationController(rootViewController: settingsVC)
+//        settingsNavVC.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "gearshape"), tag: 1)
+//        
+//        let likeNavVC = UINavigationController(rootViewController: likeVC)
+//        likeNavVC.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
+//        
+//        tabBarVC.setViewControllers([searchNavVC, settingsNavVC, likeNavVC], animated: false)
+//        tabBarVC.tabBar.backgroundColor = UIColor(red: 0.97, green: 0.98, blue: 0.98, alpha: 1.00)
+//        tabBarVC.tabBar.tintColor = .white
+//        tabBarVC.tabBar.unselectedItemTintColor = .gray
+//        
+//        // 탭바 아이콘 색상 설정
+//        tabBarVC.tabBar.tintColor = .orange // 선택된 아이템의 색상
+//        tabBarVC.tabBar.unselectedItemTintColor = .gray  // 선택되지 않은 아이템의 색상
+//        
+//        guard let items = tabBarVC.tabBar.items else { return }
+//        items[0].image = UIImage(systemName: "magnifyingglass")
+//        items[1].image = UIImage(systemName: "person")
+//        items[2].image = UIImage(systemName: "heart")
+//        
+//        // 현재 네비게이션 컨트롤러를 통해 푸시(push) 방식으로 탭 바 컨트롤러를 표시
+//        if let navigationController = self.navigationController {
+//            let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//                    self.navigationItem.backBarButtonItem = backBarButtonItem
+//                    self.navigationController?.navigationBar.tintColor = UIColor.black
+//            navigationController.pushViewController(tabBarVC, animated: true)
+//        } else {
+//            print("Navigation controller not found")
+//        }
+//    }
+
+    
+    
     private func navigateToNextScreen() {
         let tabBarVC = UITabBarController()
         
@@ -196,7 +243,7 @@ class ProfileSettingViewController: UIViewController {
         likeNavVC.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
         
         tabBarVC.setViewControllers([searchNavVC, settingsNavVC, likeNavVC], animated: false)
-        tabBarVC.modalPresentationStyle = .fullScreen
+      //  tabBarVC.modalPresentationStyle = .fullScreen
         tabBarVC.tabBar.backgroundColor = UIColor(red: 0.97, green: 0.98, blue: 0.98, alpha: 1.00)
         tabBarVC.tabBar.tintColor = .white
         tabBarVC.tabBar.unselectedItemTintColor = .gray

@@ -8,6 +8,7 @@
 import UIKit
 
 struct Shop: Codable {
+    let total: Int
     let start, display: Int
     let items: [Item]
 }
