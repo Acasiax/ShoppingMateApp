@@ -25,12 +25,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
         if productItems.count - 1 == indexPaths.last?.row {
             pageStartNumber += 1
-            shopManager.shoppingRequest(query: query, start: pageStartNumber) { items in
-                guard let items = items else { return }
-                self.productItems.append(contentsOf: items)
-                self.homeView.collectionView.reloadData()
-                self.updateEmptyImageViewVisibility()
-            }
+            
+            shopManager.shoppingRequest(query: query, start: pageStartNumber) { total, items in // 🔄 completion 클로저 수정
+                            guard let items = items else { return }
+                            self.productItems.append(contentsOf: items)
+                            self.homeView.collectionView.reloadData()
+                            self.updateEmptyImageViewVisibility()
+                        }
         }
     }
 

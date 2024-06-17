@@ -8,6 +8,9 @@ import UIKit
 import SnapKit
 
 class SearchResultsViewController: ReuseBaseViewController {
+    
+    var totalResults: Int? //검색 총결과 수
+    
     private let query: String
     private var shopManager = NetworkManager.shared
     private var productItems: [Item] = []
@@ -15,6 +18,16 @@ class SearchResultsViewController: ReuseBaseViewController {
     private var isDataLoading = false
     private var pageStartNumber = 1
 
+    //    // 🔄 결과 수를 표시하는 라벨 추가
+            let resultsCountLabel: UILabel = {
+                let label = UILabel()
+                label.textColor = .black
+                label.textAlignment = .center
+                label.font = .systemFont(ofSize: 17, weight: .bold)
+                label.isHidden = true
+                return label
+            }()
+    
     
     let searchBar: UISearchBar = {
            let searchBar = UISearchBar()
@@ -71,6 +84,7 @@ class SearchResultsViewController: ReuseBaseViewController {
     private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(searchBar)
+        view.addSubview(resultsCountLabel)
         view.addSubview(accuracyButton)
         view.addSubview(dateButton)
         view.addSubview(upPriceButton)
@@ -89,26 +103,34 @@ class SearchResultsViewController: ReuseBaseViewController {
             make.left.right.equalToSuperview()
         }
         
+        
+        resultsCountLabel.snp.makeConstraints { make in
+                  make.top.equalTo(searchBar.snp.bottom).offset(3) // searchBar 아래 3포인트
+                  make.bottom.equalTo(accuracyButton.snp.top).offset(-3) // accuracyButton 위 3포인트
+                  make.centerX.equalToSuperview()
+              }
+        
+        
         accuracyButton.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(20)
+            make.top.equalTo(resultsCountLabel.snp.bottom).offset(3) // 🔄 위치 변경
             make.leading.equalToSuperview().offset(10)
             make.width.equalTo(55)
             make.height.equalTo(38)
         }
         dateButton.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(20)
+            make.top.equalTo(resultsCountLabel.snp.bottom).offset(3) // 🔄 위치 변경
             make.leading.equalTo(accuracyButton.snp.trailing).offset(7)
             make.width.equalTo(55)
             make.height.equalTo(38)
         }
         upPriceButton.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(20)
+            make.top.equalTo(resultsCountLabel.snp.bottom).offset(3) // 🔄 위치 변경
             make.leading.equalTo(dateButton.snp.trailing).offset(7)
             make.width.equalTo(80)
             make.height.equalTo(38)
         }
         downPriceButton.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(20)
+            make.top.equalTo(resultsCountLabel.snp.bottom).offset(3) // 🔄 위치 변경
             make.leading.equalTo(upPriceButton.snp.trailing).offset(7)
             make.width.equalTo(80)
             make.height.equalTo(38)
@@ -124,15 +146,33 @@ class SearchResultsViewController: ReuseBaseViewController {
         collectionView.prefetchDataSource = self
     }
     
+    
+    
+    
     private func loadData(query: String, sort: String = "sim", display: Int = 30, start: Int = 1) {
         isDataLoading = true
-        shopManager.shoppingRequest(query: query, display: display, start: start, sort: sort) { items in
+        shopManager.shoppingRequest(query: query, display: display, start: start, sort: sort) { total, items in // 🔄 completion 클로저 수정
+       // shopManager.shoppingRequest(query: query, display: display, start: start, sort: sort) { items in
             self.isDataLoading = false
             guard let items = items else { return }
+            self.totalResults = total // 🔄 총 검색 결과 수 업데이트
             self.productItems.append(contentsOf: items)
             self.collectionView.reloadData()
+            self.updateResultsCountLabel() // 🔄 결과 수 라벨 업데이트 호출
         }
     }
+    
+    
+    // 🔄 결과 수 라벨 업데이트 메서드 추가
+       private func updateResultsCountLabel() {
+           if let totalResults = totalResults {
+               resultsCountLabel.text = "총 검색 결과 수: \(totalResults)"
+               resultsCountLabel.isHidden = false
+           } else {
+               resultsCountLabel.isHidden = true
+           }
+       }
+    
     
     @objc private func changeSort(_ sender: UIButton) {
         guard let query = searchBar.text, !query.isEmpty else { return }
@@ -182,7 +222,7 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
         if productItems.count - 1 == indexPaths.last?.row {
             pageStartNumber += 1
             loadData(query: query, start: pageStartNumber)
-            shopManager.shoppingRequest(query: query, start: pageStartNumber) { items in
+            shopManager.shoppingRequest(query: query, start: pageStartNumber) { total, items in // 🔄 completion 클로저 수정
                 guard let items = items else { return }
                 self.productItems.append(contentsOf: items)
                 //self.homeView.collectionView.reloadData()

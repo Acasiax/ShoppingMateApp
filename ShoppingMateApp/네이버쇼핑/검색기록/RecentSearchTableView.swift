@@ -97,6 +97,9 @@ class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSo
 class RecentSearchCell: UITableViewCell {
     static let identifier = "RecentSearchCell"
     
+    
+    
+    
     let searchLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black

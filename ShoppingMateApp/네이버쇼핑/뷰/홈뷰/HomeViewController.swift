@@ -9,6 +9,8 @@ import SnapKit
 import RealmSwift
 
 class HomeViewController: ReuseBaseViewController {
+    var totalResults: Int? //검색 총결과 수
+    
     let homeView = MainSearchView()
     var shopManager = NetworkManager.shared
     var productItems: [Item] = []
@@ -21,7 +23,7 @@ class HomeViewController: ReuseBaseViewController {
     var recentSearchRepository = RecentSearchRepository()
     var recentSearches: [String] = [] {
         didSet {
-            print("HomeViewController recentSearches didSet: \(recentSearches)")
+            print("HomeViewController recentSearches didSet🌟: \(recentSearches)")
             recentSearchTableView.recentSearches = recentSearches
             updateRecentSearchVisibility()
         }
@@ -45,6 +47,17 @@ class HomeViewController: ReuseBaseViewController {
         return label
     }()
     
+//    // 🔄 결과 수를 표시하는 라벨 추가
+//        let resultsCountLabel: UILabel = {
+//            let label = UILabel()
+//            label.textColor = .black
+//            label.textAlignment = .center
+//            label.font = .systemFont(ofSize: 17, weight: .bold)
+//            label.isHidden = true
+//            return label
+//        }()
+//    
+    
     let recentSearchTableView: RecentSearchTableView = {
         let tableView = RecentSearchTableView()
         tableView.isHidden = true
@@ -67,6 +80,8 @@ class HomeViewController: ReuseBaseViewController {
         loadRecentSearches()
         updateRecentSearchVisibility()
         updateEmptyImageViewVisibility()
+       // setupResultsCountLabel() // 🔄 결과 수 라벨 설정
+        
         print("Realm file URL: \(realmDatabase.configuration.fileURL!)")
     }
 
@@ -152,6 +167,19 @@ class HomeViewController: ReuseBaseViewController {
         }
     }
     
+    
+    // 🔄 결과 수 라벨 설정 메서드 추가
+//    private func setupResultsCountLabel() {
+//        view.addSubview(resultsCountLabel)
+//        resultsCountLabel.snp.makeConstraints { make in
+//            make.top.equalTo(homeView.searchBar.snp.bottom).offset(3) // 🔄 searchBar 아래 3포인트
+//            make.bottom.equalTo(homeView.accuracyButton.snp.top).offset(-3) // 🔄 accuracyButton 위 3포인트
+//            make.centerX.equalToSuperview()
+//        }
+//    }
+    
+    
+    
     private func deleteSearch(_ searchTerm: String) {
         recentSearchRepository.deleteSearch(searchTerm)
         loadRecentSearches()
@@ -199,24 +227,41 @@ class HomeViewController: ReuseBaseViewController {
 
         productItems.removeAll()
         isDataLoading = true
-        shopManager.shoppingRequest(query: query, sort: sortValue) { items in
+        shopManager.shoppingRequest(query: query, sort: sortValue) { total, items in
             self.isDataLoading = false
             guard let items = items else { return }
+            self.totalResults = total // 🔄 총 결과 수 업데이트
+       
             self.productItems.append(contentsOf: items)
             self.homeView.collectionView.reloadData()
             self.updateEmptyImageViewVisibility()
+           // self.updateResultsCountLabel()
+            
         }
     }
     
     func loadData(query: String, sort: String = "sim", display: Int = 30, start: Int = 1) {
-        shopManager.shoppingRequest(query: query, display: display, start: start, sort: sort) { items in
+        shopManager.shoppingRequest(query: query, display: display, start: start, sort: sort) { total, items in
             self.isDataLoading = false
             guard let items = items else { return }
+            self.totalResults = total
             self.productItems.append(contentsOf: items)
             self.homeView.collectionView.reloadData()
             self.updateEmptyImageViewVisibility()
+          //  self.updateResultsCountLabel()
         }
     }
+    
+    // 🔄 결과 수 라벨 업데이트 메서드 추가
+//       private func updateResultsCountLabel() {
+//           if let totalResults = totalResults {
+//               resultsCountLabel.text = "총 검색 결과 수: \(totalResults)"
+//               resultsCountLabel.isHidden = false
+//           } else {
+//               resultsCountLabel.isHidden = true
+//           }
+//       }
+    
     
     func updateEmptyImageViewVisibility() {
         let isEmpty = productItems.isEmpty
@@ -224,6 +269,7 @@ class HomeViewController: ReuseBaseViewController {
         emptyLabel.isHidden = !isEmpty
         recentSearchTableView.isHidden = recentSearches.isEmpty
         recentSearchTableView.reloadData()
+        
     }
     
     func updateRecentSearchVisibility() {
