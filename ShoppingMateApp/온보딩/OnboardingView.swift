@@ -72,7 +72,8 @@ class OnboardingView: UIViewController {
     
     @objc private func startButtonTapped() {
         print("시작하기 버튼 클릭")
-        let profileSettingVC = ProfileSettingViewController(navigationTitle: "PROFILE SETTING", showSaveButton: false)
+        let profileSettingVC = ProfileSettingViewController(navigationTitle: "PROFILE SETTING", showSaveButton: false, showCompleteButton: true, showPassButton: true)
+       // let profileSettingVC = ProfileSettingViewController(navigationTitle: "PROFILE SETTING", showSaveButton: false)
         navigationController?.pushViewController(profileSettingVC, animated: true)
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
             self.navigationItem.backBarButtonItem = backBarButtonItem

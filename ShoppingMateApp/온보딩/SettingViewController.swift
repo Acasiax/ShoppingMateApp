@@ -184,7 +184,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 cartLabel.snp.makeConstraints { make in
                     make.trailing.equalToSuperview().offset(-10)
-                   
+                    
                     make.centerY.equalToSuperview()
                 }
             }
@@ -209,10 +209,12 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             case .profile:
                 
                 let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-                    self.navigationItem.backBarButtonItem = backBarButtonItem
+                self.navigationItem.backBarButtonItem = backBarButtonItem
                 self.navigationController?.navigationBar.tintColor = UIColor.black
                 
-                let profileVC = ProfileSettingViewController(navigationTitle: "Edit Profile", showSaveButton: true)
+                
+                // 수정된 부분: 새로운 파라미터 추가
+                let profileVC = ProfileSettingViewController(navigationTitle: "Edit Profile", showSaveButton: true, showCompleteButton: false, showPassButton: false)
                 if let navigationController = self.navigationController {
                     navigationController.pushViewController(profileVC, animated: true)
                 } else {
@@ -238,7 +240,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         let alert = UIAlertController(title: "탈퇴하기", message: "정말로 탈퇴하시겠습니까?", preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "확인", style: .destructive) { _ in
             self.resetUserDefaults()
-           // self.navigateToOnboarding()
+            // self.navigateToOnboarding()
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         

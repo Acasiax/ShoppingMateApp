@@ -5,6 +5,7 @@
 //  Created by 이윤지 on 6/15/24.
 //
 import UIKit
+import SnapKit
 
 class ProfileSettingViewController: UIViewController {
     
@@ -15,16 +16,23 @@ class ProfileSettingViewController: UIViewController {
             saveUserData()
         }
     }
-
+    
     private let nicknameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "닉네임을 입력해주세요 :)"
         textField.borderStyle = .roundedRect
-        textField.textAlignment = .center
+        textField.textAlignment = .left
         textField.autocorrectionType = .no
         textField.spellCheckingType = .no
         return textField
     }()
+    
+    private let bottomLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray.withAlphaComponent(0.5)
+        return view
+    }()
+    
     
     private let noteLabel: UILabel = {
         let label = UILabel()
@@ -60,15 +68,24 @@ class ProfileSettingViewController: UIViewController {
     private var navigationTitle: String
     private var showSaveButton: Bool
     
-    init(navigationTitle: String, showSaveButton: Bool) {
+    private var showCompleteButton: Bool
+    private var showPassButton: Bool
+    
+    // 수정된 이니셜라이저
+    init(navigationTitle: String, showSaveButton: Bool, showCompleteButton: Bool, showPassButton: Bool) {
         self.navigationTitle = navigationTitle
         self.showSaveButton = showSaveButton
+        self.showCompleteButton = showCompleteButton
+        self.showPassButton = showPassButton
         super.init(nibName: nil, bundle: nil)
     }
+    
     
     required init?(coder: NSCoder) {
         self.navigationTitle = ""
         self.showSaveButton = false
+        self.showCompleteButton = true
+        self.showPassButton = true
         super.init(coder: coder)
     }
     
@@ -83,6 +100,7 @@ class ProfileSettingViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
         profileImageView.isUserInteractionEnabled = true
         profileImageView.addGestureRecognizer(tapGesture)
+        
         
         nicknameTextField.delegate = self
     }
@@ -103,9 +121,14 @@ class ProfileSettingViewController: UIViewController {
         view.addSubview(contentView)
         
         contentView.addSubview(nicknameTextField)
+        contentView.addSubview(bottomLineView)
         contentView.addSubview(noteLabel)
-        contentView.addSubview(completeButton)
-        contentView.addSubview(passButton)
+        if showCompleteButton {
+            contentView.addSubview(completeButton)
+        }
+        if showPassButton {
+            contentView.addSubview(passButton)
+        }
     }
     
     private func setupConstraints() {
@@ -126,23 +149,35 @@ class ProfileSettingViewController: UIViewController {
             make.right.equalToSuperview().offset(-40)
         }
         
-        noteLabel.snp.makeConstraints { make in
+        
+        bottomLineView.snp.makeConstraints { make in
             make.top.equalTo(nicknameTextField.snp.bottom).offset(10)
+            make.left.equalToSuperview().offset(40)
+            make.right.equalToSuperview().offset(-40)
+            make.height.equalTo(1) // 초기 굵기 설정
+        }
+        noteLabel.snp.makeConstraints { make in
+            make.top.equalTo(bottomLineView.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(50)
-           // make.right.equalToSuperview().offset(-40)
+            // make.right.equalToSuperview().offset(-40)
         }
         
-        completeButton.snp.makeConstraints { make in
-            make.top.equalTo(noteLabel.snp.bottom).offset(30)
-            make.left.equalToSuperview().offset(40)
-            make.right.equalToSuperview().offset(-40)
-            make.height.equalTo(50)
+        if showCompleteButton {
+            completeButton.snp.makeConstraints { make in
+                make.top.equalTo(noteLabel.snp.bottom).offset(30)
+                make.left.equalToSuperview().offset(40)
+                make.right.equalToSuperview().offset(-40)
+                make.height.equalTo(50)
+            }
         }
-        passButton.snp.makeConstraints { make in
-            make.top.equalTo(completeButton.snp.bottom).offset(10)
-            make.left.equalToSuperview().offset(40)
-            make.right.equalToSuperview().offset(-40)
-            make.height.equalTo(50)
+        
+        if showPassButton {
+            passButton.snp.makeConstraints { make in
+                make.top.equalTo(completeButton.snp.bottom).offset(10)
+                make.left.equalToSuperview().offset(40)
+                make.right.equalToSuperview().offset(-40)
+                make.height.equalTo(50)
+            }
         }
     }
     
@@ -170,11 +205,12 @@ class ProfileSettingViewController: UIViewController {
         }
     }
     
+    
     @objc private func passButtonTapped() {
         saveUserData()
         navigateToNextScreen()
     }
-  
+    
     private func navigateToNextScreen() {
         let tabBarVC = UITabBarController()
         
@@ -196,7 +232,7 @@ class ProfileSettingViewController: UIViewController {
         likeNavVC.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
         
         tabBarVC.setViewControllers([searchNavVC, settingsNavVC, likeNavVC], animated: false)
-      //  tabBarVC.modalPresentationStyle = .fullScreen
+        //  tabBarVC.modalPresentationStyle = .fullScreen
         tabBarVC.tabBar.backgroundColor = UIColor(red: 0.97, green: 0.98, blue: 0.98, alpha: 1.00)
         tabBarVC.tabBar.tintColor = .white
         tabBarVC.tabBar.unselectedItemTintColor = .gray
@@ -221,7 +257,7 @@ class ProfileSettingViewController: UIViewController {
     
     private func saveUserData() {
         let nickname = nicknameTextField.text ?? ""
-
+        
         // 프로필 이미지 데이터를 저장
         let profileImageData = profileImageView.imageView.image?.pngData()
         
@@ -256,7 +292,7 @@ class ProfileSettingViewController: UIViewController {
         
         printUserDefaults() // 저장 후 UserDefaults 출력
     }
-
+    
     private func loadUserData() {
         let defaults = UserDefaults.standard
         if let nickname = defaults.string(forKey: "UserNickname") {
@@ -266,7 +302,7 @@ class ProfileSettingViewController: UIViewController {
         } else {
             print("죄송해요.. 닉네임을 찾을 수 없네요")
         }
-
+        
         // 프로필 이미지 데이터를 로드
         if let profileImageData = defaults.data(forKey: "UserProfileImage"), let profileImage = UIImage(data: profileImageData) {
             profileImageView.imageView.image = profileImage
@@ -281,7 +317,7 @@ class ProfileSettingViewController: UIViewController {
         currentProfileImageName = defaults.string(forKey: "UserProfileImageName")
         printUserDefaults()  // UserDefaults 출력
     }
-
+    
     private func printUserDefaults() {
         DispatchQueue.main.async {
             let defaults = UserDefaults.standard
@@ -296,8 +332,8 @@ class ProfileSettingViewController: UIViewController {
             print("가입 날짜: \(joinDate)")
         }
     }
-
-
+    
+    
     
     private func isValidNickname(nickname: String) -> Bool {
         let nicknameRegex = "^[가-힣a-zA-Z]{2,10}$"
@@ -335,10 +371,23 @@ protocol ProfileSelectionDelegate: AnyObject {
 
 extension ProfileSettingViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        DispatchQueue.main.async {
-            let currentText = textField.text ?? ""
-            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        // 새로운 텍스트를 계산하는 부분을 수정
+        if let currentText = textField.text as NSString? {
+            let newText = currentText.replacingCharacters(in: range, with: string)
             self.noteLabel.text = self.evaluateNickname(nickname: newText)
+            
+            // 텍스트가 비어있는지 확인
+            if newText.isEmpty {
+                self.bottomLineView.backgroundColor = .lightGray.withAlphaComponent(0.5) // 초기 설정
+                self.bottomLineView.snp.updateConstraints { make in
+                    make.height.equalTo(1) // 초기 굵기 설정
+                }
+            } else {
+                self.bottomLineView.backgroundColor = .lightGray // 투명도 제거
+                self.bottomLineView.snp.updateConstraints { make in
+                    make.height.equalTo(2) // 선의 굵기 변경
+                }
+            }
         }
         return true
     }
