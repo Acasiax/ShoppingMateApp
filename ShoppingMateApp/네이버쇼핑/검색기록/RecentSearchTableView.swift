@@ -5,6 +5,7 @@
 //  Created by 이윤지 on 6/16/24.
 
 import UIKit
+import SnapKit
 
 class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     var recentSearches: [String] = [] {
@@ -19,7 +20,6 @@ class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSo
     var onDeleteSearch: ((String) -> Void)?
     var recentSearchRepository = RecentSearchRepository()
         
-    
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         setupTableView()
@@ -34,42 +34,41 @@ class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSo
         self.dataSource = self
         self.register(RecentSearchCell.self, forCellReuseIdentifier: RecentSearchCell.identifier)
         self.backgroundColor = .white
-        self.tableHeaderView = createTableHeaderView()
+       // self.tableHeaderView = createTableHeaderView()
         self.separatorStyle = .none
     }
     
-    private func createTableHeaderView() -> UIView {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 50))
-        headerView.backgroundColor = .white
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "최근 검색"
-        titleLabel.font = .systemFont(ofSize: 16, weight: .bold)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        let deleteAllButton = UIButton(type: .system)
-        deleteAllButton.setTitle("전체 삭제", for: .normal)
-        deleteAllButton.setTitleColor(.orange, for: .normal)
-        deleteAllButton.addTarget(self, action: #selector(deleteAllButtonTapped), for: .touchUpInside)
-        deleteAllButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        headerView.addSubview(titleLabel)
-        headerView.addSubview(deleteAllButton)
-        
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 15),
-            titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            
-            deleteAllButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -15),
-            deleteAllButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
-        ])
-        
-        return headerView
-    }
+//    private func createTableHeaderView() -> UIView {
+//        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 50))
+//        headerView.backgroundColor = .white
+//        
+//        let titleLabel = UILabel()
+//        titleLabel.text = "최근 검색"
+//        titleLabel.font = .systemFont(ofSize: 16, weight: .bold)
+//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        let deleteAllButton = UIButton(type: .system)
+//        deleteAllButton.setTitle("전체 삭제", for: .normal)
+//        deleteAllButton.setTitleColor(.orange, for: .normal)
+//        deleteAllButton.addTarget(self, action: #selector(deleteAllButtonTapped), for: .touchUpInside)
+//        deleteAllButton.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        headerView.addSubview(titleLabel)
+//        headerView.addSubview(deleteAllButton)
+//        
+//        NSLayoutConstraint.activate([
+//            titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 15),
+//            titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+//            
+//            deleteAllButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -15),
+//            deleteAllButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
+//        ])
+//        
+//        return headerView
+//    }
     
     @objc private func deleteAllButtonTapped() {
         recentSearchRepository.deleteAll()
-        // onDelete?()
         recentSearches.removeAll()
     }
     
@@ -94,15 +93,12 @@ class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedSearch = recentSearches[indexPath.row]
-        onSelectSearch?(selectedSearch)
+        onSelectSearch?(selectedSearch) // 검색어 선택 시 핸들러 호출
     }
 }
 
 class RecentSearchCell: UITableViewCell {
     static let identifier = "RecentSearchCell"
-    
-    
-    
     
     let searchLabel: UILabel = {
         let label = UILabel()

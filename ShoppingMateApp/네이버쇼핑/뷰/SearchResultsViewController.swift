@@ -7,6 +7,7 @@
 import UIKit
 import SnapKit
 
+//검색 결과 화면
 class SearchResultsViewController: ReuseBaseViewController {
     
     var totalResults: Int? //검색 총결과 수
@@ -80,11 +81,16 @@ class SearchResultsViewController: ReuseBaseViewController {
         super.viewDidLoad()
         setupUI()
         loadData(query: query)
+        
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+           navigationItem.backBarButtonItem = backBarButtonItem
+           navigationController?.navigationBar.tintColor = UIColor.black
+        
     }
     
     private func setupUI() {
         view.backgroundColor = .white
-        view.addSubview(searchBar)
+      //  view.addSubview(searchBar)
         view.addSubview(resultsCountLabel)
         view.addSubview(accuracyButton)
         view.addSubview(dateButton)
@@ -99,38 +105,39 @@ class SearchResultsViewController: ReuseBaseViewController {
         upPriceButton.addTarget(self, action: #selector(changeSort(_:)), for: .touchUpInside)
         downPriceButton.addTarget(self, action: #selector(changeSort(_:)), for: .touchUpInside)
         
-        searchBar.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.left.right.equalToSuperview()
-        }
+//        searchBar.snp.makeConstraints { make in
+//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+//            make.left.right.equalToSuperview()
+//        }
         
         
         resultsCountLabel.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(10)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
+           // make.top.equalTo(searchBar.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(10)
         }
         
         
         accuracyButton.snp.makeConstraints { make in
-            make.top.equalTo(resultsCountLabel.snp.bottom).offset(8)
+            make.top.equalTo(resultsCountLabel.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(10)
             make.width.equalTo(55)
             make.height.equalTo(38)
         }
         dateButton.snp.makeConstraints { make in
-            make.top.equalTo(resultsCountLabel.snp.bottom).offset(8)
+            make.top.equalTo(resultsCountLabel.snp.bottom).offset(10)
             make.leading.equalTo(accuracyButton.snp.trailing).offset(7)
             make.width.equalTo(55)
             make.height.equalTo(38)
         }
         upPriceButton.snp.makeConstraints { make in
-            make.top.equalTo(resultsCountLabel.snp.bottom).offset(8)
+            make.top.equalTo(resultsCountLabel.snp.bottom).offset(10)
             make.leading.equalTo(dateButton.snp.trailing).offset(7)
             make.width.equalTo(80)
             make.height.equalTo(38)
         }
         downPriceButton.snp.makeConstraints { make in
-            make.top.equalTo(resultsCountLabel.snp.bottom).offset(8)
+            make.top.equalTo(resultsCountLabel.snp.bottom).offset(10)
             make.leading.equalTo(upPriceButton.snp.trailing).offset(7)
             make.width.equalTo(80)
             make.height.equalTo(38)
@@ -211,16 +218,34 @@ class SearchResultsViewController: ReuseBaseViewController {
     }
 }
 
+
 extension SearchResultsViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        let searchResultsVC = SearchResultsViewController(query: query)
-        // 🌟 검색 결과를 타이틀로
-        searchResultsVC.title = query
-        navigationController?.pushViewController(searchResultsVC, animated: true)
+        
+        let newSearchResultsVC = SearchResultsViewController(query: query)
+        newSearchResultsVC.title = query
+        navigationController?.pushViewController(newSearchResultsVC, animated: true)
         
     }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        navigationController?.popViewController(animated: true)
+    }
 }
+
+
+
+//extension SearchResultsViewController: UISearchBarDelegate {
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+//        let searchResultsVC = SearchResultsViewController(query: query)
+//        // 🌟 검색 결과를 타이틀로
+//        searchResultsVC.title = query
+//        navigationController?.pushViewController(searchResultsVC, animated: true)
+//        
+//    }
+//}
 
 extension SearchResultsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

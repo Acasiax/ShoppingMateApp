@@ -15,7 +15,7 @@ class MainSearchView: BaseView, UISearchBarDelegate {
     }()
 
     let accuracyButton: UIButton = {
-        return UIView().createButton(title: "정확도")
+        return UIView().createButton(title: "정확도가짜야")
     }()
 
     let dateButton: UIButton = {
@@ -47,10 +47,10 @@ class MainSearchView: BaseView, UISearchBarDelegate {
     override func configureView() {
         self.backgroundColor = .white
        addSubview(searchBar)
-        addSubview(accuracyButton)
-        addSubview(dateButton)
-        addSubview(upPriceButton)
-        addSubview(downPriceButton)
+//        addSubview(accuracyButton)
+//        addSubview(dateButton)
+//        addSubview(upPriceButton)
+//        addSubview(downPriceButton)
         addSubview(collectionView)
     }
 
@@ -61,32 +61,33 @@ class MainSearchView: BaseView, UISearchBarDelegate {
             make.horizontalEdges.equalToSuperview()
             make.height.equalTo(50)
         }
-        accuracyButton.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(10)
-            make.width.equalTo(55)
-            make.height.equalTo(38)
-        }
-        dateButton.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(20)
-            make.leading.equalTo(accuracyButton.snp.trailing).offset(7)
-            make.width.equalTo(55)
-            make.height.equalTo(38)
-        }
-        upPriceButton.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(20)
-            make.leading.equalTo(dateButton.snp.trailing).offset(7)
-            make.width.equalTo(80)
-            make.height.equalTo(38)
-        }
-        downPriceButton.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(20)
-            make.leading.equalTo(upPriceButton.snp.trailing).offset(7)
-            make.width.equalTo(80)
-            make.height.equalTo(38)
-        }
+//        accuracyButton.snp.makeConstraints { make in
+//            make.top.equalTo(searchBar.snp.bottom).offset(20)
+//            make.leading.equalToSuperview().offset(10)
+//            make.width.equalTo(55)
+//            make.height.equalTo(38)
+//        }
+//        dateButton.snp.makeConstraints { make in
+//            make.top.equalTo(searchBar.snp.bottom).offset(20)
+//            make.leading.equalTo(accuracyButton.snp.trailing).offset(7)
+//            make.width.equalTo(55)
+//            make.height.equalTo(38)
+//        }
+//        upPriceButton.snp.makeConstraints { make in
+//            make.top.equalTo(searchBar.snp.bottom).offset(20)
+//            make.leading.equalTo(dateButton.snp.trailing).offset(7)
+//            make.width.equalTo(80)
+//            make.height.equalTo(38)
+//        }
+//        downPriceButton.snp.makeConstraints { make in
+//            make.top.equalTo(searchBar.snp.bottom).offset(20)
+//            make.leading.equalTo(upPriceButton.snp.trailing).offset(7)
+//            make.width.equalTo(80)
+//            make.height.equalTo(38)
+//        }
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(accuracyButton.snp.bottom).offset(20)
+            make.top.equalTo(searchBar.snp.bottom).offset(20)
+            // make.top.equalTo(accuracyButton.snp.bottom).offset(20)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }

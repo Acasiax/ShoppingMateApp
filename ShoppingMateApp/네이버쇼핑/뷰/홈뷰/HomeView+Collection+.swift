@@ -8,6 +8,7 @@ import UIKit
 import SnapKit
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return productItems.count
@@ -26,7 +27,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if productItems.count - 1 == indexPaths.last?.row {
             pageStartNumber += 1
             
-            shopManager.shoppingRequest(query: query, start: pageStartNumber) { total, items in // 🔄 completion 클로저 수정
+            shopManager.shoppingRequest(query: query, start: pageStartNumber) { total, items in
                             guard let items = items else { return }
                             self.productItems.append(contentsOf: items)
                             self.homeView.collectionView.reloadData()
@@ -58,10 +59,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard !isSearching else { return }
+        isSearching = true
         let selectedSearch = recentSearches[indexPath.row]
         homeView.searchBar.text = selectedSearch
-        loadData(query: selectedSearch)
-        recentSearchTableView.isHidden = true // 🌟 검색 시작 시 테이블 뷰 숨김
+        
+        navigateToSearchResults(query: selectedSearch)
+        recentSearchTableView.isHidden = true // 검색 시작 시 테이블 뷰 숨김
     }
 
     // 최근 검색어 삭제 기능 (선택 사항)

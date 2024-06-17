@@ -54,7 +54,7 @@ class ProfileSettingViewController: UIViewController {
     
     private let passButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("로그인 없이 시작", for: .normal)
+        button.setTitle("로그인 없이 둘러볼게요", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
         button.backgroundColor = .orange
         button.layer.cornerRadius = 23

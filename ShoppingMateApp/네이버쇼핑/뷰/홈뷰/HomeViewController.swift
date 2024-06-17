@@ -10,6 +10,7 @@ import RealmSwift
 
 class HomeViewController: ReuseBaseViewController {
     var totalResults: Int? //검색 총결과 수
+    var isSearching = false
     
     let homeView = MainSearchView()
     var shopManager = NetworkManager.shared
@@ -28,6 +29,44 @@ class HomeViewController: ReuseBaseViewController {
             updateRecentSearchVisibility()
         }
     }
+    
+    
+    let headerView: UIView = {
+        let headerView = UIView()
+        headerView.backgroundColor = .white
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "최근 검색"
+        titleLabel.font = .systemFont(ofSize: 16, weight: .bold)
+        
+        let deleteAllButton = UIButton(type: .system)
+        deleteAllButton.setTitle("전체 삭제", for: .normal)
+        deleteAllButton.setTitleColor(.orange, for: .normal)
+        deleteAllButton.addTarget(self, action: #selector(deleteAllButtonTapped), for: .touchUpInside)
+        
+        headerView.addSubview(titleLabel)
+        headerView.addSubview(deleteAllButton)
+        
+        titleLabel.snp.makeConstraints { make in
+            make.leading.equalTo(headerView).offset(15)
+            make.centerY.equalTo(headerView)
+        }
+        
+        deleteAllButton.snp.makeConstraints { make in
+            make.trailing.equalTo(headerView).offset(-15)
+            make.centerY.equalTo(headerView)
+        }
+        
+        return headerView
+    }()
+
+    let containerView: UIView = {
+        let view = UIView()
+        return view
+    }()
+
+    
+    
 
     let emptyImageView: UIImageView = {
         let imageView = UIImageView()
@@ -46,17 +85,6 @@ class HomeViewController: ReuseBaseViewController {
         label.isHidden = true
         return label
     }()
-    
-//    // 🔄 결과 수를 표시하는 라벨 추가
-//        let resultsCountLabel: UILabel = {
-//            let label = UILabel()
-//            label.textColor = .black
-//            label.textAlignment = .center
-//            label.font = .systemFont(ofSize: 17, weight: .bold)
-//            label.isHidden = true
-//            return label
-//        }()
-//    
     
     let recentSearchTableView: RecentSearchTableView = {
         let tableView = RecentSearchTableView()
@@ -80,13 +108,11 @@ class HomeViewController: ReuseBaseViewController {
         loadRecentSearches()
         updateRecentSearchVisibility()
         updateEmptyImageViewVisibility()
-       // setupResultsCountLabel() // 🔄 결과 수 라벨 설정
-        
-        print("Realm file URL: \(realmDatabase.configuration.fileURL!)")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        isSearching = false
         loadRecentSearches()
         updateRecentSearchVisibility()
         updateEmptyImageViewVisibility()
@@ -96,6 +122,7 @@ class HomeViewController: ReuseBaseViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
     
     private func setupUI() {
         setupNavigationUI()
@@ -130,7 +157,9 @@ class HomeViewController: ReuseBaseViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.isTranslucent = false
-        navigationItem.title = "이윤지's MEANING OUT"
+        //navigationItem.title = "이윤지's MEANING OUT"
+        let nickname = getNickname()
+            navigationItem.title = "\(nickname)'s MEANING OUT"
     }
 
     private func setupEmptyImageView() {
@@ -149,40 +178,55 @@ class HomeViewController: ReuseBaseViewController {
     }
     
     private func setupRecentSearchTableView() {
-        view.addSubview(recentSearchTableView)
+        view.addSubview(containerView)
+        containerView.addSubview(headerView)
+        containerView.addSubview(recentSearchTableView)
+        
+        containerView.snp.makeConstraints { make in
+            make.top.equalTo(homeView.searchBar.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        headerView.snp.makeConstraints { make in
+            make.top.left.right.equalTo(containerView)
+            make.height.equalTo(50)
+        }
+        
+        recentSearchTableView.snp.makeConstraints { make in
+            make.top.equalTo(headerView.snp.bottom)
+            make.left.right.bottom.equalTo(containerView)
+        }
+        
         recentSearchTableView.onSelectSearch = { [weak self] selectedSearch in
-            self?.homeView.searchBar.text = selectedSearch
-            self?.loadData(query: selectedSearch)
-            self?.recentSearchTableView.isHidden = true
+            self?.navigateToSearchResults(query: selectedSearch)
         }
         
         recentSearchTableView.onDeleteSearch = { [weak self] deletedSearch in
             self?.deleteSearch(deletedSearch)
         }
-        
-        recentSearchTableView.snp.makeConstraints { make in
-            make.top.equalTo(homeView.searchBar.snp.bottom)
-            make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
     }
+
     
-    
-    // 🔄 결과 수 라벨 설정 메서드 추가
-//    private func setupResultsCountLabel() {
-//        view.addSubview(resultsCountLabel)
-//        resultsCountLabel.snp.makeConstraints { make in
-//            make.top.equalTo(homeView.searchBar.snp.bottom).offset(3) // 🔄 searchBar 아래 3포인트
-//            make.bottom.equalTo(homeView.accuracyButton.snp.top).offset(-3) // 🔄 accuracyButton 위 3포인트
-//            make.centerX.equalToSuperview()
-//        }
-//    }
-    
-    
+    func navigateToSearchResults(query: String) {
+        let searchResultsVC = SearchResultsViewController(query: query)
+        
+        // 네비게이션 백버튼 설정
+           let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+           navigationItem.backBarButtonItem = backBarButtonItem
+           navigationController?.navigationBar.tintColor = UIColor.black
+        
+        navigationController?.pushViewController(searchResultsVC, animated: true)
+    }
     
     private func deleteSearch(_ searchTerm: String) {
         recentSearchRepository.deleteSearch(searchTerm)
         loadRecentSearches()
+    }
+    
+    @objc private func deleteAllButtonTapped() {
+        recentSearchRepository.deleteAll()
+        recentSearches.removeAll()
     }
     
     @objc private func cancelButtonTapped() {
@@ -230,13 +274,10 @@ class HomeViewController: ReuseBaseViewController {
         shopManager.shoppingRequest(query: query, sort: sortValue) { total, items in
             self.isDataLoading = false
             guard let items = items else { return }
-            self.totalResults = total // 🔄 총 결과 수 업데이트
-       
+            self.totalResults = total // 총 결과 수 업데이트
             self.productItems.append(contentsOf: items)
             self.homeView.collectionView.reloadData()
             self.updateEmptyImageViewVisibility()
-           // self.updateResultsCountLabel()
-            
         }
     }
     
@@ -248,20 +289,8 @@ class HomeViewController: ReuseBaseViewController {
             self.productItems.append(contentsOf: items)
             self.homeView.collectionView.reloadData()
             self.updateEmptyImageViewVisibility()
-          //  self.updateResultsCountLabel()
         }
     }
-    
-    // 🔄 결과 수 라벨 업데이트 메서드 추가
-//       private func updateResultsCountLabel() {
-//           if let totalResults = totalResults {
-//               resultsCountLabel.text = "총 검색 결과 수: \(totalResults)"
-//               resultsCountLabel.isHidden = false
-//           } else {
-//               resultsCountLabel.isHidden = true
-//           }
-//       }
-    
     
     func updateEmptyImageViewVisibility() {
         let isEmpty = productItems.isEmpty
@@ -269,7 +298,6 @@ class HomeViewController: ReuseBaseViewController {
         emptyLabel.isHidden = !isEmpty
         recentSearchTableView.isHidden = recentSearches.isEmpty
         recentSearchTableView.reloadData()
-        
     }
     
     func updateRecentSearchVisibility() {
@@ -282,10 +310,20 @@ class HomeViewController: ReuseBaseViewController {
         recentSearches = recentSearchRepository.fetchAll()
         print("Loaded recent searches: \(recentSearches)")
     }
+    
+    private func getNickname() -> String {
+        let defaults = UserDefaults.standard
+        return defaults.string(forKey: "UserNickname") ?? "닉네임 없음"
+    }
+
+    
+    
 }
 
 extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard !isSearching else { return }
+        isSearching = true
         guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         
         if !recentSearches.contains(query) {
@@ -293,24 +331,16 @@ extension HomeViewController: UISearchBarDelegate {
             recentSearchRepository.saveSearch(query)
         }
         
-        let searchResultsVC = SearchResultsViewController(query: query)
-        navigationController?.pushViewController(searchResultsVC, animated: true)
+        navigateToSearchResults(query: query)
+        
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-            self.navigationItem.backBarButtonItem = backBarButtonItem
-        self.navigationController?.navigationBar.tintColor = UIColor.black
+        navigationItem.backBarButtonItem = backBarButtonItem
+        navigationController?.navigationBar.tintColor = UIColor.black
     }
-
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        productItems.removeAll()
-        homeView.collectionView.reloadData()
-        updateEmptyImageViewVisibility()
-    }
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            productItems.removeAll()
-            homeView.collectionView.reloadData()
-            updateEmptyImageViewVisibility()
-        }
+        isSearching = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
     }
 }
