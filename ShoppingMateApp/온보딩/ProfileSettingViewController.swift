@@ -20,7 +20,6 @@ class ProfileSettingViewController: UIViewController {
     private let nicknameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "닉네임을 입력해주세요 :)"
-        textField.borderStyle = .roundedRect
         textField.textAlignment = .left
         textField.autocorrectionType = .no
         textField.spellCheckingType = .no
@@ -32,7 +31,6 @@ class ProfileSettingViewController: UIViewController {
         view.backgroundColor = .lightGray.withAlphaComponent(0.5)
         return view
     }()
-    
     
     private let noteLabel: UILabel = {
         let label = UILabel()
@@ -71,7 +69,6 @@ class ProfileSettingViewController: UIViewController {
     private var showCompleteButton: Bool
     private var showPassButton: Bool
     
-    // 수정된 이니셜라이저
     init(navigationTitle: String, showSaveButton: Bool, showCompleteButton: Bool, showPassButton: Bool) {
         self.navigationTitle = navigationTitle
         self.showSaveButton = showSaveButton
@@ -79,7 +76,6 @@ class ProfileSettingViewController: UIViewController {
         self.showPassButton = showPassButton
         super.init(nibName: nil, bundle: nil)
     }
-    
     
     required init?(coder: NSCoder) {
         self.navigationTitle = ""
@@ -95,12 +91,11 @@ class ProfileSettingViewController: UIViewController {
         setupNavigationBar()
         setupViews()
         setupConstraints()
-        //loadUserData()
+        loadUserData()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
         profileImageView.isUserInteractionEnabled = true
         profileImageView.addGestureRecognizer(tapGesture)
-        
         
         nicknameTextField.delegate = self
     }
@@ -149,17 +144,15 @@ class ProfileSettingViewController: UIViewController {
             make.right.equalToSuperview().offset(-40)
         }
         
-        
         bottomLineView.snp.makeConstraints { make in
             make.top.equalTo(nicknameTextField.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(40)
             make.right.equalToSuperview().offset(-40)
-            make.height.equalTo(1) // 초기 굵기 설정
+            make.height.equalTo(1)
         }
         noteLabel.snp.makeConstraints { make in
             make.top.equalTo(bottomLineView.snp.bottom).offset(10)
-            make.left.equalToSuperview().offset(50)
-            // make.right.equalToSuperview().offset(-40)
+            make.left.equalToSuperview().offset(45)
         }
         
         if showCompleteButton {
@@ -182,7 +175,6 @@ class ProfileSettingViewController: UIViewController {
     }
     
     @objc private func profileImageTapped() {
-        // 프로필 이미지 탭 기능
         let newViewController = NewProfileSelectionViewController()
         newViewController.delegate = self
         addChild(newViewController)
@@ -198,13 +190,11 @@ class ProfileSettingViewController: UIViewController {
             saveUserData()
             navigateToNextScreen()
         } else {
-            // 잘못된 닉네임 경고 메시지 표시
             let alert = UIAlertController(title: "경고", message: validationMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
         }
     }
-    
     
     @objc private func passButtonTapped() {
         saveUserData()
@@ -215,12 +205,8 @@ class ProfileSettingViewController: UIViewController {
         let tabBarVC = UITabBarController()
         
         let homeVC = HomeViewController()
-        //homeVC.navigationItem.title = "검색"
-        
         let settingsVC = SettingViewController(navigationTitle: "세팅뷰우", showSaveButton: false)
-        
         let likeVC = LikeViewController()
-        // likeVC.navigationItem.title = "좋아요"
         
         let searchNavVC = UINavigationController(rootViewController: homeVC)
         searchNavVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
@@ -232,14 +218,12 @@ class ProfileSettingViewController: UIViewController {
         likeNavVC.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
         
         tabBarVC.setViewControllers([searchNavVC, settingsNavVC, likeNavVC], animated: false)
-        //  tabBarVC.modalPresentationStyle = .fullScreen
         tabBarVC.tabBar.backgroundColor = UIColor(red: 0.97, green: 0.98, blue: 0.98, alpha: 1.00)
         tabBarVC.tabBar.tintColor = .white
         tabBarVC.tabBar.unselectedItemTintColor = .gray
         
-        // 탭바 아이콘 색상 설정
-        tabBarVC.tabBar.tintColor = .orange // 선택된 아이템의 색상
-        tabBarVC.tabBar.unselectedItemTintColor = .gray  // 선택되지 않은 아이템의 색상
+        tabBarVC.tabBar.tintColor = .orange
+        tabBarVC.tabBar.unselectedItemTintColor = .gray
         
         guard let items = tabBarVC.tabBar.items else { return }
         items[0].image = UIImage(systemName: "magnifyingglass")
@@ -258,7 +242,6 @@ class ProfileSettingViewController: UIViewController {
     private func saveUserData() {
         let nickname = nicknameTextField.text ?? ""
         
-        // 프로필 이미지 데이터를 저장
         let profileImageData = profileImageView.imageView.image?.pngData()
         
         let defaults = UserDefaults.standard
@@ -268,7 +251,6 @@ class ProfileSettingViewController: UIViewController {
             defaults.set(profileImageData, forKey: "UserProfileImage")
         }
         
-        // 랜덤 이미지 이름을 가져와서 저장
         if let randomImageName = profileImageView.imageView.accessibilityIdentifier {
             defaults.set(randomImageName, forKey: "UserProfileImageName")
         }
@@ -280,9 +262,8 @@ class ProfileSettingViewController: UIViewController {
             defaults.set(joinDate, forKey: "UserJoinDate")
         }
         
-        defaults.synchronize() // 변경사항을 즉시 디스크에 기록
+        defaults.synchronize()
         
-        // 디버깅 출력
         print("💡: \(nickname)")
         if let savedNickname = defaults.string(forKey: "UserNickname") {
             print("💡: \(savedNickname)")
@@ -290,20 +271,18 @@ class ProfileSettingViewController: UIViewController {
             print("미안해.")
         }
         
-        printUserDefaults() // 저장 후 UserDefaults 출력
+        printUserDefaults()
     }
     
     private func loadUserData() {
         let defaults = UserDefaults.standard
         if let nickname = defaults.string(forKey: "UserNickname") {
             nicknameTextField.text = nickname
-            // 디버깅 출력
             print("닉네임이 등록되었어요: \(nickname)")
         } else {
             print("죄송해요.. 닉네임을 찾을 수 없네요")
         }
         
-        // 프로필 이미지 데이터를 로드
         if let profileImageData = defaults.data(forKey: "UserProfileImage"), let profileImage = UIImage(data: profileImageData) {
             profileImageView.imageView.image = profileImage
         } else {
@@ -311,11 +290,10 @@ class ProfileSettingViewController: UIViewController {
             let randomImageName = profileImages.randomElement() ?? "profile_0"
             profileImageView.imageView.image = UIImage(named: randomImageName)
             profileImageView.imageView.accessibilityIdentifier = randomImageName
-            // 랜덤 이미지 이름을 UserDefaults에 저장
             UserDefaults.standard.set(randomImageName, forKey: "UserProfileImageName")
         }
         currentProfileImageName = defaults.string(forKey: "UserProfileImageName")
-        printUserDefaults()  // UserDefaults 출력
+        printUserDefaults()
     }
     
     private func printUserDefaults() {
@@ -332,8 +310,6 @@ class ProfileSettingViewController: UIViewController {
             print("가입 날짜: \(joinDate)")
         }
     }
-    
-    
     
     private func isValidNickname(nickname: String) -> Bool {
         let nicknameRegex = "^[가-힣a-zA-Z]{2,10}$"
@@ -361,7 +337,7 @@ extension ProfileSettingViewController: ProfileSelectionDelegate {
             self.profileImageView.imageView.image = UIImage(named: named)
             self.profileImageView.imageView.accessibilityIdentifier = named
         }
-        //saveUserData() // 선택한 이미지를 즉시 저장
+        saveUserData()
     }
 }
 
@@ -371,21 +347,19 @@ protocol ProfileSelectionDelegate: AnyObject {
 
 extension ProfileSettingViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        // 새로운 텍스트를 계산하는 부분을 수정
         if let currentText = textField.text as NSString? {
             let newText = currentText.replacingCharacters(in: range, with: string)
             self.noteLabel.text = self.evaluateNickname(nickname: newText)
             
-            // 텍스트가 비어있는지 확인
             if newText.isEmpty {
-                self.bottomLineView.backgroundColor = .lightGray.withAlphaComponent(0.5) // 초기 설정
+                self.bottomLineView.backgroundColor = .lightGray.withAlphaComponent(0.5)
                 self.bottomLineView.snp.updateConstraints { make in
-                    make.height.equalTo(1) // 초기 굵기 설정
+                    make.height.equalTo(1)
                 }
             } else {
-                self.bottomLineView.backgroundColor = .lightGray // 투명도 제거
+                self.bottomLineView.backgroundColor = .lightGray
                 self.bottomLineView.snp.updateConstraints { make in
-                    make.height.equalTo(2) // 선의 굵기 변경
+                    make.height.equalTo(2)
                 }
             }
         }

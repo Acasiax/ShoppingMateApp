@@ -187,7 +187,7 @@ class LikeView: BaseView {
 
     override func setConstraints() {
         searchBar.snp.makeConstraints { make in
-                make.top.equalToSuperview().offset(20)
+                make.top.equalToSuperview().offset(0)
                 make.horizontalEdges.equalToSuperview()
                 make.height.equalTo(50)
             }

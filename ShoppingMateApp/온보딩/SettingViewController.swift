@@ -213,7 +213,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.navigationBar.tintColor = UIColor.black
                 
                 
-                // 수정된 부분: 새로운 파라미터 추가
+                
                 let profileVC = ProfileSettingViewController(navigationTitle: "Edit Profile", showSaveButton: true, showCompleteButton: false, showPassButton: false)
                 if let navigationController = self.navigationController {
                     navigationController.pushViewController(profileVC, animated: true)
