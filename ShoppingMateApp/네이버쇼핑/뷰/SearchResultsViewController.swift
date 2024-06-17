@@ -17,40 +17,39 @@ class SearchResultsViewController: ReuseBaseViewController {
     private var isDataEnd = false
     private var isDataLoading = false
     private var pageStartNumber = 1
-
-    //    // 🔄 결과 수를 표시하는 라벨 추가
-            let resultsCountLabel: UILabel = {
-                let label = UILabel()
-                label.textColor = .black
-                label.textAlignment = .center
-                label.font = .systemFont(ofSize: 17, weight: .bold)
-                label.isHidden = true
-                return label
-            }()
+    
+    let resultsCountLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 17, weight: .bold)
+        label.isHidden = true
+        return label
+    }()
     
     
     let searchBar: UISearchBar = {
-           let searchBar = UISearchBar()
-           searchBar.placeholder = "검색어를 입력하세요"
-           return searchBar
-       }()
-       
-       let accuracyButton: UIButton = {
-           return UIView().createButton(title: "정확도")
-       }()
-       
-       let dateButton: UIButton = {
-           return UIView().createButton(title: "날짜순")
-       }()
-       
-       let upPriceButton: UIButton = {
-           return UIView().createButton(title: "가격높은순", width: 80)
-       }()
-       
-       let downPriceButton: UIButton = {
-           return UIView().createButton(title: "가격낮은순", width: 80)
-       }()
-       
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "검색어를 입력하세요"
+        return searchBar
+    }()
+    
+    let accuracyButton: UIButton = {
+        return UIView().createButton(title: "정확도")
+    }()
+    
+    let dateButton: UIButton = {
+        return UIView().createButton(title: "날짜순")
+    }()
+    
+    let upPriceButton: UIButton = {
+        return UIView().createButton(title: "가격높은순", width: 80)
+    }()
+    
+    let downPriceButton: UIButton = {
+        return UIView().createButton(title: "가격낮은순", width: 80)
+    }()
+    
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -65,16 +64,16 @@ class SearchResultsViewController: ReuseBaseViewController {
     
     //검색한 결과가 네비의 타이틀로
     init(query: String) {
-          self.query = query
-          super.init(nibName: nil, bundle: nil)
-          searchBar.text = query
-          self.title = query
-      }
+        self.query = query
+        super.init(nibName: nil, bundle: nil)
+        searchBar.text = query
+        self.title = query
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -105,32 +104,31 @@ class SearchResultsViewController: ReuseBaseViewController {
         
         
         resultsCountLabel.snp.makeConstraints { make in
-                  make.top.equalTo(searchBar.snp.bottom).offset(3) // searchBar 아래 3포인트
-                  make.bottom.equalTo(accuracyButton.snp.top).offset(-3) // accuracyButton 위 3포인트
-                  make.centerX.equalToSuperview()
-              }
+            make.top.equalTo(searchBar.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(10)
+        }
         
         
         accuracyButton.snp.makeConstraints { make in
-            make.top.equalTo(resultsCountLabel.snp.bottom).offset(3) // 🔄 위치 변경
+            make.top.equalTo(resultsCountLabel.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(10)
             make.width.equalTo(55)
             make.height.equalTo(38)
         }
         dateButton.snp.makeConstraints { make in
-            make.top.equalTo(resultsCountLabel.snp.bottom).offset(3) // 🔄 위치 변경
+            make.top.equalTo(resultsCountLabel.snp.bottom).offset(8)
             make.leading.equalTo(accuracyButton.snp.trailing).offset(7)
             make.width.equalTo(55)
             make.height.equalTo(38)
         }
         upPriceButton.snp.makeConstraints { make in
-            make.top.equalTo(resultsCountLabel.snp.bottom).offset(3) // 🔄 위치 변경
+            make.top.equalTo(resultsCountLabel.snp.bottom).offset(8)
             make.leading.equalTo(dateButton.snp.trailing).offset(7)
             make.width.equalTo(80)
             make.height.equalTo(38)
         }
         downPriceButton.snp.makeConstraints { make in
-            make.top.equalTo(resultsCountLabel.snp.bottom).offset(3) // 🔄 위치 변경
+            make.top.equalTo(resultsCountLabel.snp.bottom).offset(8)
             make.leading.equalTo(upPriceButton.snp.trailing).offset(7)
             make.width.equalTo(80)
             make.height.equalTo(38)
@@ -151,27 +149,29 @@ class SearchResultsViewController: ReuseBaseViewController {
     
     private func loadData(query: String, sort: String = "sim", display: Int = 30, start: Int = 1) {
         isDataLoading = true
-        shopManager.shoppingRequest(query: query, display: display, start: start, sort: sort) { total, items in // 🔄 completion 클로저 수정
-       // shopManager.shoppingRequest(query: query, display: display, start: start, sort: sort) { items in
+        shopManager.shoppingRequest(query: query, display: display, start: start, sort: sort) { total, items in
             self.isDataLoading = false
             guard let items = items else { return }
-            self.totalResults = total // 🔄 총 검색 결과 수 업데이트
+            self.totalResults = total // 총 검색 결과 수 업데이트
             self.productItems.append(contentsOf: items)
             self.collectionView.reloadData()
-            self.updateResultsCountLabel() // 🔄 결과 수 라벨 업데이트 호출
+            self.updateResultsCountLabel() // 결과 수 라벨 업데이트 호출
         }
     }
     
     
     // 🔄 결과 수 라벨 업데이트 메서드 추가
-       private func updateResultsCountLabel() {
-           if let totalResults = totalResults {
-               resultsCountLabel.text = "총 검색 결과 수: \(totalResults)"
-               resultsCountLabel.isHidden = false
-           } else {
-               resultsCountLabel.isHidden = true
-           }
-       }
+    private func updateResultsCountLabel() {
+        if let totalResults = totalResults {
+            let fomatterTotalResults = totalResults.formatted()
+            resultsCountLabel.text = "\(fomatterTotalResults)개의 검색 결과"
+            resultsCountLabel.textColor = .orange
+            resultsCountLabel.font = .systemFont(ofSize: 15, weight: .bold)
+            resultsCountLabel.isHidden = false
+        } else {
+            resultsCountLabel.isHidden = true
+        }
+    }
     
     
     @objc private func changeSort(_ sender: UIButton) {
@@ -197,26 +197,26 @@ class SearchResultsViewController: ReuseBaseViewController {
 extension SearchResultsViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-               let searchResultsVC = SearchResultsViewController(query: query)
-               // 🌟 Set the navigation title to the search query
-               searchResultsVC.title = query
-               navigationController?.pushViewController(searchResultsVC, animated: true)
+        let searchResultsVC = SearchResultsViewController(query: query)
+        // 🌟 검색 결과를 타이틀로
+        searchResultsVC.title = query
+        navigationController?.pushViewController(searchResultsVC, animated: true)
         
-           }
+    }
 }
 
 extension SearchResultsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return productItems.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell() }
         let item = productItems[indexPath.row]
         cell.configure(with: item)
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         guard let query = searchBar.text, !isDataLoading else { return }
         if productItems.count - 1 == indexPaths.last?.row {
@@ -226,7 +226,7 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
                 guard let items = items else { return }
                 self.productItems.append(contentsOf: items)
                 //self.homeView.collectionView.reloadData()
-               
+                
             }
         }
     }
@@ -238,8 +238,8 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
         webVC.webViewTitle = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         navigationController?.pushViewController(webVC, animated: true)
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-//            self.navigationItem.backBarButtonItem = backBarButtonItem
-//        self.navigationController?.navigationBar.tintColor = UIColor.black
+        //            self.navigationItem.backBarButtonItem = backBarButtonItem
+        //        self.navigationController?.navigationBar.tintColor = UIColor.black
     }
 }
 
