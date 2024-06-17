@@ -17,6 +17,8 @@ class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSo
     
     var onSelectSearch: ((String) -> Void)?
     var onDeleteSearch: ((String) -> Void)?
+    var recentSearchRepository = RecentSearchRepository()
+        
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -66,6 +68,8 @@ class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSo
     }
     
     @objc private func deleteAllButtonTapped() {
+        recentSearchRepository.deleteAll()
+        // onDelete?()
         recentSearches.removeAll()
     }
     
