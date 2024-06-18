@@ -26,7 +26,7 @@ class NetworkManager {
                     print("Total총 검색 수: \(shop.total)")
                     print(response.result)
                 case .failure(let error):
-                    print("Error: \(error)")
+                    print("Error에러: \(error)")
                     completion(nil, nil)
                     }
                 }
