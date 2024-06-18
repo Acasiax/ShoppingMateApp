@@ -32,6 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             print("닉네임이 없는데요?")
         }
         
+        
         // UserDefaults 값 출력
         print("닉네임🐻🌟: \(nickname)")
         print("프로필 이미지 이름🐻: \(profileImageName)")
