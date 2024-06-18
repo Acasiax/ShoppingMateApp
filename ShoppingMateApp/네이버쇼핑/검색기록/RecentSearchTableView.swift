@@ -10,7 +10,6 @@ import SnapKit
 class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     var recentSearches: [String] = [] {
         didSet {
-            print("RecentSearchTableView recentSearches didSet: \(recentSearches)")
             reloadData()
             isHidden = recentSearches.isEmpty // 검색어가 없으면 테이블 뷰 숨김
         }
@@ -38,42 +37,12 @@ class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSo
         self.separatorStyle = .none
     }
     
-//    private func createTableHeaderView() -> UIView {
-//        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 50))
-//        headerView.backgroundColor = .white
-//        
-//        let titleLabel = UILabel()
-//        titleLabel.text = "최근 검색"
-//        titleLabel.font = .systemFont(ofSize: 16, weight: .bold)
-//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        let deleteAllButton = UIButton(type: .system)
-//        deleteAllButton.setTitle("전체 삭제", for: .normal)
-//        deleteAllButton.setTitleColor(.orange, for: .normal)
-//        deleteAllButton.addTarget(self, action: #selector(deleteAllButtonTapped), for: .touchUpInside)
-//        deleteAllButton.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        headerView.addSubview(titleLabel)
-//        headerView.addSubview(deleteAllButton)
-//        
-//        NSLayoutConstraint.activate([
-//            titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 15),
-//            titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-//            
-//            deleteAllButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -15),
-//            deleteAllButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
-//        ])
-//        
-//        return headerView
-//    }
-    
     @objc private func deleteAllButtonTapped() {
         recentSearchRepository.deleteAll()
         recentSearches.removeAll()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Number of rows in section \(section): \(recentSearches.count)")
         return recentSearches.count
     }
     

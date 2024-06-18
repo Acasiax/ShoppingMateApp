@@ -24,7 +24,6 @@ class HomeViewController: ReuseBaseViewController {
     var recentSearchRepository = RecentSearchRepository()
     var recentSearches: [String] = [] {
         didSet {
-            print("HomeViewController recentSearches didSet🌟: \(recentSearches)")
             recentSearchTableView.recentSearches = recentSearches
             updateRecentSearchVisibility()
         }
@@ -301,14 +300,12 @@ class HomeViewController: ReuseBaseViewController {
     }
     
     func updateRecentSearchVisibility() {
-        print("Updating recent search visibility: \(recentSearches)")
         recentSearchTableView.isHidden = recentSearches.isEmpty
         recentSearchTableView.reloadData()
     }
     
     private func loadRecentSearches() {
         recentSearches = recentSearchRepository.fetchAll()
-        print("Loaded recent searches: \(recentSearches)")
     }
     
     private func getNickname() -> String {

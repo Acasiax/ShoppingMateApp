@@ -121,21 +121,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         contentView.addSubview(priceLabel)
         contentView.addSubview(likeButton)
     }
-    
-//    @objc private func toggleLike() {
-//        isLiked.toggle()
-//        guard let item = self.item else { return }
-//        let repository = LikeTableRepository()
-//        if isLiked {
-//              repository.saveItem(item)
-//              NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: nil) // ⭐️
-//          } else {
-//              repository.deleteItem(item)
-//              NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: nil) // ⭐️
-//          }
-//      }
-    
-    
+
     //Invalidating grant <invalid NS/CF object> failed 오류 나서 수정함
     @objc private func toggleLike() {
         isLiked.toggle()

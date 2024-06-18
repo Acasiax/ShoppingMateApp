@@ -41,5 +41,13 @@ extension UIView {
 }
 
 
-
-
+// "완료","로그인 없이 둘러볼게요 버튼" UIButton에 applyCustomStyle 확장 메서드 추가
+extension UIButton {
+    func applyCustomStyle(title: String, fontSize: CGFloat, cornerRadius: CGFloat, backgroundColor: UIColor, titleColor: UIColor) {
+        self.setTitle(title, for: .normal)
+        self.titleLabel?.font = .systemFont(ofSize: fontSize, weight: .heavy)
+        self.backgroundColor = backgroundColor
+        self.layer.cornerRadius = cornerRadius
+        self.setTitleColor(titleColor, for: .normal)
+    }
+}

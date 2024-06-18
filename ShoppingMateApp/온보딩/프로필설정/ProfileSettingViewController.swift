@@ -11,11 +11,7 @@ class ProfileSettingViewController: UIViewController {
     
     private let profileImageView = ProfileImageView()
     private let contentView = UIView()
-    private var currentProfileImageName: String? {
-        didSet {
-            saveUserData()
-        }
-    }
+    private var currentProfileImageName: String?
     
     private let nicknameTextField: UITextField = {
         let textField = UITextField()
@@ -41,27 +37,21 @@ class ProfileSettingViewController: UIViewController {
         return label
     }()
     
+    // "완료","로그인 없이 둘러볼게요 버튼" UIButton에 applyCustomStyle 확장 메서드 추가🔥
     private let completeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("완료", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
-        button.backgroundColor = .customOrange
-        button.layer.cornerRadius = 23
-        button.setTitleColor(.customWhite, for: .normal)
-        button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+        button.applyCustomStyle(title: "완료", fontSize: 15, cornerRadius: 23, backgroundColor: .customOrange, titleColor: .customWhite)
+        button.addTarget(self, action: #selector(okButtonTapped), for: .touchUpInside)
         return button
     }()
-    
+
     private let passButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("로그인 없이 둘러볼게요", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
-        button.backgroundColor = .customOrange
-        button.layer.cornerRadius = 23
-        button.setTitleColor(.customWhite, for: .normal)
+        button.applyCustomStyle(title: "로그인 없이 둘러볼게요", fontSize: 15, cornerRadius: 23, backgroundColor: .customOrange, titleColor: .customWhite)
         button.addTarget(self, action: #selector(passButtonTapped), for: .touchUpInside)
         return button
     }()
+    
     
     private var navigationTitle: String
     private var showSaveButton: Bool
@@ -184,22 +174,19 @@ class ProfileSettingViewController: UIViewController {
     }
 
     
-    
-//    @objc private func profileImageTapped() {
-//        let newViewController = NewProfileSelectionViewController()
-//        newViewController.delegate = self
-//        addChild(newViewController)
-//        newViewController.view.frame = contentView.bounds
-//        contentView.addSubview(newViewController.view)
-//        newViewController.didMove(toParent: self)
-//    }
-    
-    @objc private func saveButtonTapped() {
+    //🔥 완료 버튼 눌렀을 때!!
+    @objc private func okButtonTapped() {
         let nickname = nicknameTextField.text ?? ""
         let validationMessage = evaluateNickname(nickname: nickname)
+        
         if validationMessage == "사용할 수 있는 닉네임이에요" {
-            saveUserData()
-            navigateToNextScreen()
+            saveUserData { success in
+                if success {
+                    self.navigateToNextScreen()
+                } else {
+                    print("데이터 저장에 실패했어요")
+                }
+            }
         } else {
             let alert = UIAlertController(title: "경고", message: validationMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
@@ -207,10 +194,59 @@ class ProfileSettingViewController: UIViewController {
         }
     }
     
-    @objc private func passButtonTapped() {
-        saveUserData()
-        navigateToNextScreen()
+    
+    
+    
+    
+    
+    //이거는 저장 버튼임 프로필 수정할 때
+    @objc private func saveButtonTapped() {
+        let nickname = nicknameTextField.text ?? ""
+        let validationMessage = evaluateNickname(nickname: nickname)
+        
+        if validationMessage == "사용할 수 있는 닉네임이에요" {
+            saveUserData { success in
+                if success {
+                    self.navigateToNextScreen()
+                } else {
+                    print("데이터 저장에 실패했어요")
+                }
+            }
+        } else {
+            let alert = UIAlertController(title: "경고", message: validationMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
     }
+
+    
+    
+    
+//    @objc private func saveButtonTapped() {
+//        
+//        let nickname = nicknameTextField.text ?? ""
+//        let validationMessage = evaluateNickname(nickname: nickname)
+//        if validationMessage == "사용할 수 있는 닉네임이에요" {
+//            saveUserData()
+//            navigateToNextScreen()
+//        } else {
+//            let alert = UIAlertController(title: "경고", message: validationMessage, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+//            present(alert, animated: true, completion: nil)
+//        }
+//    }
+    
+    //둘러볼게요 버튼
+    @objc private func passButtonTapped() {
+         saveUserData { success in
+             if success {
+                 self.navigateToNextScreen()
+             } else {
+                 print("데이터 저장에 실패했어요")
+             }
+         }
+     }
+     
     
     private func navigateToNextScreen() {
         let tabBarVC = UITabBarController()
@@ -246,52 +282,96 @@ class ProfileSettingViewController: UIViewController {
             window.makeKeyAndVisible()
             UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
         } else {
-            print("Window not found")
+            print("Window를 못 찾았어요")
         }
     }
     
-    private func saveUserData() {
+    private func saveUserData(completion: @escaping (Bool) -> Void) {
         let nickname = nicknameTextField.text ?? ""
-        
+
+        // 닉네임이 빈 문자열인지 확인
+        if nickname.isEmpty {
+            print("⚠️⚠️ 닉네임이 빈 문자열이어서 저장하지 않습니다.")
+            completion(false)
+            return
+        }
+
         let profileImageData = profileImageView.imageView.image?.pngData()
-        
         let defaults = UserDefaults.standard
+
+        // 데이터 저장
         defaults.set(nickname, forKey: "UserNickname")
-        
+
         if let profileImageData = profileImageData {
             defaults.set(profileImageData, forKey: "UserProfileImage")
         }
-        
+
         if let randomImageName = profileImageView.imageView.accessibilityIdentifier {
             defaults.set(randomImageName, forKey: "UserProfileImageName")
         }
-        
+
         if defaults.string(forKey: "UserJoinDate") == nil {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let joinDate = dateFormatter.string(from: Date())
             defaults.set(joinDate, forKey: "UserJoinDate")
         }
-        
-        defaults.synchronize()
-        
-        print("💡: \(nickname)")
-        if let savedNickname = defaults.string(forKey: "UserNickname") {
-            print("💡: \(savedNickname)")
-        } else {
-            print("미안해.")
+
+        // 저장된 값 확인
+        DispatchQueue.main.async {
+            if let savedNickname = defaults.string(forKey: "UserNickname") {
+                print("💡: \(savedNickname)")
+                completion(true)
+            } else {
+                print("⚠️⚠️ 닉네임을 유저디폴트에 저장하지 못했습니다!")
+                completion(false)
+            }
+            self.printUserDefaults() // 현재 상태 출력
         }
-        
-        printUserDefaults()
     }
+
+    private func printUserDefaults() {
+        DispatchQueue.main.async {
+            let defaults = UserDefaults.standard
+            
+            if let nickname = defaults.string(forKey: "UserNickname") {
+                print("닉네임: \(nickname)")
+            } else {
+                print("닉네임: 없음")
+            }
+
+            if let profileImageData = defaults.data(forKey: "UserProfileImage") {
+                print("프로필 이미지 데이터: \(profileImageData.count) 바이트")
+            } else {
+                print("프로필 이미지 데이터: 없음")
+            }
+
+            if let profileImageName = defaults.string(forKey: "UserProfileImageName") {
+                print("프로필 이미지 이름: \(profileImageName)")
+            } else {
+                print("프로필 이미지 이름: 없음")
+            }
+
+            if let joinDate = defaults.string(forKey: "UserJoinDate") {
+                print("가입 날짜: \(joinDate)")
+            } else {
+                print("가입 날짜: 없음")
+            }
+
+            let isNicknameSet = defaults.bool(forKey: "isNicknameSet")
+            print("닉네임 설정 여부: \(isNicknameSet)")
+        }
+    }
+
     
+    //🕵🏻‍♂️🔍
     private func loadUserData() {
         let defaults = UserDefaults.standard
         if let nickname = defaults.string(forKey: "UserNickname") {
             nicknameTextField.text = nickname
-            print("닉네임이 등록되었어요: \(nickname)")
+            print("유저디폴트에 닉네임 기록이 있네요: \(nickname)")
         } else {
-            print("죄송해요.. 닉네임을 찾을 수 없네요")
+            print("유저디폴트에 닉네임 기록이 없습니다. 처음 실행하나봐요")
         }
         
         if let profileImageData = defaults.data(forKey: "UserProfileImage"), let profileImage = UIImage(data: profileImageData) {
@@ -307,21 +387,7 @@ class ProfileSettingViewController: UIViewController {
         printUserDefaults()
     }
     
-    private func printUserDefaults() {
-        DispatchQueue.main.async {
-            let defaults = UserDefaults.standard
-            let nickname = defaults.string(forKey: "UserNickname") ?? "닉네임이 설정되지 않음"
-            let profileImageName = defaults.string(forKey: "UserProfileImageName") ?? "프로필 이미지가 설정되지 않음"
-            let isNicknameSet = defaults.bool(forKey: "isNicknameSet")
-            let joinDate = defaults.string(forKey: "UserJoinDate") ?? "가입 날짜가 설정되지 않음"
-            
-            print("닉네임: \(nickname)")
-            print("프로필 이미지 이름: \(profileImageName)")
-            print("isNicknameSet: \(isNicknameSet)")
-            print("가입 날짜: \(joinDate)")
-        }
-    }
-    
+
     private func isValidNickname(nickname: String) -> Bool {
         let nicknameRegex = "^[가-힣a-zA-Z]{2,10}$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", nicknameRegex)
@@ -349,7 +415,11 @@ extension ProfileSettingViewController: ProfileSelectionDelegate {
             self.profileImageView.imageView.image = UIImage(named: named)
             self.profileImageView.imageView.accessibilityIdentifier = named
         }
-        saveUserData()
+        saveUserData { success in
+            if success {
+                print("Profile image name updated successfully")
+            }
+        }
     }
 }
 
@@ -384,8 +454,6 @@ extension ProfileSettingViewController: UITextFieldDelegate {
             }
             return true
         }
-    
-    
     
     func textFieldDidEndEditing(_ textField: UITextField) {
             if let nickname = textField.text {

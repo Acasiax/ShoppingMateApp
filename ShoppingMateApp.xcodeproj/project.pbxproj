@@ -22,6 +22,7 @@
 		AA6CB5DA2C1F50550089E3B7 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = AA6CB5D92C1F50550089E3B7 /* Toast */; };
 		AA6CB6042C2024740089E3B7 /* Color+recap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB6032C2024740089E3B7 /* Color+recap.swift */; };
 		AA6CB6072C20435B0089E3B7 /* Create+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB6062C20435B0089E3B7 /* Create+Component.swift */; };
+		AA6CB60F2C20637A0089E3B7 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB60E2C20637A0089E3B7 /* SplashViewController.swift */; };
 		AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */; };
 		AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */; };
 		AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E882E2C1BF0E800B477D3 /* ViewController.swift */; };
@@ -63,6 +64,8 @@
 		AA6CB5D62C1F503B0089E3B7 /* ToasetMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToasetMessage.swift; sourceTree = "<group>"; };
 		AA6CB6032C2024740089E3B7 /* Color+recap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+recap.swift"; sourceTree = "<group>"; };
 		AA6CB6062C20435B0089E3B7 /* Create+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Create+Component.swift"; sourceTree = "<group>"; };
+		AA6CB60D2C205E2E0089E3B7 /* CheckReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CheckReadMe.md; sourceTree = "<group>"; };
+		AA6CB60E2C20637A0089E3B7 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		AA8E88272C1BF0E800B477D3 /* ShoppingMateApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingMateApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,15 +106,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AA6CB5B62C1D4B4D0089E3B7 /* 온보딩.본본본 */ = {
+		AA6CB5B62C1D4B4D0089E3B7 /* 온보딩 */ = {
 			isa = PBXGroup;
 			children = (
+				AA6CB60E2C20637A0089E3B7 /* SplashViewController.swift */,
 				AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */,
 				AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */,
 				AA6CB6082C2043880089E3B7 /* 프로필설정 */,
 				AA6CB6092C2043C70089E3B7 /* 설정화면 */,
 			);
-			name = "온보딩.본본본";
+			name = "온보딩";
 			path = "온보딩";
 			sourceTree = "<group>";
 		};
@@ -185,10 +189,11 @@
 		AA8E88292C1BF0E800B477D3 /* ShoppingMateApp */ = {
 			isa = PBXGroup;
 			children = (
+				AA6CB60D2C205E2E0089E3B7 /* CheckReadMe.md */,
 				AA8E88402C1BF24300B477D3 /* APIKey.swift */,
-				AA6CB5D52C1F50260089E3B7 /* 경고 */,
-				AA6CB5B62C1D4B4D0089E3B7 /* 온보딩.본본본 */,
+				AA6CB5B62C1D4B4D0089E3B7 /* 온보딩 */,
 				AA8E88422C1BF2F600B477D3 /* 네이버쇼핑 */,
+				AA6CB5D52C1F50260089E3B7 /* 경고 */,
 				AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */,
 				AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */,
 				AA8E882E2C1BF0E800B477D3 /* ViewController.swift */,
@@ -381,6 +386,7 @@
 				AA6CB5D72C1F503B0089E3B7 /* ToasetMessage.swift in Sources */,
 				AA6CB6072C20435B0089E3B7 /* Create+Component.swift in Sources */,
 				AA6CB5BF2C1D597A0089E3B7 /* ProfileImageView.swift in Sources */,
+				AA6CB60F2C20637A0089E3B7 /* SplashViewController.swift in Sources */,
 				AA8E886F2C1C237900B477D3 /* WebViewController.swift in Sources */,
 				AA6CB5BA2C1D4D6C0089E3B7 /* ProfileSettingViewController.swift in Sources */,
 				AA8E885D2C1BFA0B00B477D3 /* MainSearchView.swift in Sources */,
