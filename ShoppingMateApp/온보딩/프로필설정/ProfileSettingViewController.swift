@@ -220,8 +220,6 @@ class ProfileSettingViewController: UIViewController {
     }
 
     
-    
-    
 //    @objc private func saveButtonTapped() {
 //        
 //        let nickname = nicknameTextField.text ?? ""
@@ -238,6 +236,8 @@ class ProfileSettingViewController: UIViewController {
     
     //둘러볼게요 버튼
     @objc private func passButtonTapped() {
+        navigateToNextScreen() //⚠️
+        
          saveUserData { success in
              if success {
                  self.navigateToNextScreen()
@@ -317,6 +317,9 @@ class ProfileSettingViewController: UIViewController {
             defaults.set(joinDate, forKey: "UserJoinDate")
         }
 
+        // 닉네임 설정 여부 저장
+        defaults.set(true, forKey: "isNicknameSet")
+
         // 저장된 값 확인
         DispatchQueue.main.async {
             if let savedNickname = defaults.string(forKey: "UserNickname") {
@@ -329,6 +332,7 @@ class ProfileSettingViewController: UIViewController {
             self.printUserDefaults() // 현재 상태 출력
         }
     }
+
 
     private func printUserDefaults() {
         DispatchQueue.main.async {

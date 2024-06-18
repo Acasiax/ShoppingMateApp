@@ -253,6 +253,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         let defaults = UserDefaults.standard
         let dictionary = defaults.dictionaryRepresentation()
         dictionary.keys.forEach { key in
+            print("지웠어요")
             //print("탈퇴하기 버튼을 눌러서 유저디폴트의 키를 지우겠습니다 : \(key)")
             defaults.removeObject(forKey: key) //🌟유저 디폴트 지우고
             self.navigateToOnboarding() //🌟 뷰 넘기기
