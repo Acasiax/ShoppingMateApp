@@ -25,7 +25,7 @@ class MainTabBarController: UITabBarController {
     private func setupViewControllers() {
         let homeVC = HomeViewController()
         let settingsVC = SettingViewController(navigationTitle: "세팅뷰우", showSaveButton: false)
-        let likeVC = LikeViewController()
+       // let likeVC = LikeViewController()
         
         let searchNavVC = UINavigationController(rootViewController: homeVC)
         searchNavVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
@@ -33,9 +33,9 @@ class MainTabBarController: UITabBarController {
         let settingsNavVC = UINavigationController(rootViewController: settingsVC)
         settingsNavVC.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "gearshape"), tag: 1)
         
-        let likeNavVC = UINavigationController(rootViewController: likeVC)
-        likeNavVC.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
+     //   let likeNavVC = UINavigationController(rootViewController: likeVC)
+       // likeNavVC.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
         
-        setViewControllers([searchNavVC, settingsNavVC, likeNavVC], animated: false)
+        setViewControllers([searchNavVC, settingsNavVC], animated: false)
     }
 }

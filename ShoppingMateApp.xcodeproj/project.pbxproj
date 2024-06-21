@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA5850842C25511C007B92FD /* LikedToggleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850832C25511C007B92FD /* LikedToggleItem.swift */; };
+		AA5850862C256013007B92FD /* RecentSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850852C256013007B92FD /* RecentSearch.swift */; };
 		AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */; };
 		AA6CB5BA2C1D4D6C0089E3B7 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */; };
 		AA6CB5BC2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */; };
@@ -37,19 +39,16 @@
 		AA8E884F2C1BF3EF00B477D3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E884E2C1BF3EF00B477D3 /* HomeViewController.swift */; };
 		AA8E88532C1BF49C00B477D3 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88522C1BF49C00B477D3 /* HomeCollectionViewCell.swift */; };
 		AA8E88562C1BF53D00B477D3 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88552C1BF53D00B477D3 /* Item.swift */; };
-		AA8E88582C1BF57500B477D3 /* RealmDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88572C1BF57500B477D3 /* RealmDateManager.swift */; };
 		AA8E885A2C1BF84700B477D3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88592C1BF84700B477D3 /* NetworkManager.swift */; };
 		AA8E885D2C1BFA0B00B477D3 /* MainSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */; };
-		AA8E88622C1C01FB00B477D3 /* Resuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88612C1C01FB00B477D3 /* Resuse.swift */; };
 		AA8E88652C1C078D00B477D3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AA8E88642C1C078D00B477D3 /* Kingfisher */; };
-		AA8E886D2C1C203700B477D3 /* favoriteTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886C2C1C203700B477D3 /* favoriteTable.swift */; };
 		AA8E886F2C1C237900B477D3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886E2C1C237900B477D3 /* WebViewController.swift */; };
-		AA8E88712C1C27D800B477D3 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88702C1C27D800B477D3 /* LikeViewController.swift */; };
-		AA8E88732C1C29B900B477D3 /* LikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88722C1C29B900B477D3 /* LikeCollectionViewCell.swift */; };
 		AA8E88782C1C49E600B477D3 /* HomeView+Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88772C1C49E600B477D3 /* HomeView+Collection+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA5850832C25511C007B92FD /* LikedToggleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikedToggleItem.swift; sourceTree = "<group>"; };
+		AA5850852C256013007B92FD /* RecentSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearch.swift; sourceTree = "<group>"; };
 		AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSelectionViewController.swift; sourceTree = "<group>"; };
@@ -79,14 +78,9 @@
 		AA8E884E2C1BF3EF00B477D3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AA8E88522C1BF49C00B477D3 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		AA8E88552C1BF53D00B477D3 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
-		AA8E88572C1BF57500B477D3 /* RealmDateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDateManager.swift; sourceTree = "<group>"; };
 		AA8E88592C1BF84700B477D3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchView.swift; sourceTree = "<group>"; };
-		AA8E88612C1C01FB00B477D3 /* Resuse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resuse.swift; sourceTree = "<group>"; };
-		AA8E886C2C1C203700B477D3 /* favoriteTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favoriteTable.swift; sourceTree = "<group>"; };
 		AA8E886E2C1C237900B477D3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		AA8E88702C1C27D800B477D3 /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
-		AA8E88722C1C29B900B477D3 /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
 		AA8E88772C1C49E600B477D3 /* HomeView+Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeView+Collection+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +100,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA5850812C254E40007B92FD /* 바꿀꺼 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "바꿀꺼";
+			path = "바꿀꺼";
+			sourceTree = "<group>";
+		};
+		AA5850822C2550DF007B92FD /* 바꾼거 */ = {
+			isa = PBXGroup;
+			children = (
+				AA5850832C25511C007B92FD /* LikedToggleItem.swift */,
+			);
+			name = "바꾼거";
+			path = "바꾼거";
+			sourceTree = "<group>";
+		};
 		AA6CB5B62C1D4B4D0089E3B7 /* 온보딩 */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				AA6CB5D32C1EE7E10089E3B7 /* RecentSearchTableView.swift */,
+				AA5850852C256013007B92FD /* RecentSearch.swift */,
 			);
 			name = "검색기록";
 			path = "검색기록";
@@ -189,6 +201,8 @@
 		AA8E88292C1BF0E800B477D3 /* ShoppingMateApp */ = {
 			isa = PBXGroup;
 			children = (
+				AA5850822C2550DF007B92FD /* 바꾼거 */,
+				AA5850812C254E40007B92FD /* 바꿀꺼 */,
 				AA6CB60D2C205E2E0089E3B7 /* CheckReadMe.md */,
 				AA8E88402C1BF24300B477D3 /* APIKey.swift */,
 				AA6CB5B62C1D4B4D0089E3B7 /* 온보딩 */,
@@ -221,8 +235,6 @@
 		AA8E88542C1BF52D00B477D3 /* 모델 */ = {
 			isa = PBXGroup;
 			children = (
-				AA8E88572C1BF57500B477D3 /* RealmDateManager.swift */,
-				AA8E886C2C1C203700B477D3 /* favoriteTable.swift */,
 				AA8E88592C1BF84700B477D3 /* NetworkManager.swift */,
 				AA8E88552C1BF53D00B477D3 /* Item.swift */,
 			);
@@ -235,8 +247,6 @@
 			children = (
 				AA6CB60A2C2045280089E3B7 /* 검색결과,웹뷰 */,
 				AA8E88762C1C49B000B477D3 /* 쇼핑홈뷰 */,
-				AA8E88612C1C01FB00B477D3 /* Resuse.swift */,
-				AA8E88702C1C27D800B477D3 /* LikeViewController.swift */,
 			);
 			name = "뷰";
 			path = "뷰";
@@ -256,8 +266,6 @@
 		AA8E88752C1C498300B477D3 /* 셀 */ = {
 			isa = PBXGroup;
 			children = (
-				AA8E88722C1C29B900B477D3 /* LikeCollectionViewCell.swift */,
-				AA8E88522C1BF49C00B477D3 /* HomeCollectionViewCell.swift */,
 			);
 			name = "셀";
 			path = "셀";
@@ -268,6 +276,7 @@
 			children = (
 				AA8E884E2C1BF3EF00B477D3 /* HomeViewController.swift */,
 				AA8E88772C1C49E600B477D3 /* HomeView+Collection+.swift */,
+				AA8E88522C1BF49C00B477D3 /* HomeCollectionViewCell.swift */,
 				AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */,
 			);
 			name = "쇼핑홈뷰";
@@ -362,14 +371,14 @@
 			files = (
 				AA8E885A2C1BF84700B477D3 /* NetworkManager.swift in Sources */,
 				AA6CB5C12C1D599F0089E3B7 /* SettingViewController.swift in Sources */,
+				AA5850862C256013007B92FD /* RecentSearch.swift in Sources */,
 				AA8E884F2C1BF3EF00B477D3 /* HomeViewController.swift in Sources */,
 				AA6CB5C32C1D6BB10089E3B7 /* ProfileCell.swift in Sources */,
-				AA8E886D2C1C203700B477D3 /* favoriteTable.swift in Sources */,
 				AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */,
-				AA8E88732C1C29B900B477D3 /* LikeCollectionViewCell.swift in Sources */,
 				AA6CB5CF2C1ECC770089E3B7 /* SearchResultsViewController.swift in Sources */,
 				AA6CB6042C2024740089E3B7 /* Color+recap.swift in Sources */,
 				AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */,
+				AA5850842C25511C007B92FD /* LikedToggleItem.swift in Sources */,
 				AA6CB5D12C1ECCD90089E3B7 /* MainTabBarController.swift in Sources */,
 				AA6CB5BC2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift in Sources */,
 				AA6CB5C52C1DBF6F0089E3B7 /* ProfileTableViewCell.swift in Sources */,
@@ -381,8 +390,6 @@
 				AA6CB5C72C1DCC570089E3B7 /* LikeNotification.swift in Sources */,
 				AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */,
 				AA8E88532C1BF49C00B477D3 /* HomeCollectionViewCell.swift in Sources */,
-				AA8E88582C1BF57500B477D3 /* RealmDateManager.swift in Sources */,
-				AA8E88622C1C01FB00B477D3 /* Resuse.swift in Sources */,
 				AA6CB5D72C1F503B0089E3B7 /* ToasetMessage.swift in Sources */,
 				AA6CB6072C20435B0089E3B7 /* Create+Component.swift in Sources */,
 				AA6CB5BF2C1D597A0089E3B7 /* ProfileImageView.swift in Sources */,
@@ -390,7 +397,6 @@
 				AA8E886F2C1C237900B477D3 /* WebViewController.swift in Sources */,
 				AA6CB5BA2C1D4D6C0089E3B7 /* ProfileSettingViewController.swift in Sources */,
 				AA8E885D2C1BFA0B00B477D3 /* MainSearchView.swift in Sources */,
-				AA8E88712C1C27D800B477D3 /* LikeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

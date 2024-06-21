@@ -5,15 +5,9 @@
 //  Created by 이윤지 on 6/15/24.
 import UIKit
 import SnapKit
-import RealmSwift
 
 enum SettingOption: Int, CaseIterable {
-    case profile
-    case cart
-    case faq
-    case inquiry
-    case notifications
-    case logout
+    case profile, cart, faq, inquiry, notifications, logout
     
     var title: String {
         switch self {
@@ -34,9 +28,7 @@ enum SettingOption: Int, CaseIterable {
     
     var detail: String? {
         switch self {
-        case .profile:
-            return nil
-        case .cart:
+        case .profile, .cart:
             return nil
         default:
             return nil
@@ -47,15 +39,11 @@ enum SettingOption: Int, CaseIterable {
 class SettingViewController: UIViewController {
     
     private let tableView = UITableView(frame: .zero, style: .plain)
-    
-    
     var likedItemsCount: Int = 0 {
         didSet {
             tableView.reloadData()
         }
     }
-    private var notificationToken: NotificationToken?
-    
     
     private var navigationTitle: String
     private var showSaveButton: Bool
@@ -82,7 +70,7 @@ class SettingViewController: UIViewController {
     }
     
     deinit {
-        notificationToken?.invalidate()
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("LikeStatusChanged"), object: nil)
     }
     
     private func setupNavigationBar() {
@@ -107,21 +95,19 @@ class SettingViewController: UIViewController {
     }
     
     private func observeLikedItems() {
-        let repository = LikeTableRepository()
-        let likedItems = repository.fetchAll()
-        notificationToken = likedItems.observe { [weak self] changes in
-            switch changes {
-            case .initial, .update:
-                self?.updateLikedItemsCount()
-            case .error(let error):
-                print("Error observing liked items: \(error)")
-            }
-        }
+        let likedItems = FileManagerHelper.shared.loadLikedItems()
+        updateLikedItemsCount(likedItems.count)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLikeStatusChanged), name: NSNotification.Name("LikeStatusChanged"), object: nil)
     }
     
-    private func updateLikedItemsCount() {
-        let repository = LikeTableRepository()
-        likedItemsCount = repository.fetchAll().count
+    private func updateLikedItemsCount(_ count: Int) {
+        likedItemsCount = count
+    }
+    
+    @objc private func handleLikeStatusChanged(notification: NSNotification) {
+        let likedItems = FileManagerHelper.shared.loadLikedItems()
+        updateLikedItemsCount(likedItems.count)
     }
 }
 
@@ -133,7 +119,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let settingOption = SettingOption(rawValue: indexPath.section) else {
@@ -155,20 +140,15 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             cell.accessoryType = settingOption == .logout ? .none : .disclosureIndicator
             cell.textLabel?.textColor = settingOption == .logout ? .red : .customBlack
             
-            // 모든 서브뷰를 제거합니다
             cell.contentView.subviews.forEach { $0.removeFromSuperview() }
-            let likedItemsCount = likedItemsCount
             
             if settingOption == .cart {
                 let cartImageView = UIImageView(image: UIImage(named: "like_selected"))
-                //cartImageView.tintColor = .black
                 let cartLabel = UILabel()
-                // likedItemsCount 부분을 볼드 스타일로 설정
                 let fullText = "\(likedItemsCount)개의 상품"
                 let attributedString = NSMutableAttributedString(string: fullText)
                 let boldFont = UIFont.boldSystemFont(ofSize: cartLabel.font.pointSize)
                 attributedString.addAttribute(.font, value: boldFont, range: (fullText as NSString).range(of: "\(likedItemsCount)"))
-                
                 cartLabel.attributedText = attributedString
                 cartLabel.textColor = .customBlack
                 
@@ -183,7 +163,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 cartLabel.snp.makeConstraints { make in
                     make.trailing.equalToSuperview().offset(-10)
-                    
                     make.centerY.equalToSuperview()
                 }
             }
@@ -191,9 +170,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     }
-    
-    
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let settingOption = SettingOption(rawValue: indexPath.section)
@@ -206,29 +182,20 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         if let settingOption = SettingOption(rawValue: indexPath.section) {
             switch settingOption {
             case .profile:
-                
                 let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
                 self.navigationItem.backBarButtonItem = backBarButtonItem
                 self.navigationController?.navigationBar.tintColor = .customBlack
                 
-                
-                
                 let profileVC = ProfileSettingViewController(navigationTitle: "Edit Profile", showSaveButton: true, showCompleteButton: false, showPassButton: false)
-                if let navigationController = self.navigationController {
-                    navigationController.pushViewController(profileVC, animated: true)
-                } else {
-                    print("Navigation controller not found")
-                }
+                navigationController?.pushViewController(profileVC, animated: true)
+                
             case .cart:
-                let likeVC = LikeViewController()
-                if let navigationController = self.navigationController {
-                    navigationController.pushViewController(likeVC, animated: true)
-                } else {
-                    print("Navigation controller not found")
-                }
+                // Cart view controller logic
+                break
                 
             case .logout:
                 showLogoutAlert()
+                
             default:
                 break
             }
@@ -239,7 +206,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         let alert = UIAlertController(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화 됩니다.\n탈퇴 하시겠습니까?", preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "확인", style: .destructive) { _ in
             self.resetUserDefaults()
-            // self.navigateToOnboarding()
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
@@ -253,14 +219,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         let defaults = UserDefaults.standard
         let dictionary = defaults.dictionaryRepresentation()
         dictionary.keys.forEach { key in
-            print("지웠어요")
-            //print("탈퇴하기 버튼을 눌러서 유저디폴트의 키를 지우겠습니다 : \(key)")
-            defaults.removeObject(forKey: key) //🌟유저 디폴트 지우고
-            self.navigateToOnboarding() //🌟 뷰 넘기기
+            defaults.removeObject(forKey: key)
         }
+        navigateToOnboarding()
     }
     
-    //👮‍♀️
     private func navigateToOnboarding() {
         let onboardingVC = OnboardingView()
         let navigationController = UINavigationController(rootViewController: onboardingVC)

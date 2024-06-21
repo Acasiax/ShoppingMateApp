@@ -8,7 +8,7 @@ import UIKit
 import SnapKit
 
 //검색 결과 화면
-class SearchResultsViewController: ReuseBaseViewController {
+class SearchResultsViewController: UIViewController {
     
     var totalResults: Int? //검색 총결과 수
     
@@ -152,11 +152,12 @@ class SearchResultsViewController: ReuseBaseViewController {
     
     private func loadData(query: String, sort: String = "sim", display: Int = 30, start: Int = 1) {
         isDataLoading = true
-        shopManager.shoppingRequest(query: query, display: display, start: start, sort: sort) { total, items in
+        shopManager.shoppingRequest(query: query, display: display, start: start, sort: sort) { total, items  in
             self.isDataLoading = false
             guard let items = items else { return }
             self.totalResults = total // 총 검색 결과 수 업데이트
             self.productItems.append(contentsOf: items)
+            
             self.collectionView.reloadData()
             self.updateResultsCountLabel() // 결과 수 라벨 업데이트 호출
         }
@@ -245,7 +246,7 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
         if productItems.count - 1 == indexPaths.last?.row {
             pageStartNumber += 1
             loadData(query: query, start: pageStartNumber)
-            shopManager.shoppingRequest(query: query, start: pageStartNumber) { total, items in // 🔄 completion 클로저 수정
+            shopManager.shoppingRequest(query: query, start: pageStartNumber) { total, items  in // 🔄 completion 클로저 수정
                 guard let items = items else { return }
                 self.productItems.append(contentsOf: items)
                 //self.homeView.collectionView.reloadData()

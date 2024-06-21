@@ -8,28 +8,13 @@
 import UIKit
 import SnapKit
 
-class MainSearchView: BaseView, UISearchBarDelegate {
+class MainSearchView: UIView, UISearchBarDelegate {
 
     lazy var searchBar: UISearchBar = {
-        return self.createSearchBar(delegate: self)
+        let searchBar = UISearchBar()
+        searchBar.delegate = self
+        return searchBar
     }()
-
-    let accuracyButton: UIButton = {
-        return UIView().createButton(title: "정확도가짜야")
-    }()
-
-    let dateButton: UIButton = {
-        return UIView().createButton(title: "날짜순")
-    }()
-
-    let upPriceButton: UIButton = {
-        return UIView().createButton(title: "가격높은순", width: 80)
-    }()
-
-    let downPriceButton: UIButton = {
-        return UIView().createButton(title: "가격낮은순", width: 80)
-    }()
-
    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -43,62 +28,39 @@ class MainSearchView: BaseView, UISearchBarDelegate {
         return view
     }()
   
-   
-    override func configureView() {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureView()
+        setConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configureView()
+        setConstraints()
+    }
+
+    func configureView() {
         self.backgroundColor = .customWhite
-       addSubview(searchBar)
-//        addSubview(accuracyButton)
-//        addSubview(dateButton)
-//        addSubview(upPriceButton)
-//        addSubview(downPriceButton)
+        addSubview(searchBar)
         addSubview(collectionView)
     }
 
-
-    override func setConstraints() {
+    func setConstraints() {
         searchBar.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(6)
             make.horizontalEdges.equalToSuperview()
             make.height.equalTo(50)
         }
-//        accuracyButton.snp.makeConstraints { make in
-//            make.top.equalTo(searchBar.snp.bottom).offset(20)
-//            make.leading.equalToSuperview().offset(10)
-//            make.width.equalTo(55)
-//            make.height.equalTo(38)
-//        }
-//        dateButton.snp.makeConstraints { make in
-//            make.top.equalTo(searchBar.snp.bottom).offset(20)
-//            make.leading.equalTo(accuracyButton.snp.trailing).offset(7)
-//            make.width.equalTo(55)
-//            make.height.equalTo(38)
-//        }
-//        upPriceButton.snp.makeConstraints { make in
-//            make.top.equalTo(searchBar.snp.bottom).offset(20)
-//            make.leading.equalTo(dateButton.snp.trailing).offset(7)
-//            make.width.equalTo(80)
-//            make.height.equalTo(38)
-//        }
-//        downPriceButton.snp.makeConstraints { make in
-//            make.top.equalTo(searchBar.snp.bottom).offset(20)
-//            make.leading.equalTo(upPriceButton.snp.trailing).offset(7)
-//            make.width.equalTo(80)
-//            make.height.equalTo(38)
-//        }
+
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom).offset(20)
-            // make.top.equalTo(accuracyButton.snp.bottom).offset(20)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
 
-   
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        
-       
     }
-
 }
-
 
