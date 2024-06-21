@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AA5850842C25511C007B92FD /* LikedToggleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850832C25511C007B92FD /* LikedToggleItem.swift */; };
 		AA5850862C256013007B92FD /* RecentSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850852C256013007B92FD /* RecentSearch.swift */; };
+		AA5850882C258126007B92FD /* ThreeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850872C258126007B92FD /* ThreeCollectionViewController.swift */; };
 		AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */; };
 		AA6CB5BA2C1D4D6C0089E3B7 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */; };
 		AA6CB5BC2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		AA5850832C25511C007B92FD /* LikedToggleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikedToggleItem.swift; sourceTree = "<group>"; };
 		AA5850852C256013007B92FD /* RecentSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearch.swift; sourceTree = "<group>"; };
+		AA5850872C258126007B92FD /* ThreeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCollectionViewController.swift; sourceTree = "<group>"; };
 		AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSelectionViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */,
 				AA6CB6082C2043880089E3B7 /* 프로필설정 */,
 				AA6CB6092C2043C70089E3B7 /* 설정화면 */,
+				AA5850872C258126007B92FD /* ThreeCollectionViewController.swift */,
 			);
 			name = "온보딩";
 			path = "온보딩";
@@ -374,6 +377,7 @@
 				AA5850862C256013007B92FD /* RecentSearch.swift in Sources */,
 				AA8E884F2C1BF3EF00B477D3 /* HomeViewController.swift in Sources */,
 				AA6CB5C32C1D6BB10089E3B7 /* ProfileCell.swift in Sources */,
+				AA5850882C258126007B92FD /* ThreeCollectionViewController.swift in Sources */,
 				AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */,
 				AA6CB5CF2C1ECC770089E3B7 /* SearchResultsViewController.swift in Sources */,
 				AA6CB6042C2024740089E3B7 /* Color+recap.swift in Sources */,

@@ -248,12 +248,50 @@ class ProfileSettingViewController: UIViewController {
      }
      
     
+//    private func navigateToNextScreen() {
+//        let tabBarVC = UITabBarController()
+//        
+//        let homeVC = HomeViewController()
+//        let settingsVC = SettingViewController(navigationTitle: "세팅뷰우", showSaveButton: false)
+//      //  let likeVC = LikeViewController()
+//        
+//        let searchNavVC = UINavigationController(rootViewController: homeVC)
+//        searchNavVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
+//        
+//        let settingsNavVC = UINavigationController(rootViewController: settingsVC)
+//        settingsNavVC.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "gearshape"), tag: 1)
+//        
+////        let likeNavVC = UINavigationController(rootViewController: likeVC)
+////        likeNavVC.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
+//        
+//        tabBarVC.setViewControllers([searchNavVC, settingsNavVC], animated: false)
+//        tabBarVC.tabBar.backgroundColor = UIColor(red: 0.97, green: 0.98, blue: 0.98, alpha: 1.00)
+//        tabBarVC.tabBar.tintColor = .customWhite
+//        tabBarVC.tabBar.unselectedItemTintColor = .customGray4C4C
+//        
+//        tabBarVC.tabBar.tintColor = .customOrange
+//        tabBarVC.tabBar.unselectedItemTintColor = .customGray4C4C
+//        
+//        guard let items = tabBarVC.tabBar.items else { return }
+//        items[0].image = UIImage(systemName: "magnifyingglass")
+//        items[1].image = UIImage(systemName: "person")
+//        items[2].image = UIImage(systemName: "heart")
+//        
+//        if let window = UIApplication.shared.windows.first {
+//            window.rootViewController = tabBarVC
+//            window.makeKeyAndVisible()
+//            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
+//        } else {
+//            print("Window를 못 찾았어요")
+//        }
+//    }
+    
     private func navigateToNextScreen() {
         let tabBarVC = UITabBarController()
         
         let homeVC = HomeViewController()
         let settingsVC = SettingViewController(navigationTitle: "세팅뷰우", showSaveButton: false)
-      //  let likeVC = LikeViewController()
+        let likeVC = ThreeCollectionViewController()
         
         let searchNavVC = UINavigationController(rootViewController: homeVC)
         searchNavVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
@@ -261,21 +299,14 @@ class ProfileSettingViewController: UIViewController {
         let settingsNavVC = UINavigationController(rootViewController: settingsVC)
         settingsNavVC.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "gearshape"), tag: 1)
         
-//        let likeNavVC = UINavigationController(rootViewController: likeVC)
-//        likeNavVC.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
+        let likeNavVC = UINavigationController(rootViewController: likeVC)
+        likeNavVC.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
         
-        tabBarVC.setViewControllers([searchNavVC, settingsNavVC], animated: false)
+        // 여기서 세 개의 네비게이션 컨트롤러를 추가합니다.
+        tabBarVC.setViewControllers([searchNavVC, settingsNavVC, likeNavVC], animated: false)
         tabBarVC.tabBar.backgroundColor = UIColor(red: 0.97, green: 0.98, blue: 0.98, alpha: 1.00)
-        tabBarVC.tabBar.tintColor = .customWhite
-        tabBarVC.tabBar.unselectedItemTintColor = .customGray4C4C
-        
         tabBarVC.tabBar.tintColor = .customOrange
         tabBarVC.tabBar.unselectedItemTintColor = .customGray4C4C
-        
-        guard let items = tabBarVC.tabBar.items else { return }
-        items[0].image = UIImage(systemName: "magnifyingglass")
-        items[1].image = UIImage(systemName: "person")
-        items[2].image = UIImage(systemName: "heart")
         
         if let window = UIApplication.shared.windows.first {
             window.rootViewController = tabBarVC
@@ -285,6 +316,7 @@ class ProfileSettingViewController: UIViewController {
             print("Window를 못 찾았어요")
         }
     }
+
     
     private func saveUserData(completion: @escaping (Bool) -> Void) {
         let nickname = nicknameTextField.text ?? ""

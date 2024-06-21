@@ -17,7 +17,7 @@ class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSo
     
     var onSelectSearch: ((String) -> Void)?
     var onDeleteSearch: ((String) -> Void)?
-    var recentSearchRepository = RecentSearchRepository()
+   var recentSearchRepository = RecentSearchRepository()
         
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)

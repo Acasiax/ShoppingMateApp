@@ -1,23 +1,80 @@
 //
-//  HomeCollectionViewCell.swift
+//  ThreetapViewController.swift
 //  ShoppingMateApp
 //
-//  Created by 이윤지 on 6/14/24.
+//  Created by 이윤지 on 6/21/24.
 //
-//
-
 import UIKit
 import SnapKit
 import Kingfisher
 
-class HomeCollectionViewCell: UICollectionViewCell {
+class ThreeCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    private var collectionView: UICollectionView!
+    private var items: [LikedItem] = [] // 예제 데이터를 위한 배열
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCollectionView()
+        loadLikedItems() // 저장된 좋아요 항목을 로드하는 메소드 호출
+        setupNotificationCenter() // NotificationCenter 설정
+    }
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLikeStatusChanged), name: NSNotification.Name("LikeStatusChanged"), object: nil)
+    }
+    @objc private func handleLikeStatusChanged() {
+        loadLikedItems()
+    }
+    private func setupCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .white
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(ThreeCollectionCell.self, forCellWithReuseIdentifier: "CustomCollectionViewCell")
+        
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    // 저장된 좋아요 항목을 로드하는 메소드
+    private func loadLikedItems() {
+        items = FileManagerHelper.shared.loadLikedItems()
+        collectionView.reloadData() // 데이터를 로드한 후 컬렉션뷰를 리로드합니다.
+    }
+    
+    // UICollectionViewDataSource Methods
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return items.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCollectionViewCell", for: indexPath) as? ThreeCollectionCell else {
+            return UICollectionViewCell()
+        }
+        let item = items[indexPath.row]
+        cell.configure(with: item)
+        return cell
+    }
+    
+    // UICollectionViewDelegateFlowLayout Methods
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 20, height: 250) // 몇개 나올지!
+    }
+}
+
+class ThreeCollectionCell: UICollectionViewCell {
     private let imageView = UIImageView()
     private let mallNameLabel = UILabel()
     private let titleLabel = UILabel()
     private let priceLabel = UILabel()
     private let likeButton = UIButton(type: .system)
     
-    private var item: Item?
+    private var item: LikedItem?
     private var isLiked: Bool = false {
         didSet {
             updateLikeButtonImage()
@@ -69,7 +126,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configure(with item: Item) {
+    func configure(with item: LikedItem) {
         self.item = item
         updateUI()
         loadLikeStatus()
@@ -91,18 +148,20 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     @objc private func toggleLike() {
         isLiked.toggle()
-        saveLikedStatus()
-        NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: item)
+        if let item = item {
+            saveLikedStatus(for: item)
+            NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: nil)
+        }
     }
     
     private func updateUI() {
         guard let item = item else { return }
         
-        mallNameLabel.text = item.mallName
+        mallNameLabel.text = "Sample Mall"
         titleLabel.text = item.title.cleanedTitle()
-        priceLabel.text = item.formattedPrice()
+        priceLabel.text = item.price
         
-        if let imageURL = URL(string: item.image) {
+        if let imageURL = URL(string: item.imageName) {
             imageView.kf.setImage(with: imageURL)
         }
     }
@@ -115,15 +174,14 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     private func updateLikeButtonImage() {
         likeButton.setImage(UIImage(named: isLiked ? likedImageName : unlikedImageName)?.withRenderingMode(.alwaysOriginal), for: .normal)
-        likeButton.backgroundColor = isLiked ? .customWhite : .customLightGrayCDCD.withAlphaComponent(0.5)
+        likeButton.backgroundColor = isLiked ? .white : .lightGray.withAlphaComponent(0.5)
     }
     
-    private func saveLikedStatus() {
-        guard let item = item else { return }
+    private func saveLikedStatus(for item: LikedItem) {
         var likedItems = FileManagerHelper.shared.loadLikedItems()
         
         if isLiked {
-            likedItems.append(LikedItem(imageName: item.image, title: item.title, price: item.lprice))
+            likedItems.append(item)
         } else {
             likedItems.removeAll { $0.title == item.title }
         }
@@ -146,8 +204,8 @@ private extension UIButton {
         if let unlikedImage = UIImage(named: unlikedImageName)?.withRenderingMode(.alwaysOriginal) {
             setImage(unlikedImage, for: .normal)
         }
-        backgroundColor = .customLightGrayCDCD.withAlphaComponent(0.5)
-        tintColor = .customWhite
+        backgroundColor = .lightGray.withAlphaComponent(0.5)
+        tintColor = .white
         layer.cornerRadius = 18
         clipsToBounds = true
     }
@@ -156,16 +214,5 @@ private extension UIButton {
 private extension String {
     func cleanedTitle() -> String {
         return replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
-    }
-}
-
-private extension Item {
-    func formattedPrice() -> String {
-        guard let price = Int(lprice) else {
-            return "\(lprice)원"
-        }
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        return "\(numberFormatter.string(from: NSNumber(value: price))!)원"
     }
 }

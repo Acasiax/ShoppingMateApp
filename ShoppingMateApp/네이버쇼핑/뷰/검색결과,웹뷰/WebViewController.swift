@@ -54,7 +54,7 @@ class WebViewController: UIViewController, WKUIDelegate {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.standardAppearance = appearance
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: unlikedImageName), style: .plain, target: self, action: #selector(detailLikeButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "profile_2"), style: .plain, target: self, action: #selector(detailLikeButtonTapped))
         navigationItem.title = webViewTitle
         navigationController?.navigationBar.tintColor = .customBlack
 
@@ -95,6 +95,7 @@ class WebViewController: UIViewController, WKUIDelegate {
 
     @objc private func detailLikeButtonTapped() {
         isLiked.toggle()
+       
         if isLiked {
             guard let item = self.item else { return }
             var likedItems = FileManagerHelper.shared.loadLikedItems()
@@ -106,13 +107,19 @@ class WebViewController: UIViewController, WKUIDelegate {
             likedItems.removeAll { $0.title == item?.title }
             FileManagerHelper.shared.saveLikedItems(likedItems)
         }
-        NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: item)
+     //   NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: item)
     }
 
+
+    
     private func updateLikeButtonImage() {
-        let imageName = isLiked ? likedImageName : unlikedImageName
-        navigationItem.rightBarButtonItem?.image = UIImage(named: imageName)
-    }
+            let imageName = isLiked ? likedImageName : unlikedImageName
+            if let image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal) {
+                navigationItem.rightBarButtonItem?.image = image
+            } else {
+                print("네비게이션 이미지로드에 실패: \(imageName)")
+            }
+        }
 
     private func checkIfProductIsLiked() {
         let likedItems = FileManagerHelper.shared.loadLikedItems()
