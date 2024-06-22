@@ -61,9 +61,9 @@ class ThreeCollectionViewController: UIViewController, UICollectionViewDataSourc
         return cell
     }
     
-    // UICollectionViewDelegateFlowLayout Methods
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 20, height: 250) // 몇개 나올지!
+        return CGSize(width: collectionView.frame.width - 80, height: 250) // 몇개 나올지!
     }
 }
 

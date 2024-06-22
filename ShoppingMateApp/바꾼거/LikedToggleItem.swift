@@ -56,6 +56,40 @@ class FileManagerHelper {
             print("👩‍🌾현재 저장된 좋아요 항목 개수: \(likedItems.count)개")
         }
     
+    
+    
+    
+    func saveRecentSearches(_ searches: [RecentSearch]) {
+            do {
+                let data = try JSONEncoder().encode(searches)
+                try data.write(to: fileURL)
+                print("최근 검색어 저장 성공")
+            } catch {
+                print("최근 검색어 저장 실패: \(error)")
+            }
+        }
+
+        func loadRecentSearches() -> [RecentSearch] {
+            do {
+                let fileManager = FileManager.default
+                if !fileManager.fileExists(atPath: fileURL.path) {
+                    return []  // 파일이 존재하지 않으면 빈 배열 반환
+                }
+                let data = try Data(contentsOf: fileURL)
+                let searches = try JSONDecoder().decode([RecentSearch].self, from: data)
+                return searches
+            } catch {
+                print("최근 검색어 불러오기 실패: \(error)")
+                return []
+            }
+        }
+
+        func deleteAllRecentSearches() {
+            saveRecentSearches([])
+        }
+    
+    
+    
 }
 
 protocol TitleProtocol {
