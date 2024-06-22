@@ -97,6 +97,7 @@ import UIKit
 import SwiftData
 
 struct LikedItem: Codable {
+    let mall: String
     let imageName: String
     let title: String
     let price: String

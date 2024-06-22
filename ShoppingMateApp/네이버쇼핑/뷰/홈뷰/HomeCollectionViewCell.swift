@@ -99,8 +99,11 @@ class HomeCollectionViewCell: UICollectionViewCell {
         guard let item = item else { return }
         
         mallNameLabel.text = item.mallName
+        mallNameLabel.textColor = .customGray4C4C
         titleLabel.text = item.title.cleanedTitle()
+        titleLabel.numberOfLines = 2
         priceLabel.text = item.formattedPrice()
+        priceLabel.font = UIFont.systemFont(ofSize: priceLabel.font.pointSize, weight: .heavy)
         
         if let imageURL = URL(string: item.image) {
             imageView.kf.setImage(with: imageURL)
@@ -123,7 +126,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
         var likedItems = FileManagerHelper.shared.loadLikedItems()
         
         if isLiked {
-            likedItems.append(LikedItem(imageName: item.image, title: item.title, price: item.lprice))
+            likedItems.append(LikedItem(mall: item.mallName, imageName: item.image, title: item.title, price: item.lprice))
         } else {
             likedItems.removeAll { $0.title == item.title }
         }

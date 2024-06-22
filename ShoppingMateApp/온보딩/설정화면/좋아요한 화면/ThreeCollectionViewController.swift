@@ -19,6 +19,7 @@ class ThreeCollectionViewController: UIViewController, UICollectionViewDataSourc
         loadLikedItems() // 저장된 좋아요 항목을 로드하는 메소드 호출
         setupNotificationCenter() // NotificationCenter 설정
     }
+   
     
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleLikeStatusChanged), name: NSNotification.Name("LikeStatusChanged"), object: nil)
@@ -30,7 +31,7 @@ class ThreeCollectionViewController: UIViewController, UICollectionViewDataSourc
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = UIColor(red: 1.00, green: 0.97, blue: 0.82, alpha: 1.00)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(ThreeCollectionCell.self, forCellWithReuseIdentifier: "CustomCollectionViewCell")
@@ -44,10 +45,10 @@ class ThreeCollectionViewController: UIViewController, UICollectionViewDataSourc
     // 저장된 좋아요 항목을 로드하는 메소드
     private func loadLikedItems() {
         items = FileManagerHelper.shared.loadLikedItems()
-        collectionView.reloadData() // 데이터를 로드한 후 컬렉션뷰를 리로드합니다.
+        collectionView.reloadData() // 데이터를 로드한 후 컬렉션뷰 리로드
     }
     
-    // UICollectionViewDataSource Methods
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
@@ -63,7 +64,7 @@ class ThreeCollectionViewController: UIViewController, UICollectionViewDataSourc
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 80, height: 250) // 몇개 나올지!
+        return CGSize(width: collectionView.frame.width - 60, height: 250) // 몇개 나올지!
     }
 }
 
@@ -140,6 +141,11 @@ class ThreeCollectionCell: UICollectionViewCell {
         likeButton.setupLikeButton(unlikedImageName: unlikedImageName)
         contentView.addSubview(imageView)
         contentView.addSubview(likeButton)
+        
+        mallNameLabel.textColor = .customGray4C4C
+        titleLabel.numberOfLines = 2
+        priceLabel.font = UIFont.systemFont(ofSize: priceLabel.font.pointSize, weight: .heavy)
+
     }
     
     private func setupActions() {
@@ -154,17 +160,23 @@ class ThreeCollectionCell: UICollectionViewCell {
         }
     }
     
+    
     private func updateUI() {
         guard let item = item else { return }
         
-        mallNameLabel.text = "Sample Mall"
+        mallNameLabel.text = item.mall
+        mallNameLabel.textColor = .gray
         titleLabel.text = item.title.cleanedTitle()
-        priceLabel.text = item.price
-        
+        titleLabel.numberOfLines = 2
+        priceLabel.text = item.formattedPrice()
+        priceLabel.font = UIFont.boldSystemFont(ofSize: priceLabel.font.pointSize)
+
         if let imageURL = URL(string: item.imageName) {
             imageView.kf.setImage(with: imageURL)
         }
     }
+
+    
     
     private func loadLikeStatus() {
         guard let item = item else { return }
@@ -214,5 +226,18 @@ private extension UIButton {
 private extension String {
     func cleanedTitle() -> String {
         return replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+    }
+
+}
+
+
+private extension LikedItem {
+    func formattedPrice() -> String {
+        guard let price = Int(price) else {
+            return "\(price)원"
+        }
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        return "\(numberFormatter.string(from: NSNumber(value: price))!)원"
     }
 }

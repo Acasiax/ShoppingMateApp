@@ -190,8 +190,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 navigationController?.pushViewController(profileVC, animated: true)
                 
             case .cart:
-                // Cart view controller logic
-                break
+                let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+                          self.navigationItem.backBarButtonItem = backBarButtonItem
+                          self.navigationController?.navigationBar.tintColor = .customBlack
+                let threeCollectionVC = ThreeCollectionViewController()
+                navigationController?.pushViewController(threeCollectionVC, animated: true)
                 
             case .logout:
                 showLogoutAlert()

@@ -99,7 +99,7 @@ class WebViewController: UIViewController, WKUIDelegate {
         if isLiked {
             guard let item = self.item else { return }
             var likedItems = FileManagerHelper.shared.loadLikedItems()
-            let likedItem = LikedItem(imageName: item.image, title: item.title, price: item.lprice)
+            let likedItem = LikedItem(mall: item.mallName, imageName: item.image, title: item.title, price: item.lprice)
             likedItems.append(likedItem)
             FileManagerHelper.shared.saveLikedItems(likedItems)
         } else {
