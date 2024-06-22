@@ -194,11 +194,6 @@ class ProfileSettingViewController: UIViewController {
         }
     }
     
-    
-    
-    
-    
-    
     //이거는 저장 버튼임 프로필 수정할 때
     @objc private func saveButtonTapped() {
         let nickname = nicknameTextField.text ?? ""
@@ -264,7 +259,6 @@ class ProfileSettingViewController: UIViewController {
         let likeNavVC = UINavigationController(rootViewController: likeVC)
         likeNavVC.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
         
-        // 여기서 세 개의 네비게이션 컨트롤러를 추가합니다.
         tabBarVC.setViewControllers([searchNavVC, settingsNavVC, likeNavVC], animated: false)
         tabBarVC.tabBar.backgroundColor = UIColor(red: 0.97, green: 0.98, blue: 0.98, alpha: 1.00)
         tabBarVC.tabBar.tintColor = .customOrange

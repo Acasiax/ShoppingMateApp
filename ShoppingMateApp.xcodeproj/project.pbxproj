@@ -12,6 +12,7 @@
 		AA5850882C258126007B92FD /* ThreeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850872C258126007B92FD /* ThreeCollectionViewController.swift */; };
 		AA58508A2C265B01007B92FD /* HomeViewController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850892C265B01007B92FD /* HomeViewController+Search.swift */; };
 		AA58508C2C265B37007B92FD /* HomeViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58508B2C265B37007B92FD /* HomeViewController+UICollectionView.swift */; };
+		AA58508F2C26943A007B92FD /* ThreeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58508E2C26943A007B92FD /* ThreeCollectionCell.swift */; };
 		AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */; };
 		AA6CB5BA2C1D4D6C0089E3B7 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */; };
 		AA6CB5BC2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */; };
@@ -54,6 +55,7 @@
 		AA5850872C258126007B92FD /* ThreeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCollectionViewController.swift; sourceTree = "<group>"; };
 		AA5850892C265B01007B92FD /* HomeViewController+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+Search.swift"; sourceTree = "<group>"; };
 		AA58508B2C265B37007B92FD /* HomeViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+UICollectionView.swift"; sourceTree = "<group>"; };
+		AA58508E2C26943A007B92FD /* ThreeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCollectionCell.swift; sourceTree = "<group>"; };
 		AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSelectionViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				AA5850872C258126007B92FD /* ThreeCollectionViewController.swift */,
+				AA58508E2C26943A007B92FD /* ThreeCollectionCell.swift */,
 			);
 			name = "좋아요한 화면";
 			path = "좋아요한 화면";
@@ -178,8 +181,8 @@
 		AA6CB6092C2043C70089E3B7 /* 설정화면 */ = {
 			isa = PBXGroup;
 			children = (
-				AA58508D2C266A09007B92FD /* 좋아요한 화면 */,
 				AA6CB5C02C1D599F0089E3B7 /* SettingViewController.swift */,
+				AA58508D2C266A09007B92FD /* 좋아요한 화면 */,
 			);
 			name = "설정화면";
 			path = "설정화면";
@@ -199,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				AA8E883E2C1BF22E00B477D3 /* .gitignore */,
+				AA6CB60D2C205E2E0089E3B7 /* CheckReadMe.md */,
 				AA8E88292C1BF0E800B477D3 /* ShoppingMateApp */,
 				AA8E88282C1BF0E800B477D3 /* Products */,
 			);
@@ -215,12 +219,15 @@
 		AA8E88292C1BF0E800B477D3 /* ShoppingMateApp */ = {
 			isa = PBXGroup;
 			children = (
+				AA8E88402C1BF24300B477D3 /* APIKey.swift */,
 				AA5850822C2550DF007B92FD /* 바꾼거 */,
 				AA5850812C254E40007B92FD /* 바꿀꺼 */,
-				AA6CB60D2C205E2E0089E3B7 /* CheckReadMe.md */,
-				AA8E88402C1BF24300B477D3 /* APIKey.swift */,
 				AA6CB5B62C1D4B4D0089E3B7 /* 온보딩 */,
-				AA8E88422C1BF2F600B477D3 /* 네이버쇼핑 */,
+				AA6CB5D22C1EE7D10089E3B7 /* 검색기록 */,
+				AA8E885E2C1BFC2700B477D3 /* 확장 */,
+				AA8E885B2C1BFA0300B477D3 /* 뷰 */,
+				AA8E88752C1C498300B477D3 /* 셀 */,
+				AA8E88542C1BF52D00B477D3 /* 모델 */,
 				AA6CB5D52C1F50260089E3B7 /* 경고 */,
 				AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */,
 				AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */,
@@ -231,19 +238,6 @@
 				AA8E88382C1BF0EA00B477D3 /* Info.plist */,
 			);
 			path = ShoppingMateApp;
-			sourceTree = "<group>";
-		};
-		AA8E88422C1BF2F600B477D3 /* 네이버쇼핑 */ = {
-			isa = PBXGroup;
-			children = (
-				AA6CB5D22C1EE7D10089E3B7 /* 검색기록 */,
-				AA8E885E2C1BFC2700B477D3 /* 확장 */,
-				AA8E885B2C1BFA0300B477D3 /* 뷰 */,
-				AA8E88752C1C498300B477D3 /* 셀 */,
-				AA8E88542C1BF52D00B477D3 /* 모델 */,
-			);
-			name = "네이버쇼핑";
-			path = "네이버쇼핑";
 			sourceTree = "<group>";
 		};
 		AA8E88542C1BF52D00B477D3 /* 모델 */ = {
@@ -395,6 +389,7 @@
 				AA6CB5CF2C1ECC770089E3B7 /* SearchResultsViewController.swift in Sources */,
 				AA6CB6042C2024740089E3B7 /* Color+recap.swift in Sources */,
 				AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */,
+				AA58508F2C26943A007B92FD /* ThreeCollectionCell.swift in Sources */,
 				AA5850842C25511C007B92FD /* LikedToggleItem.swift in Sources */,
 				AA6CB5D12C1ECCD90089E3B7 /* MainTabBarController.swift in Sources */,
 				AA6CB5BC2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift in Sources */,

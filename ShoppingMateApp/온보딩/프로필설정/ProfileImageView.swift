@@ -23,20 +23,20 @@ class ProfileImageView: UIView {
     }()
     
     let cameraBackgroundView: UIView = {
-          let view = UIView()
-          view.backgroundColor = .customOrange
-          view.layer.cornerRadius = 17
-          view.layer.masksToBounds = true
-          return view
-      }()
+        let view = UIView()
+        view.backgroundColor = .customOrange
+        view.layer.cornerRadius = 17
+        view.layer.masksToBounds = true
+        return view
+    }()
     
     let cameraIconView: UIImageView = {
-          let imageView = UIImageView()
-          imageView.image = UIImage(systemName: "camera.fill")
-          imageView.tintColor = .customWhite
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "camera.fill")
+        imageView.tintColor = .customWhite
         imageView.layer.masksToBounds = true
-          return imageView
-      }()
+        return imageView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,20 +55,20 @@ class ProfileImageView: UIView {
         
     }
     private func setupConstraints() {
-           imageView.snp.makeConstraints { make in
-               make.edges.equalToSuperview()
-               
-           }
-           
-        cameraBackgroundView.snp.makeConstraints { make in
-                    make.bottom.equalTo(imageView.snp.bottom)
-                    make.right.equalTo(imageView.snp.right)
-                    make.width.height.equalTo(30)
-                }
+        imageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            
+        }
         
-           cameraIconView.snp.makeConstraints { make in
-               make.center.equalTo(cameraBackgroundView)
-               make.width.height.equalTo(18)
-           }
-       }
+        cameraBackgroundView.snp.makeConstraints { make in
+            make.bottom.equalTo(imageView.snp.bottom)
+            make.right.equalTo(imageView.snp.right)
+            make.width.height.equalTo(30)
+        }
+        
+        cameraIconView.snp.makeConstraints { make in
+            make.center.equalTo(cameraBackgroundView)
+            make.width.height.equalTo(18)
+        }
+    }
 }

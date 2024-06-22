@@ -33,10 +33,8 @@ class MainTabBarController: UITabBarController {
         let settingsNavVC = UINavigationController(rootViewController: settingsVC)
         settingsNavVC.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "gearshape"), tag: 1)
         
-     //   let likeNavVC = UINavigationController(rootViewController: likeVC)
-       // likeNavVC.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
-           let likeNavVC = UINavigationController(rootViewController: likeVC)
-           likeNavVC.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
+        let likeNavVC = UINavigationController(rootViewController: likeVC)
+        likeNavVC.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage(systemName: "heart"), tag: 2)
         
         setViewControllers([searchNavVC, settingsNavVC, likeNavVC], animated: false)
     }

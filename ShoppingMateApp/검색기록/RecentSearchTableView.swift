@@ -17,8 +17,8 @@ class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSo
     
     var onSelectSearch: ((String) -> Void)?
     var onDeleteSearch: ((String) -> Void)?
-   var recentSearchRepository = RecentSearchRepository()
-        
+    var recentSearchRepository = RecentSearchRepository()
+    
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         setupTableView()
@@ -89,10 +89,10 @@ class RecentSearchCell: UITableViewCell {
     let deleteButton: UIButton = {
         let button = UIButton(type: .system)
         if let xmarkImage = UIImage(systemName: "xmark")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 13, weight: .regular)) {
-        button.setImage(xmarkImage, for: .normal)
-            }
+            button.setImage(xmarkImage, for: .normal)
+        }
         button.tintColor = .customBlack
-      
+        
         return button
     }()
     
@@ -112,26 +112,24 @@ class RecentSearchCell: UITableViewCell {
         contentView.addSubview(searchLabel)
         contentView.addSubview(deleteButton)
         
-        clockIcon.translatesAutoresizingMaskIntoConstraints = false
-        searchLabel.translatesAutoresizingMaskIntoConstraints = false
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        clockIcon.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(15)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(20)
+        }
         
-        NSLayoutConstraint.activate([
-            clockIcon.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            clockIcon.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            clockIcon.widthAnchor.constraint(equalToConstant: 20),
-            clockIcon.heightAnchor.constraint(equalToConstant: 20),
-            
-            searchLabel.leadingAnchor.constraint(equalTo: clockIcon.trailingAnchor, constant: 15),
-            searchLabel.trailingAnchor.constraint(equalTo: deleteButton.leadingAnchor, constant: -15),
-            searchLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            searchLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            
-            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
-            deleteButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            deleteButton.widthAnchor.constraint(equalToConstant: 30),
-            deleteButton.heightAnchor.constraint(equalToConstant: 30)
-        ])
+        searchLabel.snp.makeConstraints { make in
+            make.leading.equalTo(clockIcon.snp.trailing).offset(15)
+            make.trailing.equalTo(deleteButton.snp.leading).offset(-15)
+            make.top.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().offset(-10)
+        }
+        
+        deleteButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-15)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(30)
+        }
         
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }
