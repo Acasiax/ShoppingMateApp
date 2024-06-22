@@ -42,17 +42,32 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         isDataLoading = true
         pageStartNumber += 1
         
-        shopManager.shoppingRequest(query: query, start: pageStartNumber) { [weak self] total, items in
+        shopManager.shoppingRequest(query: query, start: pageStartNumber) { [weak self] result in
             guard let self = self else { return }
             self.isDataLoading = false
-            guard let items = items else { return }
-            let newIndexPaths = (self.productItems.count..<(self.productItems.count + items.count)).map { IndexPath(row: $0, section: 0) }
-            self.productItems.append(contentsOf: items)
             
-            DispatchQueue.main.async {
-                self.homeView.collectionView.insertItems(at: newIndexPaths)
-                self.updateVisibility()
+            switch result {
+            case .success(let (total, items)):
+                let newIndexPaths = (self.productItems.count..<(self.productItems.count + items.count)).map { IndexPath(row: $0, section: 0) }
+                self.productItems.append(contentsOf: items)
+                
+                DispatchQueue.main.async {
+                    self.homeView.collectionView.insertItems(at: newIndexPaths)
+                    self.updateVisibility()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.showErrorAlert(message: error.localizedDescription)
+                }
             }
         }
     }
+
+    private func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+
+
 }

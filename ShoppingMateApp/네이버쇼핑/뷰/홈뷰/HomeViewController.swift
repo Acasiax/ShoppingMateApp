@@ -220,9 +220,14 @@ class HomeViewController: UIViewController {
         recentSearchTableView.reloadData()
     }
     
+//    private func loadRecentSearches() {
+//        recentSearches = recentSearchRepository.fetchAll()
+//    }
+    
     private func loadRecentSearches() {
-        recentSearches = recentSearchRepository.fetchAll()
+        recentSearches = FileManagerHelper.shared.loadRecentSearches().map { $0.searchTerm }
     }
+
     
     private func getNickname() -> String {
         let defaults = UserDefaults.standard
