@@ -18,7 +18,7 @@ extension UIView {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.snp.makeConstraints { make in
             make.width.equalTo(width)
-            make.height.equalTo(38)
+            make.height.equalTo(40)
         }
         return button
     }

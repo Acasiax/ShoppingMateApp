@@ -37,19 +37,19 @@ class SearchResultsViewController: UIViewController {
         return searchBar
     }()
     
-    let accuracyButton: UIButton = {
+    let relevanceSortButton: UIButton = {
         return UIView().createButton(title: "정확도")
     }()
     
-    let dateButton: UIButton = {
+    let dateSortButton: UIButton = {
         return UIView().createButton(title: "날짜순")
     }()
     
-    let upPriceButton: UIButton = {
+    let highPriceSortButton: UIButton = {
         return UIView().createButton(title: "가격높은순", width: 80)
     }()
     
-    let downPriceButton: UIButton = {
+    let lowPriceSortButton: UIButton = {
         return UIView().createButton(title: "가격낮은순", width: 80)
     }()
     
@@ -92,18 +92,18 @@ class SearchResultsViewController: UIViewController {
         view.backgroundColor = .customWhite
         //  view.addSubview(searchBar)
         view.addSubview(resultsCountLabel)
-        view.addSubview(accuracyButton)
-        view.addSubview(dateButton)
-        view.addSubview(upPriceButton)
-        view.addSubview(downPriceButton)
+        view.addSubview(relevanceSortButton)
+        view.addSubview(dateSortButton)
+        view.addSubview(highPriceSortButton)
+        view.addSubview(lowPriceSortButton)
         view.addSubview(collectionView)
         
         searchBar.delegate = self
         
-        accuracyButton.addTarget(self, action: #selector(changeSort(_:)), for: .touchUpInside)
-        dateButton.addTarget(self, action: #selector(changeSort(_:)), for: .touchUpInside)
-        upPriceButton.addTarget(self, action: #selector(changeSort(_:)), for: .touchUpInside)
-        downPriceButton.addTarget(self, action: #selector(changeSort(_:)), for: .touchUpInside)
+        relevanceSortButton.addTarget(self, action: #selector(updateSortCriteria(_:)), for: .touchUpInside)
+        dateSortButton.addTarget(self, action: #selector(updateSortCriteria(_:)), for: .touchUpInside)
+        highPriceSortButton.addTarget(self, action: #selector(updateSortCriteria(_:)), for: .touchUpInside)
+        lowPriceSortButton.addTarget(self, action: #selector(updateSortCriteria(_:)), for: .touchUpInside)
         
         resultsCountLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
@@ -112,33 +112,33 @@ class SearchResultsViewController: UIViewController {
         }
         
         
-        accuracyButton.snp.makeConstraints { make in
+        relevanceSortButton.snp.makeConstraints { make in
             make.top.equalTo(resultsCountLabel.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(10)
             make.width.equalTo(55)
-            make.height.equalTo(38)
+            make.height.equalTo(40)
         }
-        dateButton.snp.makeConstraints { make in
+        dateSortButton.snp.makeConstraints { make in
             make.top.equalTo(resultsCountLabel.snp.bottom).offset(10)
-            make.leading.equalTo(accuracyButton.snp.trailing).offset(7)
+            make.leading.equalTo(relevanceSortButton.snp.trailing).offset(7)
             make.width.equalTo(55)
-            make.height.equalTo(38)
+            make.height.equalTo(40)
         }
-        upPriceButton.snp.makeConstraints { make in
+        highPriceSortButton.snp.makeConstraints { make in
             make.top.equalTo(resultsCountLabel.snp.bottom).offset(10)
-            make.leading.equalTo(dateButton.snp.trailing).offset(7)
+            make.leading.equalTo(dateSortButton.snp.trailing).offset(7)
             make.width.equalTo(80)
-            make.height.equalTo(38)
+            make.height.equalTo(40)
         }
-        downPriceButton.snp.makeConstraints { make in
+        lowPriceSortButton.snp.makeConstraints { make in
             make.top.equalTo(resultsCountLabel.snp.bottom).offset(10)
-            make.leading.equalTo(upPriceButton.snp.trailing).offset(7)
+            make.leading.equalTo(highPriceSortButton.snp.trailing).offset(7)
             make.width.equalTo(80)
-            make.height.equalTo(38)
+            make.height.equalTo(40)
         }
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(accuracyButton.snp.bottom).offset(20)
+            make.top.equalTo(relevanceSortButton.snp.bottom).offset(20)
             make.leading.trailing.bottom.equalToSuperview()
         }
         
@@ -191,8 +191,7 @@ class SearchResultsViewController: UIViewController {
     
     
     
-    
-    @objc private func changeSort(_ sender: UIButton) {
+    @objc private func updateSortCriteria(_ sender: UIButton) {
         
         // 이전에 선택된 버튼이 있으면 색상 복원
         if let previousButton = selectedButton {
@@ -204,42 +203,33 @@ class SearchResultsViewController: UIViewController {
         sender.backgroundColor = .customGray4C4C
         sender.setTitleColor(.customWhite, for: .normal)
         selectedButton = sender
-        
-        
+           
         guard let query = searchBar.text, !query.isEmpty else { return }
-        var sortValue: String
-        switch sender {
-        case accuracyButton:
-            sortValue = "sim"
-        case dateButton:
-            sortValue = "date"
-        case upPriceButton:
-            sortValue = "dsc"
-        case downPriceButton:
-            sortValue = "asc"
-        default:
-            return
-        }
+        
+        let sortValue = getSortValue(for: sender)
+        
+      
         productItems.removeAll()
         loadData(query: query, sort: sortValue)
     }
-}
-
-
-extension SearchResultsViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        
-        let newSearchResultsVC = SearchResultsViewController(query: query)
-        newSearchResultsVC.title = query
-        navigationController?.pushViewController(newSearchResultsVC, animated: true)
-        
-    }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        navigationController?.popViewController(animated: true)
+    private func getSortValue(for button: UIButton) -> String {
+        switch button {
+        case relevanceSortButton:
+            return "sim"
+        case dateSortButton:
+            return "date"
+        case highPriceSortButton:
+            return "dsc"
+        case lowPriceSortButton:
+            return "asc"
+        default:
+            return "sim"
+        }
     }
 }
+
+
 
 extension SearchResultsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -274,4 +264,17 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
     }
 }
 
-
+extension SearchResultsViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        
+        let newSearchResultsVC = SearchResultsViewController(query: query)
+        newSearchResultsVC.title = query
+        navigationController?.pushViewController(newSearchResultsVC, animated: true)
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        navigationController?.popViewController(animated: true)
+    }
+}

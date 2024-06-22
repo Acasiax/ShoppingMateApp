@@ -11,23 +11,23 @@ import Kingfisher
 class ThreeCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private var collectionView: UICollectionView!
-    private var items: [LikedItem] = [] // 예제 데이터를 위한 배열
+    private var items: [LikedItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectionView()
+        configureCollectionView()
         loadLikedItems() // 저장된 좋아요 항목을 로드하는 메소드 호출
-        setupNotificationCenter() // NotificationCenter 설정
+                configureNotificationCenter() // NotificationCenter 설정
     }
    
     
-    private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(handleLikeStatusChanged), name: NSNotification.Name("LikeStatusChanged"), object: nil)
+    private func         configureNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadLikedItems), name: NSNotification.Name("LikeStatusChanged"), object: nil)
     }
-    @objc private func handleLikeStatusChanged() {
+    @objc private func reloadLikedItems() {
         loadLikedItems()
     }
-    private func setupCollectionView() {
+    private func configureCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -95,36 +95,38 @@ class ThreeCollectionCell: UICollectionViewCell {
     }
 
     private func configureView() {
-        setupUI()
+                configureUIElements()
         setConstraints()
         setupActions()
     }
     
     private func setConstraints() {
         imageView.snp.makeConstraints { make in
-            make.horizontalEdges.top.equalToSuperview()
-            make.height.equalTo(170)
-        }
-        [mallNameLabel, titleLabel, priceLabel].forEach { label in
-            label.snp.makeConstraints { make in
-                make.leading.trailing.equalToSuperview().inset(7)
-            }
-        }
-        mallNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(3)
-            make.height.equalTo(20)
-        }
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(mallNameLabel.snp.bottom).offset(3)
-        }
-        priceLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(3)
-            make.height.equalTo(20)
-        }
-        likeButton.snp.makeConstraints { make in
-            make.bottom.trailing.equalTo(imageView).inset(8)
-            make.size.equalTo(36)
-        }
+                    make.top.horizontalEdges.equalToSuperview()
+                    make.height.equalTo(150)
+                }
+                
+                mallNameLabel.snp.makeConstraints { make in
+                    make.top.equalTo(imageView.snp.bottom).offset(5)
+                    make.leading.trailing.equalToSuperview().inset(7)
+                    make.height.equalTo(20)
+                }
+                
+                titleLabel.snp.makeConstraints { make in
+                    make.top.equalTo(mallNameLabel.snp.bottom).offset(5)
+                    make.leading.trailing.equalToSuperview().inset(7)
+                }
+                
+                priceLabel.snp.makeConstraints { make in
+                    make.top.equalTo(titleLabel.snp.bottom).offset(5)
+                    make.leading.trailing.equalToSuperview().inset(7)
+                    make.height.equalTo(20)
+                }
+                
+                likeButton.snp.makeConstraints { make in
+                    make.bottom.trailing.equalTo(imageView).inset(8)
+                    make.size.equalTo(36)
+                }
     }
     
     func configure(with item: LikedItem) {
@@ -133,7 +135,7 @@ class ThreeCollectionCell: UICollectionViewCell {
         loadLikeStatus()
     }
     
-    private func setupUI() {
+    private func         configureUIElements() {
         imageView.setupImageView()
         [mallNameLabel, titleLabel, priceLabel].forEach { label in
             contentView.addSubview(label)

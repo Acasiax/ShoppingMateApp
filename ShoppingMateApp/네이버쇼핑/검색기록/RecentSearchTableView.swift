@@ -33,7 +33,6 @@ class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSo
         self.dataSource = self
         self.register(RecentSearchCell.self, forCellReuseIdentifier: RecentSearchCell.identifier)
         self.backgroundColor = .customWhite
-       // self.tableHeaderView = createTableHeaderView()
         self.separatorStyle = .none
     }
     
