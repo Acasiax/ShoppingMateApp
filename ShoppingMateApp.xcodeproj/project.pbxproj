@@ -10,6 +10,8 @@
 		AA5850842C25511C007B92FD /* LikedToggleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850832C25511C007B92FD /* LikedToggleItem.swift */; };
 		AA5850862C256013007B92FD /* RecentSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850852C256013007B92FD /* RecentSearch.swift */; };
 		AA5850882C258126007B92FD /* ThreeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850872C258126007B92FD /* ThreeCollectionViewController.swift */; };
+		AA58508A2C265B01007B92FD /* HomeViewController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850892C265B01007B92FD /* HomeViewController+Search.swift */; };
+		AA58508C2C265B37007B92FD /* HomeViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58508B2C265B37007B92FD /* HomeViewController+UICollectionView.swift */; };
 		AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */; };
 		AA6CB5BA2C1D4D6C0089E3B7 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */; };
 		AA6CB5BC2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */; };
@@ -44,13 +46,14 @@
 		AA8E885D2C1BFA0B00B477D3 /* MainSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */; };
 		AA8E88652C1C078D00B477D3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AA8E88642C1C078D00B477D3 /* Kingfisher */; };
 		AA8E886F2C1C237900B477D3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886E2C1C237900B477D3 /* WebViewController.swift */; };
-		AA8E88782C1C49E600B477D3 /* HomeView+Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88772C1C49E600B477D3 /* HomeView+Collection+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AA5850832C25511C007B92FD /* LikedToggleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikedToggleItem.swift; sourceTree = "<group>"; };
 		AA5850852C256013007B92FD /* RecentSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearch.swift; sourceTree = "<group>"; };
 		AA5850872C258126007B92FD /* ThreeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCollectionViewController.swift; sourceTree = "<group>"; };
+		AA5850892C265B01007B92FD /* HomeViewController+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+Search.swift"; sourceTree = "<group>"; };
+		AA58508B2C265B37007B92FD /* HomeViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+UICollectionView.swift"; sourceTree = "<group>"; };
 		AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSelectionViewController.swift; sourceTree = "<group>"; };
@@ -83,7 +86,6 @@
 		AA8E88592C1BF84700B477D3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchView.swift; sourceTree = "<group>"; };
 		AA8E886E2C1C237900B477D3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		AA8E88772C1C49E600B477D3 /* HomeView+Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeView+Collection+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,7 +280,8 @@
 			isa = PBXGroup;
 			children = (
 				AA8E884E2C1BF3EF00B477D3 /* HomeViewController.swift */,
-				AA8E88772C1C49E600B477D3 /* HomeView+Collection+.swift */,
+				AA5850892C265B01007B92FD /* HomeViewController+Search.swift */,
+				AA58508B2C265B37007B92FD /* HomeViewController+UICollectionView.swift */,
 				AA8E88522C1BF49C00B477D3 /* HomeCollectionViewCell.swift */,
 				AA8E885C2C1BFA0B00B477D3 /* MainSearchView.swift */,
 			);
@@ -376,6 +379,7 @@
 				AA6CB5C12C1D599F0089E3B7 /* SettingViewController.swift in Sources */,
 				AA5850862C256013007B92FD /* RecentSearch.swift in Sources */,
 				AA8E884F2C1BF3EF00B477D3 /* HomeViewController.swift in Sources */,
+				AA58508A2C265B01007B92FD /* HomeViewController+Search.swift in Sources */,
 				AA6CB5C32C1D6BB10089E3B7 /* ProfileCell.swift in Sources */,
 				AA5850882C258126007B92FD /* ThreeCollectionViewController.swift in Sources */,
 				AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */,
@@ -389,7 +393,6 @@
 				AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */,
 				AA6CB5D42C1EE7E10089E3B7 /* RecentSearchTableView.swift in Sources */,
 				AA8E88412C1BF24300B477D3 /* APIKey.swift in Sources */,
-				AA8E88782C1C49E600B477D3 /* HomeView+Collection+.swift in Sources */,
 				AA8E88562C1BF53D00B477D3 /* Item.swift in Sources */,
 				AA6CB5C72C1DCC570089E3B7 /* LikeNotification.swift in Sources */,
 				AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */,
@@ -398,6 +401,7 @@
 				AA6CB6072C20435B0089E3B7 /* Create+Component.swift in Sources */,
 				AA6CB5BF2C1D597A0089E3B7 /* ProfileImageView.swift in Sources */,
 				AA6CB60F2C20637A0089E3B7 /* SplashViewController.swift in Sources */,
+				AA58508C2C265B37007B92FD /* HomeViewController+UICollectionView.swift in Sources */,
 				AA8E886F2C1C237900B477D3 /* WebViewController.swift in Sources */,
 				AA6CB5BA2C1D4D6C0089E3B7 /* ProfileSettingViewController.swift in Sources */,
 				AA8E885D2C1BFA0B00B477D3 /* MainSearchView.swift in Sources */,

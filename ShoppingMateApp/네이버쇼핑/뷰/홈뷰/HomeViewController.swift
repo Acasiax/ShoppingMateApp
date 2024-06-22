@@ -4,11 +4,12 @@
 //
 //  Created by 이윤지 on 6/14/24.
 //
+
 import UIKit
 import SnapKit
 
 class HomeViewController: UIViewController {
-    var totalResults: Int? //검색 총결과 수
+    var totalResults: Int?
     var isSearching = false
     
     let homeView = MainSearchView()
@@ -21,10 +22,9 @@ class HomeViewController: UIViewController {
     var recentSearches: [String] = [] {
         didSet {
             recentSearchTableView.recentSearches = recentSearches
-            updateRecentSearchVisibility()
+            updateVisibility()
         }
     }
-    
     
     let headerView: UIView = {
         let headerView = UIView()
@@ -54,15 +54,12 @@ class HomeViewController: UIViewController {
         
         return headerView
     }()
-
+    
     let containerView: UIView = {
         let view = UIView()
         return view
     }()
-
     
-    
-
     let emptyImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "empty")
@@ -93,41 +90,36 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
         tapGesture.cancelsTouchesInView = false
-       
+        
         setupUI()
-        setupEmptyImageView()
-        setupRecentSearchTableView()
         loadRecentSearches()
-        updateRecentSearchVisibility()
-        updateEmptyImageViewVisibility()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         isSearching = false
         loadRecentSearches()
-        updateRecentSearchVisibility()
-        updateEmptyImageViewVisibility()
         homeView.collectionView.reloadData()
     }
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
-
-    
-    
+     
     private func setupUI() {
         setupNavigationUI()
+        setupEmptyImageView()
+        setupRecentSearchTableView()
+        
         homeView.searchBar.delegate = self
         homeView.collectionView.delegate = self
         homeView.collectionView.dataSource = self
         homeView.collectionView.prefetchDataSource = self
-  
+
         if let cancelButton = homeView.searchBar.value(forKey: "cancelButton") as? UIButton {
             cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         }
@@ -144,9 +136,8 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.tintColor = .customWhite
         navigationController?.navigationBar.isTranslucent = false
-        //navigationItem.title = "이윤지's MEANING OUT"
         let nickname = getNickname()
-            navigationItem.title = "\(nickname)'s MEANING OUT"
+        navigationItem.title = "\(nickname)'s MEANING OUT"
     }
 
     private func setupEmptyImageView() {
@@ -194,14 +185,12 @@ class HomeViewController: UIViewController {
         }
     }
 
-    
     func navigateToSearchResults(query: String) {
         let searchResultsVC = SearchResultsViewController(query: query)
         
-        // 네비게이션 백버튼 설정
-           let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-           navigationItem.backBarButtonItem = backBarButtonItem
-           navigationController?.navigationBar.tintColor = .customBlack
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
+        navigationController?.navigationBar.tintColor = .customBlack
         
         navigationController?.pushViewController(searchResultsVC, animated: true)
     }
@@ -219,34 +208,14 @@ class HomeViewController: UIViewController {
     @objc private func cancelButtonTapped() {
         productItems.removeAll()
         homeView.collectionView.reloadData()
-        updateEmptyImageViewVisibility()
-        updateRecentSearchVisibility()
+        updateVisibility()
         navigationController?.popViewController(animated: true)
     }
 
-
-    func loadData(query: String, sort: String = "sim", display: Int = 30, start: Int = 1) {
-        print("실행⭕️")
-        shopManager.shoppingRequest(query: query, display: display, start: start, sort: sort) { total, items in
-            self.isDataLoading = false
-            guard let items = items else { return }
-            self.totalResults = total
-            print("⛑️\(String(describing: self.totalResults))")
-            self.productItems.append(contentsOf: items)
-            self.homeView.collectionView.reloadData()
-            self.updateEmptyImageViewVisibility()
-        }
-    }
-    
-    func updateEmptyImageViewVisibility() {
+    func updateVisibility() {
         let isEmpty = productItems.isEmpty
         emptyImageView.isHidden = !isEmpty
         emptyLabel.isHidden = !isEmpty
-        recentSearchTableView.isHidden = recentSearches.isEmpty
-        recentSearchTableView.reloadData()
-    }
-    
-    func updateRecentSearchVisibility() {
         recentSearchTableView.isHidden = recentSearches.isEmpty
         recentSearchTableView.reloadData()
     }
@@ -259,10 +228,8 @@ class HomeViewController: UIViewController {
         let defaults = UserDefaults.standard
         return defaults.string(forKey: "UserNickname") ?? "닉네임 없음"
     }
-
-    
-    
 }
+
 
 extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -286,6 +253,7 @@ extension HomeViewController: UISearchBarDelegate {
         isSearching = false
         searchBar.text = ""
         searchBar.resignFirstResponder()
-        
     }
 }
+
+
