@@ -8,19 +8,19 @@ import UIKit
 import WebKit
 
 class WebViewController: UIViewController, WKUIDelegate {
-    var webView = WKWebView()
-    var productID: String?
-    var likeProductID: String?
-    var webViewTitle: String?
-    var item: Item?
-    var isLiked: Bool = false {
+    var mainWebView = WKWebView()
+    var pageTitle: String?
+    var currentProductID: String?
+    var likedProductID: String?
+    var currentItem: Item?
+    private let likedImageName = "like_selected"
+    private let unlikedImageName = "like_unselected"
+    var isInCart: Bool = false {
         didSet {
-            updateLikeButtonImage()
+            updateIsinCartButtonImage()
         }
     }
     
-    private let likedImageName = "like_selected"
-    private let unlikedImageName = "like_unselected"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,62 +33,36 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        checkIfProductIsLiked()
+        updateCartStatus()
     }
     
     private func setupWebView() {
         let webConfiguration = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView.uiDelegate = self
-        view.addSubview(webView)
+        mainWebView = WKWebView(frame: .zero, configuration: webConfiguration)
+        mainWebView.uiDelegate = self
+        view.addSubview(mainWebView)
         
-        webView.snp.makeConstraints { make in
+        mainWebView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
-    private func configureNavigationBar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .customWhite
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.customBlack]
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "profile_2"), style: .plain, target: self, action: #selector(detailLikeButtonTapped))
-        navigationItem.title = webViewTitle
-        navigationController?.navigationBar.tintColor = .customBlack
-        
-        let backButton = UIButton(type: .system)
-        backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
-        backButton.addTarget(self, action: #selector(backToMainView), for: .touchUpInside)
-        backButton.tintColor = UIColor.customBlack
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        
-        
-        let tabBarAppearance = UITabBarAppearance()
-        self.tabBarController?.tabBar.standardAppearance = tabBarAppearance
-        if #available(iOS 15.0, *) {
-            self.tabBarController?.tabBar.scrollEdgeAppearance = tabBarAppearance
-        }
-    }
-
     private func loadWebView() {
-        let productID = self.productID ?? self.likeProductID
+        let productID = self.currentProductID ?? self.likedProductID
         guard let productID = productID, let url = URL(string: "\(APIEndpoints.naverProduct)\(productID)") else { return }
-        webView.load(URLRequest(url: url))
+        mainWebView.load(URLRequest(url: url))
     }
     
     @objc private func backToMainView() {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc private func detailLikeButtonTapped() {
-        isLiked.toggle()
+    @objc private func toggleCartStatus() {
+        isInCart.toggle()
         
-        guard let item = self.item else { return }
+        guard let item = self.currentItem else { return }
         var likedItems = FileManagerHelper.shared.loadLikedItems()
-        if isLiked {
+        if isInCart {
             let likedItem = LikedItem(mall: item.mallName, imageName: item.image, title: item.title, price: item.lprice)
             likedItems.append(likedItem)
         } else {
@@ -96,11 +70,9 @@ class WebViewController: UIViewController, WKUIDelegate {
         }
         FileManagerHelper.shared.saveLikedItems(likedItems)
     }
-    
-    
-    
-    private func updateLikeButtonImage() {
-        let imageName = isLiked ? likedImageName : unlikedImageName
+ 
+    private func updateIsinCartButtonImage() {
+        let imageName = isInCart ? likedImageName : unlikedImageName
         if let image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal) {
             navigationItem.rightBarButtonItem?.image = image
         } else {
@@ -108,16 +80,35 @@ class WebViewController: UIViewController, WKUIDelegate {
         }
     }
     
-    private func checkIfProductIsLiked() {
+    private func updateCartStatus() {
         let likedItems = FileManagerHelper.shared.loadLikedItems()
-        let productID = self.productID ?? self.likeProductID
-        isLiked = likedItems.contains { $0.title == productID }
+        let productID = self.currentProductID ?? self.likedProductID
+        isInCart = likedItems.contains { $0.title == productID }
     }
     
     @objc private func handleLikeStatusChanged(notification: NSNotification) {
         guard let likedItem = notification.object as? Item else { return }
-        if likedItem.productID == self.productID || likedItem.productID == self.likeProductID {
-            checkIfProductIsLiked()
+        if likedItem.productID == self.currentProductID || likedItem.productID == self.likedProductID {
+            updateCartStatus()
+        }
+    }
+    
+    private func configureNavigationBar() {
+        let rightBarButtonImage = UIImage(named: "profile_2")
+        let leftBarButtonImage = UIImage(systemName: "chevron.backward")
+        navigationController?.configureAppearance(
+            withTitle: pageTitle,
+            rightBarButtonImage: rightBarButtonImage,
+            rightBarButtonAction: #selector(toggleCartStatus),
+            target: self,
+            leftBarButtonImage: leftBarButtonImage,
+            leftBarButtonAction: #selector(backToMainView)
+        )
+        
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarController?.tabBar.standardAppearance = tabBarAppearance
+        if #available(iOS 15.0, *) {
+            tabBarController?.tabBar.scrollEdgeAppearance = tabBarAppearance
         }
     }
 }

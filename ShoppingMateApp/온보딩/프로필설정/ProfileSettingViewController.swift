@@ -4,6 +4,7 @@
 //
 //  Created by 이윤지 on 6/15/24.
 //
+
 import UIKit
 import SnapKit
 
@@ -12,6 +13,11 @@ class ProfileSettingViewController: UIViewController {
     private let profileImageView = ProfileImageView()
     private let contentView = UIView()
     private var currentProfileImageName: String?
+    private var navigationTitle: String
+    private var showSaveButton: Bool
+    
+    private var showCompleteButton: Bool
+    private var showPassButton: Bool
     
     private let nicknameTextField: UITextField = {
         let textField = UITextField()
@@ -52,12 +58,7 @@ class ProfileSettingViewController: UIViewController {
         return button
     }()
     
-    
-    private var navigationTitle: String
-    private var showSaveButton: Bool
-    
-    private var showCompleteButton: Bool
-    private var showPassButton: Bool
+
     
     init(navigationTitle: String, showSaveButton: Bool, showCompleteButton: Bool, showPassButton: Bool) {
         self.navigationTitle = navigationTitle
@@ -214,21 +215,6 @@ class ProfileSettingViewController: UIViewController {
         }
     }
 
-    
-//    @objc private func saveButtonTapped() {
-//        
-//        let nickname = nicknameTextField.text ?? ""
-//        let validationMessage = evaluateNickname(nickname: nickname)
-//        if validationMessage == "사용할 수 있는 닉네임이에요" {
-//            saveUserData()
-//            navigateToNextScreen()
-//        } else {
-//            let alert = UIAlertController(title: "경고", message: validationMessage, preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-//            present(alert, animated: true, completion: nil)
-//        }
-//    }
-    
     //둘러볼게요 버튼
     @objc private func passButtonTapped() {
         navigateToNextScreen() //⚠️

@@ -13,7 +13,6 @@ class ProfileCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        //imageView.alpha = 0.5 // 이미지 반투명 설정
         imageView.layer.cornerRadius = 40
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 1

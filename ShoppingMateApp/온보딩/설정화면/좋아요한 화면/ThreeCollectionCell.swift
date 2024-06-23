@@ -16,7 +16,7 @@ class ThreeCollectionCell: UICollectionViewCell {
     private let likeButton = UIButton(type: .system)
     
     private var item: LikedItem?
-    private var isLiked: Bool = false {
+    private var isInCart: Bool = false {
         didSet {
             updateLikeButtonImage()
         }
@@ -95,7 +95,7 @@ class ThreeCollectionCell: UICollectionViewCell {
     }
     
     @objc private func toggleLike() {
-        isLiked.toggle()
+        isInCart.toggle()
         if let item = item {
             saveLikedStatus(for: item)
             NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: nil)
@@ -121,18 +121,18 @@ class ThreeCollectionCell: UICollectionViewCell {
     private func loadLikeStatus() {
         guard let item = item else { return }
         let likedItems = FileManagerHelper.shared.loadLikedItems()
-        isLiked = likedItems.contains { $0.title == item.title }
+        isInCart = likedItems.contains { $0.title == item.title }
     }
     
     private func updateLikeButtonImage() {
-        likeButton.setImage(UIImage(named: isLiked ? likedImageName : unlikedImageName)?.withRenderingMode(.alwaysOriginal), for: .normal)
-        likeButton.backgroundColor = isLiked ? .customWhite : .lightGray.withAlphaComponent(0.5)
+        likeButton.setImage(UIImage(named: isInCart ? likedImageName : unlikedImageName)?.withRenderingMode(.alwaysOriginal), for: .normal)
+        likeButton.backgroundColor = isInCart ? .customWhite : .lightGray.withAlphaComponent(0.5)
     }
     
     private func saveLikedStatus(for item: LikedItem) {
         var likedItems = FileManagerHelper.shared.loadLikedItems()
         
-        if isLiked {
+        if isInCart {
             likedItems.append(item)
         } else {
             likedItems.removeAll { $0.title == item.title }

@@ -104,20 +104,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AA5850812C254E40007B92FD /* 바꿀꺼 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "바꿀꺼";
-			path = "바꿀꺼";
-			sourceTree = "<group>";
-		};
-		AA5850822C2550DF007B92FD /* 바꾼거 */ = {
+		AA5850822C2550DF007B92FD /* 파일매니져 */ = {
 			isa = PBXGroup;
 			children = (
 				AA5850832C25511C007B92FD /* LikedToggleItem.swift */,
 			);
-			name = "바꾼거";
+			name = "파일매니져";
 			path = "바꾼거";
 			sourceTree = "<group>";
 		};
@@ -218,8 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				AA8E88402C1BF24300B477D3 /* APIKey.swift */,
-				AA5850822C2550DF007B92FD /* 바꾼거 */,
-				AA5850812C254E40007B92FD /* 바꿀꺼 */,
+				AA5850822C2550DF007B92FD /* 파일매니져 */,
 				AA6CB5B62C1D4B4D0089E3B7 /* 온보딩 */,
 				AA6CB5D22C1EE7D10089E3B7 /* 검색기록 */,
 				AA8E885E2C1BFC2700B477D3 /* 확장 */,

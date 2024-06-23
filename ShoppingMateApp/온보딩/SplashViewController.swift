@@ -43,7 +43,7 @@ class SplashViewController: UIViewController {
     private func setupViews() {
         view.addSubview(titleLabel)
         view.addSubview(launchImageView)
-        view.addSubview(nameLabel)  // nameLabel 추가
+        view.addSubview(nameLabel)  
     }
     
     private func setupConstraints() {
@@ -55,8 +55,6 @@ class SplashViewController: UIViewController {
         launchImageView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
-           // make.width.equalToSuperview().multipliedBy(0.6)
-           // make.height.equalTo(launchImageView.snp.width).multipliedBy(1.2)
         }
         
         nameLabel.snp.makeConstraints { make in

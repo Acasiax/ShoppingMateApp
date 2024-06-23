@@ -51,3 +51,30 @@ extension UIButton {
         self.setTitleColor(titleColor, for: .normal)
     }
 }
+
+
+extension UINavigationController {
+    
+    func configureAppearance(withTitle title: String?, rightBarButtonImage: UIImage?, rightBarButtonAction: Selector, target: Any, leftBarButtonImage: UIImage?, leftBarButtonAction: Selector) {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .customWhite
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.customBlack]
+        navigationBar.isTranslucent = false
+        navigationBar.scrollEdgeAppearance = appearance
+        navigationBar.standardAppearance = appearance
+        navigationBar.tintColor = .customBlack
+        
+        let rightBarButtonItem = UIBarButtonItem(image: rightBarButtonImage, style: .plain, target: target, action: rightBarButtonAction)
+        let leftBarButton = UIButton(type: .system)
+        leftBarButton.setImage(leftBarButtonImage, for: .normal)
+        leftBarButton.addTarget(target, action: leftBarButtonAction, for: .touchUpInside)
+        leftBarButton.tintColor = UIColor.customBlack
+        let leftBarButtonItem = UIBarButtonItem(customView: leftBarButton)
+        
+        if let topItem = navigationBar.topItem {
+            topItem.rightBarButtonItem = rightBarButtonItem
+            topItem.leftBarButtonItem = leftBarButtonItem
+            topItem.title = title
+        }
+    }
+}

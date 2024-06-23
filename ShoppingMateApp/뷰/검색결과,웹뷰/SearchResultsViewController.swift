@@ -255,9 +255,9 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = productItems[indexPath.row]
         let webVC = WebViewController()
-        webVC.productID = item.productID
-        webVC.item = item
-        webVC.webViewTitle = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        webVC.currentProductID = item.productID
+        webVC.currentItem = item
+        webVC.pageTitle = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         navigationController?.pushViewController(webVC, animated: true)
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
        

@@ -191,7 +191,6 @@ class HomeViewController: UIViewController {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backBarButtonItem
         navigationController?.navigationBar.tintColor = .customBlack
-        
         navigationController?.pushViewController(searchResultsVC, animated: true)
     }
     
@@ -220,9 +219,6 @@ class HomeViewController: UIViewController {
         recentSearchTableView.reloadData()
     }
     
-//    private func loadRecentSearches() {
-//        recentSearches = recentSearchRepository.fetchAll()
-//    }
     
     private func loadRecentSearches() {
         recentSearches = FileManagerHelper.shared.loadRecentSearches().map { $0.searchTerm }

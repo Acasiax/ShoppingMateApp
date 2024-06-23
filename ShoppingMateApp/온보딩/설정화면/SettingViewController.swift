@@ -228,9 +228,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         dictionary.keys.forEach { key in
             defaults.removeObject(forKey: key)
         }
-        
-        
-        
+     
         navigateToOnboarding()
     }
     

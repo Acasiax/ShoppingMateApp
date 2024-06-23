@@ -18,7 +18,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     private let likeButton = UIButton(type: .system)
     
     private var item: Item?
-    private var isLiked: Bool = false {
+    private var         isInCart: Bool = false {
         didSet {
             updateLikeButtonImage()
         }
@@ -35,7 +35,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     private func configureView() {
         setupUI()
         setConstraints()
@@ -90,7 +90,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }
     
     @objc private func toggleLike() {
-        isLiked.toggle()
+        isInCart.toggle()
         saveLikedStatus()
         NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: item)
     }
@@ -113,19 +113,19 @@ class HomeCollectionViewCell: UICollectionViewCell {
     private func loadLikeStatus() {
         guard let item = item else { return }
         let likedItems = FileManagerHelper.shared.loadLikedItems()
-        isLiked = likedItems.contains { $0.title == item.title }
+        isInCart = likedItems.contains { $0.title == item.title }
     }
     
     private func updateLikeButtonImage() {
-        likeButton.setImage(UIImage(named: isLiked ? likedImageName : unlikedImageName)?.withRenderingMode(.alwaysOriginal), for: .normal)
-        likeButton.backgroundColor = isLiked ? .customWhite : .customLightGrayCDCD.withAlphaComponent(0.5)
+        likeButton.setImage(UIImage(named:         isInCart ? likedImageName : unlikedImageName)?.withRenderingMode(.alwaysOriginal), for: .normal)
+        likeButton.backgroundColor =         isInCart ? .customWhite : .customLightGrayCDCD.withAlphaComponent(0.5)
     }
     
     private func saveLikedStatus() {
         guard let item = item else { return }
         var likedItems = FileManagerHelper.shared.loadLikedItems()
         
-        if isLiked {
+        if         isInCart {
             likedItems.append(LikedItem(mall: item.mallName, imageName: item.image, title: item.title, price: item.lprice))
         } else {
             likedItems.removeAll { $0.title == item.title }

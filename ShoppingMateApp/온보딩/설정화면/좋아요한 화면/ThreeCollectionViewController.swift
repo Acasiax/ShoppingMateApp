@@ -6,7 +6,6 @@
 //
 import UIKit
 import SnapKit
-import Kingfisher
 
 class ThreeCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -17,11 +16,11 @@ class ThreeCollectionViewController: UIViewController, UICollectionViewDataSourc
         super.viewDidLoad()
         configureCollectionView()
         loadLikedItems() // 저장된 좋아요 항목을 로드하는 메소드 호출
-                configureNotificationCenter() // NotificationCenter 설정
+        configureNotificationCenter() // NotificationCenter 설정
     }
-   
     
-    private func         configureNotificationCenter() {
+    
+    private func configureNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadLikedItems), name: NSNotification.Name("LikeStatusChanged"), object: nil)
     }
     @objc private func reloadLikedItems() {
