@@ -88,6 +88,29 @@ class FileManagerHelper {
             return []
         }
     }
+    
+    func deleteAllData() {
+           let fileManager = FileManager.default
+           
+           do {
+               // 좋아요 항목 데이터 삭제
+               if fileManager.fileExists(atPath: likedItemsFileURL.path) {
+                   try fileManager.removeItem(at: likedItemsFileURL)
+                   print("좋아요 항목 데이터 삭제 성공")
+               }
+               
+               // 최근 검색어 데이터 삭제
+               if fileManager.fileExists(atPath: recentSearchesFileURL.path) {
+                   try fileManager.removeItem(at: recentSearchesFileURL)
+                   print("최근 검색어 데이터 삭제 성공")
+               }
+           } catch {
+               print("데이터 삭제 실패: \(error)")
+           }
+       }
+   
+    
+    
     func printLikedItemsCount() {
                 let likedItems = loadLikedItems()
                 print("👩‍🌾현재 저장된 좋아요 항목 개수: \(likedItems.count)개")

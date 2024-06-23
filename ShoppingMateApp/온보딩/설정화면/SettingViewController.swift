@@ -192,8 +192,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 
             case .cart:
                 let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-                          self.navigationItem.backBarButtonItem = backBarButtonItem
-                          self.navigationController?.navigationBar.tintColor = .customBlack
+                self.navigationItem.backBarButtonItem = backBarButtonItem
+                self.navigationController?.navigationBar.tintColor = .customBlack
                 let threeCollectionVC = ThreeCollectionViewController()
                 navigationController?.pushViewController(threeCollectionVC, animated: true)
                 
@@ -220,11 +220,17 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     private func resetUserDefaults() {
+        // FileManagerHelper의 모든 저장 데이터를 삭제
+        FileManagerHelper.shared.deleteAllData()
+        
         let defaults = UserDefaults.standard
         let dictionary = defaults.dictionaryRepresentation()
         dictionary.keys.forEach { key in
             defaults.removeObject(forKey: key)
         }
+        
+        
+        
         navigateToOnboarding()
     }
     
