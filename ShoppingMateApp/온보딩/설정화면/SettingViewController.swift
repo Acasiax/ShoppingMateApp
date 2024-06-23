@@ -99,16 +99,17 @@ class SettingViewController: UIViewController {
         let likedItems = FileManagerHelper.shared.loadLikedItems()
         updateLikedItemsCount(likedItems.count)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleLikeStatusChanged), name: NSNotification.Name("LikeStatusChanged"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleCartStatusChanged), name: NSNotification.Name("LikeStatusChanged"), object: nil)
     }
     
     private func updateLikedItemsCount(_ count: Int) {
         likedItemsCount = count
     }
     
-    @objc private func handleLikeStatusChanged(notification: NSNotification) {
+    @objc private func handleCartStatusChanged(notification: NSNotification) {
         let likedItems = FileManagerHelper.shared.loadLikedItems()
         updateLikedItemsCount(likedItems.count)
+        tableView.reloadData() // 테이블 뷰 갱신
     }
 }
 

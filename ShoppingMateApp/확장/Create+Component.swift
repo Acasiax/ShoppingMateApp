@@ -53,28 +53,34 @@ extension UIButton {
 }
 
 
-extension UINavigationController {
-    
-    func configureAppearance(withTitle title: String?, rightBarButtonImage: UIImage?, rightBarButtonAction: Selector, target: Any, leftBarButtonImage: UIImage?, leftBarButtonAction: Selector) {
+//웹뷰 네비
+extension UINavigationBar {
+    func applyCustomAppearance(backgroundColor: UIColor, titleColor: UIColor, tintColor: UIColor) {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .customWhite
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.customBlack]
-        navigationBar.isTranslucent = false
-        navigationBar.scrollEdgeAppearance = appearance
-        navigationBar.standardAppearance = appearance
-        navigationBar.tintColor = .customBlack
+        appearance.backgroundColor = backgroundColor
+        appearance.titleTextAttributes = [.foregroundColor: titleColor]
         
-        let rightBarButtonItem = UIBarButtonItem(image: rightBarButtonImage, style: .plain, target: target, action: rightBarButtonAction)
-        let leftBarButton = UIButton(type: .system)
-        leftBarButton.setImage(leftBarButtonImage, for: .normal)
-        leftBarButton.addTarget(target, action: leftBarButtonAction, for: .touchUpInside)
-        leftBarButton.tintColor = UIColor.customBlack
-        let leftBarButtonItem = UIBarButtonItem(customView: leftBarButton)
+        self.isTranslucent = false
+        self.scrollEdgeAppearance = appearance
+        self.standardAppearance = appearance
+        self.tintColor = tintColor
+    }
+}
+
+//웹뷰 네비
+extension UIViewController {
+    func configureNavigationBar(title: String?, rightButtonImage: UIImage?, rightButtonAction: Selector, leftButtonAction: Selector) {
+        navigationItem.title = title
         
-        if let topItem = navigationBar.topItem {
-            topItem.rightBarButtonItem = rightBarButtonItem
-            topItem.leftBarButtonItem = leftBarButtonItem
-            topItem.title = title
+        if let rightButtonImage = rightButtonImage {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: rightButtonImage, style: .plain, target: self, action: rightButtonAction)
         }
+        
+        let backButton = UIButton(type: .system)
+        backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        backButton.addTarget(self, action: leftButtonAction, for: .touchUpInside)
+        backButton.tintColor = UIColor.customBlack
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
     }
 }

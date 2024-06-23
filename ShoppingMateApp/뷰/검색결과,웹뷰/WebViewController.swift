@@ -15,7 +15,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     var currentItem: Item?
     var isLiked: Bool = false {
         didSet {
-            updateLikeButtonImage()
+            updateIntoCartButtonImage()
         }
     }
     
@@ -28,12 +28,12 @@ class WebViewController: UIViewController, WKUIDelegate {
         configureNavigationBar()
         loadWebView()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleLikeStatusChanged), name: NSNotification.Name("LikeStatusChanged"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleCartStatusChanged), name: NSNotification.Name("LikeStatusChanged"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        checkIfProductIsLiked()
+        verifyProductLikeStatus()
     }
     
     private func setupWebView() {
@@ -48,23 +48,18 @@ class WebViewController: UIViewController, WKUIDelegate {
     }
     
     private func configureNavigationBar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .customWhite
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.customBlack]
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "profile_2"), style: .plain, target: self, action: #selector(detailLikeButtonTapped))
-        navigationItem.title = pageTitle
-        navigationController?.navigationBar.tintColor = .customBlack
+        navigationController?.navigationBar.applyCustomAppearance(
+            backgroundColor: .customWhite,
+            titleColor: .customBlack,
+            tintColor: .customBlack
+        )
         
-        let backButton = UIButton(type: .system)
-        backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
-        backButton.addTarget(self, action: #selector(backToMainView), for: .touchUpInside)
-        backButton.tintColor = UIColor.customBlack
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        
+        configureNavigationBar(
+            title: pageTitle,
+            rightButtonImage: UIImage(named: "profile_2"),
+            rightButtonAction: #selector(detailCartButtonTapped),
+            leftButtonAction: #selector(movingBackView)
+        )
         
         let tabBarAppearance = UITabBarAppearance()
         self.tabBarController?.tabBar.standardAppearance = tabBarAppearance
@@ -72,18 +67,18 @@ class WebViewController: UIViewController, WKUIDelegate {
             self.tabBarController?.tabBar.scrollEdgeAppearance = tabBarAppearance
         }
     }
-
+    
     private func loadWebView() {
         let productID = self.currentProductID ?? self.likeProductID
         guard let productID = productID, let url = URL(string: "\(APIEndpoints.naverProduct)\(productID)") else { return }
         webView.load(URLRequest(url: url))
     }
     
-    @objc private func backToMainView() {
+    @objc private func movingBackView() {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc private func detailLikeButtonTapped() {
+    @objc private func detailCartButtonTapped() {
         isLiked.toggle()
         
         guard let item = self.currentItem else { return }
@@ -95,11 +90,13 @@ class WebViewController: UIViewController, WKUIDelegate {
             likedItems.removeAll { $0.title == item.title }
         }
         FileManagerHelper.shared.saveLikedItems(likedItems)
+        
+        // 좋아요 상태 변경에 대한 Notification 전송
+           NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: nil)
+        
     }
     
-    
-    
-    private func updateLikeButtonImage() {
+    private func updateIntoCartButtonImage() {
         let imageName = isLiked ? likedImageName : unlikedImageName
         if let image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal) {
             navigationItem.rightBarButtonItem?.image = image
@@ -108,16 +105,16 @@ class WebViewController: UIViewController, WKUIDelegate {
         }
     }
     
-    private func checkIfProductIsLiked() {
+    private func verifyProductLikeStatus() {
         let likedItems = FileManagerHelper.shared.loadLikedItems()
         let productID = self.currentProductID ?? self.likeProductID
         isLiked = likedItems.contains { $0.title == productID }
     }
     
-    @objc private func handleLikeStatusChanged(notification: NSNotification) {
+    @objc private func handleCartStatusChanged(notification: NSNotification) {
         guard let likedItem = notification.object as? Item else { return }
         if likedItem.productID == self.currentProductID || likedItem.productID == self.likeProductID {
-            checkIfProductIsLiked()
+            verifyProductLikeStatus()
         }
     }
 }
