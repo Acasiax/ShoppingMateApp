@@ -31,25 +31,22 @@ class HomeCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         configureView()
         NotificationCenter.default.addObserver(self, selector: #selector(handleLikeStatusChanged), name: NSNotification.Name("LikeStatusChanged"), object: nil)
+       
     }
+    
     @objc private func handleLikeStatusChanged(notification: NSNotification) {
-           loadLikeStatus()
-       }
+        loadLikeStatus()
+    }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    
     
     private func configureView() {
         setupUI()
         setConstraints()
         setupActions()
-    }
-    
-    func setLiked(_ liked: Bool) {
-        isInCart = liked
     }
     
     private func setConstraints() {
@@ -102,7 +99,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
     @objc private func toggleLike() {
         isInCart.toggle()
         saveLikedStatus()
-        //보내는 거
         NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: item)
     }
     

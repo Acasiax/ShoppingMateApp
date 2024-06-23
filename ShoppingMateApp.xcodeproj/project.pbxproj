@@ -107,6 +107,7 @@
 		AA5850822C2550DF007B92FD /* 파일매니져 */ = {
 			isa = PBXGroup;
 			children = (
+				AA8E88402C1BF24300B477D3 /* APIKey.swift */,
 				AA5850832C25511C007B92FD /* LikedToggleItem.swift */,
 			);
 			name = "파일매니져";
@@ -209,7 +210,6 @@
 		AA8E88292C1BF0E800B477D3 /* ShoppingMateApp */ = {
 			isa = PBXGroup;
 			children = (
-				AA8E88402C1BF24300B477D3 /* APIKey.swift */,
 				AA5850822C2550DF007B92FD /* 파일매니져 */,
 				AA6CB5B62C1D4B4D0089E3B7 /* 온보딩 */,
 				AA6CB5D22C1EE7D10089E3B7 /* 검색기록 */,

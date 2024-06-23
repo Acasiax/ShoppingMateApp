@@ -38,7 +38,6 @@ class ThreeCollectionCell: UICollectionViewCell {
         setupUI()
         setConstraints()
         setupActions()
-        
     }
     
     private func setConstraints() {

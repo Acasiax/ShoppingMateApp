@@ -4,6 +4,7 @@
 //
 //  Created by 이윤지 on 6/14/24.
 //
+
 import UIKit
 import WebKit
 
@@ -27,25 +28,13 @@ class WebViewController: UIViewController, WKUIDelegate {
         setupWebView()
         configureNavigationBar()
         loadWebView()
-        //받는거
+        
         NotificationCenter.default.addObserver(self, selector: #selector(handleCartStatusChanged), name: NSNotification.Name("LikeStatusChanged"), object: nil)
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         verifyProductLikeStatus()
-    }
-    
-    
-    @objc private func handleLikeStatusChangedInCell(notification: NSNotification) {
-        // ⭐️ 셀의 좋아요 상태 변경을 처리
-        guard let likedItem = notification.object as? Item else { return }
-        if likedItem.productID == self.currentProductID || likedItem.productID == self.likeProductID {
-            verifyProductLikeStatus()
-            
-        }
     }
     
     private func setupWebView() {
@@ -59,7 +48,6 @@ class WebViewController: UIViewController, WKUIDelegate {
         }
     }
     
-    //네비 바 버튼
     private func configureNavigationBar() {
         navigationController?.navigationBar.applyCustomAppearance(
             backgroundColor: .customWhite,
@@ -69,7 +57,7 @@ class WebViewController: UIViewController, WKUIDelegate {
         
         configureNavigationBar(
             title: pageTitle,
-            rightButtonImage: UIImage(named: unlikedImageName),
+            rightButtonImage: UIImage(named: "profile_2"),
             rightButtonAction: #selector(detailCartButtonTapped),
             leftButtonAction: #selector(movingBackView)
         )
@@ -100,14 +88,12 @@ class WebViewController: UIViewController, WKUIDelegate {
             let likedItem = LikedItem(mall: item.mallName, imageName: item.image, title: item.title, price: item.lprice)
             likedItems.append(likedItem)
         } else {
-            print("🥳 \(item.title),🥕 \(item.productID)")
             likedItems.removeAll { $0.title == item.title }
         }
         FileManagerHelper.shared.saveLikedItems(likedItems)
         
-        // 보내는 거
-          NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: nil)
-    
+        // 좋아요 상태 변경에 대한 Notification 전송
+           NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: nil)
         
     }
     
@@ -123,10 +109,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     private func verifyProductLikeStatus() {
         let likedItems = FileManagerHelper.shared.loadLikedItems()
         let productID = self.currentProductID ?? self.likeProductID
-        print("현재 상품 ID: \(productID ?? "없음")")
-        print("좋아요된 항목: \(likedItems.map { $0.title })")
         isLiked = likedItems.contains { $0.title == productID }
-        print("좋아요 상태: \(isLiked)")
     }
     
     @objc private func handleCartStatusChanged(notification: NSNotification) {

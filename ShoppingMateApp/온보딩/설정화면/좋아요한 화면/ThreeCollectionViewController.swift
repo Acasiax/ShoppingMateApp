@@ -4,6 +4,7 @@
 //
 //  Created by 이윤지 on 6/21/24.
 //
+
 import UIKit
 import SnapKit
 
@@ -21,7 +22,6 @@ class ThreeCollectionViewController: UIViewController, UICollectionViewDataSourc
     
     
     private func configureNotificationCenter() {
-        //받는거
         NotificationCenter.default.addObserver(self, selector: #selector(reloadLikedItems), name: NSNotification.Name("LikeStatusChanged"), object: nil)
     }
     @objc private func reloadLikedItems() {
@@ -45,7 +45,7 @@ class ThreeCollectionViewController: UIViewController, UICollectionViewDataSourc
     // 저장된 좋아요 항목을 로드하는 메소드
     private func loadLikedItems() {
         items = FileManagerHelper.shared.loadLikedItems()
-        collectionView.reloadData() 
+        collectionView.reloadData()
     }
     
     

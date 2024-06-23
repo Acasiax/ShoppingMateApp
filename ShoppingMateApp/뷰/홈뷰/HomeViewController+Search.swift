@@ -18,13 +18,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         let item = productItems[indexPath.row]
         cell.configure(with: item)
-        
-        // 좋아요 상태를 파일 매니저에서 확인하여 설정
-            let likedItems = FileManagerHelper.shared.loadLikedItems()
-            let isLiked = likedItems.contains { $0.title == item.title }
-            cell.setLiked(isLiked)
-        
-        
         return cell
     }
 
