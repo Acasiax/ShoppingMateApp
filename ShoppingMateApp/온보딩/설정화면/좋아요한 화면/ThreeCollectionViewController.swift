@@ -21,6 +21,7 @@ class ThreeCollectionViewController: UIViewController, UICollectionViewDataSourc
     
     
     private func configureNotificationCenter() {
+        //받는거
         NotificationCenter.default.addObserver(self, selector: #selector(reloadLikedItems), name: NSNotification.Name("LikeStatusChanged"), object: nil)
     }
     @objc private func reloadLikedItems() {

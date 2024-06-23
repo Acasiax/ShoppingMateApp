@@ -98,7 +98,12 @@ class HomeViewController: UIViewController {
         setupUI()
         loadRecentSearches()
         
-        
+        // 좋아요 상태 변경 시 컬렉션 뷰를 업데이트하기 위한 NotificationCenter 설정
+            NotificationCenter.default.addObserver(self, selector: #selector(handleLikeStatusChanged), name: NSNotification.Name("LikeStatusChanged"), object: nil)
+    }
+    
+    @objc private func handleLikeStatusChanged(notification: NSNotification) {
+        homeView.collectionView.reloadData() // 또는 특정 아이템만 업데이트하고 싶다면 추가 로직 구현
     }
 
     override func viewWillAppear(_ animated: Bool) {

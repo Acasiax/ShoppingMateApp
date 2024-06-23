@@ -99,6 +99,7 @@ class SettingViewController: UIViewController {
         let likedItems = FileManagerHelper.shared.loadLikedItems()
         updateLikedItemsCount(likedItems.count)
         
+        //받는 거
         NotificationCenter.default.addObserver(self, selector: #selector(handleCartStatusChanged), name: NSNotification.Name("LikeStatusChanged"), object: nil)
     }
     
@@ -110,6 +111,9 @@ class SettingViewController: UIViewController {
         let likedItems = FileManagerHelper.shared.loadLikedItems()
         updateLikedItemsCount(likedItems.count)
         tableView.reloadData() // 테이블 뷰 갱신
+        
+        // Notification을 다시 전송💡
+      NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: notification.object)
     }
 }
 
