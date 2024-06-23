@@ -80,7 +80,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     @objc private func detailCartButtonTapped() {
         isLiked.toggle()
-        
+        print("좋아요 상태 토글됨: \(isLiked)")
         guard let item = self.currentItem else { return }
         var likedItems = FileManagerHelper.shared.loadLikedItems()
         if isLiked {
@@ -113,6 +113,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     @objc private func handleCartStatusChanged(notification: NSNotification) {
         guard let likedItem = notification.object as? Item else { return }
+        print("Notification 수신됨: \(likedItem.title)")
         if likedItem.productID == self.currentProductID || likedItem.productID == self.likeProductID {
             verifyProductLikeStatus()
         }

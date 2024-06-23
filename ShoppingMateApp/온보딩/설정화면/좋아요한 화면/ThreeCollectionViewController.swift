@@ -44,7 +44,7 @@ class ThreeCollectionViewController: UIViewController, UICollectionViewDataSourc
     // 저장된 좋아요 항목을 로드하는 메소드
     private func loadLikedItems() {
         items = FileManagerHelper.shared.loadLikedItems()
-        collectionView.reloadData() // 데이터를 로드한 후 컬렉션뷰 리로드
+        collectionView.reloadData() 
     }
     
     

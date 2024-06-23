@@ -97,6 +97,8 @@ class HomeViewController: UIViewController {
         
         setupUI()
         loadRecentSearches()
+        
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
