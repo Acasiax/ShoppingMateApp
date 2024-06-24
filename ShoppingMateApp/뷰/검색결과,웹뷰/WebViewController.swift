@@ -59,7 +59,7 @@ class WebViewController: UIViewController, WKUIDelegate {
             title: pageTitle,
             rightButtonImage: UIImage(named: "profile_2"),
             rightButtonAction: #selector(detailCartButtonTapped),
-            leftButtonAction: #selector(movingBackView)
+            leftButtonAction: #selector(navigateBackToScreen)
         )
         
         let tabBarAppearance = UITabBarAppearance()
@@ -75,7 +75,7 @@ class WebViewController: UIViewController, WKUIDelegate {
         webView.load(URLRequest(url: url))
     }
     
-    @objc private func movingBackView() {
+    @objc private func navigateBackToScreen() {
         navigationController?.popViewController(animated: true)
     }
     

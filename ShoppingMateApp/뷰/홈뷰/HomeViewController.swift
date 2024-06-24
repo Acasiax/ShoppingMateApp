@@ -97,8 +97,6 @@ class HomeViewController: UIViewController {
         
         setupUI()
         loadRecentSearches()
-        
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -154,36 +152,6 @@ class HomeViewController: UIViewController {
         emptyLabel.snp.makeConstraints { make in
             make.top.equalTo(emptyImageView.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
-        }
-    }
-    
-    private func setupRecentSearchTableView() {
-        view.addSubview(containerView)
-        containerView.addSubview(headerView)
-        containerView.addSubview(recentSearchTableView)
-        
-        containerView.snp.makeConstraints { make in
-            make.top.equalTo(homeView.searchBar.snp.bottom)
-            make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
-        
-        headerView.snp.makeConstraints { make in
-            make.top.left.right.equalTo(containerView)
-            make.height.equalTo(50)
-        }
-        
-        recentSearchTableView.snp.makeConstraints { make in
-            make.top.equalTo(headerView.snp.bottom)
-            make.left.right.bottom.equalTo(containerView)
-        }
-        
-        recentSearchTableView.onSelectSearch = { [weak self] selectedSearch in
-            self?.navigateToSearchResults(query: selectedSearch)
-        }
-        
-        recentSearchTableView.onDeleteSearch = { [weak self] deletedSearch in
-            self?.deleteSearch(deletedSearch)
         }
     }
 
@@ -259,4 +227,36 @@ extension HomeViewController: UISearchBarDelegate {
     }
 }
 
-
+extension HomeViewController {
+     
+    private func setupRecentSearchTableView() {
+        view.addSubview(containerView)
+        containerView.addSubview(headerView)
+        containerView.addSubview(recentSearchTableView)
+        
+        containerView.snp.makeConstraints { make in
+            make.top.equalTo(homeView.searchBar.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        headerView.snp.makeConstraints { make in
+            make.top.left.right.equalTo(containerView)
+            make.height.equalTo(50)
+        }
+        
+        recentSearchTableView.snp.makeConstraints { make in
+            make.top.equalTo(headerView.snp.bottom)
+            make.left.right.bottom.equalTo(containerView)
+        }
+        
+        recentSearchTableView.onSelectSearch = { [weak self] selectedSearch in
+            self?.navigateToSearchResults(query: selectedSearch)
+        }
+        
+        recentSearchTableView.onDeleteSearch = { [weak self] deletedSearch in
+            self?.deleteSearch(deletedSearch)
+        }
+    }
+    
+}

@@ -215,7 +215,6 @@
 				AA6CB5D22C1EE7D10089E3B7 /* 검색기록 */,
 				AA8E885E2C1BFC2700B477D3 /* 확장 */,
 				AA8E885B2C1BFA0300B477D3 /* 뷰 */,
-				AA8E88752C1C498300B477D3 /* 셀 */,
 				AA8E88542C1BF52D00B477D3 /* 모델 */,
 				AA6CB5D52C1F50260089E3B7 /* 경고 */,
 				AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */,
@@ -258,14 +257,6 @@
 			);
 			name = "확장";
 			path = "확장";
-			sourceTree = "<group>";
-		};
-		AA8E88752C1C498300B477D3 /* 셀 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "셀";
-			path = "셀";
 			sourceTree = "<group>";
 		};
 		AA8E88762C1C49B000B477D3 /* 쇼핑홈뷰 */ = {

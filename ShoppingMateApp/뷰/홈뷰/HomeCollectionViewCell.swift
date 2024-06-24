@@ -18,7 +18,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     private let likeButton = UIButton(type: .system)
     
     private var item: Item?
-    private var         isInCart: Bool = false {
+    private var isInCart: Bool = false {
         didSet {
             updateLikeButtonImage()
         }
@@ -47,33 +47,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
         setupUI()
         setConstraints()
         setupActions()
-    }
-    
-    private func setConstraints() {
-        imageView.snp.makeConstraints { make in
-            make.horizontalEdges.top.equalToSuperview()
-            make.height.equalTo(170)
-        }
-        [mallNameLabel, titleLabel, priceLabel].forEach { label in
-            label.snp.makeConstraints { make in
-                make.leading.trailing.equalToSuperview().inset(7)
-            }
-        }
-        mallNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(3)
-            make.height.equalTo(20)
-        }
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(mallNameLabel.snp.bottom).offset(3)
-        }
-        priceLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(3)
-            make.height.equalTo(20)
-        }
-        likeButton.snp.makeConstraints { make in
-            make.bottom.trailing.equalTo(imageView).inset(8)
-            make.size.equalTo(36)
-        }
     }
     
     func configure(with item: Item) {
@@ -124,8 +97,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }
     
     private func updateLikeButtonImage() {
-        likeButton.setImage(UIImage(named:         isInCart ? likedImageName : unlikedImageName)?.withRenderingMode(.alwaysOriginal), for: .normal)
-        likeButton.backgroundColor =         isInCart ? .customWhite : .customLightGrayCDCD.withAlphaComponent(0.5)
+        likeButton.setImage(UIImage(named: isInCart ? likedImageName : unlikedImageName)?.withRenderingMode(.alwaysOriginal), for: .normal)
+        likeButton.backgroundColor = isInCart ? .customWhite : .customLightGrayCDCD.withAlphaComponent(0.5)
     }
     
     private func saveLikedStatus() {
@@ -177,5 +150,36 @@ private extension Item {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         return "\(numberFormatter.string(from: NSNumber(value: price))!)원"
+    }
+}
+
+private extension HomeCollectionViewCell {
+    
+    private func setConstraints() {
+        imageView.snp.makeConstraints { make in
+            make.horizontalEdges.top.equalToSuperview()
+            make.height.equalTo(170)
+        }
+        [mallNameLabel, titleLabel, priceLabel].forEach { label in
+            label.snp.makeConstraints { make in
+                make.leading.trailing.equalToSuperview().inset(7)
+            }
+        }
+        mallNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(imageView.snp.bottom).offset(3)
+            make.height.equalTo(20)
+        }
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(mallNameLabel.snp.bottom).offset(3)
+        }
+        priceLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(3)
+            make.height.equalTo(20)
+        }
+        likeButton.snp.makeConstraints { make in
+            make.bottom.trailing.equalTo(imageView).inset(8)
+            make.size.equalTo(36)
+        }
+        
     }
 }
