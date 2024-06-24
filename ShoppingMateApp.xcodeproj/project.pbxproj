@@ -13,6 +13,8 @@
 		AA58508A2C265B01007B92FD /* HomeViewController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850892C265B01007B92FD /* HomeViewController+Search.swift */; };
 		AA58508C2C265B37007B92FD /* HomeViewController+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58508B2C265B37007B92FD /* HomeViewController+UICollectionView.swift */; };
 		AA58508F2C26943A007B92FD /* ThreeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58508E2C26943A007B92FD /* ThreeCollectionCell.swift */; };
+		AA5850C72C2979CD007B92FD /* SettingView+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850C62C2979CD007B92FD /* SettingView+Alert.swift */; };
+		AA5850C92C297A89007B92FD /* SearchResult+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850C82C297A89007B92FD /* SearchResult+Alert.swift */; };
 		AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */; };
 		AA6CB5BA2C1D4D6C0089E3B7 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */; };
 		AA6CB5BC2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */; };
@@ -55,6 +57,8 @@
 		AA5850892C265B01007B92FD /* HomeViewController+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+Search.swift"; sourceTree = "<group>"; };
 		AA58508B2C265B37007B92FD /* HomeViewController+UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+UICollectionView.swift"; sourceTree = "<group>"; };
 		AA58508E2C26943A007B92FD /* ThreeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCollectionCell.swift; sourceTree = "<group>"; };
+		AA5850C62C2979CD007B92FD /* SettingView+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingView+Alert.swift"; sourceTree = "<group>"; };
+		AA5850C82C297A89007B92FD /* SearchResult+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResult+Alert.swift"; sourceTree = "<group>"; };
 		AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSelectionViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				AA6CB5C02C1D599F0089E3B7 /* SettingViewController.swift */,
+				AA5850C62C2979CD007B92FD /* SettingView+Alert.swift */,
 				AA58508D2C266A09007B92FD /* 좋아요한 화면 */,
 			);
 			name = "설정화면";
@@ -184,6 +189,7 @@
 			children = (
 				AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */,
 				AA8E886E2C1C237900B477D3 /* WebViewController.swift */,
+				AA5850C82C297A89007B92FD /* SearchResult+Alert.swift */,
 			);
 			name = "검색결과,웹뷰";
 			path = "검색결과,웹뷰";
@@ -362,6 +368,7 @@
 				AA8E884F2C1BF3EF00B477D3 /* HomeViewController.swift in Sources */,
 				AA58508A2C265B01007B92FD /* HomeViewController+Search.swift in Sources */,
 				AA6CB5C32C1D6BB10089E3B7 /* ProfileCell.swift in Sources */,
+				AA5850C92C297A89007B92FD /* SearchResult+Alert.swift in Sources */,
 				AA5850882C258126007B92FD /* ThreeCollectionViewController.swift in Sources */,
 				AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */,
 				AA6CB5CF2C1ECC770089E3B7 /* SearchResultsViewController.swift in Sources */,
@@ -370,6 +377,7 @@
 				AA58508F2C26943A007B92FD /* ThreeCollectionCell.swift in Sources */,
 				AA5850842C25511C007B92FD /* LikedToggleItem.swift in Sources */,
 				AA6CB5D12C1ECCD90089E3B7 /* MainTabBarController.swift in Sources */,
+				AA5850C72C2979CD007B92FD /* SettingView+Alert.swift in Sources */,
 				AA6CB5BC2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift in Sources */,
 				AA6CB5C52C1DBF6F0089E3B7 /* ProfileTableViewCell.swift in Sources */,
 				AA8E882B2C1BF0E800B477D3 /* AppDelegate.swift in Sources */,
