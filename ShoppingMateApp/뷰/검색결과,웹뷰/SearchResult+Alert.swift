@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+//에러 처리 얼럿
 class AlertHelper {
     static func showErrorAlert(on viewController: UIViewController, message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
@@ -15,6 +15,7 @@ class AlertHelper {
     }
 }
 
+//닉네임 설정 얼럿
 class AlertHelperProfileSettingView {
     static func showErrorAlert(on viewController: UIViewController, title: String = "경고", message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

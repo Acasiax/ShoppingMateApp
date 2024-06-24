@@ -15,6 +15,7 @@
 		AA58508F2C26943A007B92FD /* ThreeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58508E2C26943A007B92FD /* ThreeCollectionCell.swift */; };
 		AA5850C72C2979CD007B92FD /* SettingView+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850C62C2979CD007B92FD /* SettingView+Alert.swift */; };
 		AA5850C92C297A89007B92FD /* SearchResult+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850C82C297A89007B92FD /* SearchResult+Alert.swift */; };
+		AA5850CD2C298590007B92FD /* Profile+Nickname+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850CC2C298590007B92FD /* Profile+Nickname+Ext.swift */; };
 		AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */; };
 		AA6CB5BA2C1D4D6C0089E3B7 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */; };
 		AA6CB5BC2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */; };
@@ -26,7 +27,6 @@
 		AA6CB5CF2C1ECC770089E3B7 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */; };
 		AA6CB5D12C1ECCD90089E3B7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */; };
 		AA6CB5D42C1EE7E10089E3B7 /* RecentSearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5D32C1EE7E10089E3B7 /* RecentSearchTableView.swift */; };
-		AA6CB5D72C1F503B0089E3B7 /* ToasetMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5D62C1F503B0089E3B7 /* ToasetMessage.swift */; };
 		AA6CB5DA2C1F50550089E3B7 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = AA6CB5D92C1F50550089E3B7 /* Toast */; };
 		AA6CB6042C2024740089E3B7 /* Color+recap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB6032C2024740089E3B7 /* Color+recap.swift */; };
 		AA6CB6072C20435B0089E3B7 /* Create+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB6062C20435B0089E3B7 /* Create+Component.swift */; };
@@ -59,6 +59,7 @@
 		AA58508E2C26943A007B92FD /* ThreeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCollectionCell.swift; sourceTree = "<group>"; };
 		AA5850C62C2979CD007B92FD /* SettingView+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingView+Alert.swift"; sourceTree = "<group>"; };
 		AA5850C82C297A89007B92FD /* SearchResult+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResult+Alert.swift"; sourceTree = "<group>"; };
+		AA5850CC2C298590007B92FD /* Profile+Nickname+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+Nickname+Ext.swift"; sourceTree = "<group>"; };
 		AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSelectionViewController.swift; sourceTree = "<group>"; };
@@ -70,7 +71,6 @@
 		AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		AA6CB5D32C1EE7E10089E3B7 /* RecentSearchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchTableView.swift; sourceTree = "<group>"; };
-		AA6CB5D62C1F503B0089E3B7 /* ToasetMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToasetMessage.swift; sourceTree = "<group>"; };
 		AA6CB6032C2024740089E3B7 /* Color+recap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+recap.swift"; sourceTree = "<group>"; };
 		AA6CB6062C20435B0089E3B7 /* Create+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Create+Component.swift"; sourceTree = "<group>"; };
 		AA6CB60D2C205E2E0089E3B7 /* CheckReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CheckReadMe.md; sourceTree = "<group>"; };
@@ -128,6 +128,26 @@
 			path = "좋아요한 화면";
 			sourceTree = "<group>";
 		};
+		AA5850CA2C29850F007B92FD /* 새프로필선택 */ = {
+			isa = PBXGroup;
+			children = (
+				AA6CB5C22C1D6BB10089E3B7 /* ProfileCell.swift */,
+				AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */,
+				AA6CB5BE2C1D597A0089E3B7 /* ProfileImageView.swift */,
+			);
+			name = "새프로필선택";
+			path = "새프로필설정";
+			sourceTree = "<group>";
+		};
+		AA5850CB2C298546007B92FD /* 설정에서새프로필 */ = {
+			isa = PBXGroup;
+			children = (
+				AA6CB5C42C1DBF6F0089E3B7 /* ProfileTableViewCell.swift */,
+			);
+			name = "설정에서새프로필";
+			path = "설정에서새프로필";
+			sourceTree = "<group>";
+		};
 		AA6CB5B62C1D4B4D0089E3B7 /* 온보딩 */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +155,7 @@
 				AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */,
 				AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */,
 				AA6CB6082C2043880089E3B7 /* 프로필설정 */,
+				AA5850CB2C298546007B92FD /* 설정에서새프로필 */,
 				AA6CB6092C2043C70089E3B7 /* 설정화면 */,
 			);
 			name = "온보딩";
@@ -151,23 +172,12 @@
 			path = "검색기록";
 			sourceTree = "<group>";
 		};
-		AA6CB5D52C1F50260089E3B7 /* 경고 */ = {
-			isa = PBXGroup;
-			children = (
-				AA6CB5D62C1F503B0089E3B7 /* ToasetMessage.swift */,
-			);
-			name = "경고";
-			path = "경고";
-			sourceTree = "<group>";
-		};
 		AA6CB6082C2043880089E3B7 /* 프로필설정 */ = {
 			isa = PBXGroup;
 			children = (
 				AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */,
-				AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */,
-				AA6CB5C22C1D6BB10089E3B7 /* ProfileCell.swift */,
-				AA6CB5C42C1DBF6F0089E3B7 /* ProfileTableViewCell.swift */,
-				AA6CB5BE2C1D597A0089E3B7 /* ProfileImageView.swift */,
+				AA5850CC2C298590007B92FD /* Profile+Nickname+Ext.swift */,
+				AA5850CA2C29850F007B92FD /* 새프로필선택 */,
 			);
 			name = "프로필설정";
 			path = "프로필설정";
@@ -222,7 +232,6 @@
 				AA8E885E2C1BFC2700B477D3 /* 확장 */,
 				AA8E885B2C1BFA0300B477D3 /* 뷰 */,
 				AA8E88542C1BF52D00B477D3 /* 모델 */,
-				AA6CB5D52C1F50260089E3B7 /* 경고 */,
 				AA8E882A2C1BF0E800B477D3 /* AppDelegate.swift */,
 				AA8E882C2C1BF0E800B477D3 /* SceneDelegate.swift */,
 				AA8E882E2C1BF0E800B477D3 /* ViewController.swift */,
@@ -384,10 +393,10 @@
 				AA6CB5D42C1EE7E10089E3B7 /* RecentSearchTableView.swift in Sources */,
 				AA8E88412C1BF24300B477D3 /* APIKey.swift in Sources */,
 				AA8E88562C1BF53D00B477D3 /* Item.swift in Sources */,
+				AA5850CD2C298590007B92FD /* Profile+Nickname+Ext.swift in Sources */,
 				AA6CB5C72C1DCC570089E3B7 /* LikeNotification.swift in Sources */,
 				AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */,
 				AA8E88532C1BF49C00B477D3 /* HomeCollectionViewCell.swift in Sources */,
-				AA6CB5D72C1F503B0089E3B7 /* ToasetMessage.swift in Sources */,
 				AA6CB6072C20435B0089E3B7 /* Create+Component.swift in Sources */,
 				AA6CB5BF2C1D597A0089E3B7 /* ProfileImageView.swift in Sources */,
 				AA6CB60F2C20637A0089E3B7 /* SplashViewController.swift in Sources */,
