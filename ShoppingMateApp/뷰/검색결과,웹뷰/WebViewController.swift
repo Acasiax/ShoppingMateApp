@@ -13,6 +13,8 @@ class WebViewController: UIViewController, WKUIDelegate {
     var currentProductID: String?
     var likeProductID: String?
     var pageTitle: String?
+    let likedImageName = "like_selected"
+    let unlikedImageName = "like_unselected"
     var currentItem: Item?
     var isLiked: Bool = false {
         didSet {
@@ -20,8 +22,6 @@ class WebViewController: UIViewController, WKUIDelegate {
         }
     }
     
-    private let likedImageName = "like_selected"
-    private let unlikedImageName = "like_unselected"
     
     override func viewDidLoad() {
         super.viewDidLoad()

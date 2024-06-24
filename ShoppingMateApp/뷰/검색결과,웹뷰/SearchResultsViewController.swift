@@ -4,6 +4,7 @@
 
 //  Created by 이윤지 on 6/16/24.
 //
+
 import UIKit
 import SnapKit
 
@@ -58,7 +59,7 @@ class SearchResultsViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 20
         layout.minimumInteritemSpacing = 5
-        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 30) / 2, height: 250)
+        layout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 30) / 2, height: 260)
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: "MainCollectionViewCell")
         view.backgroundColor = .customWhite
@@ -107,33 +108,27 @@ class SearchResultsViewController: UIViewController {
         
         resultsCountLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
-            // make.top.equalTo(searchBar.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(10)
         }
-        
         
         relevanceSortButton.snp.makeConstraints { make in
             make.top.equalTo(resultsCountLabel.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(10)
-            make.width.equalTo(55)
             make.height.equalTo(40)
         }
         dateSortButton.snp.makeConstraints { make in
             make.top.equalTo(resultsCountLabel.snp.bottom).offset(10)
-            make.leading.equalTo(relevanceSortButton.snp.trailing).offset(7)
-            make.width.equalTo(55)
+            make.leading.equalTo(relevanceSortButton.snp.trailing).offset(8)
             make.height.equalTo(40)
         }
         highPriceSortButton.snp.makeConstraints { make in
             make.top.equalTo(resultsCountLabel.snp.bottom).offset(10)
-            make.leading.equalTo(dateSortButton.snp.trailing).offset(7)
-            make.width.equalTo(80)
+            make.leading.equalTo(dateSortButton.snp.trailing).offset(8)
             make.height.equalTo(40)
         }
         lowPriceSortButton.snp.makeConstraints { make in
             make.top.equalTo(resultsCountLabel.snp.bottom).offset(10)
-            make.leading.equalTo(highPriceSortButton.snp.trailing).offset(7)
-            make.width.equalTo(80)
+            make.leading.equalTo(highPriceSortButton.snp.trailing).offset(8)
             make.height.equalTo(40)
         }
         

@@ -11,8 +11,6 @@ import SnapKit
 class HomeViewController: UIViewController {
     var totalResults: Int?
     var isSearching = false
-    
-    let homeView = MainSearchView()
     var shopManager = NetworkManager.shared
     var productItems: [Item] = []
     var isDataEnd = false
@@ -25,6 +23,12 @@ class HomeViewController: UIViewController {
             updateVisibility()
         }
     }
+    
+    let searchBar: UISearchBar = {
+            let searchBar = UISearchBar()
+            searchBar.translatesAutoresizingMaskIntoConstraints = false
+            return searchBar
+        }()
     
     let headerView: UIView = {
         let headerView = UIView()
@@ -83,14 +87,10 @@ class HomeViewController: UIViewController {
         tableView.isHidden = true
         return tableView
     }()
-    
-    override func loadView() {
-        self.view = homeView
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .white
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
         tapGesture.cancelsTouchesInView = false
@@ -103,7 +103,6 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         isSearching = false
         loadRecentSearches()
-        homeView.collectionView.reloadData()
     }
     
     @objc func dismissKeyboard() {
@@ -112,34 +111,23 @@ class HomeViewController: UIViewController {
      
     private func setupUI() {
         setupNavigationUI()
+        setupSearchBar()
         setupEmptyImageView()
         setupRecentSearchTableView()
         
-        homeView.searchBar.delegate = self
-        homeView.collectionView.delegate = self
-        homeView.collectionView.dataSource = self
-        homeView.collectionView.prefetchDataSource = self
-
-        if let cancelButton = homeView.searchBar.value(forKey: "cancelButton") as? UIButton {
-            cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-        }
+        searchBar.delegate = self
+        
     }
 
-    private func setupNavigationUI() {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor.customWhite
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.customBlack]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.customBlack]
-        appearance.shadowColor = .clear
-
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.tintColor = .customWhite
-        navigationController?.navigationBar.isTranslucent = false
-        let nickname = getNickname()
-        navigationItem.title = "\(nickname)'s MEANING OUT"
-    }
-
+    private func setupSearchBar() {
+           view.addSubview(searchBar)
+           searchBar.snp.makeConstraints { make in
+               make.top.equalTo(view.safeAreaLayoutGuide).offset(6)
+               make.horizontalEdges.equalToSuperview()
+               make.height.equalTo(50)
+           }
+       }
+    
     private func setupEmptyImageView() {
         view.addSubview(emptyImageView)
         view.addSubview(emptyLabel)
@@ -176,7 +164,6 @@ class HomeViewController: UIViewController {
     
     @objc private func cancelButtonTapped() {
         productItems.removeAll()
-        homeView.collectionView.reloadData()
         updateVisibility()
         navigationController?.popViewController(animated: true)
     }
@@ -235,7 +222,7 @@ extension HomeViewController {
         containerView.addSubview(recentSearchTableView)
         
         containerView.snp.makeConstraints { make in
-            make.top.equalTo(homeView.searchBar.snp.bottom)
+            make.top.equalTo(searchBar.snp.bottom)
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
@@ -259,4 +246,18 @@ extension HomeViewController {
         }
     }
     
+    private func setupNavigationUI() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor.customWhite
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.customBlack]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.customBlack]
+        appearance.shadowColor = .clear
+
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.tintColor = .customWhite
+        navigationController?.navigationBar.isTranslucent = false
+        let nickname = getNickname()
+        navigationItem.title = "\(nickname)'s MEANING OUT"
+    }
 }

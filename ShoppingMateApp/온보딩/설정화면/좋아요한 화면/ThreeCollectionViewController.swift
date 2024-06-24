@@ -20,7 +20,6 @@ class ThreeCollectionViewController: UIViewController, UICollectionViewDataSourc
         configureNotificationCenter() // NotificationCenter 설정
     }
     
-    
     private func configureNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadLikedItems), name: NSNotification.Name("LikeStatusChanged"), object: nil)
     }
@@ -64,7 +63,7 @@ class ThreeCollectionViewController: UIViewController, UICollectionViewDataSourc
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 60, height: 250) // 몇개 나올지!
+        return CGSize(width: collectionView.frame.width - 60, height: 260) // 몇개 나올지!
     }
 }
 

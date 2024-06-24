@@ -24,7 +24,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard !isSearching else { return }
         isSearching = true
         let selectedSearch = recentSearches[indexPath.row]
-        homeView.searchBar.text = selectedSearch
+        searchBar.text = selectedSearch
         
         navigateToSearchResults(query: selectedSearch)
         recentSearchTableView.isHidden = true

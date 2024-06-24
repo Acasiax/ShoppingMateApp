@@ -22,7 +22,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        guard let query = homeView.searchBar.text, !isDataEnd, !isDataLoading else { return }
+        guard let query = searchBar.text, !isDataEnd, !isDataLoading else { return }
 
         if productItems.count - 1 == indexPaths.last?.row {
             fetchMoreData(query: query)
@@ -52,7 +52,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 self.productItems.append(contentsOf: items)
                 
                 DispatchQueue.main.async {
-                    self.homeView.collectionView.insertItems(at: newIndexPaths)
                     self.updateVisibility()
                 }
             case .failure(let error):

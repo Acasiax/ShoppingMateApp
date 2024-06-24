@@ -16,7 +16,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
     private let titleLabel = UILabel()
     private let priceLabel = UILabel()
     private let likeButton = UIButton(type: .system)
-    
+    private let likedImageName = "like_selected"
+    private let unlikedImageName = "like_unselected"
     private var item: Item?
     private var isInCart: Bool = false {
         didSet {
@@ -24,8 +25,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private let likedImageName = "like_selected"
-    private let unlikedImageName = "like_unselected"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -105,7 +104,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
         guard let item = item else { return }
         var likedItems = FileManagerHelper.shared.loadLikedItems()
         
-        if         isInCart {
+        if isInCart {
             likedItems.append(LikedItem(mall: item.mallName, imageName: item.image, title: item.title, price: item.lprice))
         } else {
             likedItems.removeAll { $0.title == item.title }
@@ -157,8 +156,9 @@ private extension HomeCollectionViewCell {
     
     private func setConstraints() {
         imageView.snp.makeConstraints { make in
-            make.horizontalEdges.top.equalToSuperview()
-            make.height.equalTo(170)
+            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(8)
+            make.height.equalTo(180)
         }
         [mallNameLabel, titleLabel, priceLabel].forEach { label in
             label.snp.makeConstraints { make in
@@ -166,19 +166,20 @@ private extension HomeCollectionViewCell {
             }
         }
         mallNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(3)
+            make.top.equalTo(imageView.snp.bottom).offset(5)
             make.height.equalTo(20)
         }
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(mallNameLabel.snp.bottom).offset(3)
+            make.top.equalTo(mallNameLabel.snp.bottom).offset(5)
+            
         }
         priceLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(3)
+            make.top.equalTo(titleLabel.snp.bottom).offset(5)
             make.height.equalTo(20)
         }
         likeButton.snp.makeConstraints { make in
-            make.bottom.trailing.equalTo(imageView).inset(8)
-            make.size.equalTo(36)
+            make.bottom.trailing.equalTo(imageView).inset(7)
+            make.size.equalTo(40)
         }
         
     }

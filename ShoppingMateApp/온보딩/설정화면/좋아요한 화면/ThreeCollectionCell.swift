@@ -14,16 +14,14 @@ class ThreeCollectionCell: UICollectionViewCell {
     private let titleLabel = UILabel()
     private let priceLabel = UILabel()
     private let likeButton = UIButton(type: .system)
-    
+    private let likedImageName = "like_selected"
+    private let unlikedImageName = "like_unselected"
     private var item: LikedItem?
     private var isInCart: Bool = false {
         didSet {
             updateLikeButtonImage()
         }
     }
-    
-    private let likedImageName = "like_selected"
-    private let unlikedImageName = "like_unselected"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,35 +36,6 @@ class ThreeCollectionCell: UICollectionViewCell {
         setupUI()
         setConstraints()
         setupActions()
-    }
-    
-    private func setConstraints() {
-        imageView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalToSuperview()
-            make.height.equalTo(150)
-        }
-        
-        mallNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(5)
-            make.leading.trailing.equalToSuperview().inset(7)
-            make.height.equalTo(20)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(mallNameLabel.snp.bottom).offset(5)
-            make.leading.trailing.equalToSuperview().inset(7)
-        }
-        
-        priceLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(5)
-            make.leading.trailing.equalToSuperview().inset(7)
-            make.height.equalTo(20)
-        }
-        
-        likeButton.snp.makeConstraints { make in
-            make.bottom.trailing.equalTo(imageView).inset(8)
-            make.size.equalTo(36)
-        }
     }
     
     func configure(with item: LikedItem) {
@@ -101,7 +70,6 @@ class ThreeCollectionCell: UICollectionViewCell {
             NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: nil)
         }
     }
-    
     
     private func updateUI() {
         guard let item = item else { return }
@@ -178,5 +146,38 @@ private extension LikedItem {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         return "\(numberFormatter.string(from: NSNumber(value: price))!)원"
+    }
+}
+
+
+extension ThreeCollectionCell {
+    
+    func setConstraints() {
+        imageView.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalToSuperview()
+            make.height.equalTo(150)
+        }
+        
+        mallNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(imageView.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(7)
+            make.height.equalTo(20)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(mallNameLabel.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(7)
+        }
+        
+        priceLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(7)
+            make.height.equalTo(20)
+        }
+        
+        likeButton.snp.makeConstraints { make in
+            make.bottom.trailing.equalTo(imageView).inset(8)
+            make.size.equalTo(36)
+        }
     }
 }

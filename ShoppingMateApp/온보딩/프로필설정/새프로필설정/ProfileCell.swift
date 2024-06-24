@@ -10,7 +10,6 @@ import UIKit
 class ProfileCell: UICollectionViewCell {
     
     static let id = "ProfileCell"
-    //static let shared = ProfileCell()
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
