@@ -57,17 +57,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
-                    self.showErrorAlert(message: error.localizedDescription)
+                    AlertHelper.showErrorAlert(on: self, message: error.localizedDescription)
                 }
             }
         }
     }
-
-    private func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-
 
 }
