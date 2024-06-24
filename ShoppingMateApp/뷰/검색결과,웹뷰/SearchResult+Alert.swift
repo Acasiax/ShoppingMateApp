@@ -7,19 +7,18 @@
 
 import UIKit
 
-extension SearchResultsViewController {
-    func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-}
-
-
 class AlertHelper {
     static func showErrorAlert(on viewController: UIViewController, message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        viewController.present(alert, animated: true, completion: nil)
+    }
+}
+
+class AlertHelperProfileSettingView {
+    static func showErrorAlert(on viewController: UIViewController, title: String = "경고", message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
         viewController.present(alert, animated: true, completion: nil)
     }
 }

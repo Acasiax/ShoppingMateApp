@@ -189,9 +189,7 @@ class ProfileSettingViewController: UIViewController {
                 }
             }
         } else {
-            let alert = UIAlertController(title: "경고", message: validationMessage, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
+            AlertHelperProfileSettingView.showErrorAlert(on: self, message: validationMessage)
         }
     }
     
@@ -209,9 +207,7 @@ class ProfileSettingViewController: UIViewController {
                 }
             }
         } else {
-            let alert = UIAlertController(title: "경고", message: validationMessage, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
+            AlertHelperProfileSettingView.showErrorAlert(on: self, message: validationMessage)
         }
     }
 
