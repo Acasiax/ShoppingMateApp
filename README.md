@@ -53,7 +53,7 @@
 ### 사용 기술
 - **프론트엔드**: UIKit (iOS)
 - **백엔드**: 네이버 쇼핑 API
-- **데이터베이스**: realm, swuft user defalut
+- **데이터베이스**: realm, swift user defalut
 - **네트워킹**: Alamofire (iOS)
 - **UI/UX**: swift codebase
 
