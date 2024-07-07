@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA074D412C3ADFF0001AFC77 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA074D402C3ADFF0001AFC77 /* BaseViewController.swift */; };
 		AA5850842C25511C007B92FD /* LikedToggleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850832C25511C007B92FD /* LikedToggleItem.swift */; };
 		AA5850862C256013007B92FD /* RecentSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850852C256013007B92FD /* RecentSearch.swift */; };
 		AA5850882C258126007B92FD /* ThreeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850872C258126007B92FD /* ThreeCollectionViewController.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA074D402C3ADFF0001AFC77 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		AA5850832C25511C007B92FD /* LikedToggleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikedToggleItem.swift; sourceTree = "<group>"; };
 		AA5850852C256013007B92FD /* RecentSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearch.swift; sourceTree = "<group>"; };
 		AA5850872C258126007B92FD /* ThreeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCollectionViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 		AA5850822C2550DF007B92FD /* 파일매니져 */ = {
 			isa = PBXGroup;
 			children = (
+				AA074D402C3ADFF0001AFC77 /* BaseViewController.swift */,
 				AA8E88402C1BF24300B477D3 /* APIKey.swift */,
 				AA5850832C25511C007B92FD /* LikedToggleItem.swift */,
 			);
@@ -378,6 +381,7 @@
 				AA58508A2C265B01007B92FD /* HomeViewController+Search.swift in Sources */,
 				AA6CB5C32C1D6BB10089E3B7 /* ProfileCell.swift in Sources */,
 				AA5850CF2C29888C007B92FD /* Profile+Autolayout+Ext.swift in Sources */,
+				AA074D412C3ADFF0001AFC77 /* BaseViewController.swift in Sources */,
 				AA5850C92C297A89007B92FD /* SearchResult+Alert.swift in Sources */,
 				AA5850882C258126007B92FD /* ThreeCollectionViewController.swift in Sources */,
 				AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */,

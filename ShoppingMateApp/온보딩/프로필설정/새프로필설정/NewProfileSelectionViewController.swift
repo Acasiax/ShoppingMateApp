@@ -34,7 +34,7 @@ class NewProfileSelectionViewController: UIViewController {
         collectionView.dataSource = self
         setupViews()
         setupConstraints()
-        collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: ProfileCell.id)
+        collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: ProfileCell.reuseIdentifier)
         setupNavigationBar()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
@@ -92,7 +92,7 @@ extension NewProfileSelectionViewController: UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.id, for: indexPath) as! ProfileCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.reuseIdentifier, for: indexPath) as! ProfileCell
         let profileName = profiles[indexPath.item]
         let image = UIImage(named: profileName)
         image?.accessibilityIdentifier = profileName

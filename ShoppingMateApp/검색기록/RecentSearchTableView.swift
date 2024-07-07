@@ -31,7 +31,7 @@ class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSo
     private func setupTableView() {
         self.delegate = self
         self.dataSource = self
-        self.register(RecentSearchCell.self, forCellReuseIdentifier: RecentSearchCell.identifier)
+        self.register(RecentSearchCell.self, forCellReuseIdentifier: RecentSearchCell.reuseIdentifier)
         self.backgroundColor = .customWhite
         self.separatorStyle = .none
     }
@@ -46,7 +46,7 @@ class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RecentSearchCell.identifier, for: indexPath) as? RecentSearchCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RecentSearchCell.reuseIdentifier, for: indexPath) as? RecentSearchCell else {
             return UITableViewCell()
         }
         cell.configure(with: recentSearches[indexPath.row])
@@ -65,8 +65,8 @@ class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSo
     }
 }
 
-class RecentSearchCell: UITableViewCell {
-    static let identifier = "RecentSearchCell"
+class RecentSearchCell: UITableViewCell, Reusable {
+   // static let identifier = "RecentSearchCell"
     
     let searchLabel: UILabel = {
         let label = UILabel()

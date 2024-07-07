@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 //검색 결과 화면
-class SearchResultsViewController: UIViewController {
+class SearchResultsViewController: BaseViewController {
     
     var totalResults: Int? //검색 총결과 수
     
@@ -80,32 +80,26 @@ class SearchResultsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        setupConstraints()
         loadData(query: query)
+        setupHierarchy()
+        configureView()
         
-        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backBarButtonItem
-        navigationController?.navigationBar.tintColor = .customBlack
+       
         
     }
     
-    private func setupUI() {
-        view.backgroundColor = .customWhite
-        //  view.addSubview(searchBar)
-        view.addSubview(resultsCountLabel)
-        view.addSubview(relevanceSortButton)
-        view.addSubview(dateSortButton)
-        view.addSubview(highPriceSortButton)
-        view.addSubview(lowPriceSortButton)
-        view.addSubview(collectionView)
-        
-        searchBar.delegate = self
-        
-        relevanceSortButton.addTarget(self, action: #selector(updateSortCriteria(_:)), for: .touchUpInside)
-        dateSortButton.addTarget(self, action: #selector(updateSortCriteria(_:)), for: .touchUpInside)
-        highPriceSortButton.addTarget(self, action: #selector(updateSortCriteria(_:)), for: .touchUpInside)
-        lowPriceSortButton.addTarget(self, action: #selector(updateSortCriteria(_:)), for: .touchUpInside)
-        
+    // 서브뷰 추가
+    override func setupHierarchy() {
+            view.addSubview(resultsCountLabel)
+            view.addSubview(relevanceSortButton)
+            view.addSubview(dateSortButton)
+            view.addSubview(highPriceSortButton)
+            view.addSubview(lowPriceSortButton)
+            view.addSubview(collectionView)
+        }
+    
+     override func setupConstraints() {
         resultsCountLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
             make.leading.equalToSuperview().offset(10)
@@ -136,12 +130,28 @@ class SearchResultsViewController: UIViewController {
             make.top.equalTo(relevanceSortButton.snp.bottom).offset(20)
             make.leading.trailing.bottom.equalToSuperview()
         }
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.prefetchDataSource = self
+
     }
-    
+    // 백그라운드 설정 및 추가 기능 설정
+     override func configureView() {
+           view.backgroundColor = .customWhite
+           
+           searchBar.delegate = self
+           
+           relevanceSortButton.addTarget(self, action: #selector(updateSortCriteria(_:)), for: .touchUpInside)
+           dateSortButton.addTarget(self, action: #selector(updateSortCriteria(_:)), for: .touchUpInside)
+           highPriceSortButton.addTarget(self, action: #selector(updateSortCriteria(_:)), for: .touchUpInside)
+           lowPriceSortButton.addTarget(self, action: #selector(updateSortCriteria(_:)), for: .touchUpInside)
+           
+           collectionView.delegate = self
+           collectionView.dataSource = self
+           collectionView.prefetchDataSource = self
+           
+           let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+           navigationItem.backBarButtonItem = backBarButtonItem
+           navigationController?.navigationBar.tintColor = .customBlack
+       }
+       
     
     private func loadData(query: String, sort: String = "sim", display: Int = 30, start: Int = 1) {
         isDataLoading = true

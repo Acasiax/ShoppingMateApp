@@ -9,12 +9,12 @@ import UIKit
 import WebKit
 
 class WebViewController: UIViewController, WKUIDelegate {
-    var webView = WKWebView()
+    private var webView = WKWebView()
     var currentProductID: String?
-    var likeProductID: String?
+    private var likeProductID: String?
     var pageTitle: String?
-    let likedImageName = "like_selected"
-    let unlikedImageName = "like_unselected"
+    private  let likedImageName = "like_selected"
+    private  let unlikedImageName = "like_unselected"
     var currentItem: Item?
     var isLiked: Bool = false {
         didSet {
@@ -93,7 +93,7 @@ class WebViewController: UIViewController, WKUIDelegate {
         FileManagerHelper.shared.saveLikedItems(likedItems)
         
         // 좋아요 상태 변경에 대한 Notification 전송
-           NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("LikeStatusChanged"), object: nil)
         
     }
     
