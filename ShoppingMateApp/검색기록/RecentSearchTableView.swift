@@ -8,6 +8,7 @@ import UIKit
 import SnapKit
 
 class RecentSearchTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
+    
     var recentSearches: [String] = [] {
         didSet {
             reloadData()
