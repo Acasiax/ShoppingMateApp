@@ -20,6 +20,10 @@
 		AA5850CF2C29888C007B92FD /* Profile+Autolayout+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850CE2C29888C007B92FD /* Profile+Autolayout+Ext.swift */; };
 		AA6BD3092C3D5E0400107AF6 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6BD3082C3D5E0400107AF6 /* Observable.swift */; };
 		AA6BD30C2C3D5E3500107AF6 /* ProfileSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6BD30B2C3D5E3500107AF6 /* ProfileSettingViewModel.swift */; };
+		AA6BD30F2C3D609E00107AF6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AA6BD30E2C3D609E00107AF6 /* Kingfisher */; };
+		AA6BD3122C3D60A800107AF6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AA6BD3112C3D60A800107AF6 /* SnapKit */; };
+		AA6BD3152C3D60B000107AF6 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AA6BD3142C3D60B000107AF6 /* Alamofire */; };
+		AA6BD3182C3D60B800107AF6 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = AA6BD3172C3D60B800107AF6 /* Toast */; };
 		AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */; };
 		AA6CB5BA2C1D4D6C0089E3B7 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */; };
 		AA6CB5BC2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */; };
@@ -31,7 +35,6 @@
 		AA6CB5CF2C1ECC770089E3B7 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5CE2C1ECC770089E3B7 /* SearchResultsViewController.swift */; };
 		AA6CB5D12C1ECCD90089E3B7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5D02C1ECCD90089E3B7 /* MainTabBarController.swift */; };
 		AA6CB5D42C1EE7E10089E3B7 /* RecentSearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5D32C1EE7E10089E3B7 /* RecentSearchTableView.swift */; };
-		AA6CB5DA2C1F50550089E3B7 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = AA6CB5D92C1F50550089E3B7 /* Toast */; };
 		AA6CB6042C2024740089E3B7 /* Color+recap.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB6032C2024740089E3B7 /* Color+recap.swift */; };
 		AA6CB6072C20435B0089E3B7 /* Create+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB6062C20435B0089E3B7 /* Create+Component.swift */; };
 		AA6CB60F2C20637A0089E3B7 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB60E2C20637A0089E3B7 /* SplashViewController.swift */; };
@@ -43,13 +46,10 @@
 		AA8E88372C1BF0EA00B477D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA8E88352C1BF0EA00B477D3 /* LaunchScreen.storyboard */; };
 		AA8E883F2C1BF22E00B477D3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AA8E883E2C1BF22E00B477D3 /* .gitignore */; };
 		AA8E88412C1BF24300B477D3 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88402C1BF24300B477D3 /* APIKey.swift */; };
-		AA8E88452C1BF31300B477D3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AA8E88442C1BF31300B477D3 /* SnapKit */; };
-		AA8E88482C1BF31F00B477D3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AA8E88472C1BF31F00B477D3 /* Alamofire */; };
 		AA8E884F2C1BF3EF00B477D3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E884E2C1BF3EF00B477D3 /* HomeViewController.swift */; };
 		AA8E88532C1BF49C00B477D3 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88522C1BF49C00B477D3 /* HomeCollectionViewCell.swift */; };
 		AA8E88562C1BF53D00B477D3 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88552C1BF53D00B477D3 /* Item.swift */; };
 		AA8E885A2C1BF84700B477D3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E88592C1BF84700B477D3 /* NetworkManager.swift */; };
-		AA8E88652C1C078D00B477D3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AA8E88642C1C078D00B477D3 /* Kingfisher */; };
 		AA8E886F2C1C237900B477D3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E886E2C1C237900B477D3 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -104,10 +104,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA8E88652C1C078D00B477D3 /* Kingfisher in Frameworks */,
-				AA8E88452C1BF31300B477D3 /* SnapKit in Frameworks */,
-				AA6CB5DA2C1F50550089E3B7 /* Toast in Frameworks */,
-				AA8E88482C1BF31F00B477D3 /* Alamofire in Frameworks */,
+				AA6BD3182C3D60B800107AF6 /* Toast in Frameworks */,
+				AA6BD3152C3D60B000107AF6 /* Alamofire in Frameworks */,
+				AA6BD30F2C3D609E00107AF6 /* Kingfisher in Frameworks */,
+				AA6BD3122C3D60A800107AF6 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,10 +322,10 @@
 			);
 			name = ShoppingMateApp;
 			packageProductDependencies = (
-				AA8E88442C1BF31300B477D3 /* SnapKit */,
-				AA8E88472C1BF31F00B477D3 /* Alamofire */,
-				AA8E88642C1C078D00B477D3 /* Kingfisher */,
-				AA6CB5D92C1F50550089E3B7 /* Toast */,
+				AA6BD30E2C3D609E00107AF6 /* Kingfisher */,
+				AA6BD3112C3D60A800107AF6 /* SnapKit */,
+				AA6BD3142C3D60B000107AF6 /* Alamofire */,
+				AA6BD3172C3D60B800107AF6 /* Toast */,
 			);
 			productName = ShoppingMateApp;
 			productReference = AA8E88272C1BF0E800B477D3 /* ShoppingMateApp.app */;
@@ -356,10 +356,10 @@
 			);
 			mainGroup = AA8E881E2C1BF0E800B477D3;
 			packageReferences = (
-				AA8E88432C1BF31300B477D3 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				AA8E88462C1BF31F00B477D3 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				AA8E88632C1C078D00B477D3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				AA6CB5D82C1F50550089E3B7 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				AA6BD30D2C3D609E00107AF6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				AA6BD3102C3D60A800107AF6 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				AA6BD3132C3D60B000107AF6 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				AA6BD3162C3D60B800107AF6 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = AA8E88282C1BF0E800B477D3 /* Products */;
 			projectDirPath = "";
@@ -665,31 +665,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AA6CB5D82C1F50550089E3B7 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.1.1;
-			};
-		};
-		AA8E88432C1BF31300B477D3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.7.1;
-			};
-		};
-		AA8E88462C1BF31F00B477D3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.9.1;
-			};
-		};
-		AA8E88632C1C078D00B477D3 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		AA6BD30D2C3D609E00107AF6 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -697,28 +673,52 @@
 				minimumVersion = 7.12.0;
 			};
 		};
+		AA6BD3102C3D60A800107AF6 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		AA6BD3132C3D60B000107AF6 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		AA6BD3162C3D60B800107AF6 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AA6CB5D92C1F50550089E3B7 /* Toast */ = {
+		AA6BD30E2C3D609E00107AF6 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AA6CB5D82C1F50550089E3B7 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
-			productName = Toast;
+			package = AA6BD30D2C3D609E00107AF6 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
-		AA8E88442C1BF31300B477D3 /* SnapKit */ = {
+		AA6BD3112C3D60A800107AF6 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AA8E88432C1BF31300B477D3 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = AA6BD3102C3D60A800107AF6 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
-		AA8E88472C1BF31F00B477D3 /* Alamofire */ = {
+		AA6BD3142C3D60B000107AF6 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AA8E88462C1BF31F00B477D3 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = AA6BD3132C3D60B000107AF6 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		AA8E88642C1C078D00B477D3 /* Kingfisher */ = {
+		AA6BD3172C3D60B800107AF6 /* Toast */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AA8E88632C1C078D00B477D3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
+			package = AA6BD3162C3D60B800107AF6 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

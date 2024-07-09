@@ -16,9 +16,10 @@ class ProfileSettingViewController: UIViewController {
     var currentProfileImageName: String?
     var navigationTitle: String
     var showSaveButton: Bool
-    
     var showCompleteButton: Bool
     var showPassButton: Bool
+    
+    let viewModel = ProfileSettingViewModel() //📍옵져버 모델 연결
     
     let nicknameTextField: UITextField = {
         let textField = UITextField()
@@ -84,6 +85,7 @@ class ProfileSettingViewController: UIViewController {
         setupViews()
         setupConstraints()
         loadUserData()
+        bindViewModel()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
         profileImageView.isUserInteractionEnabled = true
@@ -118,6 +120,25 @@ class ProfileSettingViewController: UIViewController {
         }
     }
     
+    func bindViewModel() {
+            viewModel.outputValidationMessage.bind { [weak self] message in
+                self?.noteLabel.text = message
+                self?.noteLabel.textColor = message == "사용할 수 있는 닉네임이에요" ? .customBlack : .customOrange
+            }
+            
+            viewModel.outputIsValidNickname.bind { [weak self] isValid in
+                self?.completeButton.isEnabled = isValid
+                self?.completeButton.backgroundColor = isValid ? .systemGreen : .gray
+            }
+            
+            nicknameTextField.addTarget(self, action: #selector(nicknameTextChanged), for: .editingChanged)
+        }
+    
+    @objc func nicknameTextChanged() {
+            viewModel.inputNickname.value = nicknameTextField.text
+        }
+    
+    
     
     @objc private func profileImageTapped() {
         let newViewController = NewProfileSelectionViewController()
@@ -131,43 +152,13 @@ class ProfileSettingViewController: UIViewController {
     
     //🔥 완료 버튼 눌렀을 때!!
     @objc private func okButtonTapped() {
-        let nickname = nicknameTextField.text ?? ""
-        let validationMessage = evaluateNickname(nickname: nickname)
-        
-        if validationMessage == "사용할 수 있는 닉네임이에요" {
-            saveUserData { success in
-                if success {
-                    self.navigateToNextScreen()
-                } else {
-                    print("데이터 저장에 실패했어요")
-                }
-            }
-        } else {
-            let alert = UIAlertController(title: "경고", message: validationMessage, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
+           
         }
-    }
     
     //이거는 저장 버튼임 프로필 수정할 때
     @objc private func saveButtonTapped() {
-        let nickname = nicknameTextField.text ?? ""
-        let validationMessage = evaluateNickname(nickname: nickname)
-        
-        if validationMessage == "사용할 수 있는 닉네임이에요" {
-            saveUserData { success in
-                if success {
-                    self.navigateToNextScreen()
-                } else {
-                    print("데이터 저장에 실패했어요")
-                }
-            }
-        } else {
-            let alert = UIAlertController(title: "경고", message: validationMessage, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
-    }
+         
+       }
     
     //둘러볼게요 버튼
     @objc private func passButtonTapped() {
@@ -182,6 +173,24 @@ class ProfileSettingViewController: UIViewController {
         }
     }
     
+    
+    private func handleNicknameValidationAndSave() {
+         let nickname = nicknameTextField.text ?? ""
+         let validationMessage = viewModel.outputValidationMessage.value
+         
+         if validationMessage == "사용할 수 있는 닉네임이에요" {
+             viewModel.saveUserData(nickname: nickname, profileImage: profileImageView.imageView.image) { success in
+                 if success {
+                     self.navigateToNextScreen()
+                 } else {
+                     print("데이터 저장에 실패했어요")
+                 }
+             }
+         } else {
+             AlertHelperProfileSettingView.showErrorAlert(on: self, message: validationMessage)
+         }
+     }
+     
     
     private func navigateToNextScreen() {
         let tabBarVC = UITabBarController()
@@ -359,45 +368,18 @@ protocol ProfileSelectionDelegate: AnyObject {
     func didSelectProfileImage(named: String)
 }
 
+
 extension ProfileSettingViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let currentText = textField.text as NSString? {
             let newText = currentText.replacingCharacters(in: range, with: string)
-            let validationMessage = self.evaluateNickname(nickname: newText)
-            self.noteLabel.text = validationMessage
-            
-            if validationMessage == "사용할 수 있는 닉네임이에요" {
-                self.noteLabel.textColor = .customBlack
-            } else {
-                self.noteLabel.textColor = .customOrange
-            }
-            
-            if newText.isEmpty {
-                self.bottomLineView.backgroundColor = .customLightGrayCDCD
-                self.bottomLineView.snp.updateConstraints { make in
-                    make.height.equalTo(1)
-                }
-            } else {
-                self.bottomLineView.backgroundColor = .customGray8282
-                self.bottomLineView.snp.updateConstraints { make in
-                    make.height.equalTo(2)
-                }
-            }
+            viewModel.inputNickname.value = newText
         }
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let nickname = textField.text {
-            let validationMessage = evaluateNickname(nickname: nickname)
-            noteLabel.text = validationMessage
-            if validationMessage == "사용할 수 있는 닉네임이에요" {
-                noteLabel.textColor = .customOrange
-            } else {
-                noteLabel.textColor = .red
-            }
-        }
+        viewModel.inputNickname.value = textField.text
     }
-    
-    
 }
+

@@ -40,3 +40,4 @@ class ProfileCell: UICollectionViewCell, Reusable {
            imageView.alpha = 0.5
        }
 }
+
