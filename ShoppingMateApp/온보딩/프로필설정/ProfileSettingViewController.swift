@@ -152,12 +152,12 @@ class ProfileSettingViewController: UIViewController {
     
     //🔥 완료 버튼 눌렀을 때!!
     @objc private func okButtonTapped() {
-           
+            handleNicknameValidationAndSave()
         }
     
     //이거는 저장 버튼임 프로필 수정할 때
     @objc private func saveButtonTapped() {
-         
+           handleNicknameValidationAndSave()
        }
     
     //둘러볼게요 버튼
