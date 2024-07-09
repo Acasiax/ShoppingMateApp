@@ -18,6 +18,8 @@
 		AA5850C92C297A89007B92FD /* SearchResult+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850C82C297A89007B92FD /* SearchResult+Alert.swift */; };
 		AA5850CD2C298590007B92FD /* Profile+Nickname+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850CC2C298590007B92FD /* Profile+Nickname+Ext.swift */; };
 		AA5850CF2C29888C007B92FD /* Profile+Autolayout+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5850CE2C29888C007B92FD /* Profile+Autolayout+Ext.swift */; };
+		AA6BD3092C3D5E0400107AF6 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6BD3082C3D5E0400107AF6 /* Observable.swift */; };
+		AA6BD30C2C3D5E3500107AF6 /* ProfileSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6BD30B2C3D5E3500107AF6 /* ProfileSettingViewModel.swift */; };
 		AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */; };
 		AA6CB5BA2C1D4D6C0089E3B7 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */; };
 		AA6CB5BC2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */; };
@@ -63,6 +65,8 @@
 		AA5850C82C297A89007B92FD /* SearchResult+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResult+Alert.swift"; sourceTree = "<group>"; };
 		AA5850CC2C298590007B92FD /* Profile+Nickname+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+Nickname+Ext.swift"; sourceTree = "<group>"; };
 		AA5850CE2C29888C007B92FD /* Profile+Autolayout+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile+Autolayout+Ext.swift"; sourceTree = "<group>"; };
+		AA6BD3082C3D5E0400107AF6 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		AA6BD30B2C3D5E3500107AF6 /* ProfileSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewModel.swift; sourceTree = "<group>"; };
 		AA6CB5B72C1D4B720089E3B7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AA6CB5B92C1D4D6C0089E3B7 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		AA6CB5BB2C1D52EF0089E3B7 /* NewProfileSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileSelectionViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +155,16 @@
 			path = "설정에서새프로필";
 			sourceTree = "<group>";
 		};
+		AA6BD30A2C3D5E2000107AF6 /* 옵져버 */ = {
+			isa = PBXGroup;
+			children = (
+				AA6BD3082C3D5E0400107AF6 /* Observable.swift */,
+				AA6BD30B2C3D5E3500107AF6 /* ProfileSettingViewModel.swift */,
+			);
+			name = "옵져버";
+			path = "옵져버";
+			sourceTree = "<group>";
+		};
 		AA6CB5B62C1D4B4D0089E3B7 /* 온보딩 */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +244,7 @@
 		AA8E88292C1BF0E800B477D3 /* ShoppingMateApp */ = {
 			isa = PBXGroup;
 			children = (
+				AA6BD30A2C3D5E2000107AF6 /* 옵져버 */,
 				AA5850822C2550DF007B92FD /* 파일매니져 */,
 				AA6CB5B62C1D4B4D0089E3B7 /* 온보딩 */,
 				AA6CB5D22C1EE7D10089E3B7 /* 검색기록 */,
@@ -387,6 +402,7 @@
 				AA6CB5B82C1D4B720089E3B7 /* OnboardingView.swift in Sources */,
 				AA6CB5CF2C1ECC770089E3B7 /* SearchResultsViewController.swift in Sources */,
 				AA6CB6042C2024740089E3B7 /* Color+recap.swift in Sources */,
+				AA6BD3092C3D5E0400107AF6 /* Observable.swift in Sources */,
 				AA8E882F2C1BF0E800B477D3 /* ViewController.swift in Sources */,
 				AA58508F2C26943A007B92FD /* ThreeCollectionCell.swift in Sources */,
 				AA5850842C25511C007B92FD /* LikedToggleItem.swift in Sources */,
@@ -402,6 +418,7 @@
 				AA6CB5C72C1DCC570089E3B7 /* LikeNotification.swift in Sources */,
 				AA8E882D2C1BF0E800B477D3 /* SceneDelegate.swift in Sources */,
 				AA8E88532C1BF49C00B477D3 /* HomeCollectionViewCell.swift in Sources */,
+				AA6BD30C2C3D5E3500107AF6 /* ProfileSettingViewModel.swift in Sources */,
 				AA6CB6072C20435B0089E3B7 /* Create+Component.swift in Sources */,
 				AA6CB5BF2C1D597A0089E3B7 /* ProfileImageView.swift in Sources */,
 				AA6CB60F2C20637A0089E3B7 /* SplashViewController.swift in Sources */,
